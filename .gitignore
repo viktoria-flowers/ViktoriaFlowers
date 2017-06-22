@@ -59,3 +59,6 @@ typings/
 
 # Visual Studio Code SpellCheker.json
 .vscode
+
+# Netbeans private folder
+nbproject
