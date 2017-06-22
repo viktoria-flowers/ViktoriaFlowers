@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 let app = express();
 app.use(bodyParser.json());
 
+// public static folder
+app.use(express.static(__dirname + '/public'));
+
 // Port and environment
 let env = process.env.NODE_ENV || 'development';
 let port = 3000;
