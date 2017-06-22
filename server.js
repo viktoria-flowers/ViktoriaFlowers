@@ -27,7 +27,7 @@ app.get('/Home', function (req, res) {
 // route for test GET
 const allFlowers = [{name: 'rose', id: 5}];
 app.get('/flowers', function (req, res) {
-	res.render('flowers', allFlowers);
+	res.render('flowers', { allFlowers : allFlowers});
 });
 
 // route for test POST
