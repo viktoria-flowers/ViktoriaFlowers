@@ -1,0 +1,31 @@
+{
+  "name": "viktoriaflowers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viktoria-flowers/ViktoriaFlowers.git"
+  },
+  "keywords": [
+    "Node",
+    "JavaScript",
+    "WebApp"
+  ],
+  "author": "Marian Nikolov, Martina Shebova, Mihail Yankov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/viktoria-flowers/ViktoriaFlowers/issues"
+  },
+  "homepage": "https://github.com/viktoria-flowers/ViktoriaFlowers#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "nodemon": "^1.11.0",
+    "pug": "^2.0.0-rc.2"
+  }
+}
