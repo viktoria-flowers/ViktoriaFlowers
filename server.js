@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 
 let app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true,
+}))
 
 // public static folder
 app.use(express.static(__dirname + '/public'));
@@ -39,9 +42,13 @@ app.get('/flowers', function (req, res) {
 			// 	"name": "rose"
 			// }
 app.post('/flowers', function (req, res) {
-	// flowers.push(req.body);
 
-	res.end();
+	// flowers.push(req.body);
+    console.log(req.body);
+    res.statusCode = '201';
+    res.statusMessage = 'Test';
+    res.json({ message: 'Ok'});
+    res.end();
 });
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
