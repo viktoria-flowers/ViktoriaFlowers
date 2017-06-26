@@ -25,6 +25,7 @@
   "homepage": "https://github.com/viktoria-flowers/ViktoriaFlowers#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "nodemon": "^1.11.0",

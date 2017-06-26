@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({
 
 // public static folder
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/node_modules'));
+
 
 // Port and environment
 let env = process.env.NODE_ENV || 'development';
