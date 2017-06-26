@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 let app = express();
 app.use(bodyParser.json());
@@ -17,14 +18,21 @@ let port = 3000;
 // Set view engine
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/server/views');
+app.locals.basedir = path.join(__dirname, '/server/views');
+// app.locals.pretty = true; // uncomment this and pug will return unminified HTML response
 
  // Routes
 app.get('/', function (req, res) {
-	res.render('home');
+	res.render('index');
 });
 
+app.get('/shop', (req, res) => res.render('shop'));
+app.get('/cart', (req, res) => res.render('cart'));
+app.get('/product', (req, res) => res.render('product'));
+app.get('/text-page', (req, res) => res.render('text-page'));
+
 app.get('/Home', function (req, res) {
-	res.render('home');
+	res.render('index');
 });
 
 // route for test GET

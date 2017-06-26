@@ -1,0 +1,147 @@
+doctype html
+//if lt IE 7
+  html.no-js.lt-ie9.lt-ie8.lt-ie7  
+//if IE 7
+  html.no-js.lt-ie9.lt-ie8  
+//if IE 8
+  html.no-js.lt-ie9  
+// [if gt IE 8] <!
+html.no-js
+  // <![endif]
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    title Indigo - A clean, responsive ecommerce HTML template
+    meta(name='description', content='Indigo - A clean, responsive ecommerce HTML template')
+    meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1')
+    link(rel='stylesheet', href='/indigo/css/normalize-and-boilerplate.css')
+    link(rel='stylesheet', href='/indigo/css/font-awesome.css')
+    link(rel='stylesheet', href='/indigo/css/flexslider.css')
+    link(rel='stylesheet', href='/indigo/css/style.css')
+    script(src='/indigo/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js')
+
+    block head
+  body
+    // start: header
+    header.header
+      .row.max-inner
+        .columns.col-2
+          a.logo(href='/', title='Indigo') Indigo
+        .columns.col-6
+          a.toggle-nav(href='#')
+            i.fa.fa-bars
+            |  Menu
+          nav.main-nav
+            ul
+              li
+                a(href='/shop') New collection
+              li
+                a(href='/shop') Catalog
+              li
+                a(href='/shop') Promotion
+              li
+                a(href='/shop') Gift card
+        .columns.col-4
+          ul.header-controls
+            li.header-search
+              a.reveal-search(href='#')
+                i.fa.fa-search
+                |  Search
+              .search-wrapper
+                form.search-form
+                  input(placeholder='Search...', type='text')
+            li.header-cart
+              a(href='/cart', title='view cart')
+                span.fa.fa-shopping-cart
+                span.cart-count 3 Products,
+                span.cart-amount $780.00
+            li.header-actions
+              a(href='#', title='Log out')
+                span.fa.fa-lock
+                |  Log out
+
+
+    block content
+    
+    // start: footer
+    footer.footer
+      .row.max-inner
+        .columns.col-2
+          h3 Address
+          p
+            | INDIGO LLC
+            br
+            br
+            |             946 Park Ave
+            br
+            |             New York, NY 10021
+            br
+            br
+            a(href='#') office@indigo.com
+            br
+            |             (445) 932 459 934
+            br
+        .columns.col-2
+          h3 Customer Service
+          ul
+            li
+              a(href='#') About us
+            li
+              a(href='#') Money back guarantee
+            li
+              a(href='#') Help center
+            li
+              a(href='#') Delivery
+            li
+              a(href='#') Payment
+        .columns.col-2
+          h3 Account
+          ul
+            li
+              a(href='#') Login
+            li
+              a(href='#') Register
+            li
+              a(href='#') My Account
+            li
+              a(href='#') Logout
+        .columns.col-6
+          h3 Follow us
+          .row
+            form.newsletter-form
+              .columns.col-8
+                input(placeholder='Enter your Email ...', type='text')
+              .columns.col-4
+                input.submit(type='submit', value='Subscribe')
+          .row
+            .columns.col-12.social-links
+              a(href='#')
+                i.fa.fa-facebook
+              a(href='#')
+                i.fa.fa-twitter
+              a(href='#')
+                i.fa.fa-google-plus
+              a(href='#')
+                i.fa.fa-pinterest
+    // end: footer
+    // start: copyright
+    section.footer-copyright
+      .row.max-inner
+        .columns.col-7.col-centered
+          p Copyright 2014 Indigo. All rights reserved.
+    // end: copyright
+    //- script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script.
+      window.jQuery || document.write('<script src="/indigo/js/vendor/jquery-1.11.0.min.js"><\\/script>')
+    script(src='/indigo/js/plugins.js') 
+    script(src='/indigo/js/main.js')
+
+    block body
+    //-
+      <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
