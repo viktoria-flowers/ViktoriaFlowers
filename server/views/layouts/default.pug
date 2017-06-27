@@ -11,8 +11,8 @@ html.no-js
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    title Indigo - A clean, responsive ecommerce HTML template
-    meta(name='description', content='Indigo - A clean, responsive ecommerce HTML template')
+    title Магазин за цветя "Виктория"
+    meta(name='description', content='Магазин за цветя "Виктория"')
     meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1')
       
     link(rel='stylesheet', href='/indigo/css/normalize-and-boilerplate.css')
@@ -34,22 +34,22 @@ html.no-js
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-              a.navbar-brand(href='#')
+              a.navbar-brand(href='/home')
                 img.img-responsive(src='img/logo.png', style='width: 140px; margin-top: -16px;')
             #myNavbar.collapse.navbar-collapse
               ul.nav.navbar-nav
                 li.active
-                  a(href='#banner') Начало
+                  a(href='/home') Начало
                 li
-                  a(href='#service') Букети
+                  a(href='/bouquets') Букети
                 li
-                  a(href='#about') Кошници
+                  a(href='/baskets') Кошници
                 li
-                  a(href='#testimonial') Саксии
+                  a(href='/pots') Саксии
                 li
-                  a(href='#contact') Картички
+                  a(href='/cards') Картички
                 li.pull-right
-                  a(href='#contact') Вход
+                  a(href='/login') Вход
                     span
                       i.fa.fa-sign-in
 
@@ -59,9 +59,9 @@ html.no-js
     footer.footer
       .row.max-inner
         .columns.col-2
-          h3 Address
+          h3 Адрес
           p
-            | INDIGO LLC
+            | София
             br
             br
             |             946 Park Ave
@@ -74,37 +74,33 @@ html.no-js
             |             (445) 932 459 934
             br
         .columns.col-2
-          h3 Customer Service
+          h3 Информация
           ul
             li
-              a(href='#') About us
+              a(href='#contacts') Контакти
             li
-              a(href='#') Money back guarantee
+              a(href='/delivery') Доставка
             li
-              a(href='#') Help center
-            li
-              a(href='#') Delivery
-            li
-              a(href='#') Payment
+              a(href='/payment') Плащане
         .columns.col-2
-          h3 Account
+          h3 Акаунт
           ul
             li
-              a(href='#') Login
+              a(href='/login') Вход
             li
-              a(href='#') Register
+              a(href='/register') Регистрация
             li
-              a(href='#') My Account
+              a(href='/profile') Моят акаунт
             li
-              a(href='#') Logout
+              a(href='/logout') Изход
         .columns.col-6
-          h3 Follow us
+          h3 Последвай ни:
           .row
             form.newsletter-form
               .columns.col-8
-                input(placeholder='Enter your Email ...', type='text')
+                input(placeholder='Въведи своята ппоща ...', type='text')
               .columns.col-4
-                input.submit(type='submit', value='Subscribe')
+                input.submit(type='submit', value='Абонирай се')
           .row
             .columns.col-12.social-links
               a(href='#')

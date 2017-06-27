@@ -1,12 +1,179 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        link(href='/images/favicon.png', rel='icon')
-        title Document
-    body
-        div
-            h1 Hello from home page!
-            
+extends /layouts/default.pug
+
+block content
+    // end: header
+    // start: content slider
+    section.content-slider
+      .flexslider
+        ul.slides
+          // start: slide
+          li
+            .row.max-inner
+              .columns.col-12.slide-image
+                img(src='/images/slide-image-1.jpg')
+              .columns.col-12.col-centered.slide-content
+                h2 Vogue Style
+                h3 For modern women
+                a.btn.cta(href='#') See the collection
+          // end: slide
+          // start: slide
+          li
+            .row.max-inner
+              .columns.col-12.slide-image
+                img(src='/images/slide-image-2.jpg')
+              .columns.col-12.col-centered.slide-content
+                h2 New Collection
+                h3 For your beauty and fashion
+                a.btn.cta(href='#') See the collection
+          // end: slide
+          // start: slide
+          li
+            .row.max-inner
+              .columns.col-12.slide-image
+                img(src='/images/slide-image-3.jpg')
+              .columns.col-12.col-centered.slide-content
+                h2 Feel the luxury
+                h3 special collection
+                a.btn.cta(href='#') See the collection
+          // end: slide
+    // end: content slider
+    // start: product grid
+    section.product-grid
+      header.row.section-header.max-inner
+        .columns-12.col-centered
+          h2 Featured Products
+          hr
+      .row.max-inner
+        // start: grid item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='/product-info')
+              img(src='/images/grid-item-image-1.jpg')
+          .grid-item-desc
+            h2
+              a.grid-item-link(href='/product-info')
+                span.grid-item-meta Lorem ipsum
+                hr
+                span.grid-item-title consectetur adipisicing elit
+                span.grid-item-price $220.00
+        // end: grid item
+        // start: grid item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='/product-info')
+              img(src='/images/grid-item-image-2.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta Dolor sit
+                hr
+                span.grid-item-title Dolore magna aliqua
+                span.grid-item-price $187.00
+        // end: grid item
+        // start: grid item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='/product-info')
+              img(src='/images/grid-item-image-3.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta Duis aute irure
+                hr
+                span.grid-item-title Dolor in reprehenderit
+                span.grid-item-price $380.00
+        // end: grid item
+        // start: grid item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='/product-info')
+              img(src='/images/grid-item-image-4.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta Enim ad minim 
+                hr
+                span.grid-item-title  Nemo enim ipsam
+                span.grid-item-price $130.00
+        // end: grid item
+    // end: product grid
+    // start: collections grid
+    section.collections-section
+      .row.max-inner
+        .columns.col-6.collection-item
+          a(href='/shop')
+            img(src='/images/collections-image-1.jpg')
+            .collection-desc
+              h2 With love and passion
+              h3 New shoe collection
+        .columns.col-6.collection-item
+          a(href='/shop')
+            img(src='/images/collections-image-2.jpg')
+            .collection-desc
+              h2 Paris inspiration
+              h3 For a good time
+      .row.max-inner
+        .columns.col-12.collection-item
+          a(href='/shop')
+            img(src='/images/collections-image-3.jpg')
+            .collection-desc
+              h2 Fashion clothes
+              h3 For summer
+    // end: collections grid
+    // start: blog section
+    section.blog-section
+      header.row.section-header.max-inner
+        .columns-12.col-centered
+          h2 Blog news
+          hr
+      .row.max-inner
+        // start: blog item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='#')
+              img(src='/images/blog-item-image-1.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta 30 May 2014
+                span.grid-item-title Dolor in reprehenderit
+            p Natus error sit voluptatem accusantium doloremque laudantium totam rem...
+        // end: blog item
+        // start: blog item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='#')
+              img(src='/images/blog-item-image-2.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta 27 May 2014
+                span.grid-item-title Accusantium doloremque
+            p Natus error sit voluptatem accusantium doloremque laudantium totam rem...
+        // end: blog item
+        // start: blog item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='#')
+              img(src='/images/blog-item-image-3.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta 24 May 2014
+                span.grid-item-title Totam rem aperiam
+            p Natus error sit voluptatem accusantium doloremque laudantium totam rem...
+        // end: blog item
+        // start: blog item
+        .columns.col-3.grid-item
+          .grid-item-media
+            a(href='#')
+              img(src='/images/blog-item-image-4.jpg')
+          .grid-item-desc
+            h2
+              a(href='/product-info')
+                span.grid-item-meta 21 May 2014
+                span.grid-item-title Nemo enim ipsam voluptatem
+            p Natus error sit voluptatem accusantium doloremque laudantium totam rem...
+        // end: blog item
+    // end: blog section
+    
