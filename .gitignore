@@ -58,7 +58,8 @@ typings/
 .env
 
 # Visual Studio Code SpellCheker.json
-.vscode
+# we need settings.json
+# .vscode
 
 # Netbeans private folder
 nbproject
