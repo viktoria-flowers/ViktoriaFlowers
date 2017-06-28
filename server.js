@@ -1,8 +1,9 @@
-/* global __dirname */
+/* global __dirname, process */
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
 const path = require('path');
 const fs = require('fs');
 
@@ -13,10 +14,18 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }));
 
-const logStream = { stream: fs.createWriteStream(path.join(__dirname, 'logs.log'), {flags: 'a'})};
-const logger = morgan( 
-    'combined', 
+const logsFile = fs.createWriteStream(
+    path.join(__dirname, 'logs.log'),
+    { flags: 'a' });
+
+const logStream = {
+    stream: logsFile,
+};
+
+const logger = morgan(
+    'combined',
     logStream);
+
 app.use(logger);
 
 // public static folder
@@ -24,17 +33,19 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use('/libs', express.static(__dirname + '/node_modules'));
 
 // Port and environment
-let env = process.env.NODE_ENV || 'development';
-let port = 3000;
+// const env = process.env.NODE_ENV || 'development';
+const port = 3000;
 
 // Set view engine
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/server/views');
 app.locals.basedir = path.join(__dirname, '/server/views');
-// app.locals.pretty = true; // uncomment this and pug will return unminified HTML response
+
+// uncomment this and pug will return unminified HTML response
+// app.locals.pretty = true; 
 
 
-app.get('/', (req, res) => res.render('home')); 
+app.get('/', (req, res) => res.render('home'));
 app.get('/home', (req, res) => res.render('home'));
 
 app.get('/bouquets', (req, res) => res.render('bouquets'));
@@ -48,11 +59,10 @@ app.get('/delivery', (req, res) => res.render('delivery'));
 app.get('/contacts', (req, res) => res.render('contacts'));
 app.get('/product-info/:id', (req, res) => res.render('product-info'));
 
-app.get('/profile', (req, res) => res.render('profile')); 
+app.get('/profile', (req, res) => res.render('profile'));
 app.get('/register', (req, res) => res.render('register'));
 app.get('/login', (req, res) => res.render('login'));
 
 app.get('/logout', (req, res) => res.redirect('home')); // redirect to home
-
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
