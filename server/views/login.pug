@@ -4,3 +4,53 @@ block content
     .section-title
       h1
         | Вход
+    .login-page.page.fix
+      // start login Area
+      .container
+        .row
+          .col-sm-6.col-md-5
+            .login
+              form#login-form(action='/login', method='POST')
+                h2 Login
+                p Welcome to your account
+                .social-login
+                  a#facebook(href='#')
+                    i.fa.fa-facebook
+                    | Sign In with Facebook
+                  a#twitter(href='#')
+                    i.fa.fa-twitter
+                    | Sign In with Twitter
+                label
+                  | E-mail Address
+                  span *
+                input(type='text')
+                label
+                  | Password
+                  span *
+                input(type='password')
+                .remember
+                  input(type='checkbox')
+                  p Remember me!
+                  a(href='#') Forgot Your Password ?
+                input(type='submit', value='login')
+          .col-md-2
+          .col-sm-6.col-md-5
+            .login
+              form#signup-form(action='#')
+                h2 Create A new Account
+                p Create your own account
+                label
+                  | E-mail Address
+                  span *
+                input(type='text')
+                label
+                  | Password
+                  span *
+                input(type='password')
+                label
+                  | Confirm Password
+                  span *
+                input(type='password')
+                input(type='submit', value='Sign up')
+      
+    

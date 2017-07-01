@@ -3,11 +3,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const passport = require('passport');
 
 const path = require('path');
 const fs = require('fs');
 
 const app = express();
+const config = require('./app/config');
+
+// fix userData TODO;
+const userData = require('./app/data');
+
+console.log('----------');
+console.log(config);
+console.log(userData);
+
+config(app, userData);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -46,7 +57,12 @@ app.locals.basedir = path.join(__dirname, '/server/views');
 
 
 app.get('/', (req, res) => res.render('home'));
-app.get('/home', (req, res) => res.render('home'));
+app.get('/home', (req, res) => {
+    console.log('-------- User -------');
+    console.log(req.user);
+
+    return res.render('home');
+});
 
 app.get('/bouquets', (req, res) => res.render('bouquets'));
 app.get('/baskets', (req, res) => res.render('baskets'));
@@ -62,6 +78,11 @@ app.get('/product-info/:id', (req, res) => res.render('product-info'));
 app.get('/profile', (req, res) => res.render('profile'));
 app.get('/register', (req, res) => res.render('register'));
 app.get('/login', (req, res) => res.render('login'));
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+   // failureFlash: true,
+}));
 
 app.get('/logout', (req, res) => res.redirect('home')); // redirect to home
 
