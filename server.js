@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }));
 
+
+// Morgan part
 const logsFile = fs.createWriteStream(
     path.join(__dirname, 'logs.log'),
     { flags: 'a' });
@@ -44,25 +46,11 @@ app.locals.basedir = path.join(__dirname, '/server/views');
 // uncomment this and pug will return unminified HTML response
 // app.locals.pretty = true; 
 
+require('./routes/server-routes')(app);
+// require('./routes/api.routes')(app);
 
-app.get('/', (req, res) => res.render('home'));
-app.get('/home', (req, res) => res.render('home'));
-
-app.get('/bouquets', (req, res) => res.render('bouquets'));
-app.get('/baskets', (req, res) => res.render('baskets'));
-app.get('/pots', (req, res) => res.render('pots'));
-app.get('/cards', (req, res) => res.render('cards'));
-
-app.get('/cart', (req, res) => res.render('cart'));
-app.get('/payment', (req, res) => res.render('payment'));
-app.get('/delivery', (req, res) => res.render('delivery'));
-app.get('/contacts', (req, res) => res.render('contacts'));
-app.get('/product-info/:id', (req, res) => res.render('product-info'));
-
-app.get('/profile', (req, res) => res.render('profile'));
-app.get('/register', (req, res) => res.render('register'));
-app.get('/login', (req, res) => res.render('login'));
-
-app.get('/logout', (req, res) => res.redirect('home')); // redirect to home
+app.get('*', (req, res) => {
+    res.render('404');
+});
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
