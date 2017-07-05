@@ -1,6 +1,12 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Вход
+    form(action='/login', method='POST')
+      div
+        label Username:
+        input(type='text', name='username')
+      div
+        label Password:
+        input(type='password', name='password')
+      button.btn.btn-success
+            | Sign-in
