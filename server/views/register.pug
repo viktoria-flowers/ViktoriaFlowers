@@ -1,6 +1,31 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Регистрация
+  .login-page.page.fix
+    .container
+      .row
+        .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+          .login.text-center
+              form#login-form(action='/register', method="POST")
+                h2 Регистрация
+                label
+                  | Потребителско име
+                  span *
+                input(type='text')
+                label
+                  | Парола
+                  span *
+                input(type='password')
+                label
+                  | E-mail
+                  span *
+                input(type='email')
+                label
+                  | Адрес
+                  span *
+                input(type='text')
+                label
+                  | Телефон за контакт
+                  span *
+                input(type='tel')
+                input(type='submit', value='Регистрация')

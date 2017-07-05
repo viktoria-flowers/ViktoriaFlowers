@@ -44,5 +44,4 @@ const configApp = (application) => {
     // app.locals.pretty = true;
 };
 
-
 module.exports = configApp;

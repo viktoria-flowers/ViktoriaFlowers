@@ -11,6 +11,7 @@ const users = {
                 u.id === id);
         return new Promise((resolve, reject) => {
             if (!user) {
+                console.log('Wrong');
                 return reject('No such user');
             }
             return resolve(user);
@@ -22,6 +23,7 @@ const users = {
                 u.username.toLowerCase() === usernameToLower);
         return new Promise((resolve, reject) => {
             if (!user) {
+                console.log('Wrong 2');                
                 return reject('No such user');
             }
             return resolve(user);

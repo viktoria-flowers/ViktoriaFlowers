@@ -2,19 +2,18 @@ const { Router } = require('express');
 const passport = require('passport');
 
 const attach = (app) => {
-    require('./config/app.config')(app);
     const router = new Router();
     // app.get('/login', (req, res) => res.render('login'));
 
     app.post('/login',
         router.authenticate('local', passport.authenticate('local', {
             successRedirect: '/',
-            failureRedirect: '/login',
+            failureRedirect: '/views/login',
             failureFlash: true,
         })
     ));
 
-    app.use('/login', router);
+    app.use('/server/views', router);
 };
 
 module.exports = attach;
