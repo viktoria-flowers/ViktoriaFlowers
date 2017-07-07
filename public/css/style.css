@@ -3527,8 +3527,9 @@ h4.heading {
  
 .pricing-table .plan ul li.plan-feature {
   padding: 15px 10px;
-  border-top: 1px solid #c5c8c0;
+  border-top: 1px solid #3f3f3f;
   margin-right: 35px;
+  color: #3f3f3f;
 }
  
 .pricing-three-column {
