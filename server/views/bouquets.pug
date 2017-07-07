@@ -1,6 +1,65 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Букети
+  .shop-product-area.section.fix
+    .container
+      .row
+        .shop-tool-bar.col-sm-12.fix
+          .view-mode
+            a.active(href='shop.html')
+              i.fa.fa-th
+            a(href='shop-list.html')
+              i.fa.fa-th-list
+          .sort-by
+            span Sort By
+            select(name='sort-by')
+              option(selected='selected', value='mercede') price: Lower
+              option(value='saab') price(low>high)
+              option(value='mercedes') price(high > low)
+              option(value='audi') rating(highest)
+          .show-product
+            span Show
+            select(name='sort-by')
+              option(selected='selected', value='mercede') 16
+              option(value='saab') 20
+              option(value='mercedes') 24
+            span Per Page
+          .pro-Showing
+            span Showing 1 - 12 of 16 items
+        .shop-products
+          .row
+            - for (var x = 1; x <= 12; x++)
+                .col-sm-4.col-md-3.fix
+                  .product-item.fix
+                    .product-img-hover
+                      // Product image
+                      a.pro-image.fix(href='product-details.html')
+                        img(src='http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg', alt='product')
+                      //- .hot-pro
+                      //-   img(src='http://elektrojeni.bg/image/catalog/Kategorii/promo.png', alt='') ---- alternative
+                      // Product action Btn
+                      .product-action-btn
+                        a.quick-view(href='#')
+                          i.fa.fa-search
+                        a.favorite(href='#')
+                          i.fa.fa-heart-o
+                        a.add-cart(href='#')
+                          i.fa.fa-shopping-cart
+                    .pro-name-price-ratting
+                      // Product Name
+                      .pro-name
+                        a(href='product-details.html') Product Name Demo
+                      // Product Ratting
+                      .pro-ratting
+                        i.on.fa.fa-star
+                        i.on.fa.fa-star
+                        i.on.fa.fa-star
+                        i.on.fa.fa-star
+                        i.on.fa.fa-star-half-o
+                      // Product Price
+                      .pro-price.fix
+                        p
+                          span.old $165
+                          span.new $150
+                      = x
+

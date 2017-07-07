@@ -1,6 +1,17 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Плащане
+  .container
+    .pricing-table.pricing-three-column.row
+      .plan.col-sm-4.col-lg-4
+        .plan-name-bronze
+          h3 Наложен платеж
+        img.transparent-imgs(src='http://www.img-academy.com/wp-content/uploads/2015/03/deliveri-img-academy-796x1024.jpg', alt='product')
+      .plan.col-sm-4.col-lg-4
+        .plan-name-silver
+          h3 PayPal
+        img.transparent-imgs(src='https://sensorstechforum.com/wp-content/uploads/2016/01/paypal-bug-stf.jpg', alt='product')
+      .plan.col-sm-4.col-lg-4
+        .plan-name-gold
+          h3 Плащане с карта
+        img.transparent-imgs(src='http://i.dailymail.co.uk/i/pix/2012/05/11/article-0-0EF9ACF900000578-557_468x315.jpg', alt='product')
