@@ -18,7 +18,10 @@
       ```
 * (Optionally) Update typescript `npm install -g typescript@atest`
 
-**Writing code without change .eslintrc will be absolutely barbaric**
+## Run `eslint`
+
+* Type in the command (terminal) `npm run lint` (Lifecycle error is thrown - ignore it)
+
 
 * Resoures
     * [babel-eslint - GitHub](https://github.com/babel/babel-eslint)
