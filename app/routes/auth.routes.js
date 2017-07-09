@@ -3,17 +3,16 @@ const passport = require('passport');
 
 const attach = (app) => {
     const router = new Router();
-    // app.get('/login', (req, res) => res.render('login'));
 
-    app.post('/login',
-        router.authenticate('local', passport.authenticate('local', {
+    router.post('/login',
+       passport.authenticate('local', {
             successRedirect: '/',
-            failureRedirect: '/views/login',
-            failureFlash: true,
+            failureRedirect: '/login',
+            // failureFlash: true,
         })
-    ));
+    );
 
-    app.use('/server/views', router);
+    app.use('/', router);
 };
 
 module.exports = attach;
