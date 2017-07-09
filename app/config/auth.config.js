@@ -21,7 +21,10 @@ const configAuth = (app, { users }) => {
 
     app.use(cookieParser());
     // Unique key for encrypting cookie
-    app.use(session({ secret: 'Yellow Unicorn' }));
+    app.use(session({
+        secret: 'Yellow Unicorn',
+        resave: true, saveUninitialized: true
+    }));
     app.use(passport.initialize());
     app.use(passport.session());
 

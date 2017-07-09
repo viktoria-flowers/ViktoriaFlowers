@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "nodemon": "nodemon server.js",
-    "test": "test"
+    "test": "test",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
