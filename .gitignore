@@ -63,3 +63,4 @@ typings/
 
 # Netbeans private folder
 nbproject
+.idea
