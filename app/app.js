@@ -4,9 +4,6 @@ const app = express();
 
 const data = require('./data');
 
-
-
-
 require('./config/app.config')(app);
 require('./config/auth.config')(app, data);
 

@@ -1,4 +1,4 @@
-/* global __dirname, process */
+/* global __dirname */
 
 const configApp = (application) => {
     const express = require('express');

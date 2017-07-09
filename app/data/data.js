@@ -7,8 +7,7 @@ const usersList = [{
 const users = {
     findById(id) {
         id = +id;
-        const user = usersList.find((u) =>
-                u.id === id);
+        const user = usersList.find((u) => u.id === id);
         return new Promise((resolve, reject) => {
             if (!user) {
                 console.log('Wrong');
@@ -20,10 +19,10 @@ const users = {
     findByUsername(username) {
         const usernameToLower = username.toLowerCase();
         const user = usersList.find((u) =>
-                u.username.toLowerCase() === usernameToLower);
+            u.username.toLowerCase() === usernameToLower);
         return new Promise((resolve, reject) => {
             if (!user) {
-                console.log('Wrong 2');                
+                console.log('Wrong 2');
                 return reject('No such user');
             }
             return resolve(user);
