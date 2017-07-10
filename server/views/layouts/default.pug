@@ -66,20 +66,29 @@ html(lang='en-US')
                     .col-sm-12.col-md-4
                         #top-menu.float-right
                             ul
-                                li
-                                    a(href='') Профил
+                                - if(isAuthenticated)
+                                    li
+                                        a(href='/profile') Профил
+                                    li
+                                        a(href='/logout') Изход
         // End Header Top Area
         .header-area
             // Start Header Area
             .container
                 .row
-                    .col-sm-4.col-lg-3
-                        .log-link
-                            p Добре дошъл
-                            h5
-                                a(href='/login') Вход
-                                |   /  
-                                a(href='/register') Регистрация
+                    - if(isAuthenticated)
+                        .col-sm-4.col-lg-3
+                            .log-link
+                                p Добре дошли 
+                                    = username
+                    - else
+                        .col-sm-4.col-lg-3
+                            .log-link
+                                p &nbsp;
+                                h5
+                                    a(href='/login') Вход
+                                    |   /  
+                                    a(href='/register') Регистрация
                     .col-sm-4.col-lg-6
                         .logo.text-center
                             a(href='/home')
