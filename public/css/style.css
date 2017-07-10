@@ -3558,3 +3558,7 @@ h4.heading {
 .row {
   display: flex; /* equal height of the children */
 }
+
+.mainContentMinHeight{
+  min-height: 500px;
+}

@@ -3,13 +3,7 @@ extends /layouts/default.pug
 block content
   .shop-product-area.section.fix
     .container
-      .row
         .shop-tool-bar.col-sm-12.fix
-          .view-mode
-            a.active(href='shop.html')
-              i.fa.fa-th
-            a(href='shop-list.html')
-              i.fa.fa-th-list
           .sort-by
             span Sort By
             select(name='sort-by')
@@ -27,7 +21,6 @@ block content
           .pro-Showing
             span Showing 1 - 12 of 16 items
         .shop-products
-          .row
             - for (var x = 1; x <= 12; x++)
                 .col-sm-4.col-md-3.fix
                   .product-item.fix
