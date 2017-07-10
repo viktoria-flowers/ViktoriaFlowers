@@ -2,16 +2,18 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const { Strategy } = require('passport-local').Strategy;
+const { authHelper } = require('../utils');
 
 const configAuth = (app, { users }) => {
     passport.use(new Strategy(
         (username, password, done) => {
             return users.findByUsername(username)
                 .then((user) => {
-                    if (user.password !== password) {
+                    const passHash = authHelper.makeHashFromPassword(password);
+                    if (user.password !== passHash) {
                         done(new Error('Invalid password'));
                     }
-                    return done(null, user);
+                return done(null, user);
                 })
                 .catch((err) => {
                     return done(err);

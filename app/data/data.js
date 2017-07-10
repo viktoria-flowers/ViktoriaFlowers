@@ -1,7 +1,9 @@
+const { authHelper } = require('../utils');
+
 const usersList = [{
     id: 1,
     username: 'Marti',
-    password: 'ala',
+    password: authHelper.makeHashFromPassword('ala'),
 }];
 
 const users = {
