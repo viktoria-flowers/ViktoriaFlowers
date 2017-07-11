@@ -1,6 +1,10 @@
 extends /layouts/default.pug
 
+block scripts
+    script(src='/static/js/home.js')
+
 block content
+        button.btn.btn-primary#myButton(type=button) MyButton
         // HOME SLIDER
         .slider-wrap.home-1-slider
             #mainSlider.nivoSlider.slider-image

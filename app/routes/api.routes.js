@@ -1,3 +1,13 @@
+const test = (app) => {
+    app.get('/api', (req, res) => {
+        // usersService returns users from datbase(Mongo)
+        // const users = usersService.getAllUsers();
+        // return res.render('usersView', users);
+        return res.json({ message: 'Ajax works'});
+    });
+};
+
+module.exports = test;
 // Here are the ajax requests send from the user
 // const items = [{
 //     'name': 'Martina',

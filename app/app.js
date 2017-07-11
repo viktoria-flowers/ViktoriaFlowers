@@ -9,7 +9,7 @@ require('./config/auth.config')(app, data);
 
 require('./routes/server-routes')(app);
 require('./routes/auth.routes')(app);
-// require('./routes/api.routes')(app);
+require('./routes/api.routes')(app); // Test api routers
 
 app.get('*', (req, res) => {
     res.render('404');
