@@ -1,0 +1,3 @@
+core.eol=lf
+core.autocrlf true
+*.js text eol=lf
