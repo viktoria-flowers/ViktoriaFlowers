@@ -1,3 +1,2 @@
 core.eol=lf
-core.autocrlf=input
 *.js text eol=lf
