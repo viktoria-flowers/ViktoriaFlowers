@@ -1,4 +1,6 @@
 const { authHelper } = require('../utils');
+const BaseData = require('./base.data');
+const UserModel = require('../models/user.model');
 
 const usersList = [{
     id: 1,
@@ -6,7 +8,11 @@ const usersList = [{
     password: authHelper.makeHashFromPassword('ala'),
 }];
 
-const usersData = {
+class UsersData extends BaseData {
+    constructor(db) {
+        super(db, UserModel, UserModel);
+    }
+
     findById(id) {
         id = +id;
         const user = usersList.find((u) => u.id === id);
@@ -17,7 +23,8 @@ const usersData = {
             }
             return resolve(user);
         });
-    },
+    }
+
     findByUsername(username) {
         const usernameToLower = username.toLowerCase();
         const user = usersList.find((u) =>
@@ -29,9 +36,7 @@ const usersData = {
             }
             return resolve(user);
         });
-    },
-};
+    }
+}
 
-module.exports = {
-    usersData,
-};
+module.exports = UsersData;

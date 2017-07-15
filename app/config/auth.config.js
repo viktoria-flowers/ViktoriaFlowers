@@ -4,7 +4,7 @@ const session = require('express-session');
 const { Strategy } = require('passport-local').Strategy;
 const { authHelper } = require('../utils');
 
-const configAuth = (app, { users }) => {
+const configAuth = (app, users) => {
     passport.use(new Strategy(
         (username, password, done) => {
             return users.findByUsername(username)
@@ -13,7 +13,7 @@ const configAuth = (app, { users }) => {
                     if (user.password !== passHash) {
                         done(new Error('Invalid password'));
                     }
-                return done(null, user);
+                    return done(null, user);
                 })
                 .catch((err) => {
                     return done(err);
