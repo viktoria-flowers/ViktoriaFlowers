@@ -1,4 +1,4 @@
-const ModelState = require('../data/modelstate');
+const ModelState = require('../model-state');
 class User {
     constructor(user) {
         this.id = user._id.toString();
@@ -6,7 +6,7 @@ class User {
     }
 
     static isValid() {
-        // TODO add valdiations.
+        // TODO add validations.
         return ModelState.valid();
     }
 }

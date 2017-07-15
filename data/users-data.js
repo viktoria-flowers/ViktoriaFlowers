@@ -1,7 +1,7 @@
-const { authHelper } = require('../utils');
-const BaseData = require('./base.data');
-const UserModel = require('../models/user.model');
 const { ObjectID } = require('mongodb');
+const { authHelper } = require('../app/utils');
+const BaseData = require('./base-data');
+const UserModel = require('./models/user-model');
 
 // const usersList = [{
 //     username: 'Marti',
@@ -9,7 +9,6 @@ const { ObjectID } = require('mongodb');
 //     roles: [],
 //     contactInfo: '',
 //     email: 'test@test.com',
-
 // }];
 
 class UsersData extends BaseData {

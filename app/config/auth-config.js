@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const { Strategy } = require('passport-local').Strategy;
 const { authHelper } = require('../utils');
-const UserModel = require('../models/user.model');
+const UserModel = require('../../data/models/user-model');
 
 const configAuth = (app, users) => {
     passport.use(new Strategy(
