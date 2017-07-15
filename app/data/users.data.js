@@ -6,7 +6,7 @@ const usersList = [{
     password: authHelper.makeHashFromPassword('ala'),
 }];
 
-const users = {
+const usersData = {
     findById(id) {
         id = +id;
         const user = usersList.find((u) => u.id === id);
@@ -33,5 +33,5 @@ const users = {
 };
 
 module.exports = {
-    users,
+    usersData,
 };
