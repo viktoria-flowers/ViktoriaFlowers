@@ -1,18 +1,25 @@
 const express = require('express');
 
-const app = express();
+const init = (data) => {
+    const app = express();
 
-const data = require('./data');
+    // folder app/config
+    require('./config/app.config')(app);
+    require('./config/auth.config')(app, data);
 
-require('./config/app.config')(app);
-require('./config/auth.config')(app, data);
+    // folder app/routes
+    require('./routes/server-routes')(app);
+    require('./routes/auth.routes')(app);
+    require('./routes/api.routes')(app); // Test api routers
 
-require('./routes/server-routes')(app);
-require('./routes/auth.routes')(app);
-require('./routes/api.routes')(app); // Test api routers
+    app.get('*', (req, res) => {
+        res.render('404');
+    });
 
-app.get('*', (req, res) => {
-    res.render('404');
-});
+    return Promise.resolve(app);
+};
 
-module.exports = app;
+
+
+
+module.exports = { init };

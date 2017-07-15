@@ -11,8 +11,7 @@ const serverRoutes = (app) => {
     app.get('/bouquets-circle', (req, res) => res.render('bouquets-circle'));
     app.get('/bouquets-tall', (req, res) => res.render('bouquets-tall'));
     app.get('/bouquets-wedding', (req, res) => res.render('bouquets-wedding'));
-    app.get('/bouquets-extraordinary', (req, res) =>
-    res.render('bouquets-extraordinary'));
+    app.get('/bouquets-extraordinary', (req, res) => res.render('bouquets-extraordinary'));
     app.get('/baskets', (req, res) => res.render('baskets'));
     app.get('/pots', (req, res) => res.render('pots'));
     app.get('/cards', (req, res) => res.render('cards'));

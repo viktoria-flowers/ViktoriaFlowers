@@ -15,5 +15,4 @@ const makeHashFromPassword = (password, salt) => {
         .digest(hashEncoding);
 };
 
-
 module.exports = { makeHashFromPassword };

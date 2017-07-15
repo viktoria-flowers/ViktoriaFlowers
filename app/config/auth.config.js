@@ -22,7 +22,8 @@ const configAuth = (app, { users }) => {
     ));
 
     app.use(cookieParser());
-    // Unique key for encrypting cookie
+    
+    // unique key for encrypting cookie
     app.use(session({
         secret: 'Yellow Unicorn',
         resave: true,
@@ -31,12 +32,12 @@ const configAuth = (app, { users }) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    // How do we want to return/generate cookie to the user
+    // return/generate cookie to the user
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
 
-    // How by given cookie to find the user
+    // find the user from cookie
     passport.deserializeUser((id, done) => {
         return users.findById(id)
             .then((user) => {
