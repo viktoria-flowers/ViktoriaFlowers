@@ -1,4 +1,4 @@
-const ModelState = require('../modelstate');
+const ModelState = require('../model-state');
 
 class BaseData {
     constructor(db, ModelClass, validator) {
