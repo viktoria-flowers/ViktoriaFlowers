@@ -1,374 +1,185 @@
 doctype html
-html(lang='en-US')
-    head
-        meta(charset='UTF-8')
-        title Магазин за цветя 'Виктория'
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        // Fav Icon
-        link#favicon(rel='icon', type='image/png', href='/static/img/favicon.png')
-        // Google Font Raleway
-        link(href='https://fonts.googleapis.com/css?family=Raleway:200,300,500,400,600,700,800', rel='stylesheet', type='text/css')
-        // Google Font Dancing Script
-        link(href='https://fonts.googleapis.com/css?family=Dancing+Script', rel='stylesheet', type='text/css')
-        // Bootstrap CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/bootstrap.min.css')
-        // Font Awesome CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/font-awesome.min.css')
-        //- link(rel='stylesheet', type='text/css', href='/libs/font-awesome/css/font-awesome.min.css')
-        // Owl Carousel CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/owl.carousel.min.css')
-        //- link(rel='stylesheet', type='text/css', href='/libs/node_modules/owl.carousel/docs/assets/owlcarousel/assetss/owl.carousel.min.css')
-        // Animate CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/animate.min.css')
-        //- link(rel='stylesheet', type='text/css', href='/libs/node_modules/animate.min.css/animate.min.css')
-        // simpleLens CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/jquery.simpleLens.css') 
-        // Price Slider CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/jquery-price-slider.css')
-        // MeanMenu CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/meanmenu.min.css')
-        // Magnific Popup CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/magnific-popup.css')
-        //- link(rel='stylesheet', type='text/css', href='/libs/node_modules/magnific-popup/dist/magnific-popup.css')
-        // Nivo Slider CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/nivo-slider.css')
-        //- link(rel='stylesheet', type='text/css', href='/libs/node_modules/nivo-slider/nivo-slider.css')
-        // Stylesheet CSS
-        link(rel='stylesheet', type='text/css', href='/static/css/style.css')
-        // Responsive Stylesheet
-        link(rel='stylesheet', type='text/css', href='/static/css/responsive.css')
-        //if IE
-            script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
-    body
-        .header-top
-            // Start Header Top Area
-            .container
-                .row
-                    .col-sm-12.col-md-4
-                        .info
-                            .phn-num.float-left
-                                i.fa.fa-phone.float-left
-                                p +359 999 999 999 
-                            .mail-id.float-left
-                                i.fa.fa-envelope-o.float-left
-                                p
-                                    a(href='#') cvete_za_vas@gmail.com
-                    .col-sm-12.col-md-4
-                        .socials.text-center
-                            a(href='#')
-                                i.fa.fa-facebook
-                            a(href='#')
-                                i.fa.fa-twitter
-                            a(href='#')
-                                i.fa.fa-linkedin
-                            a(href='#')
-                                i.fa.fa-google-plus
-                    .col-sm-12.col-md-4
-                        #top-menu.float-right
-                            ul
-                                - if(isAuthenticated)
-                                    li
-                                        a(href='/profile') Профил
-                                    li
-                                        a(href='/logout') Изход
-        // End Header Top Area
-        .header-area
-            // Start Header Area
-            .container
-                .row
-                    - if(isAuthenticated)
-                        .col-sm-4.col-lg-3
-                            .log-link
-                                p Добре дошли 
-                                    = username
-                    - else
-                        .col-sm-4.col-lg-3
-                            .log-link
-                                p &nbsp;
-                                h5
-                                    a(href='/login') Вход
-                                    |   /  
-                                    a(href='/register') Регистрация
-                    .col-sm-4.col-lg-6
-                        .logo.text-center
-                            a(href='/home')
-                                img(src='/static/img/header/logo.png', alt='')
-                                h4 Онлайн магазин за цветя
-                    .col-sm-4.col-lg-3
-                        .cart-info.float-right
-                            a(href='/cart')
-                                h5
-                                    | Вашата количка 
-                                    span $390
-                                i.fa.fa-shopping-cart
-                            .cart-hover
-                                ul.header-cart-pro
-                                    li
-                                        .image
-                                            a(href='#')
-                                                img(alt='cart item', src='/static/img/cart-1.jpg')
-                                        .content.fix
-                                            a(href='#') Product Name
-                                            span.price Price: $130
-                                            span.quantity Quantity: 1
-                                        i.fa.fa-trash.delete
-                                    li
-                                        .image
-                                            a(href='#')
-                                                img(alt='cart item', src='/static/img/cart-2.jpg')
-                                        .content.fix
-                                            a(href='#') Име на цвете - динамично
-                                            span.price Цена: $130
-                                            span.quantity Количество: 2
-                                        i.fa.fa-trash.delete
-                                .header-button-price
-                                    a(href='checkout.html')
-                                        i.fa.fa-sign-out
-                                        span Купете
-                                    .total-price
-                                        h3
-                                            | Сума за плащане : 
-                                            span $390
-                        .search.float-right
-                            input(type='text', value='', placeholder='Търси....')
-                            button.submit
-                                i.fa.fa-search
-        // End Header Area
-        .menu-area
-            // Start Main Menu Area
-            .container
-                .row
-                    .clo-md-12
-                        .main-menu.hidden-sm.hidden-xs
-                            nav
-                                ul
-                                    li
-                                        a.active(href='/home') Начало
-                                    li
-                                        a(href='/bouquets') Букети
-                                        .mega-menu.mega-menu-1
-                                            .column-1.column
-                                                ul
-                                                    li
-                                                        a(href='shop-list.html') Кръгли 
-                                            .column-2.column
-                                                ul
-                                                    li
-                                                        a(href='shop-list.html') Високи 
-                                            .column-3.column
-                                                ul
-                                                    li
-                                                        a(href='shop-list.html') Сватбени 
-                                            .column-4.column
-                                                ul
-                                                    li
-                                                        a(href='shop-list.html') Модерни
-                                                    
-                                    li
-                                        a(href='/baskets') Кошници
-                                    li
-                                        a(href='/pots') Саксии
-                                    li
-                                        a(href='/cards') Картички
-                                    li
-                                        a(href='/delivery') Доставка
-                                    li
-                                        a(href='/payment') Плащане
-                                    li
-                                        a(href='/contacts') Контакти
-                        .mobile-menu.hidden-md.hidden-lg
-                            nav
-                                ul
-                                    li
-                                        a.active(href='/home') Начало
-                                    li
-                                        a(href='/bouquets') Букети
-                                        .mega-menu.mega-menu-1
-                                            .column-1.column
-                                                ul.sub-menu
-                                                    li
-                                                        a(href='shop-list.html') Кръгли 
-                                            .column-2.column
-                                                ul.sub-menu
-                                                    li
-                                                        a(href='shop-list.html') Високи 
-                                            .column-3.column
-                                                ul.sub-menu
-                                                    li
-                                                        a(href='shop-list.html') Сватбени 
-                                            .column-4.column
-                                                ul.sub-menu
-                                                    li
-                                                        a(href='shop-list.html') Модерни
-                                    li
-                                        a(href='/baskets') Кошници
-                                    li
-                                        a(href='/pots') Саксии
-                                    li
-                                        a(href='/cards') Картички
-                                    li
-                                        a(href='/delivery') Доставка
-                                    li
-                                        a(href='/payment') Плащане
-                                    li
-                                        a(href='/contacts') Контакти
+html
+  head
+    title
+      | Магазин за цветя 'Виктория'
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='keywords', content='Super Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, \
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design')
 
-        block content
+    link(rel='shortcut icon', type='image/x-icon', href='/static/images/favicon.png')
+    link(href='/static/css/bootstrap.css', rel='stylesheet', type='text/css', media='all')
+    link(href='http://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic', rel='stylesheet', type='text/css')
+    link(href='/static/css/font-awesome.css', rel='stylesheet')
+    link(href='/static/css/skdslider.css', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css')    
+    link(href='/static/css/style.css', rel='stylesheet', type='text/css', media='all')
 
-        .footer-top-area.fix
-            // Start Footer top area
-            .container
-                .row
-                    .col-sm-6.col-md-3
-                        .footer-about
-                            .image
-                                img(src='/static/img/header/logo.png', alt='')
-                                h3 online jewelry store
-                            p
-                                | perspiciatis unde omnis iste natus error sit voluptatem accm doloremque antium, totam rem aperiam, eaque ipsa perspiciatis unde omnis iste
-                        .footer-contact
-                            .single-contact
-                                .icon
-                                    i.fa.fa-map-marker
-                                .details
-                                    p Main town, Anystreen
-                                    p C/A 1254 New Yourk
-                            .single-contact
-                                .icon
-                                    i.fa.fa-phone
-                                .details
-                                    p +012  456  456  456
-                                    p +012  356  897  222
-                            .single-contact
-                                .icon
-                                    i.fa.fa-dribbble
-                                .details
-                                    a(href='#') info@olongker.com
-                                    a(href='#') www.olongker.com
-                    .col-sm-6.col-md-3
-                        .footer-quick-link.footer-links
-                            h2 Бързи линкове
-                            ul
-                                li
-                                    a.active(href='/home') Начало
-                                li
-                                    a(href='/bouquets') Букети
-                                li
-                                    a(href='/baskets') Кошници
-                                li
-                                    a(href='/pots') Саксии
-                                li
-                                    a(href='/cards') Картички
-                                li
-                                    a(href='/delivery') Доставка
-                                li
-                                    a(href='/payment') Плащане
-                                li
-                                    a(href='/contacts') Контакти
-                    .col-sm-12.col-md-6
-                        .row
-                            .col-sm-8.footer-support.footer-links
-                                h2 OUR SUPPORT
-                                ul
-                                    li
-                                        a(href='#') Site Map
-                                    li
-                                        a(href='#') privacy Policy
-                                    li
-                                        a(href='#') Your Account
-                                    li
-                                        a(href='#') Term & Conditions
-                                    li
-                                        a(href='#') Advance Search
-                                    li
-                                        a(href='faq.html') Help & FAQs
-                                    li
-                                        a(href='#') Gift Voucher
-                                    li
-                                        a(href='contact-2.html') Contact Us
-                            .col-sm-4.footer-account.footer-links
-                                h2 my Account
-                                ul
-                                    li
-                                        a(href='#') my Account
-                                    li
-                                        a(href='#') order History
-                                    li
-                                        a(href='#') Returns
-                                    li
-                                        a(href='#') Specials
-                        .footer-newslater.fix
-                            .wrap.fix
-                                h3 Нови букети и промоции! 
-                                form(action='#')
-                                    input(type='email', placeholder='Your E-mail...')
-                                    button.submit Абонирай се
-        // Start Footer top area
-        .footer-area.fix
-            // Start Footer Area
-            .container
-                .row
-                    .col-sm-6
-                        .copy-right
-                            p
-                                | Shared by 
-                                i.fa.fa-love
-                                a(href='https://bootstrapthemes.co') BootstrapThemes
-                    .col-sm-6
-                        .payment
-                            ul
-                                li
-                                    a(href='#')
-                                        img(src='/static/img/footer/paypal.jpg', alt='')
-                                li
-                                    a(href='#')
-                                        img(src='/static/img/footer/visa.jpg', alt='')
-                                li
-                                    a(href='#')
-                                        img(src='/static/img/footer/master.jpg', alt='')
-                                li
-                                    a(href='#')
-                                        img(src='/static/img/footer/cards.jpg', alt='')
-                                li
-                                    a(href='#')
-                                        img(src='/static/img/footer/discover.jpg', alt='')
-        // End Footer Area
-        // jQuery 2.1.4
-        script(type='text/javascript', src='/static/js/jquery-2.1.4.min.js')
-        //- script(type='text/javascript', src='/libs/node_modules/jquery/dist/jquery.min.js')
-        // Bootstrap JS
-        script(type='text/javascript', src='/static/js/bootstrap.min.js')
-        //- script(type='text/javascript', src='../../../node_modules/bootstrap/dist/js/bootstrap.min.js')
-        // Owl Carousel JS
-        script(type='text/javascript', src='/static/js/owl.carousel.min.js')
-        //- script(type='text/javascript', src='../../../node_modules/owl.carousel/dist/owl.carousel.min.js')
-        // countTo JS
-        script(type='text/javascript', src='/static/js/jquery.countTo.js')
-        // mixitup JS
-        script(type='text/javascript', src='/static/js/jquery.mixitup.min.js')
-        // magnific popup JS
-        script(type='text/javascript', src='/static/js/jquery.magnific-popup.min.js')
-        //- script(type='text/javascript', src='/libs/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js')
-        // Appear JS
-        script(type='text/javascript', src='/static/js/jquery.appear.js')
-        //- script(type='text/javascript', src='/libs/node_modules/jquery.appear/jquery.appear.js')
-        // MeanMenu JS
-        script(type='text/javascript', src='/static/js/jquery.meanmenu.min.js')
-        // Nivo Slider JS
-        script(type='text/javascript', src='/static/js/jquery.nivo.slider.pack.js')
-        //- script(type='text/javascript', src='/libs/node_modules/nivo-slider/jquery.nivo.slider.pack.js')
-        // Scrollup JS
-        script(type='text/javascript', src='/static/js/jquery.scrollup.min.js')
-        // simpleLens JS
-        script(type='text/javascript', src='/static/js/jquery.simpleLens.min.js')
-        // Price Slider JS
-        script(type='text/javascript', src='/static/js/jquery-price-slider.js')
-        // WOW JS
-        script(type='text/javascript', src='/static/js/wow.min.js')
-        script.
-            new WOW().init();
-        // Main JS
-        script(type='text/javascript', src='/static/js/main.js')
+    script(src='/static/js/jquery-1.11.1.min.js')
+    script(src='https://code.jquery.com/ui/1.12.0/jquery-ui.min.js')
+  body
+    // HEADER start
+    .agileits_header
+      .container
+        .row
+          .w3l_offers.col-sm-6
+            a(href='/').col-sm-5
+              img(src="/static/images/logo.gif")#logoImage.pull-left
+            -if(isAuthenticated)
+              p.col-sm-7.pull-left Здравейте, 
+                = username
+            -else
+              p.col-sm-7.pull-left.text-center.em 
+                em Добре дошли в магазин за цветя 'Виктория'
+          .agile-login.col-sm-4
+            ul
+              - if(isAuthenticated)
+                li
+                  a(href='/profile') Профил
+                li
+                  a(href='/logout') Изход
+              - else
+                li
+                  a(href='/login')  Вход 
+                li
+                  a(href='/register') Регистрация
+          .product_list_header.col-sm-2.pull-right
+            a(href="/checkout")
+              i.fa.fa-cart-arrow-down
+      //- .clearfix  
+    .logo_products
+      .container
+        .w3ls_logo_products_left1
+          ul.phone_email
+            li
+              i.fa.fa-phone(aria-hidden='true')
+              | Поръчка по телефона: 0898 838 833
+        .w3ls_logo_products_left
+          h1
+            a(href='/') Магазин за цветя "Виктория"
+        .w3l_search
+          form(action='#', method='post')
+            input(type='search', name='Search', placeholder='Търси...', required='')
+            button.btn.btn-default.search(type='submit', aria-label='Left Align')
+              i.fa.fa-search(aria-hidden='true')  
+            .clearfix
+        .clearfix  
+    // HEADER end
+    // NAVIGATION start
+    .navigation-agileits
+      .container
+        nav.navbar.navbar-default
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header.nav_2
+            button.navbar-toggle.collapsed.navbar-toggle1(type='button', data-toggle='collapse', data-target='#bs-megadropdown-tabs')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+          #bs-megadropdown-tabs.collapse.navbar-collapse
+            ul.nav.navbar-nav.text-center
+              li.active
+                a.act(href='/') Начало
+              // Mega Menu
+              li.dropdown
+                a.dropdown-toggle(href='', data-toggle='dropdown')
+                  | Букети
+                  b.caret
+                ul.dropdown-menu.multi-column.columns-3
+                  .row
+                    .multi-gd-img
+                      ul.multi-column-dropdown
+                        li
+                          a(href='/bouquets-circle') Кръгли
+                        li
+                          a(href='/bouquets-tall') Високи
+                        li
+                          a(href='/bouquets-wedding') Сватбени
+                        li
+                          a(href='/bouquets-extraordinary') Нестандартни
+              li
+                a(href='/baskets') Кошници
+              li
+                a(href='/pots') Саксии
+              li
+                a(href='/cards') Картички
+              li
+                a(href='/delivery') Доставка
+              li
+                a(href='/payment') Плащане
+              li
+                a(href='/contacts') Контакти                
+    // NAVIGATION end
 
-    block scripts
-        
+    //Here we put different content
+    block content
+
+    //FOOTER start
+    .footer
+      .container
+        .w3_footer_grids
+          .col-md-4.w3_footer_grid
+            h3 Контакти
+            ul.address
+              li
+                i.glyphicon.glyphicon-map-marker(aria-hidden='true')
+                | Кооперативен пазар, Люлин 9
+                span София
+              li
+                i.glyphicon.glyphicon-envelope(aria-hidden='true')
+                a(href='mailto:info@example.com') cvete_za_vas@gmail.com
+              li
+                i.glyphicon.glyphicon-earphone(aria-hidden='true')
+                | 0898 838 833
+          .col-md-4.w3_footer_grid
+            h3 Информация за клиента
+            ul.info
+              li
+                i.fa.fa-arrow-right(aria-hidden='true')
+                a(href='/login') Вход
+              li
+                i.fa.fa-arrow-right(aria-hidden='true')
+                a(href='/register') Регистрация
+              li
+                i.fa.fa-arrow-right(aria-hidden='true')
+                a(href='/about') Контакти
+              li
+                i.fa.fa-arrow-right(aria-hidden='true')
+                a(href='/delivery') Доставка
+              li
+                i.fa.fa-arrow-right(aria-hidden='true')
+                a(href='/payment') Начини на плащане
+          .col-md-4.w3_footer_grid
+            h5 Абонирайте се за нашите специални предложения
+            .input-group
+              span.input-group-addon
+                i.glyphicon.glyphicon-leaf
+              input#login-username.form-control(type='text', name='username', value='', placeholder='E-mail')
+          .clearfix  
+      .footer-copy
+        .container
+          p
+            | © 2017 Super Market. All rights reserved | Design by 
+            a(href='http://w3layouts.com/') W3layouts
+    .footer-botm
+      .container
+        .w3layouts-foot
+          ul
+            li
+              a.w3_agile_facebook(href='#')
+                i.fa.fa-facebook(aria-hidden='true')
+            li
+              a.agile_twitter(href='#')
+                i.fa.fa-twitter(aria-hidden='true')
+        .clearfix  
+    //FOOTER end
+
+    // for-mobile-apps
+    script(src='/static/js/bootstrap.min.js')
+    script(type='text/javascript', src='/static/js/move-top.js')
+    script(type='text/javascript', src='/static/js/easing.js')
+    script(src='/static/js/skdslider.min.js')
+    //- script(src='/static/js/minicart.min.js')
+    script(type='text/javascript', src='/static/js/template.js')

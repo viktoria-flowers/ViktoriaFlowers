@@ -1,6 +1,100 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Profil
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Профил
+  .products
+    .container
+      .row.profile
+        .col-sm-4
+          .profile-sidebar
+            // SIDEBAR USERPIC
+            .profile-userpic
+              img.img-responsive(src='http://commackdentaldesign.com/wp-content/uploads/2016/04/2000px-Oxygen480-emotes-face-smile-big.svg_.png', alt='')
+            // END SIDEBAR USERPIC
+            // SIDEBAR USER TITLE
+            .profile-usertitle
+              .profile-usertitle-name
+                | Тук седи името на user
+            // END SIDEBAR USER TITLE
+            // SIDEBAR MENU
+            .profile-usermenu
+              ul.nav
+                li                  
+                  i.glyphicon.glyphicon-user
+                  | Потребителско име
+                  input.input.input-sm.profileInputs
+                li                  
+                  i.glyphicon.glyphicon-hand-right
+                  | Парола
+                  input.input.input-sm.profileInputs 
+                  br
+                  br
+                  br
+                  br              
+                li                  
+                  i.glyphicon.glyphicon-hand-right
+                  | Име
+                  input.input.input-sm.profileInputs
+                li                  
+                  i.glyphicon.glyphicon-hand-right
+                  | Фамилия
+                  input.input.input-sm.profileInputs
+                li                  
+                  i.glyphicon.glyphicon-earphone
+                  | Телефонен номер
+                  input.input.input-sm.profileInputs
+                li                  
+                  i.glyphicon.glyphicon-home
+                  | Адрес
+                  input.input.input-sm.profileInputs
+            // END MENU
+            // SIDEBAR BUTTONS
+            .profile-userbuttons
+              button.btn.btn-success.btn-sm(type='button') Редактирай
+              button.btn.btn-danger.btn-sm(type='button') Изтрии профил
+            // END SIDEBAR BUTTONS
+        .col-sm-8
+          .profile-content
+            #tabs
+              ul
+                li
+                  a(href='#tabs-1') История на поръчките
+                li
+                  a(href='#tabs-2') Любими
+              #tabs-1
+                ul.nav
+                  li                  
+                    i.glyphicon.glyphicon-hand-right.gly-size
+                      label.ordersText
+                        | Поръчка 1
+                  li                  
+                    i.glyphicon.glyphicon-hand-right.gly-size
+                      label.ordersText
+                        | Поръчка 2 ...   
+              #tabs-2
+                ul.nav
+                  li                  
+                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
+                      label.ordersText
+                      a(href="#")
+                        | Продукт 1
+                  li                  
+                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
+                      label.ordersText
+                      a(href="#")
+                        | Продукт 2..
+              script.
+                $( function() {
+                  $( "#tabs" ).tabs({
+                      event: "mouseover"
+                  });
+                });
+  .clearfix
+

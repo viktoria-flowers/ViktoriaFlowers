@@ -1,6 +1,50 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Контакти
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Контакти
+  .about
+    .w3_agileits_contact_grids
+      .col-md-6.w3_agileits_contact_grid_left
+        .agile_map
+          iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.3905851087434!2d-34.90500565012194!3d-8.061582082752993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab18d90992e4ab%3A0x8e83c4afabe39a3a!2sSport+Club+Do+Recife!5e0!3m2!1sen!2sin!4v1478684415917', style='border:0')
+        .agileits_w3layouts_map_pos
+          .agileits_w3layouts_map_pos1
+            h3 Магазин за цветя 'Виктория'
+            p София, Кооперативен пазар, Люлин 9
+            ul.wthree_contact_info_address
+              li
+                i.fa.fa-envelope(aria-hidden='true')
+                a(href='mailto:info@example.com') cvete_za_vas@gmail.com
+              li
+                i.fa.fa-phone(aria-hidden='true')
+                | 0838 933 933
+            .w3_agile_social_icons.w3_agile_social_icons_contact
+              ul
+                li
+                  a.icon.icon-cube.agile_facebook(href='#')
+                li
+                  a.icon.icon-cube.agile_rss(href='#')
+                li
+                  a.icon.icon-cube.agile_t(href='#')
+      .col-md-6.w3_agileits_contact_grid_right
+        h2.w3_agile_header
+          | Свържете се с нас
+        form(action='#', method='post')
+          span.input.input--ichiro
+            input#input-25.input__field.input__field--ichiro(type='text', name='Name', placeholder=' ', required='')
+            label.input__label.input__label--ichiro(for='input-25')
+              span.input__label-content.input__label-content--ichiro Име
+          span.input.input--ichiro
+            input#input-26.input__field.input__field--ichiro(type='email', name='Email', placeholder=' ', required='')
+            label.input__label.input__label--ichiro(for='input-26')
+              span.input__label-content.input__label-content--ichiro E-mail
+          textarea(name='Message', placeholder='Вашето съобщение...', required='')
+          input(type='submit', value='Изпрати')
+      .clearfix  
