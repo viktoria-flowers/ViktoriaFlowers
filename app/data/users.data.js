@@ -55,9 +55,19 @@ class UsersData extends BaseData {
             });
         }
 
-        newUser.roles = [];
-        newUser.password = authHelper.makeHashFromPassword(newUser.password);
-        return super.create(newUser);
+        const newPassword = authHelper.makeHashFromPassword(newUser.password);
+        return this.findByUsername(newUser.username)
+            .then((user) => {
+                return new Promise((resolve, reject) => {
+                    return reject('Username already exists!');
+                });
+            })
+            .catch((err) => {
+                // registrate the new user
+                newUser.roles = [];
+                newUser.password = newPassword;
+                return super.create(newUser);
+            });
     }
 }
 

@@ -14,7 +14,14 @@ const attach = (app, usersData) => {
 
     router.post('/register', (req, res) => {
         usersData.create(req.body).then((user) => {
-            res.redirect('/');
+            req.logIn(user, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.redirect('/login');
+                }
+
+                res.redirect('/profile');
+            });
         })
         .catch((err) => {
             res.redirect('/register');
