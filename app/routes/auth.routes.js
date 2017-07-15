@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
 
-const attach = (app) => {
+const attach = (app, usersData) => {
     const router = new Router();
 
     router.post('/login',
@@ -11,6 +11,22 @@ const attach = (app) => {
             // failureFlash: true,
         })
     );
+
+    router.post('/register', (req, res) => {
+        usersData.create(req.body).then((user) => {
+            req.logIn(user, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.redirect('/login');
+                }
+
+                res.redirect('/profile');
+            });
+        })
+        .catch((err) => {
+            res.redirect('/register');
+        });
+    });
 
     app.use('/', router);
 };

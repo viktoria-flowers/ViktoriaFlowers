@@ -1,37 +1,11 @@
-const { authHelper } = require('../utils');
+const UsersData = require('./users.data');
 
-const usersList = [{
-    id: 1,
-    username: 'Marti',
-    password: authHelper.makeHashFromPassword('ala'),
-}];
-
-const users = {
-    findById(id) {
-        id = +id;
-        const user = usersList.find((u) => u.id === id);
-        return new Promise((resolve, reject) => {
-            if (!user) {
-                console.log('Wrong');
-                return reject('No such user');
-            }
-            return resolve(user);
-        });
-    },
-    findByUsername(username) {
-        const usernameToLower = username.toLowerCase();
-        const user = usersList.find((u) =>
-            u.username.toLowerCase() === usernameToLower);
-        return new Promise((resolve, reject) => {
-            if (!user) {
-                console.log('Wrong 2');
-                return reject('No such user');
-            }
-            return resolve(user);
-        });
-    },
+const init = (db) => {
+    return {
+        users: new UsersData(db),
+    };
 };
 
 module.exports = {
-    users,
+    init,
 };

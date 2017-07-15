@@ -993,7 +993,7 @@ a.w3_agile_vimeo:hover{
 .login-form-grids input[type="text"]{
 	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
 }
-.login-form-grids input[type="text"]:nth-child(2){
+.login-form-grids input[type="text"]:nth-child(2n){
 	background:url(../images/img-sp.png) no-repeat 0px -298px #fff;
 	margin:1em 0;
 }
