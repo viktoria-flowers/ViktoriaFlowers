@@ -11,7 +11,7 @@ class ModelState {
  * // modelState.errors is null  
  * @return { ModelState } Returns Valid model state 
  */
-    static Valid() {
+    static valid() {
         return new this(true, null);
     }
 }

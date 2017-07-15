@@ -17,8 +17,8 @@ class BaseData {
     }
 
     create(model) {
-        const modelState = this.isValid(model);
-        if (modelState.isValid) {
+        const modelState = this.validate(model);
+        if (!modelState.isValid) {
             return Promise.reject(modelState.errors);
         }
 
@@ -40,9 +40,9 @@ class BaseData {
          }, model);
      }
 
-    isValid(model) {
+    validate(model) {
         if (!this.validator || typeof this.validator.isValid !== 'function') {
-            return new ModelState.Valid();
+            return ModelState.valid();
         }
 
         return this.validator.isValid(model);

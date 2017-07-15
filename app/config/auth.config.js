@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const { Strategy } = require('passport-local').Strategy;
 const { authHelper } = require('../utils');
+const UserModel = require('../models/user.model');
 
 const configAuth = (app, users) => {
     passport.use(new Strategy(
@@ -33,7 +34,8 @@ const configAuth = (app, users) => {
 
     // How do we want to return/generate cookie to the user
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        const serializedUser = new UserModel(user);
+        done(null, serializedUser.id);
     });
 
     // How by given cookie to find the user
