@@ -1,6 +1,22 @@
 extends /layouts/default.pug
 
 block content
-    .section-title
-      h1
-        | Доставка
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Доставка
+    .about
+      .container
+        h3.w3_agile_header Условия на доставка
+        .about-agileinfo.w3layouts
+          .col-md-12.about-wthree-grids.grid-top
+            h4 Доставка в рамките на деня - 8:00 до 20:00 часа 
+            p.top.text-justify
+              | Gnissimos voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi. atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum fuga
+            p.text-justify
+              | Dignissimos at vero eos et accusamus et iusto odio ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum fuga. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecat atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum
+  .clearfix

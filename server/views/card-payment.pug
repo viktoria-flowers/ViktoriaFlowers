@@ -1,0 +1,95 @@
+extends /layouts/default.pug
+
+block content
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Плащане с дебитна/кредитна карта
+  .about
+    .container
+      h3.w3_agile_header Плащане с дебитна/кредитна карта
+      .about-agileinfo.w3layouts
+        .col-md-8.about-wthree-grids.grid-top
+          h4 Платете при получаване на поръчката 
+          p.top.text-justify
+            | Gnissimos voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi. atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum fuga
+          p
+            | Dignissimos at vero eos et accusamus et iusto odio ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum fuga. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecat atque corrupti quos dolores et quas molestias excepturi sint occaecat officia deserunt mollitia laborum et dolorum
+          .about-w3agilerow
+            .col-md-4.about-w3imgs
+              img.img-responsive.zoom-img(src='static/images/p3.jpg', alt='')
+            .col-md-4.about-w3imgs
+              img.img-responsive.zoom-img(src='static/images/p4.jpg', alt='')
+            .col-md-4.about-w3imgs
+              img.img-responsive.zoom-img(src='static/images/p3.jpg', alt='')
+            .clearfix  
+        .col-md-4.about-wthree-grids
+          .offic-time
+            .time-top
+              h4 Praesentium :
+            .time-bottom
+              h5 At vero eos 
+              h5 Accusamus et
+              p Dignissimos at vero eos et accusamus et iusto odio ducimus qui accusamus et. 
+          .testi
+            h3.w3_agile_header Testimonial
+            // //End-slider-script
+            script(src='js/responsiveslides.min.js')
+            script.
+              // You can also use "$(window).load(function() {"
+              $(function () {
+                // Slideshow 5
+                $("#slider5").responsiveSlides({
+                  auto: true,
+                  pager: false,
+                  nav: true,
+                  speed: 500,
+                  namespace: "callbacks",
+                  before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                  },
+                  after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                  }
+                });
+              });
+            #top.callbacks_container
+              ul#slider5.rslides.callbacks.callbacks1
+                li#callbacks1_s0.callbacks1_on(style='display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 500ms ease-in-out;')
+                  .testi-slider
+                    h4 " I AM VERY PLEASED.
+                    p
+                      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu magna dolor, quisque semper.
+                    .testi-subscript
+                      p
+                        a(href='#') John Doe,
+                        | Adipiscing
+                      span.w3-agilesub  
+                li#callbacks1_s1(style='display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;')
+                  .testi-slider
+                    h4 " I AM LOREM IPSUM.
+                    p
+                      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu magna dolor, quisque semper.
+                    .testi-subscript
+                      p
+                        a(href='#') elit semper,
+                        | Dolor Elit
+                      span.w3-agilesub  
+                li#callbacks1_s2(style='display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;')
+                  .testi-slider
+                    h4 " CONSECTETUR PIMAGNA.
+                    p
+                      | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu magna dolor, quisque semper.
+                    .testi-subscript
+                      p
+                        a(href='#') Amet Doe,
+                        | Suspendisse
+                      span.w3-agilesub  
+              a.callbacks_nav.callbacks1_nav.prev(href='#') Previous
+              a.callbacks_nav.callbacks1_nav.next(href='#') Next
+        .clearfix  
+

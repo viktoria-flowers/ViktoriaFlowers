@@ -1,18 +1,29 @@
 extends /layouts/default.pug
 
 block content
-  .container
-    .pricing-table.pricing-three-column.row
-      .plan.col-sm-4.col-lg-4
-        a(href='/payment-details')
-          .plan-name-bronze
-            h3 Наложен платеж
-          img.transparent-imgs(src='http://www.img-academy.com/wp-content/uploads/2015/03/deliveri-img-academy-796x1024.jpg', alt='product')
-      .plan.col-sm-4.col-lg-4
-        .plan-name-silver
-          h3 PayPal
-        img.transparent-imgs(src='https://sensorstechforum.com/wp-content/uploads/2016/01/paypal-bug-stf.jpg', alt='product')
-      .plan.col-sm-4.col-lg-4
-        .plan-name-gold
-          h3 Плащане с карта
-        img.transparent-imgs(src='http://i.dailymail.co.uk/i/pix/2012/05/11/article-0-0EF9ACF900000578-557_468x315.jpg', alt='product')
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Начини на плащане
+    .products
+      .container
+        .col-md-4.products-left
+          .categories
+            a(href="/payOnDelivery")
+              h2 Наложен платеж
+              img(src="static/images/payOnDelivery.jpg").paymentImages
+        .col-md-4.products-left
+          .categories
+            a(href="/paypal-payment")
+              h2 PayPal
+              img(src="static/images/paypal.jpg").paymentImages
+        .col-md-4.products-left
+          .categories
+            a(href="/card-payment")
+              h2 Кредитна/дебитна карта
+              img(src="static/images/creditCardPayment.jpg").paymentImages            
+      .clearfix

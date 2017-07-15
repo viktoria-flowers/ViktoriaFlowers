@@ -1,31 +1,39 @@
 extends /layouts/default.pug
 
 block content
-  .login-page.page.fix
+  .breadcrumbs
     .container
-      .row
-        .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
-          .login.text-center
-              form#login-form(action='/register', method="POST")
-                h2 Регистрация
-                label
-                  | Потребителско име
-                  span *
-                input(type='text')
-                label
-                  | Парола
-                  span *
-                input(type='password')
-                label
-                  | E-mail
-                  span *
-                input(type='email')
-                label
-                  | Адрес
-                  span *
-                input(type='text')
-                label
-                  | Телефон за контакт
-                  span *
-                input(type='tel')
-                input(type='submit', value='Регистрация')
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Регистрация
+  .register
+    .container
+      h2 Регистрация
+      .login-form-grids
+        h5 Профилна информация
+        form(action='#', method='post')
+          input(type='text', placeholder='Име', required=' ')
+          input(type='text', placeholder='Фамилия', required=' ')
+          input(type='text', placeholder='Телефонен номер', required=' ')
+          input(type='text', placeholder='Адрес', required=' ')
+          input(type='text', placeholder='Снимка', required=' ')
+        //- .register-check-box
+        //-   .check
+        //-     label.checkbox
+        //-       input(type='checkbox', name='checkbox')
+        //-       i  
+        //-       | Subscribe to Newsletter
+        h6 Информация за вход в сайта
+        form(action='#', method='post')
+          input(type='text', placeholder='Потребителско име', required=' ')
+          input(type='password', placeholder='Парола', required=' ')
+          //- .register-check-box
+          //-   .check
+          //-     label.checkbox
+          //-       input(type='checkbox', name='checkbox')
+          //-       i  
+          //-       | I accept the terms and conditions
+          input(type='submit', value='Регистрирай ме')
