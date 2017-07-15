@@ -298,8 +298,7 @@ ul.multi-column-dropdown h6 {
 }
 /*-- cart --*/
 /*-- cart-box --*/ 
-.w3view-cart {
-    background: #3399cc;
+/*.w3view-cart {
     border: none;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -310,8 +309,8 @@ ul.multi-column-dropdown h6 {
     height: 40px;
     text-align: center;
     outline: none;
-}
-.w3view-cart i.fa {
+}*/
+.product_list_header a i.fa {
     font-size: 24px;
     color: #ffffff;
 }
