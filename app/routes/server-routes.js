@@ -1,4 +1,17 @@
 const serverRoutes = (app) => {
+    // https://scotch.io/tutorials/easy-node-authentication-setup-and-local#toc-routes-approutesjs
+    // route middleware to make sure a user is logged in
+    const isLoggedIn = (req, res, next) => {
+        // if user is authenticated in the session, carry on 
+        if (req.isAuthenticated()) {
+            return next();
+        }
+
+        // if they aren't redirect them to the home page
+        res.status(401);
+        return res.redirect('/login');
+    };
+
     // Midleware to set a current user accessible in pug views
     app.use('/', (req, res, next) => {
         res.locals.isAuthenticated = !!req.user;
@@ -23,13 +36,13 @@ const serverRoutes = (app) => {
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
+    app.get('/profile', isLoggedIn, (req, res) => res.render('profile'));
     app.get('/checkout', (req, res) => res.render('checkout'));
-    app.get('/profile', (req, res) => res.render('profile'));
     app.get('/register', (req, res) => res.render('register'));
     app.get('/login', (req, res) => res.render('login'));
     app.get('/logout', (req, res) => {
         req.logout();
-        res.redirect('home');
+        res.redirect('/home');
     });
 };
 
