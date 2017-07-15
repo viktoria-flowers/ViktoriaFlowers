@@ -14,22 +14,20 @@ block content
       h2 Регистрация
       .login-form-grids
         h5 Профилна информация
-        form(action='#', method='post')
-          input(type='text', placeholder='Име', required=' ')
-          input(type='text', placeholder='Фамилия', required=' ')
-          input(type='text', placeholder='Телефонен номер', required=' ')
-          input(type='text', placeholder='Адрес', required=' ')
-          input(type='text', placeholder='Снимка', required=' ')
-        //- .register-check-box
-        //-   .check
-        //-     label.checkbox
-        //-       input(type='checkbox', name='checkbox')
-        //-       i  
-        //-       | Subscribe to Newsletter
-        h6 Информация за вход в сайта
-        form(action='#', method='post')
-          input(type='text', placeholder='Потребителско име', required=' ')
-          input(type='password', placeholder='Парола', required=' ')
+        form(action='/register', method='POST')
+          input(type='text', name='names', placeholder='Име и фамилия', required='required')
+          input(type='text', name='phone', placeholder='Телефонен номер', required='required')
+          input(type='email', name='email', placeholder='Емейл', required='required')
+          input(type='text', name='contactInfo', placeholder='Адрес', required='required')
+          //- .register-check-box
+          //-   .check
+          //-     label.checkbox
+          //-       input(type='checkbox', name='checkbox')
+          //-       i  
+          //-       | Subscribe to Newsletter
+          h6 Информация за вход в сайта
+          input(type='text', name='username', placeholder='Потребителско име', required='required')
+          input(type='password', name='password',  placeholder='Парола', required='required')
           //- .register-check-box
           //-   .check
           //-     label.checkbox
