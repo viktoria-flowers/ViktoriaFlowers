@@ -23,9 +23,10 @@ class BaseData {
         }
 
         return this.collection.insert(model)
-            .then(() => {
-                // TODO: refactor, parameters?, should return the whole model? 
-                return model;
+            .then((status) => {
+                // conatins the created Id
+                return status.ops[0];
+                // return model;
             });
     }
 
