@@ -1,4 +1,5 @@
 const ModelState = require('../model-state');
+
 class User {
     constructor(user) {
         this.id = user._id.toString();

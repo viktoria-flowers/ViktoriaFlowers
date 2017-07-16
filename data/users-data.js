@@ -62,7 +62,7 @@ class UsersData extends BaseData {
                 });
             })
             .catch((err) => {
-                // registrate the new user
+                // registerer the new user
                 newUser.roles = [];
                 newUser.password = newPassword;
                 return super.create(newUser);
