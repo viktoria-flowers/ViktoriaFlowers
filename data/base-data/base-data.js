@@ -21,7 +21,6 @@ class BaseData {
         if (!modelState.isValid) {
             return Promise.reject(modelState.errors);
         }
-
         return this.collection.insert(model)
             .then((status) => {
                 // conatins the created Id

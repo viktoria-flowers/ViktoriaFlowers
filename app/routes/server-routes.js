@@ -67,7 +67,8 @@ const serverRoutes = (app, data) => {
     app.get('/bouquets-circle', (req, res) => res.render('bouquets-circle'));
     app.get('/bouquets-tall', (req, res) => res.render('bouquets-tall'));
     app.get('/bouquets-wedding', (req, res) => res.render('bouquets-wedding'));
-    app.get('/bouquets-extraordinary', (req, res) => res.render('bouquets-extraordinary'));
+    app.get('/bouquets-extraordinary', (req, res) =>
+        res.render('bouquets-extraordinary'));
     app.get('/baskets', (req, res) => res.render('baskets'));
     app.get('/pots', (req, res) => res.render('pots'));
     app.get('/cards', (req, res) => res.render('cards'));
@@ -79,7 +80,10 @@ const serverRoutes = (app, data) => {
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
-    app.get('/profile', isLoggedIn, (req, res) => res.render('profile'));
+    app.get('/profile', isLoggedIn, (req, res) =>
+        data.getAll(res.locals._id).then((user) => {
+            return res.render('profile', { user: user });
+        }));
     app.get('/checkout', (req, res) => res.render('checkout'));
     app.get('/register', (req, res) => res.render('register'));
     app.get('/login', (req, res) => res.render('login'));

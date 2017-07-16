@@ -19,7 +19,7 @@ const attach = (app, usersData) => {
                     console.log(err);
                     res.redirect('/login');
                 }
-
+                console.log(user._id);
                 res.redirect('/profile');
             });
         })
