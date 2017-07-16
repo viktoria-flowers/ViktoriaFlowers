@@ -19,7 +19,6 @@ $(document).ready(function () {
 // }
 
 jQuery(document).ready(function () {
-    console.log(344343);
     jQuery('#demo1').skdslider({ 'delay': 2000, 'animationSpeed': 1000, 'showNextPrev': true, 'showPlayButton': true, 'autoSlide': true, 'animationType': 'fading' });
     jQuery('#responsive').change(function () {
         $('#responsive_wrapper').width(jQuery(this).val());

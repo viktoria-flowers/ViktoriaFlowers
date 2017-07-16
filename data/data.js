@@ -2,9 +2,9 @@ const { authHelper } = require('../app/utils');
 const UsersData = require('./users-data');
 
 const init = (db) => {
-    return Promise.resolve({
+    return {
         items: new UsersData(db),
-    });
+    };
 };
 
 module.exports = {
