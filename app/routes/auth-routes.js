@@ -13,6 +13,7 @@ const attach = (app, usersData) => {
     );
 
     router.post('/register', (req, res) => {
+        console.log(req.body);
         usersData.create(req.body).then((user) => {
             req.logIn(user, (err) => {
                 if (err) {

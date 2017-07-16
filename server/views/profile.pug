@@ -25,40 +25,42 @@ block content
             //- // END SIDEBAR USER TITLE
             // SIDEBAR MENU
             .profile-usermenu
-              ul.nav           
-                li                  
-                  i.glyphicon.glyphicon-user
+              form(action='/profile', method='POST')
+                ul.nav
+                  li
+                    i.glyphicon.glyphicon-user
                     | Потребителско име
-                  input(type="text", value=user[0].username).input.input-sm.profileInputs
-                li                  
-                  i.glyphicon.glyphicon-hand-right
-                  | Парола
-                  input(type="text", value=user[0].password).input.input-sm.profileInputs 
-                  br
-                  br
-                  br
-                  br              
-                li                  
-                  i.glyphicon.glyphicon-hand-right
-                  | Име
-                  input(type="text", value=user[0].names[0]).input.input-sm.profileInputs
-                li                  
-                  i.glyphicon.glyphicon-hand-right
-                  | Фамилия
-                  input(type="text", value=user[0].names[1]).input.input-sm.profileInputs
-                li                  
-                  i.glyphicon.glyphicon-earphone
-                  | Телефонен номер
-                  input(type="text", value=user[0].phone).input.input-sm.profileInputs
-                li                  
-                  i.glyphicon.glyphicon-home
-                  | Адрес
-                  input(type="text", value=user[0].contactInfo).input.input-sm.profileInputs
-            // END MENU
-            // SIDEBAR BUTTONS
-            .profile-userbuttons
-            
-              button.btn.btn-success.btn-sm(type='submit') Редактирай
+                    input.input.input-sm.profileInputs(type='text', name='username', value=user[0].username)
+                  li
+                    input.input.input-sm.profileInputs(type='hidden', name='_id', value=user[0]._id)
+                  li
+                    i.glyphicon.glyphicon-hand-right
+                    | Нова парола
+                    input.input.input-sm.profileInputs(type='text', name='password')
+                    br
+                    br
+                    br
+                    br
+                  li
+                    i.glyphicon.glyphicon-hand-right
+                    | Име и Фамилия
+                    input.input.input-sm.profileInputs(type='text', name='names', , value=user[0].names)
+                  li
+                    i.glyphicon.glyphicon-hand-right
+                    | E-mail адрес
+                    input.input.input-sm.profileInputs(type='text', name='email', , value=user[0].email)
+                  li
+                    i.glyphicon.glyphicon-earphone
+                    | Телефонен номер
+                    input.input.input-sm.profileInputs(type='text', name='phone', , value=user[0].phone)
+                  li
+                    i.glyphicon.glyphicon-home
+                    | Адрес
+                    input.input.input-sm.profileInputs(type='text', name='contactInfo', , value=user[0].contactInfo)
+                // END MENU
+                // SIDEBAR BUTTONS
+                .profile-userbuttons
+                  input.btn.btn-success.btn-sm(type='submit', value='Редактирай')
               button.btn.btn-danger.btn-sm(type='submit') Изтрии профил
             // END SIDEBAR BUTTONS
         .col-sm-8
