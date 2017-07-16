@@ -81,7 +81,7 @@ const serverRoutes = (app, data) => {
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
     app.get('/profile', isLoggedIn, (req, res) =>
-        data.getAll(res.locals._id).then((user) => {
+        data.getAll(req.user._id).then((user) => {
             return res.render('profile', { user: user });
         }));
     app.get('/checkout', (req, res) => res.render('checkout'));
@@ -90,6 +90,12 @@ const serverRoutes = (app, data) => {
     app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/home');
+    });
+
+    // to do
+    app.post('/profile', (req, res) => {
+        // data.updateById(req.body);
+        res.send(data.findById(req.body._id));
     });
 };
 

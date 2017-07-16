@@ -34,9 +34,9 @@ class BaseData {
         https://github.com/TelerikAcademy/Web-Applications-with-Node.js/blob/master/Live-demos/project-structure/data/base/base.data.js  
      */
 
-     updateById(model) {
+     updateById(model, findByIDInDB) {
          return this.collection.updateOne({
-            _id: model._id,
+            // findByIDInDB : model._id,
          }, model);
      }
 
