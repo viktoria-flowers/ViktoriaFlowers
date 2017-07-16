@@ -18,22 +18,22 @@ block content
             .profile-userpic
               img.img-responsive(src='http://commackdentaldesign.com/wp-content/uploads/2016/04/2000px-Oxygen480-emotes-face-smile-big.svg_.png', alt='')
             // END SIDEBAR USERPIC
-            // SIDEBAR USER TITLE
-            .profile-usertitle
-              .profile-usertitle-name
-                | Тук седи името на user
-            // END SIDEBAR USER TITLE
+            //- // SIDEBAR USER TITLE
+            //- .profile-usertitle
+            //-   .profile-usertitle-name
+            //-     | Тук седи името на user
+            //- // END SIDEBAR USER TITLE
             // SIDEBAR MENU
             .profile-usermenu
-              ul.nav
+              ul.nav           
                 li                  
                   i.glyphicon.glyphicon-user
-                  | Потребителско име
-                  input.input.input-sm.profileInputs
+                    | Потребителско име
+                  input(type="text", value=user[0].username).input.input-sm.profileInputs
                 li                  
                   i.glyphicon.glyphicon-hand-right
                   | Парола
-                  input.input.input-sm.profileInputs 
+                  input(type="text", value=user[0].password).input.input-sm.profileInputs 
                   br
                   br
                   br
@@ -41,24 +41,25 @@ block content
                 li                  
                   i.glyphicon.glyphicon-hand-right
                   | Име
-                  input.input.input-sm.profileInputs
+                  input(type="text", value=user[0].names[0]).input.input-sm.profileInputs
                 li                  
                   i.glyphicon.glyphicon-hand-right
                   | Фамилия
-                  input.input.input-sm.profileInputs
+                  input(type="text", value=user[0].names[1]).input.input-sm.profileInputs
                 li                  
                   i.glyphicon.glyphicon-earphone
                   | Телефонен номер
-                  input.input.input-sm.profileInputs
+                  input(type="text", value=user[0].phone).input.input-sm.profileInputs
                 li                  
                   i.glyphicon.glyphicon-home
                   | Адрес
-                  input.input.input-sm.profileInputs
+                  input(type="text", value=user[0].contactInfo).input.input-sm.profileInputs
             // END MENU
             // SIDEBAR BUTTONS
             .profile-userbuttons
-              button.btn.btn-success.btn-sm(type='button') Редактирай
-              button.btn.btn-danger.btn-sm(type='button') Изтрии профил
+            
+              button.btn.btn-success.btn-sm(type='submit') Редактирай
+              button.btn.btn-danger.btn-sm(type='submit') Изтрии профил
             // END SIDEBAR BUTTONS
         .col-sm-8
           .profile-content
@@ -97,4 +98,4 @@ block content
                   });
                 });
   .clearfix
-
+    

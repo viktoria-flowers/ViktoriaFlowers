@@ -21,10 +21,9 @@ class BaseData {
         if (!modelState.isValid) {
             return Promise.reject(modelState.errors);
         }
-
         return this.collection.insert(model)
             .then(() => {
-                // TODO: refactor, parameters?, should return the whole model? 
+                // to do refactor, parameters?, should return the whole model?  
                 return model;
             });
     }

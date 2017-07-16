@@ -8,7 +8,7 @@ const init = (data) => {
     require('./config/auth-config')(app, data.items);
 
     // folder app/routes
-    require('./routes/server-routes')(app);
+    require('./routes/server-routes')(app, data.items);
     require('./routes/auth-routes')(app, data.items);
     require('./routes/api-routes')(app); // Test api routers
 

@@ -2,7 +2,6 @@ const { Router } = require('express');
 const passport = require('passport');
 
 const attach = (app, usersData) => {
-    console.log(usersData);
     const router = new Router();
 
     router.post('/login',
@@ -20,7 +19,7 @@ const attach = (app, usersData) => {
                     console.log(err);
                     res.redirect('/login');
                 }
-
+                console.log(user._id);
                 res.redirect('/profile');
             });
         })

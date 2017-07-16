@@ -7,7 +7,7 @@ class User {
     }
 
     static isValid() {
-        // TODO add validations.
+        // to do add validations.
         return ModelState.valid();
     }
 }

@@ -3,7 +3,7 @@ const test = (app) => {
         // usersService returns users from datbase(Mongo)
         // const users = usersService.getAllUsers();
         // return res.render('usersView', users);
-        return res.json({ message: 'Ajax works'});
+        return res.json({ message: 'Ajax works' });
     });
 };
 

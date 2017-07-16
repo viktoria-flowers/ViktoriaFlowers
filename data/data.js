@@ -1,4 +1,4 @@
-const { authHelper } = require('../app/utils');
+// const { authHelper } = require('../app/utils');
 const UsersData = require('./users-data');
 
 const init = (db) => {

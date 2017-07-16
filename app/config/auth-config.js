@@ -23,7 +23,6 @@ const configAuth = (app, users) => {
     ));
 
     app.use(cookieParser());
-    
     // unique key for encrypting cookie
     app.use(session({
         secret: 'Yellow Unicorn',
