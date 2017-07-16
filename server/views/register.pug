@@ -14,7 +14,7 @@ block content
       h2 Регистрация
       .login-form-grids
         h5 Профилна информация
-        form(action='/register', method='POST')
+        form#register-form(action='/register', method='POST')
           input(type='text', name='names', placeholder='Име и фамилия', required='required')
           input(type='text', name='phone', placeholder='Телефонен номер', required='required')
           input(type='email', name='email', placeholder='Емейл', required='required')

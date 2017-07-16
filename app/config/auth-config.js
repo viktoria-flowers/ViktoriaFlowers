@@ -35,7 +35,7 @@ const configAuth = (app, users) => {
 
     // return/generate cookie to the user
     passport.serializeUser((user, done) => {
-        const serializedUser = new UserModel(user);
+        const serializedUser = UserModel.toViewModel(user);
         done(null, serializedUser.id);
     });
 
