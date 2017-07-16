@@ -1,14 +1,53 @@
 const ModelState = require('../model-state');
 
+// TODO: Global constants
+const passwordLength = 6;
+const phoneLength = 10;
+const contactInfoLength = 10;
+const userNameMinLength = 4;
+const emailRegExPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
+
 class User {
-    constructor(user) {
-        this.id = user._id.toString();
-        this.username = user.username;
+    static toViewModel(user) {
+        return {
+            id: user._id.toString(),
+            username: user.username,
+        };
     }
 
-    static isValid() {
-        // TODO add validations.
-        return ModelState.valid();
+    static isValid(userModel) {
+        const modelState = new ModelState(false);
+        if (!userModel.names) {
+            modelState.addError('names');
+        }
+
+        if (!userModel.phone || userModel.phone.length < phoneLength) {
+            modelState.addError('phone');
+        }
+
+        if (!userModel.email || !emailRegExPattern.test(userModel.email)) {
+            modelState.addError('email');
+        }
+
+        if (!userModel.contactInfo ||
+            userModel.contactInfo.length < contactInfoLength) {
+            modelState.addError('contactInfo');
+        }
+
+        if (!userModel.password || userModel.password.length < passwordLength) {
+            modelState.addError('password');
+        }
+
+        if (!userModel.username ||
+            userModel.username.length < userNameMinLength) {
+            modelState.addError('username');
+        }
+
+        if (!modelState.errors || modelState.errors.length === 0) {
+            modelState.isValid = true;
+        }
+
+        return modelState;
     }
 }
 
