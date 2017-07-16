@@ -22,9 +22,10 @@ class BaseData {
             return Promise.reject(modelState.errors);
         }
         return this.collection.insert(model)
-            .then(() => {
-                // to do refactor, parameters?, should return the whole model?  
-                return model;
+            .then((status) => {
+                // conatins the created Id
+                return status.ops[0];
+                // return model;
             });
     }
 

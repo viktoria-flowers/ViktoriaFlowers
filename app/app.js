@@ -8,9 +8,9 @@ const init = (data) => {
     require('./config/auth-config')(app, data.items);
 
     // folder app/routes
-    require('./routes/server-routes')(app, data.items);
+    require('./routes/server-routes')(app, data);
     require('./routes/auth-routes')(app, data.items);
-    require('./routes/api-routes')(app); // Test api routers
+    require('./routes/api-routes')(app);
 
     app.get('*', (req, res) => {
         res.render('404');

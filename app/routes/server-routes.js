@@ -1,3 +1,9 @@
+/* globals: Buffer */
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+const { ObjectID } = require('mongodb');
+
 const serverRoutes = (app, data) => {
     // https://scotch.io/tutorials/easy-node-authentication-setup-and-local#toc-routes-approutesjs
     // route middleware to make sure a user is logged in
@@ -21,6 +27,43 @@ const serverRoutes = (app, data) => {
 
     app.get('/', (req, res) => res.render('home'));
     app.get('/home', (req, res) => res.render('home'));
+    app.get('/bouquets/create', (req, res) => res.render('bouquets/create'));
+    app.post('/bouquets/create', upload.single('image'), (req, res) => {
+        const modelState = data.bouquets.validate(req.body);
+        // Need to validate the object first
+        if (!modelState.isValid) {
+            return res.render('/bouquets/create', {
+                errors: modelState.errors,
+                context: req.body,
+            });
+        }
+
+        return data.images.create(req.file).then((newImg) => {
+            req.body.url = `/images/${newImg._id}/${newImg.originalname}`;
+            data.bouquets.create(req.body).then((bouquete) => {
+                return res.redirect(`/bouquets/details/${bouquete._id}`);
+            });
+        });
+    });
+
+    app.get('/images/:id/:name/', (req, res) => {
+        if (!req.params.id || !req.params.name) {
+            return res.redirect('/not-found');
+        }
+
+        return data.images.getAll({
+            originalname: req.params.name,
+            _id: new ObjectID(req.params.id),
+        })
+            .then((images) => {
+                if (!images[0]) {
+                    return res.redirect('/not-found');
+                }
+
+                return res.end(images[0].buffer.buffer);
+            });
+    });
+
     app.get('/bouquets-circle', (req, res) => res.render('bouquets-circle'));
     app.get('/bouquets-tall', (req, res) => res.render('bouquets-tall'));
     app.get('/bouquets-wedding', (req, res) => res.render('bouquets-wedding'));
@@ -38,7 +81,7 @@ const serverRoutes = (app, data) => {
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
     app.get('/profile', isLoggedIn, (req, res) =>
-        data.getAll(req.user._id).then((user) => {
+        data.items.getAll(req.user._id).then((user) => {
             return res.render('profile', { user: user });
         }));
     app.get('/checkout', (req, res) => res.render('checkout'));

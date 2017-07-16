@@ -1,0 +1,17 @@
+const BaseData = require('./base-data');
+const ImageModel = require('../data/models/image-model');
+
+class ImagesData extends BaseData {
+    constructor(db) {
+        super(db, ImageModel, ImageModel);
+    }
+
+    // override base
+    create(imageModel) {
+        // replace white spaces with underscore "_"
+        imageModel.originalname = imageModel.originalname.replace(/\s+/g, '_');
+        return super.create(imageModel);
+    }
+}
+
+module.exports = ImagesData;

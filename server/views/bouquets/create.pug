@@ -1,0 +1,27 @@
+extends ../layouts/default
+
+block content 
+    .about
+        .w3_agileits_contact_grids
+            .col-md-6.w3_agileits_contact_grid_right.col-md-offset-2
+                h2.w3_agile_header
+                    | Създай
+                    span  букет
+                form(action='/bouquets/create', method='POST', enctype='multipart/form-data')
+                    span.input.input--ichiro
+                        input#title-box.input__field.input__field--ichiro(name='title', placeholder=' ', required='required', type='text')
+                        label.input__label.input__label--ichiro(for='title-box')
+                            span.input__label-content.input__label-content--ichiro Име
+                    span.input.input--ichiro
+                        input#price-box.input__field.input__field--ichiro(name='price', placeholder=' ', required='required', type='number', min=0)
+                        label.input__label.input__label--ichiro(for='price-box')
+                            span.input__label-content.input__label-content--ichiro Цена
+                    span.input.input--ichiro
+                        input#image-box.input__field.input__field--ichiro(name='image', placeholder=' ', required='required', type='file', accept='image/*')
+                        label.input__label.input__label--ichiro(for='image-box')
+                            span.input__label-content.input__label-content--ichiro Снимка    
+                    textarea(name='description', placeholder='Описание', required='')
+                    input(value='Добави', type='submit')
+            .clearfix  
+
+
