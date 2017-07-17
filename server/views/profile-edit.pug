@@ -25,7 +25,6 @@ block content
             //- // END SIDEBAR USER TITLE
             // SIDEBAR MENU
             .profile-usermenu
-            form(action="/", method="POST")
               form(action='/profile-edit', method='POST')
                 ul.nav
                   li
@@ -43,7 +42,7 @@ block content
                   li
                     i.glyphicon.glyphicon-hand-right
                     | Име и Фамилия
-                    input.input.input-sm.profileInputs(type='text', name='names', , value=user.names)
+                    input.input.input-sm.profileInputs(type='text', name='names', value=user.names)
                   li
                     i.glyphicon.glyphicon-hand-right
                     | E-mail адрес
