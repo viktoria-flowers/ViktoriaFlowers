@@ -3,19 +3,12 @@ const { authHelper } = require('../app/utils');
 const BaseData = require('./base-data');
 const UserModel = require('./models/user-model');
 
-// const usersList = [{
-//     username: 'Marti',
-//     password: authHelper.makeHashFromPassword('ala'),
-//     roles: [],
-//     contactInfo: '',
-//     email: 'test@test.com',
-// }];
-
 class UsersData extends BaseData {
     constructor(db) {
         super(db, UserModel, UserModel);
     }
 
+    // override base
     findById(id) {
         return this.collection.findOne({ _id: new ObjectID(id) })
             .then((user) => {

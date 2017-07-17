@@ -10,6 +10,7 @@ class ImagesData extends BaseData {
     create(imageModel) {
         // replace white spaces with underscore "_"
         imageModel.originalname = imageModel.originalname.replace(/\s+/g, '_');
+        imageModel.dateCreated = new Date();
         return super.create(imageModel);
     }
 }

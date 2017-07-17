@@ -1,4 +1,5 @@
 const ModelState = require('../model-state');
+const { ObjectID } = require('mongodb');
 
 class BaseData {
     constructor(db, ModelClass, validator) {
@@ -16,6 +17,19 @@ class BaseData {
         return this.collection.find().toArray();
     }
 
+    findById(id) {
+        return this.collection.findOne({ _id: new ObjectID(id) })
+            .then((model) => {
+                return new Promise((resolve, reject) => {
+                    if (!model) {
+                        return resolve(null);
+                    }
+
+                    return resolve(model);
+                });
+            });
+    }
+
     create(model) {
         const modelState = this.validate(model);
         if (!modelState.isValid) {
@@ -29,11 +43,6 @@ class BaseData {
             });
     }
 
-    /*
-        findOrCreateBy(props) do we need this function ?
-        https://github.com/TelerikAcademy/Web-Applications-with-Node.js/blob/master/Live-demos/project-structure/data/base/base.data.js  
-     */
-
     updateWholeObjectById(model) {
         return this.collection.replaceOne({
             _id: model._id,
@@ -41,13 +50,11 @@ class BaseData {
     }
 
     // to do isActive: false give it dinamically
-    updateParamsById(model) {
+    updateParamsById(model, props) {
         return this.collection.updateOne(
-            { _id: model._id },
+            { _id: new ObjectID(model._id) },
             {
-                $set: {
-                    isActive: false,
-                },
+                $set: props,
             }
         );
     }
