@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "nodemon": "nodemon server.js",
-    "test": "test",
+    "test": "./node_modules/.bin/mocha",
+    "mocha": "./node_modules/.bin/_mocha",
+    "istanbul": "./node_modules/.bin/istanbul",
     "lint": "eslint ."
   },
   "repository": {
@@ -30,7 +32,6 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
-    "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "mongodb": "^2.2.30",
     "morgan": "^1.8.2",
@@ -41,7 +42,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "chai": "^4.1.0",
     "eslint": "^4.1.1",
-    "eslint-config-google": "^0.8.0"
+    "eslint-config-google": "^0.8.0",
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^1.1.2",
+    "gulp-mocha": "3",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.8"
   }
 }

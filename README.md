@@ -1,9 +1,17 @@
 # ViktoriaFlowers
 
+### Starts `Tests`
+* Run unit tests with mocha
+* `./node_modules/.bin/mocha test/**/*.js`
+* or
+* `npm test test/**/*.js`
+
+* Run unit tests with istanbul
+* `istanbul mocha tests/**/*.js`
 
 ### Set up `eslint`
 
-* Intstall required libraries:
+* Install required libraries:
     * `npm install --save-dev eslint eslint-config-google`
     * `npm install --save-dev babel-eslint `
 
