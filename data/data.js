@@ -4,7 +4,7 @@ const BouquetsData = require('./bouquets-data');
 
 const init = (db) => {
     return {
-        items: new UsersData(db),
+        users: new UsersData(db),
         images: new ImagesData(db),
         bouquets: new BouquetsData(db),
     };

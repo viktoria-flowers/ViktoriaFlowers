@@ -34,11 +34,11 @@ class BaseData {
         https://github.com/TelerikAcademy/Web-Applications-with-Node.js/blob/master/Live-demos/project-structure/data/base/base.data.js  
      */
 
-     updateById(model, findByIDInDB) {
-         return this.collection.updateOne({
-            // findByIDInDB : model._id,
-         }, model);
-     }
+    updateById(model) {
+        return this.collection.replaceOne({
+            _id: model._id,
+        }, model);
+    }
 
     validate(model) {
         if (!this.validator || typeof this.validator.isValid !== 'function') {

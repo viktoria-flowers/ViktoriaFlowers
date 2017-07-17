@@ -3,6 +3,7 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { ObjectID } = require('mongodb');
+const { authHelper } = require('./../utils');
 
 const serverRoutes = (app, data) => {
     // https://scotch.io/tutorials/easy-node-authentication-setup-and-local#toc-routes-approutesjs
@@ -81,8 +82,8 @@ const serverRoutes = (app, data) => {
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
     app.get('/profile', isLoggedIn, (req, res) =>
-        data.items.getAll(req.user._id).then((user) => {
-            return res.render('profile', { user: user });
+        data.users.getAll(req.user._id).then((user) => {
+            return res.render('profile', { user: user[0] });
         }));
     app.get('/checkout', (req, res) => res.render('checkout'));
     app.get('/register', (req, res) => res.render('register'));
@@ -92,10 +93,21 @@ const serverRoutes = (app, data) => {
         res.redirect('/home');
     });
 
-    // to do
-    app.post('/profile', (req, res) => {
-        // data.updateById(req.body);
-        res.send(data.findById(req.body._id));
+    app.post('/profile', isLoggedIn, (req, res) => {
+        /* This is done because mongodb ids are ObjectIDs and we are trying to 
+        send it a string as an ID, this is why we convert it into an ObjectID */
+        const convertStringToObjectID = new ObjectID(req.user._id);
+        req.body._id = convertStringToObjectID;
+
+        if (req.body.password.length === 0) {
+            req.body.password = req.user.password;
+            data.users.updateById(req.body);
+        } else {
+            req.body.password = authHelper
+                                    .makeHashFromPassword(req.body.password);
+            data.users.updateById(req.body);
+        }
+        res.send(req.body);
     });
 };
 

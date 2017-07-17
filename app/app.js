@@ -5,11 +5,11 @@ const init = (data) => {
 
     // folder app/config
     require('./config/app-config')(app);
-    require('./config/auth-config')(app, data.items);
+    require('./config/auth-config')(app, data.users);
 
     // folder app/routes
     require('./routes/server-routes')(app, data);
-    require('./routes/auth-routes')(app, data.items);
+    require('./routes/auth-routes')(app, data.users);
     require('./routes/api-routes')(app);
 
     app.get('*', (req, res) => {

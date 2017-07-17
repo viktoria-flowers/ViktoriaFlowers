@@ -30,9 +30,7 @@ block content
                   li
                     i.glyphicon.glyphicon-user
                     | Потребителско име
-                    input.input.input-sm.profileInputs(type='text', name='username', value=user[0].username)
-                  li
-                    input.input.input-sm.profileInputs(type='hidden', name='_id', value=user[0]._id)
+                    input.input.input-sm.profileInputs(type='text', name='username', value=user.username)
                   li
                     i.glyphicon.glyphicon-hand-right
                     | Нова парола
@@ -44,24 +42,25 @@ block content
                   li
                     i.glyphicon.glyphicon-hand-right
                     | Име и Фамилия
-                    input.input.input-sm.profileInputs(type='text', name='names', , value=user[0].names)
+                    input.input.input-sm.profileInputs(type='text', name='names', , value=user.names)
                   li
                     i.glyphicon.glyphicon-hand-right
                     | E-mail адрес
-                    input.input.input-sm.profileInputs(type='text', name='email', , value=user[0].email)
+                    input.input.input-sm.profileInputs(type='text', name='email', , value=user.email)
                   li
                     i.glyphicon.glyphicon-earphone
                     | Телефонен номер
-                    input.input.input-sm.profileInputs(type='text', name='phone', , value=user[0].phone)
+                    input.input.input-sm.profileInputs(type='text', name='phone', , value=user.phone)
                   li
                     i.glyphicon.glyphicon-home
                     | Адрес
-                    input.input.input-sm.profileInputs(type='text', name='contactInfo', , value=user[0].contactInfo)
+                    input.input.input-sm.profileInputs(type='text', name='contactInfo', , value=user.contactInfo)
                 // END MENU
                 // SIDEBAR BUTTONS
                 .profile-userbuttons
-                  input.btn.btn-success.btn-sm(type='submit', value='Редактирай')
-              button.btn.btn-danger.btn-sm(type='submit') Изтрии профил
+                  span
+                    input.btn.btn-success.btn-sm(type='submit', value='Редактирай')
+                    input.btn.btn-danger.btn-sm(type='submit', value="Изтрии профил")
             // END SIDEBAR BUTTONS
         .col-sm-8
           .profile-content
