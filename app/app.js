@@ -11,6 +11,8 @@ const init = (data) => {
     require('./routes/server-routes')(app, data);
     require('./routes/auth-routes')(app, data.users);
     require('./routes/api-routes')(app);
+    require('./routes/bouquete-routes')(app, data);
+    require('./routes/image-routes')(app, data);
 
     app.get('*', (req, res) => {
         res.render('404');
