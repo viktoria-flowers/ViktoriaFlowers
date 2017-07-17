@@ -1,0 +1,51 @@
+extends ../layouts/default
+
+block content
+  .products
+    .container
+      .agileinfo_single
+        .col-md-4.agileinfo_single_left
+          img#example.img-responsive(src=model.url, alt=model.url)
+        .col-md-8.agileinfo_single_right
+          h2 
+           = model.title
+          .w3agile_description
+            p Дата: 
+              = model.dateCreated.toLocaleDateString()
+          .rating1
+            p Преглеждания: 
+              = model.viewsCount
+            //- span.starRating
+              input#rating5(name='rating', value='5', type='radio')
+              label(for='rating5') 5
+              input#rating4(name='rating', value='4', type='radio')
+              label(for='rating4') 4
+              input#rating3(name='rating', value='3', checked='', type='radio')
+              label(for='rating3') 3
+              input#rating2(name='rating', value='2', type='radio')
+              label(for='rating2') 2
+              input#rating1(name='rating', value='1', type='radio')
+              label(for='rating1') 1
+          .w3agile_description
+            h4 Описание :
+            p
+              = model.description || 'Липсва'
+          .snipcart-item.block
+            .snipcart-thumb.agileinfo_single_right_snipcart
+              h4.m-sing
+                = model.price ? model.price + '.00 лв.' : 'Цената липсва'
+                //- span $25.00
+            .snipcart-details.agileinfo_single_right_details
+              form(action='#', method='post')
+                fieldset
+                  input(name='cmd', value='_cart', type='hidden')
+                  input(name='add', value='1', type='hidden')
+                  input(name='business', value=' ', type='hidden')
+                  input(name='item_name', value='pulao basmati rice', type='hidden')
+                  input(name='amount', value='21.00', type='hidden')
+                  input(name='discount_amount', value='1.00', type='hidden')
+                  input(name='currency_code', value='USD', type='hidden')
+                  input(name='return', value=' ', type='hidden')
+                  input(name='cancel_return', value=' ', type='hidden')
+                  input.button(name='submit', value='Добави в количка', type='submit')
+        .clearfix  
