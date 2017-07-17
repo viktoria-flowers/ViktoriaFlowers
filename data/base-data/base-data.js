@@ -34,10 +34,22 @@ class BaseData {
         https://github.com/TelerikAcademy/Web-Applications-with-Node.js/blob/master/Live-demos/project-structure/data/base/base.data.js  
      */
 
-    updateById(model) {
+    updateWholeObjectById(model) {
         return this.collection.replaceOne({
             _id: model._id,
         }, model);
+    }
+
+    // to do isActive: false give it dinamically
+    updateParamsById(model) {
+        return this.collection.updateOne(
+            { _id: model._id },
+            {
+                $set: {
+                    isActive: false,
+                },
+            }
+        );
     }
 
     validate(model) {

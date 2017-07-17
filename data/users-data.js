@@ -65,6 +65,7 @@ class UsersData extends BaseData {
                 // registerer the new user
                 newUser.roles = [];
                 newUser.orders = [];
+                newUser.isActive = true;
                 newUser.password = newPassword;
                 return super.create(newUser);
             });

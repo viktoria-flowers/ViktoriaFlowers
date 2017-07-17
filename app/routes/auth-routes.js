@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const attach = (app, usersData) => {
     const router = new Router();
-
+console.log(usersData);
     router.post('/login',
        passport.authenticate('local', {
             successRedirect: '/',
@@ -13,7 +13,6 @@ const attach = (app, usersData) => {
     );
 
     router.post('/register', (req, res) => {
-        console.log(req.body);
         usersData.create(req.body).then((user) => {
             req.logIn(user, (err) => {
                 if (err) {
