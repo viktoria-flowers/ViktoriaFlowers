@@ -1,6 +1,18 @@
 # ViktoriaFlowers
 
 
+### Set admin in Mongo db
+
+```js
+db.users.update(
+    { "_id" : ObjectId("The_ID_HERE")}, 
+    { $set:
+      {
+        roles: ['admin']
+      }
+});
+```
+
 ### Set up `eslint`
 
 * Intstall required libraries:
