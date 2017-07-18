@@ -13,7 +13,7 @@ class Image {
             return modelState;
         }
 
-        modelState.addError('Image size exceeds 2Mb.');
+        modelState.addError('size');
         return modelState;
     }
 }
