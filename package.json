@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "nodemon": "nodemon server.js",
-    "test": "./node_modules/.bin/mocha",
-    "mocha": "./node_modules/.bin/_mocha",
-    "istanbul": "./node_modules/.bin/istanbul",
+    "test-unit": "gulp tests:unit",
     "lint": "eslint ."
+    // "test": "./node_modules/.bin/mocha test/**/*js",
+    // "mocha": "./node_modules/.bin/mocha test/**/*js",
+    // "istanbul": "./node_modules/.bin/istanbul",
   },
   "repository": {
     "type": "git",

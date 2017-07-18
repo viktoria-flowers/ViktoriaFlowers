@@ -2,12 +2,11 @@
 
 ### Starts `Tests`
 * Run unit tests with mocha
-* `./node_modules/.bin/mocha test/**/*.js`
-* or
-* `npm test test/**/*.js`
+* `gulp tests:unit`
+* (gulp should by installed globally)
 
-* Run unit tests with istanbul
-* `istanbul mocha tests/**/*.js`
+* Run integration tests with istanbul
+* 
 
 ### Set admin in Mongo db
 
