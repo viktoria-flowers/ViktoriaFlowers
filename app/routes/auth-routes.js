@@ -21,7 +21,10 @@ const attach = (app, usersData) => {
             });
         })
         .catch((err) => {
-            res.redirect('/register');
+            res.render('register', {
+                model: req.body,
+                errors: err,
+            });
         });
     });
 

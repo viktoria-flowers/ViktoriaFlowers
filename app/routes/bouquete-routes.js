@@ -22,8 +22,8 @@ const bouquetesRoutes = (app, data) => {
             }
 
             return data.bouquets
-              .updateParamsById(bouquete, { viewsCount: ++bouquete.viewsCount })
-              .then(() => {
+                .updateParamsById(bouquete, { viewsCount: ++bouquete.viewsCount })
+                .then(() => {
                     return res.render(
                         'bouquets/details', { model: bouquete });
                 });
@@ -37,18 +37,27 @@ const bouquetesRoutes = (app, data) => {
             const modelState = data.bouquets.validate(req.body);
             // Need to validate the object first
             if (!modelState.isValid) {
-                return res.render('/bouquets/create', {
+                return res.render('bouquets/create', {
                     errors: modelState.errors,
-                    context: req.body,
+                    model: req.body,
                 });
             }
 
-            return data.images.create(req.file).then((newImg) => {
-                req.body.url = `/images/${newImg._id}/${newImg.originalname}`;
-                data.bouquets.create(req.body).then((bouquete) => {
+            return data.images.create(req.file)
+                .then((newImg) => {
+                    const url = `/images/${newImg._id}/${newImg.originalname}`;
+                    req.body.url = url;
+                    return data.bouquets.create(req.body);
+                })
+                .then((bouquete) => {
                     return res.redirect(`/bouquets/details/${bouquete._id}`);
+                })
+                .catch((errors) => {
+                    return res.render('bouquets/create', {
+                        model: req.body,
+                        errors: errors,
+                    });
                 });
-            });
         });
 
 

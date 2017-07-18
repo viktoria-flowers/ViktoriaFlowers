@@ -1,10 +1,12 @@
 const ModelState = require('../model-state');
 
+const minTitleLength = 3;
+
 class Bouquete {
     static isValid(bouquteModel) {
         const modelState = new ModelState(false);
 
-        if (!bouquteModel.title) {
+        if (!bouquteModel.title || bouquteModel.title.length < minTitleLength) {
             modelState.addError('title');
         }
 

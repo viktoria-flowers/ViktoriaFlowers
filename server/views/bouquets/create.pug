@@ -1,5 +1,7 @@
 extends ../layouts/default
 
+include ../mixins/bouqueteErrors.pug
+
 block content 
     .about
         .w3_agileits_contact_grids
@@ -8,20 +10,32 @@ block content
                     | Създай
                     span  букет
                 form(action='/bouquets/create', method='POST', enctype='multipart/form-data')
+                    - if(errors)
+                        ul.text-danger 
+                            each err in errors
+                                 +getErrorText(err)
                     span.input.input--ichiro
-                        input#title-box.input__field.input__field--ichiro(name='title', placeholder=' ', required='required', type='text')
+                        input#title-box.input__field.input__field--ichiro(name='title', placeholder=' ', value=model?model.title || '' : '', required='required', type='text')
                         label.input__label.input__label--ichiro(for='title-box')
                             span.input__label-content.input__label-content--ichiro Име
                     span.input.input--ichiro
-                        input#price-box.input__field.input__field--ichiro(name='price', placeholder=' ', required='required', type='number', min=0)
+                        input#price-box.input__field.input__field--ichiro(name='price', placeholder=' ', value=model?model.price || '' : '', required='required', type='number', min=0)
                         label.input__label.input__label--ichiro(for='price-box')
                             span.input__label-content.input__label-content--ichiro Цена
+                    span.input.input--ichiro
+                        select#type-dropdown.input__field.input__field--ichiro(name='type', value='wedding')
+                            option(value='circle', selected= model&&model.type==='circle') Кръгли
+                            option(value='tall', selected= model&&model.type==='tall') Високи
+                            option(value='wedding', selected= model&&model.type==='wedding') Сватбени
+                            option(value='unstandard', selected= model&&model.type==='unstandard') Нестандартни
+                        label.input__label.input__label--ichiro(for='type-dropdown')
+                            span.input__label-content.input__label-content--ichiro Тип
                     span.input.input--ichiro
                         input#image-box.input__field.input__field--ichiro(name='image', placeholder=' ', required='required', type='file', accept='image/*')
                         label.input__label.input__label--ichiro(for='image-box')
                             span.input__label-content.input__label-content--ichiro Снимка    
                     textarea(name='description', placeholder='Описание', required='')
+                        =  value=model?model.description || '' : ''
                     input(value='Добави', type='submit')
             .clearfix  
-
 
