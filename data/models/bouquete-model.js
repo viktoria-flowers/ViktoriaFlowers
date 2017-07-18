@@ -6,7 +6,7 @@ class Bouquete {
     static isValid(bouquteModel) {
         const modelState = new ModelState(false);
 
-        if (!bouquteModel.title || bouquteModel.title.length < 3) {
+        if (!bouquteModel.title || bouquteModel.title.length < minTitleLength) {
             modelState.addError('title');
         }
 
