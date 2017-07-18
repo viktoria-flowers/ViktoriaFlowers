@@ -1,0 +1,17 @@
+mixin getErrorText(field)
+    case field
+        when 'username-exist'
+            li Потрибителското име е заето
+        when 'names'
+            li Имената са задължително
+        when 'phone'
+            li Въведете валиден телфон
+        when 'email'
+            li Въведете валиден емейл адрес
+        when 'contactInfo'
+            li Въведете валиден адрес за доставка
+        when 'password'
+            li Минимална дължина на парола - 6 символа
+        default
+            - break
+

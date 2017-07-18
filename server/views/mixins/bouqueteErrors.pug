@@ -1,0 +1,12 @@
+mixin getErrorText(errorField)
+    case errorField
+        when 'description'
+           li Описанието е задължително
+        when 'title'
+            li Името е задължително с поне 3 символа
+        when 'price'
+            li Цената е задължиелна
+        when 'size'
+            li Снимката не трябва да е по голяма от 2 Мб
+        default
+            - break
