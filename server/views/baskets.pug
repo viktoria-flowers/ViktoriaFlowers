@@ -40,9 +40,9 @@ block content
                           .snipcart-thumb
                             a(href='single.html')
                               img(title=' ', alt=' ', src='static/images/pc1.png')
-                            p Baby Lotion
-                            h4
-                              | $35.99 
+                            p#b Baby Lotion
+                            h4#c
+                              label $35.99
                               span $55.00
                           .snipcart-details.top_brand_home_details
                             form(action='#', method='post')
@@ -56,7 +56,7 @@ block content
                                 input(type='hidden', name='currency_code', value='лв.')
                                 input(type='hidden', name='return', value=' ')
                                 input(type='hidden', name='cancel_return', value=' ')
-                                input.button(type='submit', name='submit', value='Добави в количката') 
+                                button.btn.btn-default.button(type='button').addToCart Добави в количката
           nav.numbering
             ul.pagination.paging
               li

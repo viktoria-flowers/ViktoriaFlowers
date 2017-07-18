@@ -16,97 +16,46 @@ block content
     .container
       h2
         | Количка: 
-        span 3 Products
+        span#prodName 3 Products
       .checkout-right
         table.timetable_sub
           thead
             tr
-              th SL No.
-              th Product
+              th Снимка
+              th Име
               th Количество
-              th Product Name
               th Цена
               th Изтрии
           tbody
-            tr.rem1
-              td.invert 1
-              td.invert-image
-                a(href='single.html')
-                  img.img-responsive(src='/static/images/1.png', alt=' ')
-              td.invert
-                .quantity
-                  .quantity-select
-                    .entry.value-minus  
-                    .entry.value
-                      span 1
-                    .entry.value-plus.active  
-              td.invert Tata Salt
-              td.invert
-                label
-                  | 25 
-                span лв.
-              td.invert
-                .rem
-                  .close1  
-                script.
-                  $(document).ready(function(c) {
-                    $('.close1').on('click', function(c){
-                      $('.rem1').fadeOut('slow', function(c){
-                        $('.rem1').remove();
-                      });
-                    });
+            - for (var p = 0; p <= 10; p += 1)
+                tr.rem1
+                  td.invert-image.prodImg
+                    a(href='single.html')
+                      img.img-responsive(src='/static/images/1.png', alt=' ')
+                  td.invert.prodName
+                  td.invert
+                    .quantity
+                      .quantity-select
+                        .entry.value-minus
+                        .entry.value
+                          span 1
+                        .entry.value-plus.active
+                  td.invert
+                    label#prodPrice
+                    span лв.
+                  td.invert
+                    .rem
+                      .close1
+            //This script is for deleting product from cart
+            script.
+              $(document).ready(function(c) {
+                $('.close1').on('click', $(this), function(c){
+                  $('.rem1').fadeOut('slow', function(c){
+                    $('.rem1').remove();
                   });
-            tr.rem2
-              td.invert 2
-              td.invert-image
-                a(href='single.html')
-                  img.img-responsive(src='/static/images/2.png', alt=' ')
-              td.invert
-                .quantity
-                  .quantity-select
-                    .entry.value-minus  
-                    .entry.value
-                      span 1
-                    .entry.value-plus.active  
-              td.invert Fortune oil
-              td.invert $250.00
-              td.invert
-                .rem
-                  .close2  
-                script.
-                  $(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                      $('.rem2').fadeOut('slow', function(c){
-                        $('.rem2').remove();
-                      });
-                    });
-                  });
-            tr.rem3
-              td.invert 3
-              td.invert-image
-                a(href='single.html')
-                  img.img-responsive(src='/static/images/3.png', alt=' ')
-              td.invert
-                .quantity
-                  .quantity-select
-                    .entry.value-minus  
-                    .entry.value
-                      span 1
-                    .entry.value-plus.active  
-              td.invert Aashirvaad atta
-              td.invert $15.00
-              td.invert
-                .rem
-                  .close3  
-                script.
-                  $(document).ready(function(c) {
-                      $('.close3').on('click', function(c){
-                        $('.rem3').fadeOut('slow', function(c){
-                          $('.rem3').remove();
-                        });
-                    });
-                  });
-            // quantity
+                });
+              });
+            //This script is for quantity increasing and decreasing
             script.
               $('.value-plus').on('click', function(){
                 var divUpd = $(this).parent().find('.value');
@@ -117,7 +66,6 @@ block content
                 var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
                 if(newVal>=1) divUpd.text(newVal);
               });
-            // quantity
       .checkout-left
         .checkout-left-basket
           ul
@@ -141,7 +89,7 @@ block content
               var itemPrice = +($('td.invert label').html());
                   totalItemPrice = itemPrice += newVal;
               $('.checkout-left-basket ul li span').html(totalItemPrice);
-              console.log(newVal);
+              //- console.log(newVal);
 
             a.btn.btn-lg.btn-success(href='#myModal', data-toggle='modal') Завършване на поръчката
             // Modal HTML
