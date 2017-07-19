@@ -11,15 +11,6 @@ class UsersData extends BaseData {
     // override base
     findById(id) {
         return this.collection.findOne({ _id: new ObjectID(id) });
-        // .then((user) => {
-        //     return new Promise((resolve, reject) => {
-        //         if (!user) {
-        //             return resolve(null);
-        //         }
-
-        //         return resolve(user);
-        //     });
-        // });
     }
 
     findByUsername(username) {
