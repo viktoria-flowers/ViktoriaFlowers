@@ -1,6 +1,6 @@
 const ModelState = require('../model-state');
 
-// TODO: Global constants
+// User constants
 const passwordLength = 6;
 const phoneLength = 10;
 const contactInfoLength = 10;

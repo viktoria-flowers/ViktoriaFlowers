@@ -2,19 +2,19 @@ const ModelState = require('../model-state');
 
 const minTitleLength = 3;
 
-class Bouquete {
-    static isValid(bouquteModel) {
+class Product {
+    static isValid(productModel) {
         const modelState = new ModelState(false);
 
-        if (!bouquteModel.title || bouquteModel.title.length < minTitleLength) {
+        if (!productModel.title || productModel.title.length < minTitleLength) {
             modelState.addError('title');
         }
 
-        if (!bouquteModel.description) {
+        if (!productModel.description) {
             modelState.addError('description');
         }
 
-        if (!bouquteModel.price) {
+        if (!productModel.price) {
             modelState.addError('price');
         }
 
@@ -26,4 +26,4 @@ class Bouquete {
     }
 }
 
-module.exports = Bouquete;
+module.exports = Product;

@@ -1,12 +1,12 @@
 const UsersData = require('./users-data');
 const ImagesData = require('./images-data');
-const BouquetsData = require('./bouquets-data');
+const ProductsData = require('./products-data');
 
 const init = (db) => {
     return {
         users: new UsersData(db),
         images: new ImagesData(db),
-        bouquets: new BouquetsData(db),
+        products: new ProductsData(db),
     };
 };
 
