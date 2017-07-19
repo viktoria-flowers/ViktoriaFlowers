@@ -61,11 +61,26 @@ const bouquetesRoutes = (app, data) => {
         });
 
 
-    app.get('/bouquets-circle', (req, res) => res.render('bouquets-circle'));
-    app.get('/bouquets-tall', (req, res) => res.render('bouquets-tall'));
-    app.get('/bouquets-wedding', (req, res) => res.render('bouquets-wedding'));
+    app.get('/bouquets-circle', (req, res) =>
+        data.bouquets.getAll().then((single) => {
+            return res.render('bouquets-circle', { single: single });
+        })
+    );
+    app.get('/bouquets-tall', (req, res) =>
+        data.bouquets.getAll().then((single) => {
+            return res.render('bouquets-tall', { single: single });
+        })
+    );
+    app.get('/bouquets-wedding', (req, res) =>
+        data.bouquets.getAll().then((single) => {
+            return res.render('bouquets-wedding', { single: single });
+        })
+    );
     app.get('/bouquets-extraordinary', (req, res) =>
-        res.render('bouquets-extraordinary'));
+        data.bouquets.getAll().then((single) => {
+            return res.render('bouquets-extraordinary', { single: single });
+        })
+    );
 };
 
 module.exports = bouquetesRoutes;

@@ -352,7 +352,8 @@ ul.multi-column-dropdown h6 {
 	padding:1em;
 }
 .agile_top_brand_left_grid1 img{
-	margin:0 auto;
+    margin:0 auto;
+    width: 100%;
 }
 .top-brands{
     background: #f5f5f5;
@@ -2554,6 +2555,7 @@ ul.phone_email li {
 }
 .agile_top_brand_left_grid1 img {
    max-width: 100% ! important ;
+   width: 100%;
 }
 .brands-agile-1 {
     margin: 0;
