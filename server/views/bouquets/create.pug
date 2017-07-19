@@ -23,6 +23,10 @@ block content
                         label.input__label.input__label--ichiro(for='price-box')
                             span.input__label-content.input__label-content--ichiro Цена
                     span.input.input--ichiro
+                        input#wasPrice.input__field.input__field--ichiro(name='wasPrice', placeholder=' ', value=model?model.wasPrice || '' : '', type='number', min=0)
+                        label.input__label.input__label--ichiro(for='wasPrice')
+                            span.input__label-content.input__label-content--ichiro Предишна цена
+                    span.input.input--ichiro
                         select#type-dropdown.input__field.input__field--ichiro(name='type', value='wedding')
                             option(value='circle', selected= model&&model.type==='circle') Кръгли
                             option(value='tall', selected= model&&model.type==='tall') Високи

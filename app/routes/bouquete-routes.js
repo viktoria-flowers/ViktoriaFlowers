@@ -45,7 +45,7 @@ const bouquetesRoutes = (app, data) => {
 
             return data.images.create(req.file)
                 .then((newImg) => {
-                    const url = `/images/${newImg._id}/${newImg.originalname}`;
+                    const url = `/static/images/${newImg.originalname}`;
                     req.body.url = url;
                     return data.bouquets.create(req.body);
                 })

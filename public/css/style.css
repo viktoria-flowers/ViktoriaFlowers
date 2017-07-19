@@ -3494,3 +3494,11 @@ td.invert-image a img {
 .error-actions .btn {
      margin-right:10px; 
 }
+
+.scratchOverText{
+    text-decoration: line-through;
+}
+
+.imgRightDimensions{
+    width: 100%;
+}

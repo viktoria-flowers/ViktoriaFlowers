@@ -29,24 +29,30 @@ block content
               .clearfix
             .agile_top_brands_grids
           if single
-            each val in single
-              if val.type === 'wedding'
+            each flower in single
+              if flower.type === 'wedding'
                 .col-md-4.top_brand_left
                   .hover14.column
                     .agile_top_brand_left_grid
                       .agile_top_brand_left_grid_pos
+                      if flower.wasPrice.length
                         img.img-responsive(src='static/images/offer.png', alt=' ')
                       .agile_top_brand_left_grid1
                         figure
                           .snipcart-item.block
                             .snipcart-thumb
                               a(href='single.html')
-                                img(title=' ', alt=' ', src='/static' + val.url)
+                                img.img-responsive.imgRightDimensions(title=' ', alt=' ', src=flower.url)
                               p 
-                                =val.title
+                                =flower.title
                               h4
-                                = val.price + 'лв.'
-                                span $55.00
+                                = 'Цена: ' + flower.price + 'лв.'
+                              br
+                              if flower.wasPrice.length
+                                h5.scratchOverText.text-center
+                                  = 'Предишна цена: ' + flower.wasPrice + 'лв.'
+                              else
+                                = flower.wasPrice
                             .snipcart-details.top_brand_home_details
                               form(action='#', method='post')
                                 fieldset
