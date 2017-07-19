@@ -1,11 +1,10 @@
 /*globals describe, beforeEach, it*/ 
 
-const {expect } = require('chai');
+const { expect } = require('chai');
 const request = require('supertest');
 
-
-describe('/items tests', () => {
-    const connectionString = 'mongodb://localhost/items-db-test';
+describe('/bouquets tests', () => {
+    const connectionString = 'mongodb://localhost/bouquets-db-test';
     let app = null;
 
     beforeEach(() => {
@@ -18,7 +17,7 @@ describe('/items tests', () => {
             });
     });
 
-    describe('GET /item', () => {
+    describe('GET /bouquets', () => {
         it('expect to return 200', (done) => {
             request(app)
                 .get('/items')

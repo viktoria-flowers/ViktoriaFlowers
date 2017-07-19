@@ -33,7 +33,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
 });
 
 const config = {
-    connectionString: 'mongodb://localhost/viktoria-flowers',
+    connectionString: 'mongodb://localhost/viktoria-flowers-test',
     port: 3002,
 };
 
@@ -45,7 +45,7 @@ gulp.task('test-server:start', () => {
         .then((app) => {
             app.listen(
                 config.port,
-                () => console.log(`Server running ot port: ${config.port}`));
+                () => console.log(`Server running to port: ${config.port}`));
         });
 });
 
@@ -59,7 +59,7 @@ gulp.task('test-server:stop', () => {
 });
 
 gulp.task('tests:browser', ['test-server:start'], () => {
-    return gulp.src('./test/browser/items/create-item.js')
+    return gulp.src('./test/browser/bouquets/getAll.js')
         .pipe(mocha({
             reporter: 'nyan',
             timeout: 10000,
