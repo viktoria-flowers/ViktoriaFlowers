@@ -1,12 +1,13 @@
 # ViktoriaFlowers
 
 ### Starts `Tests`
-* Run unit tests with mocha
+* Run unit tests and integration tests
 * `gulp tests:unit`
 * (gulp should by installed globally)
 
-* Run integration tests with istanbul
-* 
+* Run browser tests with selenium
+* `gulp tests:browser` 
+* (selenium should by installed - view presentation)
 
 ### Set admin in Mongo db
 

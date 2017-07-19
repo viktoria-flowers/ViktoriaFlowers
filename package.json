@@ -53,6 +53,7 @@
     "gulp-mocha": "3",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
+    "selenium-webdriver": "^3.4.0",
     "sinon": "^2.3.8",
     "supertest": "^3.0.0"
   }
