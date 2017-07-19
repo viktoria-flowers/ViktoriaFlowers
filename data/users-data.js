@@ -10,32 +10,14 @@ class UsersData extends BaseData {
 
     // override base
     findById(id) {
-        return this.collection.findOne({ _id: new ObjectID(id) })
-            .then((user) => {
-                return new Promise((resolve, reject) => {
-                    if (!user) {
-                        return reject('No such user');
-                    }
-
-                    return resolve(user);
-                });
-            });
+        return this.collection.findOne({ _id: new ObjectID(id) });
     }
 
     findByUsername(username) {
         return this.collection.findOne({
             username:
             { $regex: new RegExp('^' + username.toLowerCase() + '$', 'i') },
-        })
-            .then((user) => {
-                return new Promise((resolve, reject) => {
-                    if (!user) {
-                        return reject('No such user');
-                    }
-
-                    return resolve(user);
-                });
-            });
+        });
     }
 
     // override base
@@ -50,17 +32,22 @@ class UsersData extends BaseData {
         const newPassword = authHelper.makeHashFromPassword(newUser.password);
         return this.findByUsername(newUser.username)
             .then((user) => {
-                return new Promise((resolve, reject) => {
-                    return reject('Username already exists!');
-                });
-            })
-            .catch((err) => {
-                // registerer the new user
+                if (user) {
+                    return new Promise((resolve, reject) => {
+                        return reject(['username-exist']);
+                    });
+                }
+
+                // register the new user
                 newUser.roles = [];
                 newUser.orders = [];
                 newUser.isActive = true;
                 newUser.password = newPassword;
                 return super.create(newUser);
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
             });
     }
 }

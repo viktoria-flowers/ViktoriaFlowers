@@ -1,6 +1,6 @@
 extends ../layouts/default
 
-include ../mixins/bouqueteErrors.pug
+include ../mixins/productErrors.pug
 
 block content 
     .about
@@ -8,8 +8,8 @@ block content
             .col-md-6.w3_agileits_contact_grid_right.col-md-offset-2
                 h2.w3_agile_header
                     | Създай
-                    span  букет
-                form(action='/bouquets/create', method='POST', enctype='multipart/form-data')
+                    span  продукт
+                form(action='/products/create', method='POST', enctype='multipart/form-data')
                     - if(errors)
                         ul.text-danger 
                             each err in errors
@@ -31,7 +31,10 @@ block content
                             option(value='circle', selected= model&&model.type==='circle') Кръгли
                             option(value='tall', selected= model&&model.type==='tall') Високи
                             option(value='wedding', selected= model&&model.type==='wedding') Сватбени
-                            option(value='unstandard', selected= model&&model.type==='unstandard') Нестандартни
+                            option(value='extraordinary', selected= model&&model.type==='extraordinary') Нестандартни
+                            option(value='baskets', selected= model&&model.type==='baskets') Кошници
+                            option(value='pots', selected= model&&model.type==='pots') Нестандартни
+                            option(value='cards', selected= model&&model.type==='cards') Нестандартни
                         label.input__label.input__label--ichiro(for='type-dropdown')
                             span.input__label-content.input__label-content--ichiro Тип
                     span.input.input--ichiro

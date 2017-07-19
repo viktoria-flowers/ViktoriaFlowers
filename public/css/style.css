@@ -1386,7 +1386,7 @@ ul.faq {
     margin-right: 2em;
     width: 25%;
 }
-select#country,select#country1 {
+select#sort, select#order  {
     border: 1px solid #212121;
     outline: none;
     font-size: 14px;

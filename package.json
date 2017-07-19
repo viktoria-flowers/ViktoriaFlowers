@@ -7,7 +7,7 @@
     "start": "node server.js",
     "nodemon": "nodemon server.js",
     "test-unit": "gulp tests:unit",
-    "lint": "eslint .",
+    "lint": "./node_modules/.bin/eslint .",
     "test": "./node_modules/.bin/mocha test/**/*js",
     "mocha": "./node_modules/.bin/mocha test/**/*js",
     "istanbul": "./node_modules/.bin/istanbul"

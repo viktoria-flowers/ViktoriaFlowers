@@ -1,0 +1,89 @@
+extends ../layouts/default.pug
+
+block content
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Високи Букети (Change)
+    .products
+      .container
+        .col-md-12.products-right
+          .products-right-grid
+            .products-right-grids
+              .sorting
+                label(for='sort') Сортирай по
+              .sorting-left
+                label(for='order') Подредба
+              .clearfix
+            .products-right-grids
+              .sorting
+                select#sort.frm-field.required.sect
+                  option(value='null') Име на продукт
+                  option(value='null') Брой преглеждания
+                  option(value='null') Цена на продукт
+                  option(value='null') Дата на добавяне
+              .sorting-left
+                select#order.frm-field.required.sect
+                  option(value='-') Възходящ ред
+                  option(value='+') Низходящ ред
+              .clearfix
+            .agile_top_brands_grids
+          if (products && products.length)
+            each product in products
+              .col-md-4.top_brand_left
+                .hover14.column
+                  .agile_top_brand_left_grid
+                    .agile_top_brand_left_grid_pos
+                    if product.wasPrice.length
+                      img.img-responsive(src='/static/images/offer.png', alt=' ')
+                    .agile_top_brand_left_grid1
+                      figure
+                        .snipcart-item.block
+                          .snipcart-thumb
+                            a(href='/products/details/'+product._id)
+                              img.img-responsive.imgRightDimensions(title='Снимка на продукт', alt=product.url, src=product.url)
+                            p 
+                              =product.title
+                            h4
+                              = 'Цена: ' + product.price + 'лв.'
+                            br
+                            if product.wasPrice.length
+                              h5.scratchOverText.text-center
+                                = 'Предишна цена: ' + product.wasPrice + 'лв.'
+                            else
+                              = product.wasPrice
+                          .snipcart-details.top_brand_home_details
+                            form(action='#', method='post')
+                              fieldset
+                                input(type='hidden', name='id', value=product._id)
+                                input(type='hidden', name='title', value=product.title)
+                                input(type='hidden', name='url', value=product.url)
+                                input(type='hidden', name='price', value=product.price)
+                                input.button(type='button', name='submit', value='Добави в количката') 
+          else
+            h2 Няма продукти по зададените критерии  
+        nav.numbering
+          ul.pagination.paging
+            li
+              a(href='#', aria-label='Previous')
+                span(aria-hidden='true') «
+            li.active
+              a(href='#')
+                | 1
+                span.sr-only (current)
+            li
+              a(href='#') 2
+            li
+              a(href='#') 3
+            li
+              a(href='#') 4
+            li
+              a(href='#') 5
+            li
+              a(href='#', aria-label='Next')
+                span(aria-hidden='true') »
+      .clearfix
