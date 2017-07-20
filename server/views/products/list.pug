@@ -8,7 +8,15 @@ block content
           a(href='/')
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
-        li.active Високи Букети (Change)
+        each product in products
+          if product.type === 'circle'
+            li.active | Кръгли Букети
+          else if product.type === 'tall'
+            li.active Високи Букети
+          else if product.type === 'unstandard'
+            li.active Нестандартни Букети
+          else if product.type === 'wedding'
+            li.active Сватбени Букети  
     .products
       .container
         .col-md-12.products-right
@@ -45,11 +53,14 @@ block content
                         .snipcart-item.block
                           .snipcart-thumb
                             a(href='/products/details/'+product._id)
-                              img.img-responsive.imgRightDimensions(title='Снимка на продукт', alt=product.url, src=product.url)
-                            p 
+                              img.img-responsive.imgRightDimensions#prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
+                            p#prodName 
                               =product.title
                             h4
-                              = 'Цена: ' + product.price + 'лв.'
+                              | Цена:
+                              span#prodPrice
+                                = product.price
+                              |  лв.
                             br
                             if product.wasPrice.length
                               h5.scratchOverText.text-center
@@ -63,9 +74,9 @@ block content
                                 input(type='hidden', name='title', value=product.title)
                                 input(type='hidden', name='url', value=product.url)
                                 input(type='hidden', name='price', value=product.price)
-                                input.button(type='button', name='submit', value='Добави в количката') 
+                                input.button(type='button', name='submit', value='Добави в количката').addToCart
           else
-            h2 Няма продукти по зададените критерии  
+            h2.text-center Няма продукти по зададените критерии  
         nav.numbering
           ul.pagination.paging
             li

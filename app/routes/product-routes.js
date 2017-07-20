@@ -64,7 +64,7 @@ const productRoutes = (app, data) => {
     // GET /products/
     // GET /products/tall
     // GET /products/extraordinary
-    // GET /products/cricle
+    // GET /products/circle
     // GET /products/wedding
     app.get('/products/:type*?', (req, res) => {
         const filter = {};
