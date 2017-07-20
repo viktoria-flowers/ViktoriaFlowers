@@ -27,29 +27,12 @@ block content
               th Цена
               th Изтрии
           tbody#checkoutBody
-            //Dinamically created script for localStorage
-
-
-
+            //Dinamically add products from localStorage
       .checkout-left
         .checkout-left-basket
-          ul
-            li
-              | Product1 
-              span
-                
-            li
-              | Product2 
-              span $25.00 
-            li
-              | Product3 
-              span $29.00 
-            li
-              | Total Service Charges 
-              span $15.00
-            li
-              | Total
-              span $84.00
+          p
+            | Total
+            span $84.00
             script.
               var itemPrice = +($('td.invert label').html());
                   totalItemPrice = itemPrice += newVal;

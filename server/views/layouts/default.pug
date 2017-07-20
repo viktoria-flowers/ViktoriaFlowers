@@ -165,10 +165,11 @@ html
                 a(href='/payment') Начини на плащане
           .col-md-4.w3_footer_grid
             h5 Абонирайте се за нашите специални предложения
-            .input-group
-              span.input-group-addon
-                i.glyphicon.glyphicon-leaf
-              input#login-username.form-control(type='text', name='username', value='', placeholder='E-mail')
+            form(action="/api/subscribe", method="POST")
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-leaf
+                input#login-username.form-control(type='text', name='subscribeEmail', value='', placeholder='E-mail')
           .clearfix  
       .footer-copy
         .container

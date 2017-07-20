@@ -1179,7 +1179,7 @@ td.invert-image a img {
 .checkout-left {
     margin: 2em 0 0;
 }
-.checkout-left-basket ul li{
+.checkout-left-basket p{
 	list-style-type:none;
 	margin-bottom:1em;
 	font-size:14px;

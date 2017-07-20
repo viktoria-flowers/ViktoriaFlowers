@@ -16,6 +16,7 @@ let savedData = JSON.parse(localStorage.test),
 
 for(let i = 0; i < savedDataLen; i += 1){
 
+    //Dinamically create the products in cart => get them from localStorage
     let mainRow = $('<tr />').addClass('rem1');
         let firstCell = $('<td />').addClass('invert-image');
             let firstCellAnchor = $('<a />').attr('href', '/');
@@ -45,7 +46,7 @@ for(let i = 0; i < savedDataLen; i += 1){
         thirdCell.appendTo(mainRow);
 
         let fourthCell = $('<td />').addClass('invert');     
-            let fourthCellLabel = $('<label />').html(savedData[i].price + 'лв.');
+            let fourthCellLabel = $('<label />').html(savedData[i].price + 'лв.').attr('id', 'dynPrice');
         
         fourthCellLabel.appendTo(fourthCell);
         fourthCell.appendTo(mainRow);
@@ -62,9 +63,10 @@ for(let i = 0; i < savedDataLen; i += 1){
         mainRow.appendTo(tableBody);
     
     //This script is for deleting product from cart
-    fifthCell.on('click', $(this), function(c){
-        mainRow.fadeOut('slow', function(c){
-        mainRow.remove();
+    //to do delete only row not whole table
+    fifthCell.on('click', function(){
+        $(this).parent().fadeOut('slow', function(c){
+        $(this).parent().remove();
         });
     });
 
@@ -73,13 +75,20 @@ for(let i = 0; i < savedDataLen; i += 1){
         var divUpd = $(this).parent().find('.value');
             newVal = parseInt(divUpd.text(), 10)+1;
         divUpd.text(newVal);
+        var dynPrice = $('#dynPrice').html(newVal * savedData[i].price + 'лв.');
+        
     });
+    //to do formula for substracting product price
     secondInnerDiv.on('click', function(){
         var divUpd = $(this).parent().find('.value');
             newVal = parseInt(divUpd.text(), 10)-1;
         if(newVal >= 1) {
             divUpd.text(newVal)
+            var dynPrice = $('#dynPrice').html(savedData[i].price - newVal + 'лв.');  
         };
+
     });
+
+    //to do total sum
 }
 
