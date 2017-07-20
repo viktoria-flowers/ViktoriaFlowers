@@ -12,6 +12,11 @@ html
     link(href='/static/css/bootstrap.css', rel='stylesheet', type='text/css', media='all')
     link(href='http://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic', rel='stylesheet', type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Bellefair', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Bellefair|Lemonada', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Dancing+Script', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Alegreya', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Philosopher', rel='stylesheet')
     link(href='/static/css/font-awesome.css', rel='stylesheet')
     link(href='/static/css/skdslider.css', rel='stylesheet')
     link(href='/libs/node_modules/sweetalert/dist/sweetalert.css')
@@ -21,22 +26,26 @@ html
 
     script(src='/static/js/jquery-1.11.1.min.js')
     script(src='https://code.jquery.com/ui/1.12.0/jquery-ui.min.js')
+    //- script(src='/libs/node_modules/sweetalert/dist/sweetalert.min.js')
+    
   body
     // HEADER start
     .agileits_header
       .container
         .row
-          .w3l_offers.col-sm-6
-            a(href='/').col-sm-5
-              img(src="/static/images/logo.gif")#logoImage.pull-left
-            -if(isAuthenticated)
-              p.col-sm-7.pull-left Здравейте, 
+          .col-sm-4.xs-text-center
+            label.header-labels.pull-left
+              - if(isAuthenticated)
+                | Здравейте, 
                 = username
-            -else
-              p.col-sm-7.pull-left.text-center.em 
-                em Добре дошли в магазин за цветя 'Виктория'
-          .agile-login.col-sm-4
-            ul
+              - else
+                | Здравейте, анонимен
+          .col-sm-3.xs-text-center
+            label.header-labels
+              i.fa.fa-phone(aria-hidden='true')
+                | Поръчайте: 0898 838 833
+          .agile-login.col-sm-5.xs-text-center
+            ul.text-right
               - if(isAdmin)
                 li 
                   a(href='/products/create') Добави букет
@@ -50,25 +59,23 @@ html
                   a(href='/login')  Вход 
                 li
                   a(href='/register') Регистрация
-          .product_list_header.col-sm-2.pull-right
-            a(href="/checkout")
-              i.fa.fa-cart-arrow-down
-      //- .clearfix  
+                li
+                  a(href="/checkout")
+                    i.fa.fa-cart-arrow-down
     .logo_products
       .container
-        .w3ls_logo_products_left1
-          ul.phone_email
-            li
-              i.fa.fa-phone(aria-hidden='true')
-              | Поръчка по телефона: 0898 838 833
-        .w3ls_logo_products_left
-          h1
+        .col-sm-4
+            //- img.imgRightDimensions.pull-left(src="/static/images/logo.gif")
+        .w3ls_logo_products_left.col-sm-4
+          h3
             a(href='/') Магазин за цветя "Виктория"
-        .w3l_search
-          form(action='#', method='post')
-            input(type='search', name='Search', placeholder='Търси...', required='')
-            button.btn.btn-default.search(type='submit', aria-label='Left Align')
-              i.fa.fa-search(aria-hidden='true')  
+        .w3l_search.col-sm-4
+          form.form-group(action='#', method='post')
+            .input-group.margin-bottom-sm.pull-right
+              input#inputFirstName.form-control(type='text', placeholder="Търси...")
+              span.input-group-addon#search-color
+                a(href="/")
+                  i.fa.fa-search
             .clearfix
         .clearfix  
     // HEADER end
@@ -84,7 +91,7 @@ html
               span.icon-bar
               span.icon-bar
           #bs-megadropdown-tabs.collapse.navbar-collapse
-            ul.nav.navbar-nav.text-center
+            ul.nav.navbar-nav
               li.active
                 a.act(href='/') Начало
               // Mega Menu
@@ -190,6 +197,5 @@ html
     script(type='text/javascript', src='/static/js/template.js')
     script(type='text/javascript', src='/static/js/checkout.js')    
     script(src='/static/js/site/loading.js')
-    //- script(src='/libs/node_modules/sweetalert/dist/sweetalert.min.js')
     
     block scripts
