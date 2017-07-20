@@ -5,6 +5,13 @@ const test = (app) => {
         // return res.render('usersView', users);
         return res.json({ message: 'Ajax works' });
     });
+
+    app.post('/api/subscribe', (req, res) => {
+        // usersService returns users from datbase(Mongo)
+        // const users = usersService.getAllUsers();
+        // return res.render('usersView', users);
+        return res.json({ message: 'Ajax works' });
+    });
 };
 
 module.exports = test;

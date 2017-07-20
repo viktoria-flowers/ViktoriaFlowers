@@ -166,10 +166,8 @@ html
           .col-md-4.w3_footer_grid
             h5 Абонирайте се за нашите специални предложения
             form(action="/api/subscribe", method="POST")
-              .input-group
-                span.input-group-addon
-                  i.glyphicon.glyphicon-leaf
-                input#login-username.form-control(type='text', name='subscribeEmail', value='', placeholder='E-mail')
+              input#login-username.form-control(type='text', name='subscribeEmail', value='', placeholder='E-mail')
+              input.btn.btn-success.form-control(type="submit", value="Изпрати")
           .clearfix  
       .footer-copy
         .container
