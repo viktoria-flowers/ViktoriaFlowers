@@ -61,7 +61,6 @@ class BaseData {
         }, model);
     }
 
-    // to do isActive: false give it dinamically
     updateParamsById(model, props) {
         return this.collection.updateOne(
             { _id: new ObjectID(model._id) },

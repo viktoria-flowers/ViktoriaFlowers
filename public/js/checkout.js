@@ -92,10 +92,10 @@ if(localStorage.length > 0){
         });
 
         //to do sum
-        let dynamicPrice = $('#dynPrice').html();
-        let totalSum = $('<p />').html('Обща сума: ' + (dynamicPrice));
-        let totalSumHolder = $('.checkout-left-basket');
-        totalSum.prependTo(totalSumHolder);
+        // let dynamicPrice = $('#dynPrice').html();
+        // let totalSum = $('<p />').html('Обща сума: ' + (dynamicPrice));
+        // let totalSumHolder = $('.checkout-left-basket');
+        // totalSum.prependTo(totalSumHolder);
     }
 }else{
     let container = $('<tr />').addClass('panel panel-default');

@@ -74,16 +74,7 @@ block content
                                 input(type='hidden', name='title', value=product.title)
                                 input(type='hidden', name='url', value=product.url)
                                 input(type='hidden', name='price', value=product.price)
-                                input.button(type='button', name='submit', value='Добави в количката', href='#addToCartModal', data-toggle='modal').addToCart
-                  // Modal HTML
-                  #addToCartModal.modal.fade
-                    .modal-dialog
-                      .modal-content
-                        .modal-body
-                          p Продуктът е добавен в количката
-                        .modal-footer
-                          а(href="/checkout", data-dismiss='modal').btn.btn-success Завършете поръчката
-                          а(href="/", data-dismiss='modal').btn.btn-warning Продължете да пазарувате
+                                input.button(type='submit', name='submit', value='Добави в количката', href='#myModal', data-toggle='modal').addToCart
           else
             h2.text-center Няма продукти по зададените критерии  
         nav.numbering
