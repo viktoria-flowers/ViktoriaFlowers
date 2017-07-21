@@ -1,4 +1,4 @@
-const test = (app) => {
+const ajaxRequests = (app, data) => {
     app.get('/api', (req, res) => {
         // usersService returns users from datbase(Mongo)
         // const users = usersService.getAllUsers();
@@ -7,14 +7,12 @@ const test = (app) => {
     });
 
     app.post('/api/subscribe', (req, res) => {
-        // usersService returns users from datbase(Mongo)
-        // const users = usersService.getAllUsers();
-        // return res.render('usersView', users);
-        return res.json({ message: 'Ajax works' });
+        return res.json({ message: data.emailSubscribers.find() });
     });
 };
 
-module.exports = test;
+module.exports = ajaxRequests;
+
 // Here are the ajax requests send from the user
 // const items = [{
 //     'name': 'Martina',

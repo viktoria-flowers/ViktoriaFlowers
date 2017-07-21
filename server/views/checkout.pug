@@ -24,20 +24,13 @@ block content
               th Снимка
               th Име
               th Количество
-              th Цена
+              th Цена в лв.
               th Изтрии
           tbody#checkoutBody
             //Dinamically add products from localStorage
       .checkout-left
         .checkout-left-basket
-          p
-            | Total
-            span $84.00
-            script.
-              var itemPrice = +($('td.invert label').html());
-                  totalItemPrice = itemPrice += newVal;
-              $('.checkout-left-basket ul li span').html(totalItemPrice);
-              //- console.log(newVal);
+            //Dinamically add total price
 
             a.btn.btn-lg.btn-success(href='#myModal', data-toggle='modal') Завършване на поръчката
             // Modal HTML

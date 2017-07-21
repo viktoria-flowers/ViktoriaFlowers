@@ -48,7 +48,7 @@ if(localStorage.length > 0){
             thirdCell.appendTo(mainRow);
 
             let fourthCell = $('<td />').addClass('invert');     
-                let fourthCellLabel = $('<label />').html(savedData[i].price + 'лв.').attr('id', 'dynPrice');
+                let fourthCellLabel = $('<label />').html(savedData[i].price).attr('id', 'dynPrice');
             
             fourthCellLabel.appendTo(fourthCell);
             fourthCell.appendTo(mainRow);
@@ -77,21 +77,25 @@ if(localStorage.length > 0){
             var divUpd = $(this).parent().find('.value');
                 newVal = parseInt(divUpd.text(), 10)+1;
             divUpd.text(newVal);
-            var dynPrice = $('#dynPrice').html(newVal * savedData[i].price + 'лв.');
+            var dynPrice = $('#dynPrice').html(newVal * savedData[i].price);
             
         });
+
         //to do formula for substracting product price
         secondInnerDiv.on('click', function(){
             var divUpd = $(this).parent().find('.value');
                 newVal = parseInt(divUpd.text(), 10)-1;
             if(newVal >= 1) {
                 divUpd.text(newVal)
-                var dynPrice = $('#dynPrice').html(savedData[i].price - newVal + 'лв.');  
+                var dynPrice = $('#dynPrice').html(getDynPrice - 23);
             };
-
         });
 
-        //to do total sum
+        //to do sum
+        let dynamicPrice = $('#dynPrice').html();
+        let totalSum = $('<p />').html('Обща сума: ' + (dynamicPrice));
+        let totalSumHolder = $('.checkout-left-basket');
+        totalSum.prependTo(totalSumHolder);
     }
 }else{
     let container = $('<tr />').addClass('panel panel-default');
