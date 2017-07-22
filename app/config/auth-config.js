@@ -11,9 +11,10 @@ const configAuth = (app, users) => {
             return users.findByUsername(username)
                 .then((user) => {
                     const passHash = authHelper.makeHashFromPassword(password);
-                    if (user.password !== passHash) {
-                        done(new Error('Invalid password'));
+                    if (user && user.password !== passHash) {
+                        return done(new Error('Invalid credentials'));
                     }
+
                     return done(null, user);
                 })
                 .catch((err) => {
