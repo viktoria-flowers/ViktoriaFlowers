@@ -10,7 +10,7 @@ const init = (data) => {
     // folder app/routes
     require('./routes/server-routes')(app, data);
     require('./routes/auth-routes')(app, data.users);
-    require('./routes/api-routes')(app);
+    require('./routes/api-routes')(app, data);
     require('./routes/product-routes')(app, data);
     require('./routes/image-routes')(app, data);
 
