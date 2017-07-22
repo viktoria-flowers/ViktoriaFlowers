@@ -1,3 +1,4 @@
+
 $('#sendSubscribeEmail').on('click', () => {
 
     var getEmail = $("#subscriptionEmail").val();
