@@ -1,26 +1,38 @@
 class ModelState {
-    constructor(isValid, errors) {
-        this.isValid = isValid || false;
+    constructor(errors) {
         this.errors = errors || [];
+        this.isValid = true;
+
+        if (this.errors.length && this.errors.length > 0) {
+            this.isValid = false;
+        }
     }
 
+    /**
+     * @param { String } errorText 
+     */
     addError(errorText) {
         if (typeof this.errors === 'undefined' ||
             typeof this.errors.length === 'undefined') {
             this.errors = [];
         }
 
+        if (!errorText) {
+            return;
+        }
+
+        this.isValid = false;
         this.errors.push(errorText);
     }
+
     /**
      * @example 
      * let modelState = ModelState.Valid();  
      * // modelState.isValid is true  
-     * // modelState.errors is null  
      * @return { ModelState } Returns Valid model state 
      */
     static valid() {
-        return new this(true, null);
+        return new this();
     }
 }
 

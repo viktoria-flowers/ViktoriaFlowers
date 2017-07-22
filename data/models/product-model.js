@@ -4,7 +4,7 @@ const minTitleLength = 3;
 
 class Product {
     static isValid(productModel) {
-        const modelState = new ModelState(false);
+        const modelState = new ModelState();
 
         if (!productModel.title || productModel.title.length < minTitleLength) {
             modelState.addError('title');
@@ -16,10 +16,6 @@ class Product {
 
         if (!productModel.price) {
             modelState.addError('price');
-        }
-
-        if (!modelState.errors || modelState.errors.length === 0) {
-            modelState.isValid = true;
         }
 
         return modelState;

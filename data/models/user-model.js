@@ -16,7 +16,7 @@ class User {
     }
 
     static isValid(userModel) {
-        const modelState = new ModelState(false);
+        const modelState = new ModelState();
         if (!userModel.names) {
             modelState.addError('names');
         }
@@ -41,10 +41,6 @@ class User {
         if (!userModel.username ||
             userModel.username.length < userNameMinLength) {
             modelState.addError('username');
-        }
-
-        if (!modelState.errors || modelState.errors.length === 0) {
-            modelState.isValid = true;
         }
 
         return modelState;

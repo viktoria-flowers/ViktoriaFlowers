@@ -4,12 +4,11 @@ const twoMegaBytesInBytes = 1000 * 2000;
 
 class Image {
     static isValid(imageModel) {
-        const modelState = new ModelState(false);
+        const modelState = new ModelState();
 
         // allow images less than 2MB
         // size of the image in bytes
         if (imageModel.size <= twoMegaBytesInBytes) {
-            modelState.isValid = true;
             return modelState;
         }
 
