@@ -78,11 +78,10 @@ if (localStorage.length > 0) {
         mainRow.appendTo(tableBody);
 
         //This script is for deleting product from cart
-        //to do delete only row not whole table
-        $('#checkoutBody').on('click', $('.close1'), function () {
+        $('body').on('click', '.rem1 .close1', function (c) {
             console.log(mainRow);
-            $(this).fadeOut('slow', function (c) {
-                $(this).remove();
+            $(this).closest('tr').fadeOut('slow', function (c) {
+                $(this).closest('tr').remove();
             });
         });
 

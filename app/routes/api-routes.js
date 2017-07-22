@@ -7,7 +7,26 @@ const ajaxRequests = (app, data) => {
     });
 
     app.post('/api/subscribe', (req, res) => {
-        return res.json({ message: data.emailSubscribers.find() });
+        // { subscribeEmail : 'marti@sada.com'  }
+
+        return data.emailSubscribers.getAll(req.body)
+            .then((existingEmail) => {
+                if (existingEmail.length > 0) {
+                    return res.status(400).json(
+                        'Този e-mail вече съществува, моля опитайте с друг'
+                    );
+                }
+
+                return data.emailSubscribers.create(req.body)
+                    .then((newEmail) => {
+                      return res.json({ message: 'Ok' });
+                    })
+                    .catch((err) => {
+                      return res.json(err);
+                    });
+            });
+
+        //  return res.json({ message: data.emailSubscribers.find() });
     });
 };
 
