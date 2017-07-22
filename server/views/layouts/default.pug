@@ -165,9 +165,8 @@ html
                 a(href='/payment') Начини на плащане
           .col-md-4.w3_footer_grid
             h5 Абонирайте се за нашите специални предложения
-            form(action="/api/subscribe", method="POST")
-              input#login-username.form-control(type='text', name='subscribeEmail', value='', placeholder='E-mail')
-              input.btn.btn-success.form-control(type="submit", value="Изпрати")
+              input#subscriptionEmail.form-control(type='text', name='subscribeEmail', placeholder='E-mail')
+              button.btn.btn-success.form-control(type="button", value="Изпрати", id="sendSubscribeEmail")
           .clearfix  
       .footer-copy
         .container
@@ -184,7 +183,7 @@ html
             li
               a.agile_twitter(href='#')
                 i.fa.fa-twitter(aria-hidden='true')
-        .clearfix  
+        .clearfix
     //FOOTER end
 
     // for-mobile-apps
@@ -192,8 +191,9 @@ html
     script(type='text/javascript', src='/static/js/move-top.js')
     script(type='text/javascript', src='/static/js/easing.js')
     script(src='/static/js/skdslider.min.js')
+    script(src='/static/js/site/loading.js')    
     script(type='text/javascript', src='/static/js/template.js')
-    script(type='text/javascript', src='/static/js/checkout.js')    
-    script(src='/static/js/site/loading.js')
+    script(type='text/javascript', src='/static/js/checkout.js')
+    script(type='text/javascript', src='/static/js/ajaxRequests.js')      
     
     block scripts

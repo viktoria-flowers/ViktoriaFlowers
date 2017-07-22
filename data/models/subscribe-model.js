@@ -4,12 +4,16 @@ const ModelState = require('../model-state');
 const emailRegExPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
 
 class EmailSubscriber {
-    static isValid(emailSubscription) {
+    static isValid(subscribeModel) {
         const modelState = new ModelState(false);
 
-        if (!emailSubscription.email ||
-            !emailRegExPattern.test(emailSubscription.email)) {
+        if (!subscribeModel.subscribeEmail ||
+            !emailRegExPattern.test(subscribeModel.subscribeEmail)) {
             modelState.addError('email');
+        }
+
+        if (!modelState.errors || modelState.errors.length === 0) {
+            modelState.isValid = true;
         }
 
         return modelState;
