@@ -1,0 +1,20 @@
+mixin getPages(pages)
+    ul.pagination.paging
+      li
+        a(href="#" aria-label='Първа страница', data-page='1')
+          span(aria-hidden='true') «
+      each pageObj, index in pages
+        case pageObj.type
+          when 'normal'
+            if pageObj.isCurrent
+              li.active
+                a(href="/", data-page=pageObj.page)
+                  = pageObj.page
+            else 
+              li
+                a(href="/", data-page=pageObj.page)
+                  = pageObj.page
+          when 'last'
+            li 
+              a(href="/", data-page=pageObj.page, aria-label='Последна страница')
+                span(aria-hidden='true') »

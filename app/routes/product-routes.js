@@ -3,7 +3,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { isAdmin } = require('../middlewares');
 const { ObjectID } = require('mongodb');
-const productTypes = require('../utils/productTypes');
+const { productTypes, pagination, constants } = require('../utils');
 
 const productRoutes = (app, data) => {
     app.get(
@@ -77,11 +77,31 @@ const productRoutes = (app, data) => {
             filter.type = type;
         }
 
-        return data.products.getAll(filter)
-            .then((products) => {
-                // return res.json(products);
+        let productModels = [];
+
+        const field = constants.DEFAULT_SORT_FIELD;
+        const sortType = constants.DEFAULT_SORT_TYPE;
+        const sort = { };
+        sort[field] = sortType;
+        // get fo the first page
+        return data.products.getAll(filter, sort)
+            .then((firstPageProducts) => {
+                productModels = firstPageProducts;
+
+                // get All 
+                const pageSize = Number.MAX_SAFE_INTEGER;
+                return data.products.getAll(filter, {}, 1, pageSize);
+            })
+            .then((allProds) => {
+                const pages = pagination(
+                    allProds.length,
+                    constants.DEFAULT_PAGE_SIZE,
+                    1);
+
                 return res.render('products/list', {
-                    products: products,
+                    products: productModels,
+                    type: type,
+                    pages: pages,
                 });
             });
     });
