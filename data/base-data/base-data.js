@@ -1,6 +1,6 @@
 const ModelState = require('../model-state');
 const { ObjectID } = require('mongodb');
-const DEFAULT_SIZE = 12;
+const constants = require('../../app/utils/constants');
 
 class BaseData {
     constructor(db, ModelClass, validator) {
@@ -10,23 +10,27 @@ class BaseData {
         this.collection = db.collection(this.collectionName);
     }
 
-    getAll(filters, page, size) {
+    getAll(filters, sortObj, page, size) {
         page = page || 1;
-        size = size || DEFAULT_SIZE;
+        size = size || constants.DEFAULT_PAGE_SIZE;
+        sortObj = sortObj || {};
+
         const skipVal = (page - 1) * size;
         if (filters) {
             return this.collection
                 .find(filters)
+                .sort(sortObj)
                 .skip(skipVal)
                 .limit(size)
                 .toArray();
         }
 
         return this.collection
-                .find()
-                .skip(skipVal)
-                .limit(size)
-                .toArray();
+            .find()
+            .sort(sortObj)
+            .skip(skipVal)
+            .limit(size)
+            .toArray();
     }
 
     findById(id) {
