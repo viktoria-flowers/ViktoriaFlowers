@@ -111,9 +111,21 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
     container.appendTo(tableBody);
 }
 
+// Cart images
+$(document).ready(function(){
+  $('td img')
+    .wrap('<div style="height:200px"></div>')
+    .css('display', 'block')
+    .parent()
+    .zoom({
+        touch: true
+    });
+});
+
+// All images in site
 $(document).ready(function(){
   $('img')
-    .wrap('<div style="height:200px"></div>')
+    .wrap('<div style="display:inline-block"></div>')
     .css('display', 'block')
     .parent()
     .zoom({
