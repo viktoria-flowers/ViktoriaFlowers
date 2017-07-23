@@ -3,6 +3,7 @@ $('.addToCart').on('click', () => {
     var test = localStorage.getItem("test");
     var obj = [];
     var productName = $('#prodName').html();
+    var productId = $('input[name=id]').attr('value');
     var exist = false;
 
     if (test) {
@@ -10,24 +11,35 @@ $('.addToCart').on('click', () => {
     }
 
     for (let i = 0; i < obj.length; i += 1) {
-        if (obj[i].name == productName) {
+        if (obj[i].id == productId) {
             exist = true;
         }
     }
 
     if (!exist) {
-        obj.push({ "name": $('#prodName').html(), "price": $('#prodPrice').html(), "imgUrl": $('#prodImg').attr('src') });
+        obj.push({ "id": $('input[name=id]').attr('value'), "name": $('.prodName').html(), "price": $('.prodPrice').html(), "imgUrl": $('.prodImg').attr('src') });
+        alert('Продуктът беше добавен в количката');
     } else {
         alert('Вече сте добавили този продукт в количката');
     }
 
+    if(localStorage.getItem("cart")){
+        localStorage.setItem("cart", JSON.stringify(obj));
+    }
     localStorage.setItem("test", JSON.stringify(obj));
 });
 
-if (localStorage.length > 0) {
+if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
-    let savedData = JSON.parse(localStorage.test),
-        savedDataLen = savedData.length;
+        let savedData;
+
+        if(localStorage.test){
+            savedData = JSON.parse(localStorage.test);
+        }else{
+            savedData = JSON.parse(localStorage.cart);
+        }
+
+        let savedDataLen = savedData.length;
 
     for (let i = 0; i < savedDataLen; i += 1) {
 
@@ -41,8 +53,8 @@ if (localStorage.length > 0) {
         firstCellAnchor.appendTo(firstCell);
         firstCell.appendTo(mainRow);
 
-        let secondCell = $('<td />').addClass('invert').html(savedData[i].name);
-        secondCell.appendTo(mainRow);
+        let secondCell = $('<td />').addClass('invert').html(savedData[i].name).attr('value', savedData[i].id).addClass('productName');
+            secondCell.appendTo(mainRow);
 
         let thirdCell = $('<td />').addClass('invert');
         let quantityDiv = $('<div />').addClass('quantity');
@@ -91,26 +103,51 @@ if (localStorage.length > 0) {
 
     container.appendTo(tableBody);
 }
-
-//This script is for deleting product from cart
-$('body').on('click', '.rem1 .close1', function (c) {
-    $(this).closest('tr').fadeOut('slow', function (c) {
-        $(this).closest('tr').remove();
-    });
-});
-
 var sum = $('.rem1').find('.dynamicPrice').map(function(){
     return $(this).html();
 }).get();
 
+
 var totalSum = sum.reduce(function (a, b) {
-  return parseInt(a) + parseInt(b);
-});
+    return parseInt(a) + parseInt(b);
+}, 0);
+
 
 let totalSumLabel = $('<p />');
     totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
 let totalSumHolder = $('.checkout-left-basket');
     totalSumLabel.prependTo(totalSumHolder);
+
+//This script is for deleting product from cart
+$('body').on('click', '.rem1 .close1', function (c) {
+    $(this).closest('tr').fadeOut('slow', function (c) {
+        $(this).closest('tr').remove();        
+        let sumToBeRemoved = parseInt($(this).closest('tr').find('.dynamicPrice').html());
+            totalSumLabel.html('Обща сума: ' + (totalSum -= sumToBeRemoved) + 'лв.');
+
+        let savedData;
+
+        if(localStorage.test){
+            savedData = JSON.parse(localStorage.test);
+        }else{
+            savedData = JSON.parse(localStorage.cart);
+        }
+
+        let savedDataLen = savedData.length,
+            productForDeletion = $(this).closest('tr').find('.productName').attr('value'),
+            slicedLocalStorage;
+
+        for (let i = 0; i < savedDataLen; i += 1) {
+            if(savedData[i].id === productForDeletion){
+                slicedLocalStorage = savedData.splice(i, 1);
+            }
+        }
+        localStorage.removeItem("test");
+        localStorage.setItem("cart", JSON.stringify(slicedLocalStorage));
+    });
+});
+
+totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
 
 //This script is for quantity increasing
 $('body').on('click', '.value-plus', function () {

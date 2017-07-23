@@ -51,12 +51,12 @@ block content
                           .snipcart-item.block
                             .snipcart-thumb
                               a(href='/products/details/'+product._id)
-                                img.img-responsive.imgRightDimensions#prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
-                              p#prodName
+                                img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
+                              p.prodName
                                 =product.title
                               h4
                                 | Цена:
-                                span#prodPrice
+                                span.prodPrice
                                   = product.price
                                 |  лв.
                               br

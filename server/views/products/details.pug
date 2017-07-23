@@ -5,9 +5,9 @@ block content
     .container
       .agileinfo_single
         .col-md-4.agileinfo_single_left
-          img#example.img-responsive(src=model.url, alt=model.url)
+          img#example.img-responsive.prodImg(src=model.url, alt=model.url)
         .col-md-8.agileinfo_single_right
-          h2 
+          h2.prodName 
            = model.title
           .w3agile_description
             p Дата: 
@@ -32,20 +32,21 @@ block content
               = model.description || 'Липсва'
           .snipcart-item.block
             .snipcart-thumb.agileinfo_single_right_snipcart
-              h4.m-sing
+              h4.m-sing.prodPrice
                 = model.price ? model.price + '.00 лв.' : 'Цената липсва'
                 //- span $25.00
             .snipcart-details.agileinfo_single_right_details
               form(action='#', method='post')
-                fieldset
-                  input(name='cmd', value='_cart', type='hidden')
-                  input(name='add', value='1', type='hidden')
-                  input(name='business', value=' ', type='hidden')
-                  input(name='item_name', value='pulao basmati rice', type='hidden')
-                  input(name='amount', value='21.00', type='hidden')
-                  input(name='discount_amount', value='1.00', type='hidden')
-                  input(name='currency_code', value='USD', type='hidden')
-                  input(name='return', value=' ', type='hidden')
-                  input(name='cancel_return', value=' ', type='hidden')
-                  input.button(name='submit', value='Добави в количка', type='button')
+                fieldset#fieldsetHiddenItems
+                  input(type='hidden', name='id', value=model._id)
+                  //- input(name='cmd', value='_cart', type='hidden')
+                  //- input(name='add', value='1', type='hidden')
+                  //- input(name='business', value=' ', type='hidden')
+                  //- input(name='item_name', value='pulao basmati rice', type='hidden')
+                  //- input(name='amount', value='21.00', type='hidden')
+                  //- input(name='discount_amount', value='1.00', type='hidden')
+                  //- input(name='currency_code', value='USD', type='hidden')
+                  //- input(name='return', value=' ', type='hidden')
+                  //- input(name='cancel_return', value=' ', type='hidden')
+                  input.button(name='submit', value='Добави в количка', type='button').addToCart
         .clearfix  
