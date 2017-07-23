@@ -82,5 +82,20 @@ describe('ModelState tests', () => {
                 expect(textError).to.equal(errText);
             });
         });
+
+        it('Expect ot add initialize error array if is not exits', () => {
+            const modelState = new ModelState();
+            delete modelState.errors;
+
+            modelState.addError('new-error');
+
+            expect(modelState.errors)
+                .to.be.an('array')
+                .with.property('length')
+                .that.is.equal(1);
+
+
+            expect(modelState.errors[0]).to.be.equal('new-error');
+        });
     });
 });
