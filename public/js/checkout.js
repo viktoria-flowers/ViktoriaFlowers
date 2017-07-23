@@ -17,11 +17,11 @@ $('.addToCart').on('click', () => {
 
     if (!exist) {
         obj.push({ "name": $('#prodName').html(), "price": $('#prodPrice').html(), "imgUrl": $('#prodImg').attr('src') });
-    }else{
+    } else {
         alert('Вече сте добавили този продукт в количката');
     }
 
-    localStorage.setItem("test", JSON.stringify(obj)); 
+    localStorage.setItem("test", JSON.stringify(obj));
 });
 
 if (localStorage.length > 0) {
@@ -31,7 +31,7 @@ if (localStorage.length > 0) {
 
     for (let i = 0; i < savedDataLen; i += 1) {
 
-        //Dinamically create the products in cart => get them from localStorage
+        // Dynamically create the products in cart => get them from localStorage
         let mainRow = $('<tr />').addClass('rem1');
         let firstCell = $('<td />').addClass('invert-image');
         let firstCellAnchor = $('<a />').attr('href', '/');
@@ -45,23 +45,27 @@ if (localStorage.length > 0) {
         secondCell.appendTo(mainRow);
 
         let thirdCell = $('<td />').addClass('invert');
-        let thirdCellFirstDiv = $('<div />').addClass('quantity');
-        let firstInnerDiv = $('<div />').addClass('quantity-select');
-        let secondInnerDiv = $('<div />').addClass('entry value-minus');
-        let thirdInnerDiv = $('<div />').addClass('entry value');
-        let thirdInnerDivSpan = $('<span />').html(1);
-        let fourthInnerDiv = $('<div />').addClass('entry value-plus active');
+        let quantityDiv = $('<div />').addClass('quantity');
+        quantityDiv.appendTo(thirdCell);
 
-        fourthInnerDiv.appendTo(thirdCellFirstDiv);
-        thirdInnerDivSpan.appendTo(thirdInnerDiv);
-        thirdInnerDiv.appendTo(thirdCellFirstDiv);
-        secondInnerDiv.appendTo(thirdCellFirstDiv);
-        firstInnerDiv.appendTo(thirdCellFirstDiv);
-        thirdCellFirstDiv.appendTo(thirdCell);
+        let quantitySelectDiv = $('<div />').addClass('quantity-select');
+        quantitySelectDiv.appendTo(quantityDiv);
+
+        let valueMinusDiv = $('<div />').addClass('entry value-minus');
+        valueMinusDiv.appendTo(quantitySelectDiv);
+
+        let entryValue = $('<div />').addClass('entry value');
+        let spanNumber = $('<span />').html(1);
+        spanNumber.appendTo(entryValue);
+        entryValue.appendTo(quantitySelectDiv);
+
+        let valuePlusDiv = $('<div />').addClass('entry value-plus active');
+        valuePlusDiv.appendTo(quantitySelectDiv);
+
         thirdCell.appendTo(mainRow);
 
         let fourthCell = $('<td />').addClass('invert');
-        let fourthCellLabel = $('<label />').html(savedData[i].price).attr('id', 'dynPrice');
+        let fourthCellLabel = $('<label />').html(savedData[i].price).attr('class', 'dynamicPrice').attr('value', savedData[i].price);
 
         fourthCellLabel.appendTo(fourthCell);
         fourthCell.appendTo(mainRow);
@@ -76,39 +80,6 @@ if (localStorage.length > 0) {
 
         let tableBody = $('#checkoutBody');
         mainRow.appendTo(tableBody);
-
-        //This script is for deleting product from cart
-        $('body').on('click', '.rem1 .close1', function (c) {
-            console.log(mainRow);
-            $(this).closest('tr').fadeOut('slow', function (c) {
-                $(this).closest('tr').remove();
-            });
-        });
-
-        //This script is for quantity increasing and decreasing
-        fourthInnerDiv.on('click', function () {
-            var divUpd = $(this).parent().find('.value');
-            newVal = parseInt(divUpd.text(), 10) + 1;
-            divUpd.text(newVal);
-            var dynPrice = $('#dynPrice').html(newVal * savedData[i].price);
-
-        });
-
-        //to do formula for substracting product price
-        secondInnerDiv.on('click', function () {
-            var divUpd = $(this).parent().find('.value');
-            newVal = parseInt(divUpd.text(), 10) - 1;
-            if (newVal >= 1) {
-                divUpd.text(newVal)
-                var dynPrice = $('#dynPrice').html(getDynPrice - 23);
-            };
-        });
-
-        //to do sum
-        // let dynamicPrice = $('#dynPrice').html();
-        // let totalSum = $('<p />').html('Обща сума: ' + (dynamicPrice));
-        // let totalSumHolder = $('.checkout-left-basket');
-        // totalSum.prependTo(totalSumHolder);
     }
 } else {
     let container = $('<tr />').addClass('panel panel-default');
@@ -121,4 +92,48 @@ if (localStorage.length > 0) {
     container.appendTo(tableBody);
 }
 
+//This script is for deleting product from cart
+$('body').on('click', '.rem1 .close1', function (c) {
+    $(this).closest('tr').fadeOut('slow', function (c) {
+        $(this).closest('tr').remove();
+    });
+});
 
+var sum = $('.rem1').find('.dynamicPrice').map(function(){
+    return $(this).html();
+}).get();
+
+var totalSum = sum.reduce(function (a, b) {
+  return parseInt(a) + parseInt(b);
+});
+
+let totalSumLabel = $('<p />');
+    totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+let totalSumHolder = $('.checkout-left-basket');
+    totalSumLabel.prependTo(totalSumHolder);
+
+//This script is for quantity increasing
+$('body').on('click', '.value-plus', function () {
+    let valueField = $(this).parent().find('.value'),
+        newValue = parseInt(valueField.text(), 10) + 1;
+    valueField.text(newValue);
+
+    let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
+    dynamicPriceField.text(parseInt(dynamicPriceField.attr('value')) * newValue);
+    totalSum += (parseInt(dynamicPriceField.attr('value')));
+    totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+});
+
+//This script is for quantity decreasing
+$('body').on('click', '.value-minus', function () {
+    let valueField = $(this).parent().find('.value'),
+        newValue = parseInt(valueField.text(), 10) - 1;
+    if (newValue >= 1) {
+        valueField.text(newValue);
+        let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
+        let initialValue = $(this).parent().parent().parent().parent().find('.dynamicPrice').attr('value');
+            dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue));
+        totalSum -= (parseInt(dynamicPriceField.attr('value')));
+        totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+    }
+});
