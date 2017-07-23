@@ -1,12 +1,6 @@
 const { constants, pagination, productTypes } = require('../utils');
 
 const ajaxRequests = (app, data) => {
-    app.get('/api', (req, res) => {
-        // usersService returns users from datbase(Mongo)
-        // const users = usersService.getAllUsers();
-        // return res.render('usersView', users);
-        return res.json({ message: 'Ajax works' });
-    });
 
     app.post('/api/subscribe', (req, res) => {
         // { subscribeEmail : 'marti@sada.com'  }
@@ -14,21 +8,17 @@ const ajaxRequests = (app, data) => {
         return data.emailSubscribers.getAll(req.body)
             .then((existingEmail) => {
                 if (existingEmail.length > 0) {
-                    return res.status(400).json(
-                        'Този e-mail вече съществува, моля опитайте с друг'
-                    );
+                    return res.status(400).json(existingEmail);
                 }
 
                 return data.emailSubscribers.create(req.body)
                     .then((newEmail) => {
-                      return res.json({ message: 'Ok' });
+                      return res.status(200).json({ message: 'Ok' });
                     })
                     .catch((err) => {
-                      return res.json(err);
+                      return res.status(400).json(err);
                     });
             });
-
-        //  return res.json({ message: data.emailSubscribers.find() });
     });
 
     app.get('/api/products/:type*?', function(req, res) {
