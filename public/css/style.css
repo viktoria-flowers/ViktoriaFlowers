@@ -1091,12 +1091,16 @@ table.timetable_sub {
 .timetable_sub td {
 	border:1px solid #CDCDCD;
 }
-td.invert-image a img {
+ /* td.invert-image a img {
     width:30%;
     margin: 0 auto;
-}
-.rem{
+}  */
+ .rem{
 	position:relative;
+}
+.rem1 td{
+    width: 22.2222%;
+    vertical-align: middle !important;
 }
 .close1,.close2,.close3 {
     background: url('../images/close_1.png') no-repeat 0px 0px;
@@ -1104,8 +1108,11 @@ td.invert-image a img {
     width: 28px;
     height: 28px;
     position: absolute;
-    right: 15px;
-    top: -13px;
+    top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%); /* This is a shorthand of
+                                         translateX(-50%) and translateY(-50%) */
     -webkit-transition: color 0.2s ease-in-out;
     -moz-transition: color 0.2s ease-in-out;
     -o-transition: color 0.2s ease-in-out;
@@ -2876,9 +2883,9 @@ ul.faq {
 .checkout-left-basket {
     width: 49%;
 }
-td.invert-image a img {
+ /* td.invert-image a img {
     width: 65%;
-}
+}  */
 .timetable_sub th, .timetable_sub td {
     width: 50px;
 }
@@ -3302,9 +3309,9 @@ ul.faq {
 .value {
     margin: 4px 10px;
 }
-td.invert-image a img {
+ /* td.invert-image a img {
     width: 72%;
-}
+}  */
 .agileinfo_single h2 {
     font-size: 0.95em;
 }

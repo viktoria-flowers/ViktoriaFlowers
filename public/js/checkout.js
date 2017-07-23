@@ -23,7 +23,7 @@ $('.addToCart').on('click', () => {
         alert('Вече сте добавили този продукт в количката');
     }
 
-    if(localStorage.getItem("cart")){
+    if (localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify(obj));
     }
     localStorage.setItem("test", JSON.stringify(obj));
@@ -31,15 +31,15 @@ $('.addToCart').on('click', () => {
 
 if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
-        let savedData;
+    let savedData;
 
-        if(localStorage.test){
-            savedData = JSON.parse(localStorage.test);
-        }else{
-            savedData = JSON.parse(localStorage.cart);
-        }
+    if (localStorage.test) {
+        savedData = JSON.parse(localStorage.test);
+    } else {
+        savedData = JSON.parse(localStorage.cart);
+    }
 
-        let savedDataLen = savedData.length;
+    let savedDataLen = savedData.length;
 
     for (let i = 0; i < savedDataLen; i += 1) {
 
@@ -54,7 +54,7 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
         firstCell.appendTo(mainRow);
 
         let secondCell = $('<td />').addClass('invert').html(savedData[i].name).attr('value', savedData[i].id).addClass('productName');
-            secondCell.appendTo(mainRow);
+        secondCell.appendTo(mainRow);
 
         let thirdCell = $('<td />').addClass('invert');
         let quantityDiv = $('<div />').addClass('quantity');
@@ -68,8 +68,8 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
         let entryValue = $('<div />').addClass('entry value');
         let spanNumber = $('<span />').html(1);
-        spanNumber.appendTo(entryValue);
-        entryValue.appendTo(quantitySelectDiv);
+            spanNumber.appendTo(entryValue);
+            entryValue.appendTo(quantitySelectDiv);
 
         let valuePlusDiv = $('<div />').addClass('entry value-plus active');
         valuePlusDiv.appendTo(quantitySelectDiv);
@@ -77,18 +77,25 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
         thirdCell.appendTo(mainRow);
 
         let fourthCell = $('<td />').addClass('invert');
-        let fourthCellLabel = $('<label />').html(savedData[i].price).attr('class', 'dynamicPrice').attr('value', savedData[i].price);
-
-        fourthCellLabel.appendTo(fourthCell);
-        fourthCell.appendTo(mainRow);
+        let fourthCellLabel = $('<label />').html(savedData[i].price + ' лв.');
+            fourthCellLabel.appendTo(fourthCell);
+            fourthCell.appendTo(mainRow);
 
         let fifthCell = $('<td />').addClass('invert');
-        let fifthCellDiv = $('<div />').addClass('rem');
-        let fifthCellDivInner = $('<div />').addClass('close1');
+        let fifthCellLabel = $('<label />').html(savedData[i].price).attr('class', 'dynamicPrice').attr('value', savedData[i].price);
+            let currencySpan = $('<span />').html(' лв.');
+            currencySpan.appendTo(fifthCellLabel);
 
-        fifthCellDivInner.appendTo(fifthCellDiv);
-        fifthCellDiv.appendTo(fifthCell);
+        fifthCellLabel.appendTo(fifthCell);
         fifthCell.appendTo(mainRow);
+
+        let sixthCell = $('<td />').addClass('invert');
+        let sixthCellDiv = $('<div />').addClass('rem');
+        let sixthCellDivInner = $('<div />').addClass('close1');
+
+        sixthCellDivInner.appendTo(sixthCellDiv);
+        sixthCellDiv.appendTo(sixthCell);
+        sixthCell.appendTo(mainRow);
 
         let tableBody = $('#checkoutBody');
         mainRow.appendTo(tableBody);
@@ -103,7 +110,18 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
     container.appendTo(tableBody);
 }
-var sum = $('.rem1').find('.dynamicPrice').map(function(){
+
+$(document).ready(function(){
+  $('img')
+    .wrap('<div style="height:200px"></div>')
+    .css('display', 'block')
+    .parent()
+    .zoom({
+        touch: true
+    });
+});
+
+var sum = $('.rem1').find('.dynamicPrice').map(function () {
     return $(this).html();
 }).get();
 
@@ -114,40 +132,30 @@ var totalSum = sum.reduce(function (a, b) {
 
 
 let totalSumLabel = $('<p />');
-    totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 let totalSumHolder = $('.checkout-left-basket');
-    totalSumLabel.prependTo(totalSumHolder);
+totalSumLabel.prependTo(totalSumHolder);
 
 //This script is for deleting product from cart
 $('body').on('click', '.rem1 .close1', function (c) {
     $(this).closest('tr').fadeOut('slow', function (c) {
-        $(this).closest('tr').remove();        
+        $(this).closest('tr').remove();
         let sumToBeRemoved = parseInt($(this).closest('tr').find('.dynamicPrice').html());
-            totalSumLabel.html('Обща сума: ' + (totalSum -= sumToBeRemoved) + 'лв.');
+        totalSumLabel.html('Обща сума: ' + (totalSum -= sumToBeRemoved) + 'лв.');
 
-        let savedData;
+        var idToRemove = $(this).closest('tr').find('.productName').attr('value');
+        var arrItems = JSON.parse(localStorage.getItem('test'));
+        var indexOfItem = arrItems.findIndex(obj => obj.id === idToRemove);
 
-        if(localStorage.test){
-            savedData = JSON.parse(localStorage.test);
-        }else{
-            savedData = JSON.parse(localStorage.cart);
+        if (indexOfItem !== -1) {
+            arrItems.splice(indexOfItem, 1);
         }
 
-        let savedDataLen = savedData.length,
-            productForDeletion = $(this).closest('tr').find('.productName').attr('value'),
-            slicedLocalStorage;
-
-        for (let i = 0; i < savedDataLen; i += 1) {
-            if(savedData[i].id === productForDeletion){
-                slicedLocalStorage = savedData.splice(i, 1);
-            }
-        }
-        localStorage.removeItem("test");
-        localStorage.setItem("cart", JSON.stringify(slicedLocalStorage));
+        localStorage.setItem('test', JSON.stringify(arrItems));
     });
 });
 
-totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 
 //This script is for quantity increasing
 $('body').on('click', '.value-plus', function () {
@@ -156,9 +164,9 @@ $('body').on('click', '.value-plus', function () {
     valueField.text(newValue);
 
     let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
-    dynamicPriceField.text(parseInt(dynamicPriceField.attr('value')) * newValue);
+    dynamicPriceField.text(parseInt(dynamicPriceField.attr('value')) * newValue + ' лв.');
     totalSum += (parseInt(dynamicPriceField.attr('value')));
-    totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+    totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 });
 
 //This script is for quantity decreasing
@@ -169,8 +177,8 @@ $('body').on('click', '.value-minus', function () {
         valueField.text(newValue);
         let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
         let initialValue = $(this).parent().parent().parent().parent().find('.dynamicPrice').attr('value');
-            dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue));
+            dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue) + ' лв.');
         totalSum -= (parseInt(dynamicPriceField.attr('value')));
-        totalSumLabel.html('Обща сума: ' + totalSum + 'лв.');
+        totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
     }
 });
