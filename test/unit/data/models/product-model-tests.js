@@ -100,5 +100,18 @@ describe('ProductModel tests', () => {
             expect(modelState.errors.length).to.be.equal(1);
             expect(modelState.errors).to.include('price');
         });
+
+        it('Expect valid state when object is correct', () => {
+            const testProduct = {
+                title: 'Product #11',
+                description: 'Most wanted',
+                price: 32,
+            };
+
+            const modelState = ProductModel.isValid(testProduct);
+
+            expect(modelState.isValid).to.be.true;
+            expect(modelState.errors).to.be.deep.equal([]);
+        });
     });
 });
