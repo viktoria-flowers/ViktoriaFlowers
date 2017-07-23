@@ -1,14 +1,17 @@
 const ModelState = require('../model-state');
-
-// E-mail check constant
-const emailRegExPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
+const { constants } = require('../../app/utils');
 
 class EmailSubscriber {
     static isValid(subscribeModel) {
         const modelState = new ModelState();
 
+        if (!subscribeModel) {
+            modelState.addError(constants.MISSING_MODEL_ERR);
+            return modelState;
+        }
+
         if (!subscribeModel.subscribeEmail ||
-            !emailRegExPattern.test(subscribeModel.subscribeEmail)) {
+            !constants.EMAIL_REGEX.test(subscribeModel.subscribeEmail)) {
             modelState.addError('email');
         }
 
