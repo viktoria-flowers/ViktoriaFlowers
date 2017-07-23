@@ -1,11 +1,11 @@
 const ModelState = require('../model-state');
+const { constants } = require('../../app/utils');
 
 // User constants
 const passwordLength = 6;
 const phoneLength = 10;
 const contactInfoLength = 10;
 const userNameMinLength = 4;
-const emailRegExPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
 
 class User {
     static toViewModel(user) {
@@ -16,7 +16,7 @@ class User {
     }
 
     static isValid(userModel) {
-        const modelState = new ModelState(false);
+        const modelState = new ModelState();
         if (!userModel.names) {
             modelState.addError('names');
         }
@@ -25,7 +25,7 @@ class User {
             modelState.addError('phone');
         }
 
-        if (!userModel.email || !emailRegExPattern.test(userModel.email)) {
+        if (!userModel.email || !constants.EMAIL_REGEX.test(userModel.email)) {
             modelState.addError('email');
         }
 
@@ -41,10 +41,6 @@ class User {
         if (!userModel.username ||
             userModel.username.length < userNameMinLength) {
             modelState.addError('username');
-        }
-
-        if (!modelState.errors || modelState.errors.length === 0) {
-            modelState.isValid = true;
         }
 
         return modelState;
