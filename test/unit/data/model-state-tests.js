@@ -1,11 +1,9 @@
-
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
-const sinon = require('sinon');
 
 const ModelState = require('../../../data/model-state');
 
-describe('Model state tests', () => {
+describe('ModelState tests', () => {
     describe('Static method "valid()"', () => {
         it('Expect to return valid model state', () => {
             expect(ModelState.valid())
