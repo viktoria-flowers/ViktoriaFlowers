@@ -9,14 +9,24 @@ const userNameMinLength = 4;
 
 class User {
     static toViewModel(user) {
+        if (!user) {
+            throw new Error('Expect an object');
+        }
+
         return {
-            id: user._id.toString(),
+            id: user._id ? user._id.toString() : user._id,
             username: user.username,
         };
     }
 
     static isValid(userModel) {
         const modelState = new ModelState();
+
+        if (!userModel) {
+            modelState.addError(constants.MISSING_MODEL_ERR);
+            return modelState;
+        }
+
         if (!userModel.names) {
             modelState.addError('names');
         }
