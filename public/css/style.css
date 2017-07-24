@@ -21,7 +21,8 @@ p{
 }
 @media only screen {
   .xs-text-center {
-    text-align: center !important; }
+    text-align: center !important; 
+  }
 }
 
 h1,h2,h3,h4,h5,h6,a{
@@ -2407,7 +2408,7 @@ h3.agileits-icons-title {
 	.icon-box {
 		float: none;
 		width: 100%;
-}
+    }
 }
 @media (max-width: 414px){
 	h3.agileits-icons-title {
@@ -2442,8 +2443,9 @@ h3.agileits-icons-title {
 @media (max-width: 1280px){
 }
 @media (max-width: 1080px){
-#PPMiniCart {
-	left: 42% !important;
+    #PPMiniCart {
+        left: 42% !important;
+    }
 }
 #Awesome h4 {
 	padding: 1.9em 0 0;
@@ -2495,8 +2497,9 @@ h3.w3_agile_header, h2.w3_agile_header {
 }
 
 @media (max-width: 991px){
-.w3view-cart {
-    height: 36px;
+    .w3view-cart {
+        height: 36px;
+    }
 }
 .w3ls_logo_products_left h3 a {
     font-size: 30px;
@@ -2632,12 +2635,13 @@ ul.phone_email li {
 .agileinfo_single_right_details {
     width: 36% !important;
 }
-}
+
 @media (max-width:800px){
 }
 @media (max-width: 768px){
-#PPMiniCart {
-	left: 39% !important;
+    #PPMiniCart {
+        left: 39% !important;
+    }
 }
 .top-brands {
     padding: 3em 0;
@@ -2681,12 +2685,13 @@ ul.paging {
 .checkout {
     padding: 3em 0;
 }
-}
+
 @media (max-width: 767px){
 	.navbar-nav > li {
-	float: none;
-    margin-left: 0px;
-    text-align: center;
+        float: none;
+        margin-left: 0px;
+        text-align: center;
+    }
 }
 .navbar-nav {
     margin: 0;
@@ -2712,10 +2717,11 @@ ul.faq {
     border: none;
     text-align: center;
 }
-}
+
 @media (max-width: 736px){
-#PPMiniCart {
-	top: 140px !important;
+    #PPMiniCart {
+        top: 140px !important;
+    }
 }
 #PPMiniCart form {
 	max-height: 185px !important;
@@ -2753,10 +2759,11 @@ ul.faq {
 .agileinfo_single h2 {
     font-size: 1.3em;
 }
-}
+
 @media (max-width: 667px){
-#PPMiniCart {
-	left: 36% !important;
+    #PPMiniCart {
+        left: 36% !important;
+    }
 }
 #PPMiniCart form {
 	max-height: 165px !important;
@@ -2811,10 +2818,11 @@ ul.faq {
     width: 73% !important;
 	text-align: left;
 }
-}
+
 @media (max-width: 640px){
-#PPMiniCart form {
-	max-height: 400px !important;
+    #PPMiniCart form {
+        max-height: 400px !important;
+    }
 }
 
 .about .grid-top h4 {
@@ -2838,10 +2846,11 @@ ul.faq {
 .agileinfo_single_right {
     padding-left: 1em;
 }
-}
+
 @media (max-width: 600px){
-#PPMiniCart form {
-	width: 506px !important;
+    #PPMiniCart form {
+        width: 506px !important;
+    }
 }
 #PPMiniCart {
 	left: 41% !important;
@@ -2862,10 +2871,11 @@ ul.faq {
     height: 22px;
     line-height: 6px;
 }
-}
+
 @media (max-width: 568px){
-#PPMiniCart form {
-	max-height: 100px !important;
+    #PPMiniCart form {
+        max-height: 100px !important;
+    }
 }
 .snipcart-details input.button {
     width: 64%;
@@ -2901,10 +2911,11 @@ ul.faq {
 .timetable_sub th, .timetable_sub td {
     padding: 7px 0px;
 }
-}
+
 @media (max-width: 480px){
-#PPMiniCart form {
-	max-height: 350px !important;
+    #PPMiniCart form {
+        max-height: 350px !important;
+    }
 }
 #PPMiniCart form {
 	width: 400px !important;
@@ -2983,10 +2994,11 @@ h3.w3_agile_header, h2.w3_agile_header {
     padding-left: 0em;
     width: 100%;
 }
-}
+
 @media (max-width: 414px){
-#PPMiniCart form {
-	width: 360px !important;
+    #PPMiniCart form {
+        width: 360px !important;
+    }
 }
 #PPMiniCart ul {
 	width: 318px !important;
@@ -3050,11 +3062,12 @@ h3.w3_agile_header, h2.w3_agile_header {
 .agileinfo_single_left {
     padding: 2em 2em;
 }
-}
+
 @media (max-width: 384px){
-#PPMiniCart form {
-	width: 300px !important;
-	padding: 10px 10px 40px !important;
+    #PPMiniCart form {
+        width: 300px !important;
+        padding: 10px 10px 40px !important;
+    }
 }
 #PPMiniCart ul {
 	width: 278px !important;
@@ -3110,24 +3123,25 @@ span.minicart-price {
 .checkout h2 {
     font-size: 0.9em;
 }
-}
+
 @media (max-width: 375px){
 	.login-form-grids {
-    width: 100%;
-}
-.checkout h2 {
-    font-size: 0.875em;
-}
-.agileinfo_single_left {
-    padding: 1em 1em;
-}
-.agileinfo_single h2 {
-    font-size: 1.1em;
-}
+        width: 100%;
+    }
+    .checkout h2 {
+        font-size: 0.875em;
+    }
+    .agileinfo_single_left {
+        padding: 1em 1em;
+    }
+    .agileinfo_single h2 {
+        font-size: 1.1em;
+    }
 }
 @media (max-width: 320px){
-#PPMiniCart form {
-	width: 285px !important;
+    #PPMiniCart form {
+        width: 285px !important;
+    }
 }
 #PPMiniCart ul {
 	width: 263px !important;
@@ -3324,7 +3338,7 @@ ul.faq {
 .w3agile_description p {
     font-size: 13px;
 }
-}
+
 .paymentImages{
     width: 100%;
     height: 400px;
