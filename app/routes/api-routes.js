@@ -1,19 +1,20 @@
 const { constants, pagination, productTypes } = require('../utils');
 
 const ajaxRequests = (app, data) => {
-
     app.post('/api/subscribe', (req, res) => {
         // { subscribeEmail : 'marti@sada.com'  }
 
         return data.emailSubscribers.getAll(req.body)
             .then((existingEmail) => {
                 if (existingEmail.length > 0) {
-                    return res.status(400).json(existingEmail);
+                    return res.status(400).json('email-exists');
                 }
 
                 return data.emailSubscribers.create(req.body)
                     .then((newEmail) => {
-                      return res.status(200).json({ message: 'Ok' });
+                      return res.status(200).json(
+                          { message: 'E-mail added in the list' }
+                      );
                     })
                     .catch((err) => {
                       return res.status(400).json(err);

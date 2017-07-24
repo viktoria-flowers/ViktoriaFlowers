@@ -124,7 +124,7 @@ $(document).ready(function(){
 
 // All images in site
 $(document).ready(function(){
-  $('img')
+  $('.prodImg')
     .wrap('<div style="display:inline-block"></div>')
     .css('display', 'block')
     .parent()
