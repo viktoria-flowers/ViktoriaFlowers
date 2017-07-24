@@ -28,57 +28,55 @@ html
     
   body
     // HEADER start
-    .agileits_header
-      .container
-        .row
-          .col-sm-4.xs-text-center
-            label.header-labels.pull-left
-              - if(isAuthenticated)
-                | Здравейте, 
-                = username
-              - else
-                | Здравейте, анонимен
-          .col-sm-3.xs-text-center
-            label.header-labels
-              i.fa.fa-phone(aria-hidden='true')
+    .container
+      .row
+        .col-sm-12.text-center
+          ul
+          - if(isAdmin)
+            li.ul-li
+              label
                 | Поръчайте: 0898 838 833
-          .agile-login.col-sm-5.xs-text-center
-            ul.text-right
-              - if(isAdmin)
-                li 
-                  a(href='/products/create') Добави продукт
-              - if(isAuthenticated)
-                li
-                  a(href='/profile') Профил
-                li
-                  a(href="/checkout")
-                    i.fa.fa-cart-arrow-down
-                li
-                  a(href='/logout') Изход
-              - else
-                li
-                  a(href='/login')  Вход
-                li
-                  a(href='/register') Регистрация
-                li
-                  a(href="/checkout")
-                    i.fa.fa-cart-arrow-down
+            li.ul-li
+              a(href='/products/create') Добави продукт
+          - if(isAuthenticated)
+            li.ul-li
+              a(href='/profile') Профил
+            li.ul-li
+              a(href="/checkout") Вашата количка  
+                i.fa.fa-cart-arrow-down
+            li.ul-li
+              a(href='/logout') Изход
+          - else
+            li.ul-li
+              | Поръчайте: 0898 838 833
+            li.ul-li
+              a(href='/login')  Вход
+            li.ul-li
+              a(href='/register') Регистрация
+            li.ul-li
+              a(href="/checkout") Вашата количка  
+                i.fa.fa-cart-arrow-down
     .logo_products
       .container
-        .col-sm-4
-            //- img.imgRightDimensions.pull-left(src="/static/images/logo.gif")
-        .w3ls_logo_products_left.col-sm-4
-          h3
-            a(href='/') Магазин за цветя "Виктория"
-        .w3l_search.col-sm-4
-          form.form-group(action='#', method='post')
-            .input-group.margin-bottom-sm.pull-right
-              input#inputFirstName.form-control(type='text', placeholder="Търси...")
-              span.input-group-addon#search-color
-                a(href="/")
-                  i.fa.fa-search
-            .clearfix
-        .clearfix  
+        .row
+          .col-sm-12
+            .col-sm-4.text-center
+                label#usernameLabel
+                  - if(isAuthenticated)
+                    | Здравейте, 
+                    = username
+            .w3ls_logo_products_left.col-sm-4
+              h3
+                a(href='/') Магазин за цветя "Виктория"
+            .w3l_search.col-sm-4
+              form.form-group(action='#', method='post')
+                .input-group.margin-bottom-sm.pull-right
+                  input#inputFirstName.form-control(type='text', placeholder="Търси...")
+                  span.input-group-addon#search-color
+                    a(href="/")
+                      i.fa.fa-search
+          .clearfix
+      .clearfix  
     // HEADER end
     // NAVIGATION start
     .navigation-agileits
@@ -138,7 +136,7 @@ html
             ul.address
               li
                 i.glyphicon.glyphicon-map-marker(aria-hidden='true')
-                | Кооперативен пазар, Люлин 9
+                | Кооперативен пазар, Люлин 4
                 span София
               li
                 i.glyphicon.glyphicon-envelope(aria-hidden='true')

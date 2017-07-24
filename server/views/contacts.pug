@@ -9,42 +9,45 @@ block content
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
         li.active Контакти
-  .about
-    .w3_agileits_contact_grids
-      .col-md-6.w3_agileits_contact_grid_left
-        .agile_map
-          iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d308.12786004405666!2d23.25088288570622!3d42.715942205743005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDQyJzU3LjUiTiAyM8KwMTUnMDMuNiJF!5e0!3m2!1sen!2sbg!4v1500879671951', width='600', height='450', frameborder='0', style='border:0', allowfullscreen='')
-        .agileits_w3layouts_map_pos
-          .agileits_w3layouts_map_pos1
-            h3 Магазин за цветя 'Виктория'
-            p София, Кооперативен пазар, Люлин 4
-            ul.wthree_contact_info_address
-              li
-                i.fa.fa-envelope(aria-hidden='true')
-                a(href='mailto:info@example.com') cvete_za_vas@gmail.com
-              li
-                i.fa.fa-phone(aria-hidden='true')
-                | 0838 933 933
-            .w3_agile_social_icons.w3_agile_social_icons_contact
-              ul
-                li
-                  a.icon.icon-cube.agile_facebook(href='#')
-                li
-                  a.icon.icon-cube.agile_rss(href='#')
-                li
-                  a.icon.icon-cube.agile_t(href='#')
-      .col-md-6.w3_agileits_contact_grid_right
-        h2.w3_agile_header
-          | Свържете се с нас
-        form(action='#', method='post')
-          span.input.input--ichiro
-            input#input-25.input__field.input__field--ichiro(type='text', name='Name', placeholder=' ', required='')
-            label.input__label.input__label--ichiro(for='input-25')
-              span.input__label-content.input__label-content--ichiro Име
-          span.input.input--ichiro
-            input#input-26.input__field.input__field--ichiro(type='email', name='Email', placeholder=' ', required='')
-            label.input__label.input__label--ichiro(for='input-26')
-              span.input__label-content.input__label-content--ichiro E-mail
-          textarea(name='Message', placeholder='Вашето съобщение...', required='')
+  .container
+    .row
+      .col-sm-12
+        .embed-responsive.embed-responsive-16by9
+          iframe.embed-responsive-item(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d308.12786004405666!2d23.25088288570622!3d42.715942205743005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDQyJzU3LjUiTiAyM8KwMTUnMDMuNiJF!5e0!3m2!1sen!2sbg!4v1500879671951', width='600', height='300', style='border:0', allowfullscreen='')
+    .row
+      .col-sm-12
+        .col-sm-6.text-center
+          h3.text-center 
+            | Магазин за цветя 'Виктория'
+          br
+          p.text-center София, Кооперативен пазар, Люлин 4
+          br
+          ul.social-network.social-circle
+            li
+              a.icoRss(href='#', title='Rss')
+                i.fa.fa-rss
+            li
+              a.icoFacebook(href='#', title='Facebook')
+                i.fa.fa-facebook
+            li
+              a.icoTwitter(href='#', title='Twitter')
+                i.fa.fa-twitter
+            li
+              a.icoGoogle(href='#', title='Google +')
+                i.fa.fa-google-plus
+            li
+              a.icoLinkedin(href='#', title='Linkedin')
+                i.fa.fa-linkedin
+        .col-sm-6
+          h3.text-center
+            | Свържете се с нас
+          .panel.panel-primary
+            .panel-header
+              | Име
+              .panel-body
+          .panel.panel-primary
+            .panel-header
+              | E-mail
+              .panel-body
           input(type='submit', value='Изпрати')
       .clearfix  
