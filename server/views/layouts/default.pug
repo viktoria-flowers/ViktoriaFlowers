@@ -5,8 +5,6 @@ html
       | Магазин за цветя 'Виктория'
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    meta(name='keywords', content='Super Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, \
-    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design')
     
     link(rel='shortcut icon', type='image/x-icon', href='/static/images/favicon.png')
     link(href='/static/css/bootstrap.css', rel='stylesheet', type='text/css', media='all')
@@ -22,6 +20,7 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css')    
     link(href='/static/css/style.css', rel='stylesheet', type='text/css', media='all')
     link(href='/static/css//site/loading.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/libs/typeahead/style.css', rel='stylesheet', type='text/css', media='all')
 
     script(src='/static/js/jquery-1.11.1.min.js')
     script(src='https://code.jquery.com/ui/1.12.0/jquery-ui.min.js')
@@ -37,11 +36,11 @@ html
                 | Здравейте, 
                 = username
               - else
-                | Здравейте, анонимен
+                | Поръчайте сега
           .col-sm-3.xs-text-center
             label.header-labels
               i.fa.fa-phone(aria-hidden='true')
-                | Поръчайте: 0898 838 833
+                |  Поръчайте: 0898 838 833
           .agile-login.col-sm-5.xs-text-center
             ul.text-right
               - if(isAdmin)
@@ -73,7 +72,7 @@ html
         .w3l_search.col-sm-4
           form.form-group(action='#', method='post')
             .input-group.margin-bottom-sm.pull-right
-              input#inputFirstName.form-control(type='text', placeholder="Търси...")
+              input#autocomplete.autocompleteInput.form-control(type='text', placeholder="Търси...")
               span.input-group-addon#search-color
                 a(href="/")
                   i.fa.fa-search
@@ -188,7 +187,6 @@ html
         .clearfix
     //FOOTER end
 
-    // for-mobile-apps
     script(src='/static/js/bootstrap.min.js')
     script(type='text/javascript', src='/static/js/move-top.js')
     script(type='text/javascript', src='/static/js/easing.js')
@@ -198,5 +196,6 @@ html
     script(type='text/javascript', src='/static/js/template.js')
     script(type='text/javascript', src='/static/js/checkout.js')
     script(type='text/javascript', src='/static/js/ajaxRequests.js')      
+    script(src="https://rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js")
     
     block scripts

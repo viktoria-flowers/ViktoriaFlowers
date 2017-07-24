@@ -41,7 +41,8 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.0-rc.2"
+    "pug": "^2.0.0-rc.2",
+    "typeahead": "^0.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

@@ -1,6 +1,30 @@
 const { constants, pagination, productTypes } = require('../utils');
 
 const ajaxRequests = (app, data) => {
+
+    app.post('/api/autocomplete', (req, res) => {
+        return data.products.getAll(req.body)
+            .then((products) => {
+                
+                if (products.length === 0) {
+                    return res.status(400);
+                }
+
+                let filteredProducts = products.filter((prod) => {
+                    return prod.title.includes('');
+                });
+
+                // for test
+                // let data = ['pesho', 'gosho', 'sasho'];
+                return res.status(200).json(
+                    { data: data }
+                )
+                    .catch((err) => {
+                        return res.status(400).json(err);
+                    });
+            });
+    });
+
     app.post('/api/subscribe', (req, res) => {
         // { subscribeEmail : 'marti@sada.com'  }
 
@@ -12,17 +36,17 @@ const ajaxRequests = (app, data) => {
 
                 return data.emailSubscribers.create(req.body)
                     .then((newEmail) => {
-                      return res.status(200).json(
-                          { message: 'E-mail added in the list' }
-                      );
+                        return res.status(200).json(
+                            { message: 'E-mail added in the list' }
+                        );
                     })
                     .catch((err) => {
-                      return res.status(400).json(err);
+                        return res.status(400).json(err);
                     });
             });
     });
 
-    app.get('/api/products/:type*?', function(req, res) {
+    app.get('/api/products/:type*?', function (req, res) {
         const type = req.params.type;
         if (type && productTypes.indexOf(type) === -1) {
             return res.json({ message: `Wrong type: ${type}` });
@@ -60,7 +84,7 @@ const ajaxRequests = (app, data) => {
                 });
             })
             .catch((err) => res.status(400)
-                            .res.json(err));
+                .res.json(err));
     });
 };
 

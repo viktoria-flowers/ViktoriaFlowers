@@ -4,6 +4,7 @@ const { authHelper } = require('./../utils');
 const { isLoggedIn, setLocals } = require('../middlewares');
 
 const serverRoutes = (app, data) => {
+
     app.use('/', setLocals);
 
     app.get('/', (req, res) => res.render('home'));
