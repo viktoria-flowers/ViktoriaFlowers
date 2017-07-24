@@ -5,7 +5,7 @@ const { authHelper } = require('./../utils');
 const { isLoggedIn } = require('../middlewares');
 
 const serverRoutes = (app, data) => {
-    // Midleware to set a current user accessible in pug views
+    // Middleware to set a current user accessible in pug views
     app.use('/', (req, res, next) => {
         res.locals.isAuthenticated = !!req.user;
         res.locals.username = !req.user ? '' : req.user.username;
