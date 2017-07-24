@@ -1,22 +1,10 @@
 /* globals: Buffer */
-
 const { ObjectID } = require('mongodb');
 const { authHelper } = require('./../utils');
-const { isLoggedIn } = require('../middlewares');
+const { isLoggedIn, setLocals } = require('../middlewares');
 
 const serverRoutes = (app, data) => {
-    // Midleware to set a current user accessible in pug views
-    app.use('/', (req, res, next) => {
-        res.locals.isAuthenticated = !!req.user;
-        res.locals.username = !req.user ? '' : req.user.username;
-
-        // set isAdmin
-        if (req.user && req.user.roles.indexOf('admin') !== -1) {
-            res.locals.isAdmin = true;
-        }
-
-        next();
-    });
+    app.use('/', setLocals);
 
     app.get('/', (req, res) => res.render('home'));
     app.get('/home', (req, res) => res.render('home'));
