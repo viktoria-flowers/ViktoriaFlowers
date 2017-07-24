@@ -83,7 +83,7 @@ describe('ModelState tests', () => {
             });
         });
 
-        it('Expect ot add initialize error array if is not exits', () => {
+        it('Expect to initialize error array if is not exits', () => {
             const modelState = new ModelState();
             delete modelState.errors;
 
