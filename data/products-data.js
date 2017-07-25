@@ -1,7 +1,7 @@
-const Basedata = require('./base-data');
+const BaseData = require('./base-data');
 const ProductModel = require('./models/product-model');
 
-class ProductData extends Basedata {
+class ProductData extends BaseData {
     constructor(db) {
         super(db, ProductModel, ProductModel);
     }

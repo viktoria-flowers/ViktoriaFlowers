@@ -45,12 +45,12 @@
             $('.products .container .products-content').html(htmlResponse);
         })
         .fail(function(err) {
-            alert('An error oucuured! Check console [F12]!');
+            alert('An error occurred! Check console [F12]!');
             console.log(err);
         })
         .always(function() {
             hideLoading('.products .container');
-        })
+        });
     }
 
 
