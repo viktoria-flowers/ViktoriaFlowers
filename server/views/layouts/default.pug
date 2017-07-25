@@ -27,7 +27,6 @@ html
     
   body
     // HEADER start
-<<<<<<< HEAD
     .container
       .row
         .col-sm-12.text-center
@@ -48,7 +47,8 @@ html
               a(href='/logout') Изход
           - else
             li.ul-li
-              | Поръчайте: 0898 838 833
+              label
+                | Поръчайте: 0898 838 833
             li.ul-li
               a(href='/login')  Вход
             li.ul-li
@@ -77,59 +77,6 @@ html
                       i.fa.fa-search
           .clearfix
       .clearfix  
-=======
-    .agileits_header
-      .container
-        .row
-          .col-sm-4.xs-text-center
-            label.header-labels.pull-left
-              - if(isAuthenticated)
-                | Здравейте, 
-                = username
-              - else
-                | Поръчайте сега
-          .col-sm-3.xs-text-center
-            label.header-labels
-              i.fa.fa-phone(aria-hidden='true')
-                |  Поръчайте: 0898 838 833
-          .agile-login.col-sm-5.xs-text-center
-            ul.text-right
-              - if(isAdmin)
-                li 
-                  a(href='/products/create') Добави продукт
-              - if(isAuthenticated)
-                li
-                  a(href='/profile') Профил
-                li
-                  a(href="/checkout")
-                    i.fa.fa-cart-arrow-down
-                li
-                  a(href='/logout') Изход
-              - else
-                li
-                  a(href='/login')  Вход
-                li
-                  a(href='/register') Регистрация
-                li
-                  a(href="/checkout")
-                    i.fa.fa-cart-arrow-down
-    .logo_products
-      .container
-        .col-sm-4
-            //- img.imgRightDimensions.pull-left(src="/static/images/logo.gif")
-        .w3ls_logo_products_left.col-sm-4
-          h3
-            a(href='/') Магазин за цветя "Виктория"
-        .w3l_search.col-sm-4
-          form.form-group(action='#', method='post')
-            .input-group.margin-bottom-sm.pull-right
-              input#autocomplete.autocompleteInput.form-control(type='text', placeholder="Търси...")
-              span.input-group-addon#search-color
-                a(href="/")
-                  i.fa.fa-search
-            .clearfix
-        .clearfix  
->>>>>>> 1d5d7fc683a5a309d9f5d7bc568d3c2550cb138c
     // HEADER end
     // NAVIGATION start
     .navigation-agileits
@@ -217,8 +164,9 @@ html
                 a(href='/payment') Начини на плащане
           .col-md-4.w3_footer_grid
             h5 Абонирайте се за нашите специални предложения
+              br
               input#subscriptionEmail.form-control(type='text', name='subscribeEmail', placeholder='E-mail')
-              button.btn.btn-success.form-control(type="button", value="Изпрати", id="sendSubscribeEmail")
+              button.btn.form-control.emailSubsButton(type="button", value="Изпрати", id="sendSubscribeEmail")
                 | Изпрати
           .clearfix  
       .footer-copy

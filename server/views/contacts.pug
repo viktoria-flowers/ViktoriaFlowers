@@ -9,18 +9,20 @@ block content
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
         li.active Контакти
+  br
+  br
   .container
     .row
       .col-sm-12
-        .embed-responsive.embed-responsive-16by9
-          iframe.embed-responsive-item(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d308.12786004405666!2d23.25088288570622!3d42.715942205743005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDQyJzU3LjUiTiAyM8KwMTUnMDMuNiJF!5e0!3m2!1sen!2sbg!4v1500879671951', width='600', height='300', style='border:0', allowfullscreen='')
-    .row
-      .col-sm-12
-        .col-sm-6.text-center
-          h3.text-center 
+        .col-sm-6.text-left
+          h3.text-left
             | Магазин за цветя 'Виктория'
           br
-          p.text-center София, Кооперативен пазар, Люлин 4
+          p.text-left София, Кооперативен пазар, Люлин 4
+          p.text-left Телефон за поръчки: 
+            strong.text-warning 0848 848 844
+          p.text-left Е-mail: 
+            strong.text-warning cvete_za_vas@kfmf.vf          
           br
           ul.social-network.social-circle
             li
@@ -38,16 +40,34 @@ block content
             li
               a.icoLinkedin(href='#', title='Linkedin')
                 i.fa.fa-linkedin
-        .col-sm-6
-          h3.text-center
-            | Свържете се с нас
-          .panel.panel-primary
-            .panel-header
-              | Име
-              .panel-body
-          .panel.panel-primary
-            .panel-header
-              | E-mail
-              .panel-body
-          input(type='submit', value='Изпрати')
+        .col-sm-6.text-right
+          section.panel.panel-warning
+            .panel-heading.text-center
+              h4.panel-title Свържете се с нас
+            .panel-body.text-center
+              .col-sm-12
+                .form-group
+                  .col-sm-3
+                    label.control-label(for='name') Име
+                  .col-sm-9
+                    input#name.form-control(type='text', name='name', placeholder='Име')
+              .col-sm-12
+                .form-group
+                  .col-sm-3
+                    label.control-label(for='name') E-mail
+                  .col-sm-9
+                    input#name.form-control(type='text', name='name', placeholder='E-mail')
+              .col-sm-12
+                .form-group
+                  .col-sm-3
+                    label.control-label(for='about') Текст
+                  .col-sm-9
+                    textarea.form-control(placeholder="Текст")
+              .col-sm-12
+                .form-group
+                  button.btn.btn-warning(type='submit') Изпратете
+    .row
+      .col-sm-12
+        .embed-responsive.embed-responsive-16by9
+          iframe.embed-responsive-item(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d308.12786004405666!2d23.25088288570622!3d42.715942205743005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDQyJzU3LjUiTiAyM8KwMTUnMDMuNiJF!5e0!3m2!1sen!2sbg!4v1500879671951', width='600', height='300', style='border:0', allowfullscreen='')
       .clearfix  

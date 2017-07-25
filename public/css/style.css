@@ -3537,3 +3537,15 @@ a.socialIcon:hover, .socialHoverClass {
 	-ms-transition: all 0.8s;
 	transition: all 0.8s;
 }
+
+.emailSubsButton{
+    background: #AFAFAF;
+}
+
+.form-control{
+    margin: 5px;
+}
+
+.panel-title{
+    font-size: 18px;
+}
