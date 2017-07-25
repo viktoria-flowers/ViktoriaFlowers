@@ -111,21 +111,21 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
     container.appendTo(tableBody);
 }
 
-// Cart images
+// All images in site
 $(document).ready(function(){
-  $('td img')
-    .wrap('<div style="height:200px"></div>')
-    .css('display', 'block')
+  $('.prodImg')
+    .wrap('<span style="display:inline-block"></span>')
+    .css('display', 'inline-block')
     .parent()
     .zoom({
         touch: true
     });
 });
 
-// All images in site
+// Cart images
 $(document).ready(function(){
-  $('.prodImg')
-    .wrap('<div style="display:inline-block"></div>')
+  $('td img')
+    .wrap('<div style="height:200px"></div>')
     .css('display', 'block')
     .parent()
     .zoom({
@@ -194,3 +194,28 @@ $('body').on('click', '.value-minus', function () {
         totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
     }
 });
+
+
+// Sliding cart
+if (localStorage.length > 0 && localStorage.test !== 'undefined') {
+
+    let savedData;
+
+    if (localStorage.test) {
+        savedData = JSON.parse(localStorage.test);
+    } else {
+        savedData = JSON.parse(localStorage.cart);
+    }
+
+    let savedDataLen = savedData.length;
+    let slidingCartName = $('#slidingCartTitle');
+    let slidingCartPrice = $('#slidingCartPrice');
+    let slidingCartImgSrc = $('#slidingCartImg');
+
+    for (let i = 0; i < savedDataLen; i += 1) {
+        slidingCartName.html(savedData[i].name);
+        slidingCartPrice.html(savedData[i].price + ' лв.');
+        slidingCartImgSrc.attr('src', savedData[i].imgUrl).css('width', '100%');
+    }
+}
+
