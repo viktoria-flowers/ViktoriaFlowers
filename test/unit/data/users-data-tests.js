@@ -91,4 +91,38 @@ describe('UsersData tests', () => {
         });
 
     });
+
+    describe('method "create()"', () => {
+        describe('when there are provided user as parameter should by validate and save him in db', () => {
+            let newUser = { username: 'pesho' };
+
+    //         const findOne = () => {
+    //             return Promise.resolve(existingUser);
+    //         };
+
+    //         beforeEach(() => {
+    //             items = [existingUser];
+    //             sinon.stub(db, 'collection')
+    //                 .callsFake(() => {
+    //                     return { findOne };
+    //                 });
+    //             ModelClass = class {
+    //             };
+
+    //             // Arrange
+    //             userData = new UsersData(db, ModelClass, validator);
+    //         });
+
+    //         afterEach(() => {
+    //             db.collection.restore();
+    //         });
+
+            // it('expect to return save user in db such', () => {
+            //     return userData.create(newUser)
+            //         .then((user) => {
+            //             expect(user).to.deep.equal(newUser);
+            //         });
+            // });
+        });
+    });
 });
