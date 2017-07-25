@@ -12,6 +12,7 @@ block content
             | Начало
         li.active Създаване на нов продукт
   br
+  // to do still not that responsive
   br
   .col-sm-5.col-sm-offset-2.text-center
     .row
@@ -27,26 +28,26 @@ block content
                   each err in errors
                         +getErrorText(err)
           .form-group
-            .col-sm-5
+            .col-sm-5.text-left
               label.newProdLabelPadding Име *
-            .col-sm-7
+            .col-sm-7.text-left
               input.form-control(name='title', placeholder=' ', value=model?model.title || '' : '', required='required', type='text')
             br
           .form-group
-            .col-sm-5
+            .col-sm-5.text-left
               label.newProdLabelPadding Цена *
-            .col-sm-7
+            .col-sm-7.text-left
               input.form-control(name='price', placeholder=' ', value=model?model.price || '' : '', required='required', type='number', min=0)
             br
           .form-group
-            .col-sm-5
-              label.newProdLabelPadding Предишна цена
-            .col-sm-7
+            .col-sm-5.text-left
+              label.newProdLabelPadding Предишна цена *
+            .col-sm-7.text-left
               input.form-control(name='wasPrice', placeholder=' ', value=model?model.wasPrice || '' : '', type='number', min=0)
             br
           .form-group
-            .col-sm-5
-              label Тип *:
+            .col-sm-5.text-left
+              label.newProdLabelPadding Тип *:
             .col-sm-7.text-left
               select.form-control(name='type', value='wedding')
                 option(value='circle', selected= model&&model.type==='circle') Кръгли
@@ -57,17 +58,19 @@ block content
                 option(value='pots', selected= model&&model.type==='pots') Саксии
                 option(value='cards', selected= model&&model.type==='cards') Картички
             br
+            br
           .form-group
-            .col-sm-5
-              label Cнимка *
-            .col-sm-7
+            .col-sm-5.text-left
+              label.newProdLabelPadding Cнимка *
+            .col-sm-7.text-center
               label.btn-bs-file.btn.btn-primary Изберете снимка
                 input(name='image', placeholder=' ', required='required', type='file', accept='image/*')
             br
+            br
           .form-group
-            .col-sm-5
+            .col-sm-5.text-left
               label.newProdLabelPadding Описание *
-            .col-sm-7
+            .col-sm-7.text-left
               textarea.form-control(name='description', placeholder='Описание', required='')
                 =  value=model?model.description || '' : ''
             br
