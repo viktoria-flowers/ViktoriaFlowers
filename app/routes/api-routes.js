@@ -1,16 +1,14 @@
 const { constants, pagination, productTypes } = require('../utils');
 
 const ajaxRequests = (app, data) => {
-
     app.post('/api/autocomplete', (req, res) => {
         return data.products.getAll(req.body)
             .then((products) => {
-                
                 if (products.length === 0) {
                     return res.status(400);
                 }
 
-                let filteredProducts = products.filter((prod) => {
+                const filteredProducts = products.filter((prod) => {
                     return prod.title.includes('');
                 });
 
@@ -44,6 +42,18 @@ const ajaxRequests = (app, data) => {
                         return res.status(400).json(err);
                     });
             });
+    });
+
+    app.post('/api/contactUs', (req, res) => {
+        return data.contactUsUsers.create(req.body)
+                    .then((contactUsDataSend) => {
+                        return res.status(200).json(
+                            { message: 'OK' }
+                        );
+                    })
+                    .catch((err) => {
+                        return res.status(400).json(err);
+                    });
     });
 
     app.get('/api/products/:type*?', function (req, res) {

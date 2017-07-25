@@ -48,24 +48,24 @@ block content
               .col-sm-12
                 .form-group
                   .col-sm-3
-                    label.control-label(for='name') Име
+                    label.control-label(for='contactUserName') Име и фамилия
                   .col-sm-9
-                    input#name.form-control(type='text', name='name', placeholder='Име')
+                    input#cUserNames.form-control(type='text', name='contactUserNames', placeholder='Име')
               .col-sm-12
                 .form-group
                   .col-sm-3
-                    label.control-label(for='name') E-mail
+                    label.control-label(for='contactUserEmail') E-mail
                   .col-sm-9
-                    input#name.form-control(type='text', name='name', placeholder='E-mail')
+                    input#cUserEmail.form-control(type='text', name='contactUserEmail', placeholder='E-mail')
               .col-sm-12
                 .form-group
                   .col-sm-3
                     label.control-label(for='about') Текст
                   .col-sm-9
-                    textarea.form-control(placeholder="Текст")
+                    textarea#cUserText.form-control(placeholder="Текст", name='contactUserText')
               .col-sm-12
                 .form-group
-                  button.btn.btn-warning(type='submit') Изпратете
+                  button#contactFormSend.btn.btn-warning(type='button') Изпратете
     .row
       .col-sm-12
         .embed-responsive.embed-responsive-16by9

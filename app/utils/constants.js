@@ -4,4 +4,5 @@ module.exports = {
     DEFAULT_SORT_TYPE: 1,
     MISSING_MODEL_ERR: 'missing-model',
     EMAIL_REGEX: /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/,
+    TEXTAREA_REGEX: /^[a-zA-Z0-9 ]+$/,
 };
