@@ -1,60 +1,60 @@
-/* globals describe, beforeEach, afterEach, it */
-const { expect } = require('chai');
-const sinon = require('sinon');
+// /* globals describe, beforeEach, afterEach, it */
+// const { expect } = require('chai');
+// const sinon = require('sinon');
 
-const BaseData = require('../../../data/base-data/base-data');
+// const BaseData = require('../../../data/base-data/base-data');
 
-describe('BaseData.getAll()', () => {
-    const db = {
-        collection: () => { },
-    };
-    let items = [];
+// describe('BaseData.getAll()', () => {
+//     const db = {
+//         collection: () => { },
+//     };
+//     let items = [];
 
-    let ModelClass = null;
-    const validator = null;
-    let data = null;
+//     let ModelClass = null;
+//     const validator = null;
+//     let data = null;
 
-    const toArray = () => {
-        return Promise.resolve(items);
-    };
+//     const toArray = () => {
+//         return Promise.resolve(items);
+//     };
 
-    const find = () => {
-        return {
-            toArray,
-        };
-    };
+//     const find = () => {
+//         return {
+//             toArray,
+//         };
+//     };
 
-    describe('when there are items in db', () => {
+//     describe('when there are items in db', () => {
 
-		// 1
-        describe('with default toViewModel', () => {
-            beforeEach(() => {
-                items = [1, 2, 3, 4];
-                sinon.stub(db, 'collection')
-                    .callsFake(() => {
-                        return { find };
-					});
+// 		// 1
+//         describe('with default toViewModel', () => {
+//             beforeEach(() => {
+//                 items = [1, 2, 3, 4];
+//                 sinon.stub(db, 'collection')
+//                     .callsFake(() => {
+//                         return { find };
+// 					});
 					
-                ModelClass = class {};
+//                 ModelClass = class {};
 
-                data = new BaseData(db, ModelClass, validator);
-            });
+//                 data = new BaseData(db, ModelClass, validator);
+//             });
 
-            afterEach(() => {
-                db.collection.restore();
-            });
+//             afterEach(() => {
+//                 db.collection.restore();
+//             });
 
-            it('expect to return items', () => {
-                return data.getAll()
-                    .then((models) => {
-                        expect(models).to.deep.equal(items);
-                    });
-            });
-		});
+//             it('expect to return items', () => {
+//                 return data.getAll()
+//                     .then((models) => {
+//                         expect(models).to.deep.equal(items);
+//                     });
+//             });
+// 		});
 		
-		// 2
-        // describe('with custom toViewModel', () => {
+// 		// 2
+//         // describe('with custom toViewModel', () => {
        
-        // });
-    });
-});
+//         // });
+//     });
+// });

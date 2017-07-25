@@ -36,13 +36,11 @@ class BaseData {
     findById(id) {
         return this.collection.findOne({ _id: new ObjectID(id) })
             .then((model) => {
-                return new Promise((resolve, reject) => {
-                    if (!model) {
-                        return resolve(null);
-                    }
+                if (!model) {
+                    return Promise.resolve(null);
+                }
 
-                    return resolve(model);
-                });
+                return Promise.resolve(model);
             });
     }
 
