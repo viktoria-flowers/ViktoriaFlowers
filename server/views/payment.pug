@@ -9,21 +9,19 @@ block content
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
         li.active Начини на плащане
-    .products
-      .container
-        .col-md-4.products-left
-          .categories
-            a(href="/payOnDelivery")
-              h2 Наложен платеж
-              img(src="static/images/payOnDelivery.jpg").paymentImages
-        .col-md-4.products-left
-          .categories
-            a(href="/paypal-payment")
-              h2 PayPal
-              img(src="static/images/paypal.jpg").paymentImages
-        .col-md-4.products-left
-          .categories
-            a(href="/card-payment")
-              h2 Кредитна/дебитна карта
-              img(src="static/images/creditCardPayment.jpg").paymentImages            
-      .clearfix
+    br
+    br
+    .container
+      .col-md-4
+        a(href="/payOnDelivery")
+          h3.text-center.payText Наложен платеж
+          img(src="static/images/payOnDelivery.jpg").paymentImages
+      .col-md-4
+        a(href="/paypal-payment")
+          h3.text-center.payText PayPal
+          img(src="static/images/paypal.jpg").paymentImages
+      .col-md-4
+        a(href="/card-payment")
+          h3.text-center.payText Кредитна/дебитна карта
+          img(src="static/images/creditCardPayment.jpg").paymentImages            
+  .clearfix
