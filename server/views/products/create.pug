@@ -2,47 +2,130 @@ extends ../layouts/default
 
 include ../mixins/productErrors.pug
 
-block content 
+block content
+  .breadcrumbs
     .container
-        .w3_agileits_contact_grids
-            .col-md-6.w3_agileits_contact_grid_right.col-md-offset-2
-                h2.w3_agile_header
-                    | Създай
-                    span  продукт
-                form(action='/products/create', method='POST', enctype='multipart/form-data')
-                    - if(errors)
-                        ul.text-danger 
-                            each err in errors
-                                 +getErrorText(err)
-                    span.input.input--ichiro
-                        input#title-box.input__field.input__field--ichiro(name='title', placeholder=' ', value=model?model.title || '' : '', required='required', type='text')
-                        label.input__label.input__label--ichiro(for='title-box')
-                            span.input__label-content.input__label-content--ichiro Име
-                    span.input.input--ichiro
-                        input#price-box.input__field.input__field--ichiro(name='price', placeholder=' ', value=model?model.price || '' : '', required='required', type='number', min=0)
-                        label.input__label.input__label--ichiro(for='price-box')
-                            span.input__label-content.input__label-content--ichiro Цена
-                    span.input.input--ichiro
-                        input#wasPrice.input__field.input__field--ichiro(name='wasPrice', placeholder=' ', value=model?model.wasPrice || '' : '', type='number', min=0)
-                        label.input__label.input__label--ichiro(for='wasPrice')
-                            span.input__label-content.input__label-content--ichiro Предишна цена
-                    span.input.input--ichiro
-                        select#type-dropdown.input__field.input__field--ichiro(name='type', value='wedding')
-                            option(value='circle', selected= model&&model.type==='circle') Кръгли
-                            option(value='tall', selected= model&&model.type==='tall') Високи
-                            option(value='wedding', selected= model&&model.type==='wedding') Сватбени
-                            option(value='extraordinary', selected= model&&model.type==='extraordinary') Нестандартни
-                            option(value='baskets', selected= model&&model.type==='baskets') Кошници
-                            option(value='pots', selected= model&&model.type==='pots') Саксии
-                            option(value='cards', selected= model&&model.type==='cards') Картички
-                        label.input__label.input__label--ichiro(for='type-dropdown')
-                            span.input__label-content.input__label-content--ichiro Тип
-                    span.input.input--ichiro
-                        input#image-box.input__field.input__field--ichiro(name='image', placeholder=' ', required='required', type='file', accept='image/*')
-                        label.input__label.input__label--ichiro(for='image-box')
-                            span.input__label-content.input__label-content--ichiro Снимка    
-                    textarea(name='description', placeholder='Описание', required='')
-                        =  value=model?model.description || '' : ''
-                    input(value='Добави', type='submit')
-            .clearfix  
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Създаване на нов продукт
+  br
+  br
+  .col-sm-5.col-sm-offset-2.text-center
+    .row
+      .col-md-4
+        img.img-responsive.center-block(src='https://cdn1.iconfinder.com/data/icons/softwaredemo/PNG/256x256/Pencil3.png', alt='')
+      .col-md-8
+        h3
+          | Създай нов продукт
+        hr
+        form(action='/products/create', method='POST', enctype='multipart/form-data')
+          - if(errors)
+              ul.text-danger 
+                  each err in errors
+                        +getErrorText(err)
+          .form-group
+            .col-sm-5
+              label.newProdLabelPadding Име *
+            .col-sm-7
+              input.form-control(name='title', placeholder=' ', value=model?model.title || '' : '', required='required', type='text')
+            br
+          .form-group
+            .col-sm-5
+              label.newProdLabelPadding Цена *
+            .col-sm-7
+              input.form-control(name='price', placeholder=' ', value=model?model.price || '' : '', required='required', type='number', min=0)
+            br
+          .form-group
+            .col-sm-5
+              label.newProdLabelPadding Предишна цена
+            .col-sm-7
+              input.form-control(name='wasPrice', placeholder=' ', value=model?model.wasPrice || '' : '', type='number', min=0)
+            br
+          .form-group
+            .col-sm-5
+              label Тип *:
+            .col-sm-7.text-left
+              select.form-control(name='type', value='wedding')
+                option(value='circle', selected= model&&model.type==='circle') Кръгли
+                option(value='tall', selected= model&&model.type==='tall') Високи
+                option(value='wedding', selected= model&&model.type==='wedding') Сватбени
+                option(value='extraordinary', selected= model&&model.type==='extraordinary') Нестандартни
+                option(value='baskets', selected= model&&model.type==='baskets') Кошници
+                option(value='pots', selected= model&&model.type==='pots') Саксии
+                option(value='cards', selected= model&&model.type==='cards') Картички
+            br
+          .form-group
+            .col-sm-5
+              label Cнимка *
+            .col-sm-7
+              label.btn-bs-file.btn.btn-primary Изберете снимка
+                input(name='image', placeholder=' ', required='required', type='file', accept='image/*')
+            br
+          .form-group
+            .col-sm-5
+              label.newProdLabelPadding Описание *
+            .col-sm-7
+              textarea.form-control(name='description', placeholder='Описание', required='')
+                =  value=model?model.description || '' : ''
+            br
+          input.btn.btn-warning.btn-md(value='Добави новия продукт', type='submit')
+          br
+          hr
+        //-       button.btn.btn-success(type='button', value='Submit', onclick='writeComment()') Write out text
+        //-   label
+        //-     input#chkLorem(type='checkbox', onclick='writeLorem()')
+        //-     |  Use Lorem Ipsum text
+        //- hr
+        //- p
+        //-   | Write to "textarea"
+        //- textarea#txtCommentHere.form-control(rows='3')
+
+
+
+
+
+        //- .w3_agileits_contact_grids
+        //-     .col-md-6.w3_agileits_contact_grid_right.col-md-offset-2
+        //-         h2.w3_agile_header
+        //-             | Създай
+        //-             span  продукт
+        //-         form(action='/products/create', method='POST', enctype='multipart/form-data')
+        //-             - if(errors)
+        //-                 ul.text-danger 
+        //-                     each err in errors
+        //-                          +getErrorText(err)
+        //-             span.input.input--ichiro
+        //-                 input#title-box.input__field.input__field--ichiro(name='title', placeholder=' ', value=model?model.title || '' : '', required='required', type='text')
+        //-                 label.input__label.input__label--ichiro(for='title-box')
+        //-                     span.input__label-content.input__label-content--ichiro Име
+        //-             span.input.input--ichiro
+        //-                 input#price-box.input__field.input__field--ichiro(name='price', placeholder=' ', value=model?model.price || '' : '', required='required', type='number', min=0)
+        //-                 label.input__label.input__label--ichiro(for='price-box')
+        //-                     span.input__label-content.input__label-content--ichiro Цена
+        //-             span.input.input--ichiro
+        //-                 input#wasPrice.input__field.input__field--ichiro(name='wasPrice', placeholder=' ', value=model?model.wasPrice || '' : '', type='number', min=0)
+        //-                 label.input__label.input__label--ichiro(for='wasPrice')
+        //-                     span.input__label-content.input__label-content--ichiro Предишна цена
+        //-             span.input.input--ichiro
+        //-                 select#type-dropdown.input__field.input__field--ichiro(name='type', value='wedding')
+        //-                     option(value='circle', selected= model&&model.type==='circle') Кръгли
+        //-                     option(value='tall', selected= model&&model.type==='tall') Високи
+        //-                     option(value='wedding', selected= model&&model.type==='wedding') Сватбени
+        //-                     option(value='extraordinary', selected= model&&model.type==='extraordinary') Нестандартни
+        //-                     option(value='baskets', selected= model&&model.type==='baskets') Кошници
+        //-                     option(value='pots', selected= model&&model.type==='pots') Саксии
+        //-                     option(value='cards', selected= model&&model.type==='cards') Картички
+        //-                 label.input__label.input__label--ichiro(for='type-dropdown')
+        //-                     span.input__label-content.input__label-content--ichiro Тип
+        //-             span.input.input--ichiro
+        //-                 input#image-box.input__field.input__field--ichiro(name='image', placeholder=' ', required='required', type='file', accept='image/*')
+        //-                 label.input__label.input__label--ichiro(for='image-box')
+        //-                     span.input__label-content.input__label-content--ichiro Снимка    
+        //-             textarea(name='description', placeholder='Описание', required='')
+        //-                 =  value=model?model.description || '' : ''
+        //-             input(value='Добави', type='submit')
+  .clearfix  
 
