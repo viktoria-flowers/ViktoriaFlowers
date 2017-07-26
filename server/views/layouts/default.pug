@@ -38,6 +38,8 @@ html
                   a(href='/profile') Профил
                 li.ul-li.pull-left-lg-nav
                   a(href='/products/create') Добави продукт
+                li.ul-li.pull-left-lg-nav
+                  a(href='/products/delete') Изтрии продукт
               .col-sm-6
                 li.ul-li.pull-right-lg-nav
                   a(href='/logout') Изход
@@ -49,27 +51,10 @@ html
                 | Поръчайте: 0898 838 833
             li.ul-li.pull-right-lg-nav
               a(href='/profile') Профил
-            ul.nav.navbar-nav.navbar-right.pull-right-lg-nav
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
-                  span.glyphicon.glyphicon-shopping-cart
-                  |  Количка 7
-                  span.caret
-                ul.dropdown-menu.dropdown-cart(role='menu')
-                  li
-                    .col-sm-12
-                      .col-sm-10
-                        .col-sm-5
-                          img#slidingCartImg(src='')
-                        .col-sm-5
-                          p#slidingCartTitle
-                          p#slidingCartPrice
-                      .col-sm-2
-                        button.btn.btn-xs.btn-danger x
-                  li.divider
-                  li
-                    a.text-center(href='/checkout') Количка
-                      li.ul-li
+            li.ul-li.pull-right-lg-nav
+              a(href="/checkout")
+                span.glyphicon.glyphicon-shopping-cart
+                |  Вашата количка
           - else
             li.ul-li.pull-left-lg-nav
               label
