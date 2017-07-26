@@ -51,7 +51,7 @@ class BaseData {
         }
         return this.collection.insert(model)
             .then((status) => {
-                // conatins the created Id
+                // contains the created Id
                 return status.ops[0];
                 // return model;
             });
