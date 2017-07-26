@@ -1,14 +1,12 @@
 /*globals $, alert, typeahead */
 $('.autocompleteInput').on('keyup', () => {
     let currentValue = $(".autocompleteInput").val();
-    // let data = ['pesho', 'gosho', 'sasho'];
-alert(currentValue);
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/autocomplete",
-        data: { currentValue: currentValue },
+        data: { name: currentValue },
         success: ((data) => {
-            $('#autocomplete').typeahead({source: data.data});
+            $('#autocomplete').typeahead({ source: data });
         }),
         error: ((error) => {
             alert("error on search");
@@ -65,11 +63,11 @@ $('#contactFormSend').on('click', (() => {
     let hasError = false;
 
     function validate(names, email, text) {
-        let namesPattern = /^[a-zA-Z]+$/;        
+        let namesPattern = /^[a-zA-Z]+$/;
         let emailPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
         let textPattern = /^[a-zA-Z0-9 ]+$/;
 
-        if(names === '' || email === '' || text === ''){
+        if (names === '' || email === '' || text === '') {
             alert('Формата за връзка с нас е празна, моля попълнете всички полета');
             return;
         }
@@ -85,7 +83,7 @@ $('#contactFormSend').on('click', (() => {
             $('#cUserEmail').val('');
             hasError = true;
         }
-        
+
         if (!text.match(textPattern)) {
             alert('Текстовото поле съдържа непозволени символи');
             $('#cUserText').val('');
@@ -102,31 +100,50 @@ $('#contactFormSend').on('click', (() => {
     $.ajax({
         type: "POST",
         url: "/api/contactUs",
-        data: { 
+        data: {
             contactUserNames: names,
             contactUserEmail: email,
             contactUserText: text,
         },
         success: ((data) => {
             alert('Успешно се абонирахте за нашите предложения');
-                $('#cUserNames').val('');
-                $('#cUserEmail').val('');
-                $('#cUserText').val('');
+            $('#cUserNames').val('');
+            $('#cUserEmail').val('');
+            $('#cUserText').val('');
         }),
         error: ((error) => {
             let len = error.responseJSON.length;
 
-            for(let i = 0; i < len; i += 1){
-                if(error.responseJSON[i] === 'names'){
+            for (let i = 0; i < len; i += 1) {
+                if (error.responseJSON[i] === 'names') {
                     alert('Моля, въведете валидни имена');
-                }else if(error.responseJSON[i] === 'email'){
+                } else if (error.responseJSON[i] === 'email') {
                     alert('Моля, въведете валиден e-mail');
-                }else if(error.responseJSON[i] === 'text'){
-                    alert('Използвали сте невалидни символи в текстовото поле');                        
+                } else if (error.responseJSON[i] === 'text') {
+                    alert('Използвали сте невалидни символи в текстовото поле');
                 }
             }
         })
     });
 
 }));
+
+$('body').on('click', '.delete_product', () => {
+
+    let productId = $('.idCell').attr('value');
+
+    $.ajax({
+        type: "POST",
+        url: "/api/delete-product",
+        data: { _id : productId },
+        success: ((data) => {
+            alert('Продуктът беше изтрит от системата успешно');
+            $(location).attr('href', '/products/delete');
+        }),
+        error: ((error) => {
+            alert(JSON.stringify(error));
+        })
+    });
+});
+
 

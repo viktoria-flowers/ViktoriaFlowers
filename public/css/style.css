@@ -85,15 +85,16 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
 }
 .ul-li a{
     text-decoration: none;
-    font-size: 15px;
-    color: #9D9894;
+    font-size: 18px;
+    color: white;
     text-align: center;
+    cursor: pointer;
 }
 .ul-li a:hover{
     color: #fe9126;
 }
 .ul-li label{
-    font-size: 17px;
+    font-size: 20px;
     text-align: center;
     color: #fe9126;
     animation: blinker 3s linear infinite;
@@ -203,12 +204,13 @@ button.w3view-cart:focus{
 }
 
 #bs-megadropdown-tabs > ul > li{
-    margin:10px;
+    margin:15px;
 }
 
 #usernameLabel{
-    font-size: 18px;
-    color: #9D9894;
+    font-size: 20px;
+    color: black;
+    opacity: 0.7;
 }
 
 .w3ls_logo_products_left {
@@ -237,8 +239,8 @@ button.w3view-cart:focus{
 /*-- //header --*/
 .navbar-default .navbar-nav > li > a {
     color: #fff;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: bold;
 }
 .logo-nav-left1 ul li.active a.act{
 	color:#fff !important;
@@ -2553,9 +2555,7 @@ ul.phone_email li {
 .w3l_search input[type="search"] {
     width: 76%;
 }
-.navbar-default .navbar-nav > li > a {
-    font-size: 16px;
-}
+
 .nav > li > a {
     padding: 10px 2px !important;
 }
@@ -3541,9 +3541,9 @@ a.socialIcon:hover, .socialHoverClass {
     background: #AFAFAF;
 }
 
-.form-control{
+/* .form-control{
     margin: 5px;
-}
+} */
 
 .panel-title{
     font-size: 18px;
@@ -3697,7 +3697,7 @@ ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
 
-.navbar-right li a{
+/* .navbar-right li a{
     text-decoration: none;
     font-size: 15px;
     color: #9D9894;
@@ -3710,7 +3710,7 @@ ul.dropdown-cart li .item-right button{
 
 .navbar-right li a:hover{
     color:#9D9894;
-}
+} */
 
 @media (min-width: 1200px) {
     .pull-right-lg-nav {
@@ -3738,4 +3738,34 @@ ul.dropdown-cart li .item-right button{
 
 #nav-color{
     background: black;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+#createProductHeader{
+    margin:10px;
+    color: #F56505;
+}
+#form-createAd{
+    background: transparent;
+    border: none;
+}
+#createProductLegend{
+    border: none;
+}
+#createProductButton{
+    background:#F56505;
+    color:white
+}
+#shopTitle{
+    color:#F56505;
+    text-decoration: none;
+}
+#search-span{
+    background:#F56505;
+}
+#search-glyph{
+    color: white;
+}
+.glyphicon-heart:hover{
+    background: red;
 }

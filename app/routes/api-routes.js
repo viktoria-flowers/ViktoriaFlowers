@@ -1,25 +1,28 @@
 const { constants, pagination, productTypes } = require('../utils');
+const { ObjectID } = require('mongodb');
 
 const ajaxRequests = (app, data) => {
-    app.post('/api/autocomplete', (req, res) => {
-        return data.products.getAll(req.body)
+    app.get('/api/autocomplete', (req, res) => {
+        var regex = new RegExp(req.query.name);
+        var query = { "title": regex };
+
+        return data.products.getAll(query)
             .then((products) => {
+                
                 if (products.length === 0) {
                     return res.status(400);
                 }
 
-                const filteredProducts = products.filter((prod) => {
-                    return prod.title.includes('');
+                var productNames = products.map((p) => {
+                    return p.title;
                 });
+                console.log(productNames);
 
-                // for test
-                // let data = ['pesho', 'gosho', 'sasho'];
-                return res.status(200).json(
-                    { data: data }
-                )
-                    .catch((err) => {
-                        return res.status(400).json(err);
-                    });
+                return res.status(200).json(productNames);
+
+            })
+            .catch((err) => {
+                return res.status(400).json(err);
             });
     });
 
@@ -44,16 +47,25 @@ const ajaxRequests = (app, data) => {
             });
     });
 
+    app.post('/api/delete-product', (req, res) => {
+        return data.products.removeObjectById(req.body)
+            .then((deletedProduct) => {
+                res.status(200).json(
+                    { message: 'OK' }
+                );
+            });
+    });
+
     app.post('/api/contactUs', (req, res) => {
         return data.contactUsUsers.create(req.body)
-                    .then((contactUsDataSend) => {
-                        return res.status(200).json(
-                            { message: 'OK' }
-                        );
-                    })
-                    .catch((err) => {
-                        return res.status(400).json(err);
-                    });
+            .then((contactUsDataSend) => {
+                return res.status(200).json(
+                    { message: 'OK' }
+                );
+            })
+            .catch((err) => {
+                return res.status(400).json(err);
+            });
     });
 
     app.get('/api/products/:type*?', function (req, res) {

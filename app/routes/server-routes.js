@@ -20,6 +20,10 @@ const serverRoutes = (app, data) => {
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
+    app.get('/products/delete', isLoggedIn, (req, res) =>
+        data.products.getAll().then((products) => {
+            return res.render('products/delete-products', { productsList: products });
+        }));
     app.get('/profile', isLoggedIn, (req, res) =>
         data.users.getAll(req.user._id).then((user) => {
             return res.render('profile', { user: user[0] });

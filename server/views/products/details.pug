@@ -1,53 +1,41 @@
 extends ../layouts/default
 
 block content
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Информация за продукт
   .products
     .container
-      .agileinfo_single
-        .col-md-4.agileinfo_single_left
-          img#example.img-responsive.prodImg(src=model.url, alt=model.url)
-        .col-md-8.agileinfo_single_right
-          h2.prodName 
+      .col-sm-12
+        .col-sm-6.text-center
+          img.img-responsive.prodImg(src=model.url, alt=model.url)
+        .col-md-6.text-center
+          h3.prodName
            = model.title
-          .w3agile_description
-            p Дата: 
-              = model.dateCreated.toLocaleDateString()
-          .rating1
-            p Преглеждания: 
-              = model.viewsCount
-            //- span.starRating
-              input#rating5(name='rating', value='5', type='radio')
-              label(for='rating5') 5
-              input#rating4(name='rating', value='4', type='radio')
-              label(for='rating4') 4
-              input#rating3(name='rating', value='3', checked='', type='radio')
-              label(for='rating3') 3
-              input#rating2(name='rating', value='2', type='radio')
-              label(for='rating2') 2
-              input#rating1(name='rating', value='1', type='radio')
-              label(for='rating1') 1
-          .w3agile_description
-            h4 Описание :
+          br
+          small Добавен на: 
+            = model.dateCreated.toLocaleDateString()
+          h4 Преглеждания: 
+            = model.viewsCount
+          h4 Добави в любими 
+            a(href="/")
+              i.glyphicon.glyphicon-heart
+          h4 Описание: 
             p
               = model.description || 'Липсва'
-          .snipcart-item.block
-            .snipcart-thumb.agileinfo_single_right_snipcart
-              h4.m-sing.prodPrice
-                = model.price ? model.price + '.00 лв.' : 'Цената липсва'
-                //- span $25.00
-            .snipcart-details.agileinfo_single_right_details
-              form(action='#', method='post')
-                fieldset#fieldsetHiddenItems
-                  input(type='hidden', name='id', value=model._id)
-                  //- input(name='cmd', value='_cart', type='hidden')
-                  //- input(name='add', value='1', type='hidden')
-                  //- input(name='business', value=' ', type='hidden')
-                  //- input(name='item_name', value='pulao basmati rice', type='hidden')
-                  //- input(name='amount', value='21.00', type='hidden')
-                  //- input(name='discount_amount', value='1.00', type='hidden')
-                  //- input(name='currency_code', value='USD', type='hidden')
-                  //- input(name='return', value=' ', type='hidden')
-                  //- input(name='cancel_return', value=' ', type='hidden')
-                  a
-                    input.button(name='submit', value='Добави в количка', type='button').addToCart
-        .clearfix  
+          h4 Цена: 
+            = model.price ? model.price + '.00 лв.' : 'Цената липсва'
+          h4.scratchOverText
+            = model.wasPrice ? 'Предишна цена: ' + model.wasPrice + '.00 лв.' : ''
+          br
+          form(action='#', method='post')
+            fieldset#fieldsetHiddenItems
+              input(type='hidden', name='id', value=model._id)
+              a
+                input.btn.btn-warning.btn-md(name='submit', value='Добави в количка', type='button').addToCart
+  .clearfix  

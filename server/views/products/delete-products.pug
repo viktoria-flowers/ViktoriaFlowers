@@ -1,0 +1,34 @@
+extends /layouts/default.pug
+
+block content
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Изтрии продукт
+  .container.table-responsive
+    table.table.text-left
+      thead
+        tr
+          th Уникален номер на продукта
+          th Име
+          th Цена
+          th Дата на добавяне
+          th
+      tbody
+        if (productsList && productsList.length)
+          - for(var i = 0; i < productsList.length; i += 1) 
+              tr.productsRow
+                td.idCell(value=productsList[i]._id)
+                  = productsList[i]._id
+                td
+                  = productsList[i].title
+                td
+                  = productsList[i].price + ' лв.'
+                td
+                  = moment(productsList[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
+                td
+                  input.btn.btn-md.btn-danger(type="button", value="Изтриите продукта", class="delete_product") 
