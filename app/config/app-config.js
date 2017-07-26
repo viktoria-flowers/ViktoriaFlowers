@@ -38,6 +38,7 @@ const configApp = (application) => {
     application.set('view engine', 'pug');
     application.set('views', __dirname + '/../../server/views');
     application.locals.basedir = path.join(__dirname, '/../../server/views');
+    application.locals.moment = require('moment');
 
     // uncomment this and pug will return unminified HTML response
     // app.locals.pretty = true;

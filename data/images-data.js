@@ -8,6 +8,10 @@ class ImagesData extends BaseData {
 
     // override base
     create(imageModel) {
+        if (!imageModel) {
+            return Promise.reject(['model-missing']);
+        }
+        
         // replace white spaces with underscore "_"
         imageModel.originalname = imageModel.originalname.replace(/\s+/g, '_');
         imageModel.dateCreated = new Date();

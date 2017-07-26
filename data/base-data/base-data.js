@@ -34,6 +34,10 @@ class BaseData {
     }
 
     findById(id) {
+        if (id || !ObjectID.isValid(id)) {
+            return Promise.reject(['invalid-id']);
+        }
+
         return this.collection.findOne({ _id: new ObjectID(id) })
             .then((model) => {
                 if (!model) {
@@ -51,9 +55,8 @@ class BaseData {
         }
         return this.collection.insert(model)
             .then((status) => {
-                // contains the created Id
+                // contains the object with generated Id from mongo
                 return status.ops[0];
-                // return model;
             });
     }
 

@@ -29,7 +29,11 @@ gulp.task('tests:unit', ['pre-test'], () => {
         .pipe(mocha({
             reporter: 'spec',
         }))
-        .pipe(istanbul.writeReports());
+        .pipe(istanbul.writeReports())
+        .on('end', () => {
+            /* eslint-disable no-undef */
+            process.exit(0);
+        });
 });
 
 const config = {

@@ -1,10 +1,9 @@
 /* globals: Buffer */
 const { ObjectID } = require('mongodb');
 const { authHelper } = require('./../utils');
-const { isLoggedIn, setLocals } = require('../middlewares');
+const { isLoggedIn, setLocals, isAdmin } = require('../middlewares');
 
 const serverRoutes = (app, data) => {
-
     app.use('/', setLocals);
 
     app.get('/', (req, res) => res.render('home'));
@@ -20,9 +19,10 @@ const serverRoutes = (app, data) => {
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
-    app.get('/products/delete', isLoggedIn, (req, res) =>
+    app.get('/products/delete', isAdmin, (req, res) =>
         data.products.getAll().then((products) => {
-            return res.render('products/delete-products', { productsList: products });
+            const pugView = 'products/delete-products';
+            return res.render(pugView, { productsList: products });
         }));
     app.get('/profile', isLoggedIn, (req, res) =>
         data.users.getAll(req.user._id).then((user) => {

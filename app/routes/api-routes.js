@@ -1,25 +1,23 @@
 const { constants, pagination, productTypes } = require('../utils');
-const { ObjectID } = require('mongodb');
+const { isAdmin } = require('../middlewares');
 
 const ajaxRequests = (app, data) => {
     app.get('/api/autocomplete', (req, res) => {
-        var regex = new RegExp(req.query.name);
-        var query = { "title": regex };
+        const regex = new RegExp(req.query.name);
+        const query = { 'title': regex };
 
         return data.products.getAll(query)
             .then((products) => {
-                
                 if (products.length === 0) {
                     return res.status(400);
                 }
 
-                var productNames = products.map((p) => {
+                const productNames = products.map((p) => {
                     return p.title;
                 });
                 console.log(productNames);
 
                 return res.status(200).json(productNames);
-
             })
             .catch((err) => {
                 return res.status(400).json(err);
@@ -27,8 +25,6 @@ const ajaxRequests = (app, data) => {
     });
 
     app.post('/api/subscribe', (req, res) => {
-        // { subscribeEmail : 'marti@sada.com'  }
-
         return data.emailSubscribers.getAll(req.body)
             .then((existingEmail) => {
                 if (existingEmail.length > 0) {
@@ -47,7 +43,7 @@ const ajaxRequests = (app, data) => {
             });
     });
 
-    app.post('/api/delete-product', (req, res) => {
+    app.post('/api/delete-product', isAdmin, (req, res) => {
         return data.products.removeObjectById(req.body)
             .then((deletedProduct) => {
                 res.status(200).json(
@@ -68,7 +64,7 @@ const ajaxRequests = (app, data) => {
             });
     });
 
-    app.get('/api/products/:type*?', function (req, res) {
+    app.get('/api/products/:type*?', (req, res) => {
         const type = req.params.type;
         if (type && productTypes.indexOf(type) === -1) {
             return res.json({ message: `Wrong type: ${type}` });
@@ -78,7 +74,7 @@ const ajaxRequests = (app, data) => {
         const sortField = req.query.sortField || constants.DEFAULT_SORT_FIELD;
         const sortType = req.query.sortType || constants.DEFAULT_SORT_TYPE;
 
-        // This will be initalizated in then() handlers
+        // This will be initialized in then() handlers
         let productsModels = [];
         const filter = {};
         if (type) {
