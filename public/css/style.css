@@ -85,7 +85,7 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
 }
 .ul-li a{
     text-decoration: none;
-    font-size: 15px;
+    font-size: 20px;
     color: #9D9894;
     text-align: center;
 }
@@ -93,7 +93,7 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
     color: #fe9126;
 }
 .ul-li label{
-    font-size: 17px;
+    font-size: 20px;
     text-align: center;
     color: #fe9126;
     animation: blinker 3s linear infinite;
@@ -3541,9 +3541,9 @@ a.socialIcon:hover, .socialHoverClass {
     background: #AFAFAF;
 }
 
-.form-control{
+/* .form-control{
     margin: 5px;
-}
+} */
 
 .panel-title{
     font-size: 18px;
@@ -3738,4 +3738,19 @@ ul.dropdown-cart li .item-right button{
 
 #nav-color{
     background: black;
+}
+#createProductHeader{
+    margin:10px;
+    color: #F56505;
+}
+#form-createAd{
+    background: transparent;
+    border: none;
+}
+#createProductLegend{
+    border: none;
+}
+#createProductButton{
+    background:#F56505;
+    color:white
 }
