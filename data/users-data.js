@@ -24,18 +24,14 @@ class UsersData extends BaseData {
     create(newUser) {
         const modelState = this.validate(newUser);
         if (!modelState.isValid) {
-            return new Promise((resolve, reject) => {
-                return reject(modelState.errors);
-            });
+            return Promise.reject(modelState.errors);
         }
-
+        
         const newPassword = authHelper.makeHashFromPassword(newUser.password);
         return this.findByUsername(newUser.username)
             .then((user) => {
                 if (user) {
-                    return new Promise((resolve, reject) => {
-                        return reject(['username-exist']);
-                    });
+                    return Promise.reject(['username-exist']);
                 }
 
                 // register the new user
