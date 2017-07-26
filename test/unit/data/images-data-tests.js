@@ -31,7 +31,7 @@ describe('ImagesData tests', () => {
                 });
         });
 
-        it('Expect to replace empty spaces with underscore in name', (done) => {
+        it('Expect to replace empty spaces with underscore in name', () => {
             imageData.create({ originalname: '   t   e    s     t.png' })
                 .then((image) => {
                     expect(image.originalname).to.be.equal('_t_e_s_t.png');

@@ -34,15 +34,17 @@ class BaseData {
     }
 
     findById(id) {
+        if (id || !ObjectID.isValid(id)) {
+            return Promise.reject(['invalid-id']);
+        }
+
         return this.collection.findOne({ _id: new ObjectID(id) })
             .then((model) => {
-                return new Promise((resolve, reject) => {
-                    if (!model) {
-                        return resolve(null);
-                    }
+                if (!model) {
+                    return Promise.resolve(null);
+                }
 
-                    return resolve(model);
-                });
+                return Promise.resolve(model);
             });
     }
 
@@ -53,9 +55,8 @@ class BaseData {
         }
         return this.collection.insert(model)
             .then((status) => {
-                // conatins the created Id
+                // contains the object with generated Id from mongo
                 return status.ops[0];
-                // return model;
             });
     }
 
