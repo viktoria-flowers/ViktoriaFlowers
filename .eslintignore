@@ -3,3 +3,4 @@
 # Ignore minified files and libraries
 
 public/js/**/*.js
+coverage/*
