@@ -27,7 +27,7 @@ html
     
   body
     // HEADER start
-    .container-fluid#nav-color
+    .container#nav-color
       .row
         .col-sm-12.text-center
           ul
@@ -78,27 +78,27 @@ html
               a(href='/register') Регистрация
             li.ul-li.pull-right-lg-nav
               a(href='/login')  Вход
-    .logo_products
-      .container
-        .row
-          .col-sm-12
-            .col-sm-4.text-center
-                label#usernameLabel
-                  - if(isAuthenticated)
-                    | Здравейте, 
-                    = username
-            .w3ls_logo_products_left.col-sm-4
-              h3
-                a(href='/') Магазин за цветя "Виктория"
-            .w3l_search.col-sm-4
-              form.form-group(action='#', method='post')
-                .input-group.margin-bottom-sm.pull-right
+    .container
+      .row
+        .col-sm-12
+          .col-sm-4.text-center
+              label#usernameLabel.text-center-lg-nav
+                - if(isAuthenticated)
+                  | Здравейте, 
+                  = username
+          .col-sm-4.text-center
+            h1
+              a(href='/')#shopTitle Магазин за цветя "Виктория"
+          .col-sm-4
+            form.form-group(action='#', method='post')
+              .col-sm-12.inputGroupContainer
+                .input-group
                   input#autocomplete.autocompleteInput.form-control(type='text', placeholder='Търси...', autocomplete='off')
-                  span.input-group-addon#search-color
+                  span.input-group-addon#search-span
                     a(href="/")
-                      i.fa.fa-search
-          .clearfix
-      .clearfix  
+                      i.glyphicon.glyphicon-search#search-glyph
+        .clearfix
+    .clearfix  
     // HEADER end
     // NAVIGATION start
     .navigation-agileits
