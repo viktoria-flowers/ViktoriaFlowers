@@ -3,6 +3,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { ObjectID } = require('mongodb');
+const ModelState = require('./../../../data/model-state');
 
 const UsersData = require('../../../data/users-data');
 
@@ -10,8 +11,8 @@ describe('UsersData tests', () => {
     const db = {
         collection: () => { },
     };
-    let items = [];
 
+    let items = [];
     let ModelClass = null;
     const validator = null;
     let userData = null;
@@ -93,36 +94,67 @@ describe('UsersData tests', () => {
     });
 
     describe('method "create()"', () => {
-        describe('when there are provided user as parameter should by validate and save him in db', () => {
-            let newUser = { username: 'pesho' };
+        describe('when there are provided user as parameter', () => {
+            describe('with invalid parameters should by returned model state with error', () => {
+                let newUserInvalidUsername = {
+                    username: 'p',
+                    password: 'pesho123456',
+                    names: 'Pesho',
+                    phone: '0888888888',
+                    email: 'abv@abv.bg',
+                    contactInfo: 'Bulgaria, Sofia...',
+                };
 
-    //         const findOne = () => {
-    //             return Promise.resolve(existingUser);
-    //         };
+                let modelState = new ModelState();
+                modelState.errors = ['username'];
 
-    //         beforeEach(() => {
-    //             items = [existingUser];
-    //             sinon.stub(db, 'collection')
-    //                 .callsFake(() => {
-    //                     return { findOne };
-    //                 });
-    //             ModelClass = class {
-    //             };
+                // mock userModel
+                ModelClass = {
+                    create: () => {
+                    },
+                    validate: () => {
+                    }
+                };
 
-    //             // Arrange
-    //             userData = new UsersData(db, ModelClass, validator);
-    //         });
+                const validate = () => {
+                    return modelState;
+                };
 
-    //         afterEach(() => {
-    //             db.collection.restore();
-    //         });
+             
+                    beforeEach(() => {
+                        sinon.stub(ModelClass, 'validate')
+                            .callsFake(() => {
+                                return { validate };
+                            });
 
-            // it('expect to return save user in db such', () => {
-            //     return userData.create(newUser)
-            //         .then((user) => {
-            //             expect(user).to.deep.equal(newUser);
-            //         });
-            // });
+
+
+
+                        // Arrange
+                        userData = new UsersData(db, ModelClass, ModelClass);
+                    });
+
+                    // afterEach(() => {
+                    //     db.collection.restore();
+                    // });
+
+                    it('expect to return ModelState with errors user in db such', () => {
+                        return userData.create(newUserInvalidUsername)
+                            .then((modelStateWithErrors) => {
+                                expect(modelStateWithErrors).to.deep.equal(modelState);
+                            });
+                    });
+                });
+
+                let newUserValid = {
+                    username: 'p',
+                    password: 'pesho123456',
+                    names: 'Pesho',
+                    phone: '0888888888',
+                    email: 'abv@abv.bg',
+                    contactInfo: 'Bulgaria, Sofia...',
+                };
+
+            });
         });
     });
-});
