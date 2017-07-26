@@ -3758,10 +3758,14 @@ ul.dropdown-cart li .item-right button{
 }
 #shopTitle{
     color:#F56505;
+    text-decoration: none;
 }
 #search-span{
     background:#F56505;
 }
 #search-glyph{
     color: white;
+}
+.glyphicon-heart:hover{
+    background: red;
 }
