@@ -128,3 +128,22 @@ $('#contactFormSend').on('click', (() => {
 
 }));
 
+$('body').on('click', '.delete_product', () => {
+
+    let productId = $('.idCell').attr('value');
+
+    $.ajax({
+        type: "POST",
+        url: "/api/delete-product",
+        data: { _id : productId },
+        success: ((data) => {
+            alert('Продуктът беше изтрит от системата успешно');
+            $(location).attr('href', '/products/delete');
+        }),
+        error: ((error) => {
+            alert(JSON.stringify(error));
+        })
+    });
+});
+
+

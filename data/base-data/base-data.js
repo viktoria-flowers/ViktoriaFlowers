@@ -63,6 +63,12 @@ class BaseData {
         }, model);
     }
 
+    removeObjectById(obj) {
+        return this.collection.remove({
+            _id: new ObjectID(obj._id),
+        });
+    }
+
     updateParamsById(model, props) {
         return this.collection.updateOne(
             { _id: new ObjectID(model._id) },

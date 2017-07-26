@@ -21,8 +21,8 @@ block content
       tbody
         if (productsList && productsList.length)
           - for(var i = 0; i < productsList.length; i += 1) 
-              tr
-                td 
+              tr.productsRow
+                td.idCell(value=productsList[i]._id)
                   = productsList[i]._id
                 td
                   = productsList[i].title
@@ -31,4 +31,4 @@ block content
                 td
                   = moment(productsList[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
                 td
-                  input.btn.btn-md.btn-danger(type="text", value="Изтриите продукта") 
+                  input.btn.btn-md.btn-danger(type="button", value="Изтриите продукта", class="delete_product") 
