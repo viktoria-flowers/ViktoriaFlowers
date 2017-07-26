@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { ObjectID } = require('mongodb');
 const ModelState = require('./../../../data/model-state');
+const { authHelper } = require('./../../../app/utils');
 
 const UsersData = require('../../../data/users-data');
 
@@ -90,71 +91,188 @@ describe('UsersData tests', () => {
                     });
             });
         });
-
     });
 
     describe('method "create()"', () => {
-        describe('when there are provided user as parameter', () => {
-            describe('with invalid parameters should by returned model state with error', () => {
-                let newUserInvalidUsername = {
-                    username: 'p',
-                    password: 'pesho123456',
-                    names: 'Pesho',
-                    phone: '0888888888',
-                    email: 'abv@abv.bg',
-                    contactInfo: 'Bulgaria, Sofia...',
-                };
+        describe('when there are provided user with invalid parameters should by returned model state with error', () => {
+            let newUserInvalidUsername = {
+                username: 'p',
+                password: 'pesho123456',
+                names: 'Pesho',
+                phone: '0888888888',
+                email: 'abv@abv.bg',
+                contactInfo: 'Bulgaria, Sofia...',
+            };
 
-                let modelState = new ModelState();
-                modelState.errors = ['username'];
+            let modelState = new ModelState();
+            modelState.errors = ['username'];
 
-                // mock userModel
-                ModelClass = {
-                    create: () => {
-                    },
-                    validate: () => {
-                    }
-                };
+            ModelClass = {
+                validate: () => {
+                }
+            };
 
-                const validate = () => {
-                    return modelState;
-                };
+            const validate = () => {
+                return modelState;
+            };
 
-             
-                    beforeEach(() => {
-                        sinon.stub(ModelClass, 'validate')
-                            .callsFake(() => {
-                                return { validate };
-                            });
-
-
-
-
-                        // Arrange
-                        userData = new UsersData(db, ModelClass, ModelClass);
+            beforeEach(() => {
+                sinon.stub(ModelClass, 'validate')
+                    .callsFake(() => {
+                        return { validate };
                     });
 
-                    // afterEach(() => {
-                    //     db.collection.restore();
-                    // });
+                // Arrange
+                userData = new UsersData(db, ModelClass, null);
+            });
 
-                    it('expect to return ModelState with errors user in db such', () => {
-                        return userData.create(newUserInvalidUsername)
-                            .then((modelStateWithErrors) => {
-                                expect(modelStateWithErrors).to.deep.equal(modelState);
-                            });
+            it('expect to return ModelState with errors user in db such', () => {
+                return userData.create(newUserInvalidUsername)
+                    .catch((errors) => {
+                        expect(errors).to.deep.equal(modelState.errors);
                     });
-                });
+            });
+        });
 
-                let newUserValid = {
-                    username: 'p',
-                    password: 'pesho123456',
-                    names: 'Pesho',
-                    phone: '0888888888',
-                    email: 'abv@abv.bg',
-                    contactInfo: 'Bulgaria, Sofia...',
-                };
+        describe('when there are provided user and hi exist in data base should be return error', () => {
+            let newUserValid = {
+                username: 'Pesho',
+                password: 'pesho123456',
+                names: 'Pesho',
+                phone: '0888888888',
+                email: 'abv@abv.bg',
+                contactInfo: 'Bulgaria, Sofia...',
+            };
 
+            let expectedUser = {
+                username: 'Pesho',
+                password: 'pesho123456',
+                names: 'Pesho',
+                phone: '0888888888',
+                email: 'abv@abv.bg',
+                contactInfo: 'Bulgaria, Sofia...',
+            };
+
+            ModelClass = class {
+            };
+
+            let modelState = new ModelState();
+
+            ModelClass = {
+                validate: () => {
+                }
+            };
+
+            expectedUser.roles = [];
+            expectedUser.orders = [];
+            expectedUser.password = authHelper.makeHashFromPassword(newUserValid.password);
+
+            const validate = () => {
+                return modelState;
+            };
+
+            const findOne = (name) => {
+                return Promise.resolve(expectedUser);
+            };
+
+            beforeEach(() => {
+                sinon.stub(ModelClass, 'validate')
+                    .callsFake(() => {
+                        return { validate };
+                    });
+
+                sinon.stub(db, 'collection')
+                    .callsFake(() => {
+                        return { findOne };
+                    });
+
+                // Arrange
+                userData = new UsersData(db, ModelClass, { isValid: () => ModelState.valid() });
+            });
+
+            afterEach(() => {
+                db.collection.restore();
+            });
+
+            it('expect to return user with set correct parameters', () => {
+                return userData.create(newUserValid)
+                    .catch((error) => {
+                        expect(error).to.deep.equal(['username-exist']);
+                    });
+            });
+        });
+
+
+        describe('when there are provided user with valid parameters should by created and saved in database', () => {
+            let newUserValid = {
+                username: 'Pesho',
+                password: 'pesho123456',
+                names: 'Pesho',
+                phone: '0888888888',
+                email: 'abv@abv.bg',
+                contactInfo: 'Bulgaria, Sofia...',
+            };
+
+            let expectedUser = {
+                username: 'Pesho',
+                password: 'pesho123456',
+                names: 'Pesho',
+                phone: '0888888888',
+                email: 'abv@abv.bg',
+                contactInfo: 'Bulgaria, Sofia...',
+            };
+
+            ModelClass = class {
+            };
+
+            let modelState = new ModelState();
+
+            ModelClass = {
+                validate: () => {
+                }
+            };
+
+            expectedUser.roles = [];
+            expectedUser.orders = [];
+            expectedUser.password = authHelper.makeHashFromPassword(newUserValid.password);
+
+            const validate = () => {
+                return modelState;
+            };
+
+            const insert = (user) => {
+                return Promise.resolve({ops: [user]});
+            };
+
+            const findOne = (name) => {
+                return Promise.resolve(null);
+            };
+
+            beforeEach(() => {
+                sinon.stub(ModelClass, 'validate')
+                    .callsFake(() => {
+                        return { validate };
+                    });
+
+                sinon.stub(db, 'collection')
+                    .callsFake(() => {
+                        return { findOne, insert };
+                    });
+
+                // Arrange
+                userData = new UsersData(db, ModelClass, { isValid: () => ModelState.valid() });
+            });
+
+            afterEach(() => {
+                db.collection.restore();
+            });
+
+            it('expect to return user with set correct parameters', () => {
+                return userData.create(newUserValid)
+                    .then((user) => {
+                        expect(user).to.deep.equal(expectedUser);
+                    });
             });
         });
     });
+});
