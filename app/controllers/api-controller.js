@@ -66,6 +66,13 @@ class ApiController {
             });
     }
 
+    postCheckout(req, res) {
+        return this._data.products.findAllRecordsByIds(req.body.ids)
+            .then((foundProduct) => {
+                return res.send(foundProduct);
+            });
+    }
+
     getProducts(req, res) {
         const type = req.params.type;
         if (type && productTypes.indexOf(type) === -1) {

@@ -1,5 +1,4 @@
-const { isAdmin } = require('../middlewares');
-const { isLoggedIn } = require('../middlewares');
+const { isAdmin, isLoggedIn } = require('../middlewares');
 
 const ajaxRequests = (app, apiController) => {
     app.get('/api/autocomplete', (req, res) => {
@@ -19,10 +18,7 @@ const ajaxRequests = (app, apiController) => {
     });
 
     app.post('/api/checkout', isLoggedIn, (req, res) => {
-        return data.products.findAllRecordsByIds(req.body.ids)
-            .then((foundProduct) => {
-                res.send(foundProduct);
-            });
+        return apiController.postCheckout(req, res);
     });
 
     app.get('/api/products/:type*?', (req, res) => {
