@@ -24,6 +24,7 @@ block content
             em
              | Нестандартни букети
     //MAIN slider end
+
     //PROMO and newest products start
     .top-brands
       .container
@@ -32,12 +33,31 @@ block content
           .bs-example.bs-example-tabs(role='tabpanel', data-example-id='togglable-tabs')
             ul#myTab.nav.nav-tabs(role='tablist')
               li.active(role='presentation')
-                a#expeditions-tab(href='#expeditions', role='tab', data-toggle='tab', aria-controls='expeditions', aria-expanded='true') Промо
+                a#expeditions-tab(href='#expeditions', role='tab', data-toggle='tab', aria-controls='expeditions', aria-expanded='true') Най-търсени предложения
               li(role='presentation')
                 a#tours-tab(href='#tours', role='tab', data-toggle='tab', aria-controls='tours') Най-нови предложения
+            
+            
+            
+            
             #myTabContent.tab-content
+              
+              
+              
+              ///////////////// first
+              
+              
+              
               #expeditions.tab-pane.fade.in.active(role='tabpanel', aria-labelledby='expeditions-tab')
+                
                 .agile_top_brands_grids
+                  
+              
+                  //- each prod in products.topNewest 
+                  //-   h3
+                  //-     = prod.title
+
+
                   .col-md-4.top_brand_left
                     .hover14.column
                       .agile_top_brand_left_grid
@@ -140,7 +160,9 @@ block content
                                     input(type='hidden', name='return', value=' ')
                                     input(type='hidden', name='cancel_return', value=' ')
                                     input.button(type='submit', name='submit', value='Add to cart')
-                  .clearfix  
+                  .clearfix
+
+
                 .agile_top_brands_grids
                   .col-md-4.top_brand_left
                     .hover14.column
@@ -247,12 +269,17 @@ block content
                                     input(type='hidden', name='cancel_return', value=' ')
                                     input.button(type='submit', name='submit', value='Add to cart')
                   .clearfix  
+              
+              
+              
+              
+              //////// second 
+              
+              
+              
               #tours.tab-pane.fade(role='tabpanel', aria-labelledby='tours-tab')
-                .agile-tp
-                  h5 This week
-                  p.w3l-ad
-                    | We've pulled together all our advertised offers into one place, so you won't miss out on a great deal.
                 .agile_top_brands_grids
+
                   .col-md-4.top_brand_left
                     .hover14.column
                       .agile_top_brand_left_grid
@@ -462,6 +489,7 @@ block content
                                     input(type='hidden', name='cancel_return', value=' ')
                                     input.button(type='submit', name='submit', value='Add to cart')
                   .clearfix  
+    
     //PROMO and newest products start
     //Carousel start
     #myCarousel.carousel.slide(data-ride='carousel')

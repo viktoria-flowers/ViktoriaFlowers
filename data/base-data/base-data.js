@@ -14,7 +14,7 @@ class BaseData {
         page = page || 1;
         size = size || constants.DEFAULT_PAGE_SIZE;
         sortObj = sortObj || {};
-
+        
         const skipVal = (page - 1) * size;
         if (filters) {
             return this.collection

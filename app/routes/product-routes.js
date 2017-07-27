@@ -22,8 +22,7 @@ const productRoutes = (app, data) => {
                 return res.redirect('/NotFound');
             }
 
-            return data.products
-                .updateParamsById(product, { viewsCount: ++product.viewsCount })
+            return data.products.updateParamsById(product, { viewsCount: ++product.viewsCount })
                 .then(() => {
                     return res.render(
                         'products/details', { model: product });

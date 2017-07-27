@@ -7,7 +7,24 @@ const serverRoutes = (app, data) => {
     app.use('/', setLocals);
 
     app.get('/', (req, res) => res.render('home'));
-    app.get('/home', (req, res) => res.render('home'));
+    app.get('/home', (req, res) => {
+        let sortViewsObj = { viewsCount: 1 };
+        let sortNewsesObj = { dateCreated: 1 };
+        var products = {};
+
+        Promise.resolve;
+        data.products.getAll({}, sortViewsObj, 1, 6)
+            .then((topViewed) => {
+                products.topViewed = topViewed;
+
+                data.products.getAll({}, sortNewsesObj, 1, 6)
+                    .then((topNewest) => {
+                        products.topNewest = topNewest;
+
+                        return res.render('home', products);
+                    });
+            });
+    });
     app.get('/baskets', (req, res) => res.render('baskets'));
     app.get('/pots', (req, res) => res.render('pots'));
     app.get('/cards', (req, res) => res.render('cards'));
