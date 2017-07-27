@@ -1,5 +1,6 @@
 const { constants, pagination, productTypes } = require('../utils');
 const { isAdmin } = require('../middlewares');
+const { isLoggedIn } = require('../middlewares');
 
 const ajaxRequests = (app, data) => {
     app.get('/api/autocomplete', (req, res) => {
@@ -15,7 +16,6 @@ const ajaxRequests = (app, data) => {
                 const productNames = products.map((p) => {
                     return p.title;
                 });
-                console.log(productNames);
 
                 return res.status(200).json(productNames);
             })
@@ -61,6 +61,13 @@ const ajaxRequests = (app, data) => {
             })
             .catch((err) => {
                 return res.status(400).json(err);
+            });
+    });
+
+    app.post('/api/checkout', isLoggedIn, (req, res) => {
+        return data.products.findAllRecordsByIds(req.body.ids)
+            .then((foundProduct) => {
+                res.send(foundProduct);
             });
     });
 

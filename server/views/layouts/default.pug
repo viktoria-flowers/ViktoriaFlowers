@@ -27,7 +27,7 @@ html
     
   body
     // HEADER start
-    .container#nav-color
+    .container-fluid#nav-color
       .row
         .col-sm-12.text-center
           ul
@@ -172,8 +172,9 @@ html
           .col-md-4.w3_footer_grid
             h5 Абонирайте се за нашите специални предложения
               br
+              br
               input#subscriptionEmail.form-control(type='text', name='subscribeEmail', placeholder='E-mail')
-              button.btn.form-control.emailSubsButton(type="button", value="Изпрати", id="sendSubscribeEmail")
+              button.btn.btn-success.form-control.emailSubsButton(type="button", value="Изпрати", id="sendSubscribeEmail")
                 | Изпрати
           .clearfix  
       .footer-copy

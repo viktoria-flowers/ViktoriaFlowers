@@ -48,6 +48,22 @@ class BaseData {
             });
     }
 
+    findAllRecordsByIds(ids) {
+        // console.log(ids);
+        // const searchedIds = ids.map(((obj) => {
+        //      return new ObjectID(obj._id);
+        // }));
+let searchedIds = ids.map(function (obj){ return new ObjectID(obj._id)});
+
+this.collection.find({ "_id": { "$in": searchedIds }});
+        // console.log(searchedIds);
+        // this.collection.find({
+        //     '_id': { '$in':
+        //         searchedIds,
+        //     },
+        // });
+    }
+
     create(model) {
         const modelState = this.validate(model);
         if (!modelState.isValid) {

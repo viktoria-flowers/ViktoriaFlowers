@@ -146,4 +146,31 @@ $('body').on('click', '.delete_product', () => {
     });
 });
 
+$('#checkout-button').on('click', () => {
+
+    let ids = $('.productName').toArray();
+    let quantities = $('.quantities').toArray();
+    let sendIdsArray = [];
+    let sendQuantitiesArray = [];
+
+    for(let i = 0; i < ids.length; i += 1){
+        sendIdsArray.push({"_id": ids[i].attributes.value.nodeValue});
+        sendQuantitiesArray.push(quantities[i].innerHTML);
+    }
+console.log(sendIdsArray);
+    $.ajax({
+        type: "POST",
+        url: "/api/checkout",
+        data: {
+            ids: sendIdsArray,
+            quantities: sendQuantitiesArray
+        },
+        success: ((data) => {
+            alert(data);
+        }),
+        error: ((error) => {
+            alert(error);
+        })
+    });
+});
 
