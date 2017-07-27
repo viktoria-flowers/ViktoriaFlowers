@@ -12,7 +12,7 @@ class ApiController {
         return this._data.products.getAll(query)
             .then((products) => {
                 if (products.length === 0) {
-                    return res.status(400);
+                    return res.sendStatus(400);
                 }
 
                 const productNames = products.map((p) => {
@@ -35,7 +35,7 @@ class ApiController {
 
                 return this._data.emailSubscribers.create(req.body)
                     .then((newEmail) => {
-                        return res.status(200).json(
+                        return res.status(201).json(
                             { message: 'E-mail added in the list' }
                         );
                     })
