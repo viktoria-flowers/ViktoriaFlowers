@@ -12,7 +12,7 @@ class ApiController {
         return this._data.products.getAll(query)
             .then((products) => {
                 if (products.length === 0) {
-                    return res.status(400);
+                    return res.sendStatus(400);
                 }
 
                 const productNames = products.map((p) => {
