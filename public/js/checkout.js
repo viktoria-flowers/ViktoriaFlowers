@@ -53,7 +53,7 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
         firstCellAnchor.appendTo(firstCell);
         firstCell.appendTo(mainRow);
 
-        let secondCell = $('<td />').addClass('invert').html(savedData[i].name).attr('value', savedData[i].id).addClass('productName');
+        let secondCell = $('<td />').addClass('invert productName').html(savedData[i].name).attr('value', savedData[i].id);
         secondCell.appendTo(mainRow);
 
         let thirdCell = $('<td />').addClass('invert');
@@ -67,7 +67,7 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
         valueMinusDiv.appendTo(quantitySelectDiv);
 
         let entryValue = $('<div />').addClass('entry value');
-        let spanNumber = $('<span />').html(1);
+        let spanNumber = $('<span />').html(1).addClass('quantities');
             spanNumber.appendTo(entryValue);
             entryValue.appendTo(quantitySelectDiv);
 
@@ -173,7 +173,7 @@ totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 $('body').on('click', '.value-plus', function () {
     let valueField = $(this).parent().find('.value'),
         newValue = parseInt(valueField.text(), 10) + 1;
-    valueField.text(newValue);
+    valueField.text(newValue).addClass('quantities');
 
     let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
     dynamicPriceField.text(parseInt(dynamicPriceField.attr('value')) * newValue + ' лв.');
@@ -186,7 +186,7 @@ $('body').on('click', '.value-minus', function () {
     let valueField = $(this).parent().find('.value'),
         newValue = parseInt(valueField.text(), 10) - 1;
     if (newValue >= 1) {
-        valueField.text(newValue);
+        valueField.text(newValue).addClass('quantities');
         let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
         let initialValue = $(this).parent().parent().parent().parent().find('.dynamicPrice').attr('value');
             dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue) + ' лв.');

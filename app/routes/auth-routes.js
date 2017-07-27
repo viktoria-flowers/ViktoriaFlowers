@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
 
-const attach = (app, usersData) => {
+const attach = (app, authController) => {
     const router = new Router();
     router.post('/login',
         passport.authenticate('local', {
@@ -12,22 +12,17 @@ const attach = (app, usersData) => {
     );
 
     router.post('/register', (req, res) => {
-        usersData.create(req.body)
-            .then((user) => {
-                req.logIn(user, (err) => {
-                    if (err) {
-                        res.redirect('/login');
-                    }
+        return authController.postRegister(req, res);
+    });
 
-                    res.redirect('/profile');
-                });
-            })
-            .catch((err) => {
-                res.render('register', {
-                    model: req.body,
-                    errors: err,
-                });
-            });
+    router.get('/register', (req, res) => {
+        return authController.getRegister(req, res);
+    });
+    router.get('/login', (req, res) => {
+        return authController.getLogin(req, res);
+    });
+    router.get('/logout', (req, res) => {
+        return authController.logOut(req, res);
     });
 
     app.use('/', router);

@@ -34,7 +34,7 @@ class BaseData {
     }
 
     findById(id) {
-        if (id || !ObjectID.isValid(id)) {
+        if (!id || !ObjectID.isValid(id)) {
             return Promise.reject(['invalid-id']);
         }
 
@@ -48,6 +48,22 @@ class BaseData {
             });
     }
 
+    findAllRecordsByIds(ids) {
+        // console.log(ids);
+        // const searchedIds = ids.map(((obj) => {
+        //      return new ObjectID(obj._id);
+        // }));
+let searchedIds = ids.map(function (obj){ return new ObjectID(obj._id)});
+
+this.collection.find({ "_id": { "$in": searchedIds }});
+        // console.log(searchedIds);
+        // this.collection.find({
+        //     '_id': { '$in':
+        //         searchedIds,
+        //     },
+        // });
+    }
+
     create(model) {
         const modelState = this.validate(model);
         if (!modelState.isValid) {
@@ -58,12 +74,6 @@ class BaseData {
                 // contains the object with generated Id from mongo
                 return status.ops[0];
             });
-    }
-
-    updateWholeObjectById(model) {
-        return this.collection.replaceOne({
-            _id: model._id,
-        }, model);
     }
 
     removeObjectById(obj) {

@@ -72,8 +72,11 @@ block content
                                   input(type='hidden', name='title', value=product.title)
                                   input(type='hidden', name='url', value=product.url)
                                   input(type='hidden', name='price', value=product.price)
+                                - if (isAuthenticated)
                                   a
                                     input.button(type='button', name='submit', value='Добави в количката').addToCart
+                                - else
+                                  a(href="/login") Влезнете в профила си                                  
             else
               h2.text-center Няма продукти по зададените критерии  
           nav.numbering
