@@ -3760,3 +3760,9 @@ ul.dropdown-cart li .item-right button{
 .glyphicon-heart:hover{
     background: red;
 }
+.avatar{
+    width: 50%;
+}
+.histotyFav{
+    width: 60px;
+}
