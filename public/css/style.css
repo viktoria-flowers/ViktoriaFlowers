@@ -3537,14 +3537,6 @@ a.socialIcon:hover, .socialHoverClass {
 	transition: all 0.8s;
 }
 
-.emailSubsButton{
-    background: #AFAFAF;
-}
-
-/* .form-control{
-    margin: 5px;
-} */
-
 .panel-title{
     font-size: 18px;
 }
@@ -3739,7 +3731,6 @@ ul.dropdown-cart li .item-right button{
 #nav-color{
     background: black;
     opacity: 0.7;
-    border-radius: 5px;
 }
 #createProductHeader{
     margin:10px;

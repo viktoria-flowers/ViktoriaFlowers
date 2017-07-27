@@ -18,7 +18,6 @@ class ApiController {
                 const productNames = products.map((p) => {
                     return p.title;
                 });
-                console.log(productNames);
 
                 return res.status(200).json(productNames);
             })

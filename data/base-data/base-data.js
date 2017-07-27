@@ -48,6 +48,22 @@ class BaseData {
             });
     }
 
+    findAllRecordsByIds(ids) {
+        // console.log(ids);
+        // const searchedIds = ids.map(((obj) => {
+        //      return new ObjectID(obj._id);
+        // }));
+let searchedIds = ids.map(function (obj){ return new ObjectID(obj._id)});
+
+this.collection.find({ "_id": { "$in": searchedIds }});
+        // console.log(searchedIds);
+        // this.collection.find({
+        //     '_id': { '$in':
+        //         searchedIds,
+        //     },
+        // });
+    }
+
     create(model) {
         const modelState = this.validate(model);
         if (!modelState.isValid) {
@@ -60,10 +76,35 @@ class BaseData {
             });
     }
 
-    updateWholeObjectById(model) {
-        return this.collection.replaceOne({
-            _id: model._id,
-        }, model);
+    updateObjectPropertiesById(model, pass) {
+        if (!pass) {
+            return this.collection.update(
+                { _id: model._id },
+                {
+                    $set: {
+                        names: model.names,
+                        phone: model.phone,
+                        email: model.email,
+                        contactInfo: model.contactInfo,
+                        username: model.username,
+                    },
+                }
+            );
+        } else {
+            return this.collection.update(
+                { _id: model._id },
+                {
+                    $set: {
+                        names: model.names,
+                        phone: model.phone,
+                        email: model.email,
+                        contactInfo: model.contactInfo,
+                        username: model.username,
+                        password: pass,
+                    },
+                }
+            );
+        }
     }
 
     removeObjectById(obj) {

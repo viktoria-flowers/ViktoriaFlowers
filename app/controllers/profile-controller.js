@@ -28,7 +28,7 @@ class ProfileController {
         if (req.body.password.length === 0) {
             req.body.password = req.user.password;
 
-            return this._data.users.updateWholeObjectById(req.body).then(() => {
+            return this._data.users.updateObjectPropertiesById(req.body).then(() => {
                 res.redirect('/profile');
             }, (error) => {
                 res.redirect('/profile-edit');
@@ -37,7 +37,7 @@ class ProfileController {
 
         req.body.password = authHelper
             .makeHashFromPassword(req.body.password);
-        return this._data.users.updateWholeObjectById(req.body)
+        return this._data.users.updateObjectPropertiesById(req.body, req.body.password)
             .then((updatedUser, error) => {
                 res.redirect('/profile');
             }, (error) => {
