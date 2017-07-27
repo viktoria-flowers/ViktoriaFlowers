@@ -57,10 +57,9 @@ block content
                               .snipcart-thumb
                                 a(href='/products/details/' + prod._id)
                                   img(title=' ', alt=' ', src=prod.url)
-                                p prod.title
-                                h4
-                                  | prod.price 
-                                  span prod.price 
+                                p= prod.title
+                                h4= prod.price 
+                                  span= prod.price 
                               .snipcart-details.top_brand_home_details
                                 form(action='#', method='post')
                                   fieldset
@@ -84,9 +83,8 @@ block content
                               .snipcart-thumb
                                 a(href='/products/details/' + prod._id)
                                   img(title=' ', alt=' ', src=prod.url)
-                                p prod.title
-                                h4
-                                  | prod.price 
+                                p= prod.title
+                                h4= prod.price 
                               .snipcart-details.top_brand_home_details
                                 form(action='#', method='post')
                                   fieldset
@@ -103,6 +101,9 @@ block content
                         if (index + 1) % 3 == 0
                           .clearfix
                           .agile_top_brands_grids
+
+
+
               // ////// second 
             
             
