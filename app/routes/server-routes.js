@@ -20,7 +20,8 @@ const serverRoutes = (app, data) => {
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/product-info/:id', (req, res) => res.render('product-info'));
     app.get('/products/delete', isAdmin, (req, res) =>
-        data.products.getAll().then((products) => {
+        data.products.getAll(null, null, null, Number.MAX_SAFE_INTEGER)
+            .then((products) => {
             const pugView = 'products/delete-products';
             return res.render(pugView, { productsList: products });
         }));
@@ -49,7 +50,7 @@ const serverRoutes = (app, data) => {
         if (req.body.password.length === 0) {
             req.body.password = req.user.password;
 
-            data.users.updateObjectPropertiesById(req.body).then(() => {
+            data.users.updateUserPropertiesById(req.body).then(() => {
                 res.redirect('/profile');
             }, (error) => {
                 res.redirect('/profile-edit');
@@ -57,7 +58,7 @@ const serverRoutes = (app, data) => {
         } else {
             req.body.password = authHelper
                 .makeHashFromPassword(req.body.password);
-            data.users.updateObjectPropertiesById(req.body, req.body.password)
+            data.users.updateUserPropertiesById(req.body, req.body.password)
                 .then((updatedUser, error) => {
                     res.redirect('/profile');
                 }, (error) => {

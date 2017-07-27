@@ -60,38 +60,7 @@ $('#contactFormSend').on('click', (() => {
     let email = $('#cUserEmail').val();
     let text = $('#cUserText').val();
 
-    let hasError = false;
-
-    function validate(names, email, text) {
-        let namesPattern = /^[a-zA-Z]+$/;
-        let emailPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
-        let textPattern = /^[a-zA-Z0-9 ]+$/;
-
-        if (names === '' || email === '' || text === '') {
-            alert('Формата за връзка с нас е празна, моля попълнете всички полета');
-            return;
-        }
-
-        if (!names.match(namesPattern)) {
-            alert('Моля, въведете валидни имена');
-            $('#cUserNames').val('');
-            hasError = true;
-        }
-
-        if (!email.match(emailPattern)) {
-            alert('Моля, въведете валиден e-mail адрес');
-            $('#cUserEmail').val('');
-            hasError = true;
-        }
-
-        if (!text.match(textPattern)) {
-            alert('Текстовото поле съдържа непозволени символи');
-            $('#cUserText').val('');
-            hasError = true;
-        }
-    }
-
-    validate(names, email, text);
+    let hasError = validate(names, email, text);
 
     if (hasError) {
         return;
@@ -135,7 +104,7 @@ $('body').on('click', '.delete_product', () => {
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
-        data: { _id : productId },
+        data: { _id: productId },
         success: ((data) => {
             alert('Продуктът беше изтрит от системата успешно');
             $(location).attr('href', '/products/delete');
@@ -146,6 +115,43 @@ $('body').on('click', '.delete_product', () => {
     });
 });
 
+function validate(names, email, text) {
+    let namesPattern = /^[a-zA-Z]+/;
+    let emailPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
+    let textPattern = /^[a-zA-Z0-9 ]+$/;
+    let hasError = false;
+
+    if (!names && !email && !text) {
+        alert('Формата за връзка с нас е празна, моля попълнете всички полета');
+        hasError = true;
+        return hasError;
+    }
+    if (!names.match(namesPattern)) {
+
+        alert('Моля, въведете валидни имена');
+        $('#cUserNames').val('');
+        hasError = true;
+        return hasError;
+        
+    }
+
+    if (!email.match(emailPattern)) {
+        alert('Моля, въведете валиден e-mail адрес');
+        $('#cUserEmail').val('');
+        hasError = true;
+        return hasError;
+    }
+
+    if (!text.match(textPattern)) {
+        alert('Текстовото поле съдържа непозволени символи или е празно');
+        $('#cUserText').val('');
+        hasError = true;
+        return hasError;
+    }
+        return hasError;
+    
+}
+
 $('#checkout-button').on('click', () => {
 
     let ids = $('.productName').toArray();
@@ -153,11 +159,11 @@ $('#checkout-button').on('click', () => {
     let sendIdsArray = [];
     let sendQuantitiesArray = [];
 
-    for(let i = 0; i < ids.length; i += 1){
-        sendIdsArray.push({"_id": ids[i].attributes.value.nodeValue});
+    for (let i = 0; i < ids.length; i += 1) {
+        sendIdsArray.push({ "_id": ids[i].attributes.value.nodeValue });
         sendQuantitiesArray.push(quantities[i].innerHTML);
     }
-console.log(sendIdsArray);
+    console.log(sendIdsArray);
     $.ajax({
         type: "POST",
         url: "/api/checkout",

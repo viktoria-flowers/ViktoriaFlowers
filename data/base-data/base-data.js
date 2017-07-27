@@ -76,37 +76,6 @@ this.collection.find({ "_id": { "$in": searchedIds }});
             });
     }
 
-    updateObjectPropertiesById(model, pass) {
-        if (!pass) {
-            return this.collection.update(
-                { _id: model._id },
-                {
-                    $set: {
-                        names: model.names,
-                        phone: model.phone,
-                        email: model.email,
-                        contactInfo: model.contactInfo,
-                        username: model.username,
-                    },
-                }
-            );
-        } else {
-            return this.collection.update(
-                { _id: model._id },
-                {
-                    $set: {
-                        names: model.names,
-                        phone: model.phone,
-                        email: model.email,
-                        contactInfo: model.contactInfo,
-                        username: model.username,
-                        password: pass,
-                    },
-                }
-            );
-        }
-    }
-
     removeObjectById(obj) {
         return this.collection.remove({
             _id: new ObjectID(obj._id),
