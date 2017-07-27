@@ -34,7 +34,7 @@ class BaseData {
     }
 
     findById(id) {
-        if (id || !ObjectID.isValid(id)) {
+        if (!id || !ObjectID.isValid(id)) {
             return Promise.reject(['invalid-id']);
         }
 
