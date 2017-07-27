@@ -14,6 +14,4 @@ const init = (db) => {
     };
 };
 
-module.exports = {
-    init,
-};
+module.exports = { init };
