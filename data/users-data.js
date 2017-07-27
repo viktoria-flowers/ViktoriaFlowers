@@ -20,13 +20,44 @@ class UsersData extends BaseData {
         });
     }
 
+    updateUserPropertiesById(model, pass) {
+        if (!pass) {
+            return this.collection.update(
+                { _id: model._id },
+                {
+                    $set: {
+                        names: model.names,
+                        phone: model.phone,
+                        email: model.email,
+                        contactInfo: model.contactInfo,
+                        username: model.username,
+                    },
+                }
+            );
+        } else {
+            return this.collection.update(
+                { _id: model._id },
+                {
+                    $set: {
+                        names: model.names,
+                        phone: model.phone,
+                        email: model.email,
+                        contactInfo: model.contactInfo,
+                        username: model.username,
+                        password: pass,
+                    },
+                }
+            );
+        }
+    }
+
     // override base
     create(newUser) {
         const modelState = this.validate(newUser);
         if (!modelState.isValid) {
             return Promise.reject(modelState.errors);
         }
-        
+
         const newPassword = authHelper.makeHashFromPassword(newUser.password);
         return this.findByUsername(newUser.username)
             .then((user) => {

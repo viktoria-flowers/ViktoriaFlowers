@@ -28,16 +28,17 @@ class ProfileController {
         if (req.body.password.length === 0) {
             req.body.password = req.user.password;
 
-            return this._data.users.updateObjectPropertiesById(req.body).then(() => {
-                res.redirect('/profile');
-            }, (error) => {
-                res.redirect('/profile-edit');
-            });
+            return this._data.users.updateUserPropertiesById(req.body)
+                .then(() => {
+                    res.redirect('/profile');
+                }, (error) => {
+                    res.redirect('/profile-edit');
+                });
         }
 
         req.body.password = authHelper
             .makeHashFromPassword(req.body.password);
-        return this._data.users.updateObjectPropertiesById(req.body, req.body.password)
+        return this._data.users.updateUserPropertiesById(req.body, req.body.password)
             .then((updatedUser, error) => {
                 res.redirect('/profile');
             }, (error) => {

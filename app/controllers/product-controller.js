@@ -97,7 +97,8 @@ class ProductController {
     }
 
     getDeleteProducts(req, res) {
-        return this._data.products.getAll()
+        return this._data.products
+            .getAll(null, null, null, Number.MAX_SAFE_INTEGER)
             .then((products) => {
                 const pugView = 'products/delete-products';
                 return res.render(pugView, { productsList: products });
