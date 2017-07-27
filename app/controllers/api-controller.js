@@ -35,7 +35,7 @@ class ApiController {
 
                 return this._data.emailSubscribers.create(req.body)
                     .then((newEmail) => {
-                        return res.status(200).json(
+                        return res.status(201).json(
                             { message: 'E-mail added in the list' }
                         );
                     })

@@ -3,6 +3,7 @@
 const { expect } = require('chai');
 const request = require('supertest');
 const testProducts = require('../utils/fake-products');
+const exitsSubscriber = { subscribeEmail: 'exits@one.com' };
 
 describe('/API tests', () => {
     const connectionString = 'mongodb://localhost/products-db-test';
@@ -15,6 +16,10 @@ describe('/API tests', () => {
             .then((_db) => {
                 db = _db;
                 return _db.collection('products').insertMany(testProducts)
+                    .then(() => {
+                        return _db.collection('emailsubscribers')
+                            .insertOne(exitsSubscriber);
+                    })
                     .then(() => {
                         return require('../../data').init(_db);
                     });
@@ -72,8 +77,42 @@ describe('/API tests', () => {
                 .get('/api/autocomplete')
                 .query({ name: 'invalid-prod' })
                 .expect(400, (err) => done(err));
-            //    .then((d) => done(d))
-            //    .catch((err) => done(err));
+        });
+    });
+
+    describe('Api post subscribers', () => {
+        it('Expect to return error', (done) => {
+            request(app)
+                .post('/api/subscribe')
+                .type('application/json')
+                .send({ subscribeEmail: exitsSubscriber.subscribeEmail })
+                .expect(400)
+                .end((err, response) => {
+                    if (err) {
+                        done(err);
+                    }
+
+                    expect(response.body).to.be.equal('email-exists');
+                    done();
+                });
+        });
+
+        it('Expect to add new subscriber', (done) => {
+            request(app)
+                .post('/api/subscribe')
+                .type('application/json')
+                .send({ subscribeEmail: 'new@email.com' })
+                .expect(201)
+                .end((err, response) => {
+                    if (err) {
+                        done(err);
+                    }
+
+                    expect(response.body).to.be.deep.equal({
+                        message: 'E-mail added in the list',
+                    });
+                    done();
+                });
         });
     });
 
