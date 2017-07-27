@@ -44,11 +44,12 @@ const serverRoutes = (app, data) => {
         /* This is done because mongodb ids are ObjectIDs and we are trying to 
         send it a string as an ID, this is why we convert it into an ObjectID */
         const convertStringToObjectID = new ObjectID(req.user._id);
-        req.body._id = convertStringToObjectID;
+            req.body._id = convertStringToObjectID;
+
         if (req.body.password.length === 0) {
             req.body.password = req.user.password;
 
-            data.users.updateWholeObjectById(req.body).then(() => {
+            data.users.updateObjectPropertiesById(req.body).then(() => {
                 res.redirect('/profile');
             }, (error) => {
                 res.redirect('/profile-edit');
@@ -56,7 +57,7 @@ const serverRoutes = (app, data) => {
         } else {
             req.body.password = authHelper
                 .makeHashFromPassword(req.body.password);
-            data.users.updateWholeObjectById(req.body)
+            data.users.updateObjectPropertiesById(req.body, req.body.password)
                 .then((updatedUser, error) => {
                     res.redirect('/profile');
                 }, (error) => {
