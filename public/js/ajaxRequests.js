@@ -1,4 +1,4 @@
-/*globals $, typeahead */
+/*globals $, typeahead, toastr */
 $('.autocompleteInput').on('keyup', () => {
     let currentValue = $(".autocompleteInput").val();
     $.ajax({
