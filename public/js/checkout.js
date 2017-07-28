@@ -18,9 +18,10 @@ $('.addToCart').on('click', () => {
 
     if (!exist) {
         obj.push({ "id": $('input[name=id]').attr('value'), "name": $('.prodName').html(), "price": $('.prodPrice').html(), "imgUrl": $('.prodImg').attr('src') });
-        alert('Продуктът беше добавен в количката');
+        toastr.info('Продуктът беше добавен в количката')
     } else {
-        alert('Вече сте добавили този продукт в количката');
+        toastr.options.closeButton = true;
+        toastr.error('Вече сте добавили този продукт в количката')
     }
 
     if (localStorage.getItem("cart")) {
