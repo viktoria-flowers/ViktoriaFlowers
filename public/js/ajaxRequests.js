@@ -3,7 +3,6 @@ $('.autocompleteInput').on('keyup', () => {
     
     let currentValue = $(".autocompleteInput").val();
     if (!currentValue) {
-        console.log("return");
         return;
     }
 
@@ -12,7 +11,6 @@ $('.autocompleteInput').on('keyup', () => {
         url: "/api/autocomplete",
         data: { name: currentValue },
         success: ((data) => {
-            console.log(data);
             $('#autocomplete').typeahead({ source: data });
         }),
         error: ((error) => {

@@ -65,15 +65,14 @@ describe('/API tests', () => {
                 });
         });
 
-        it('Expect to return all if no parameter provided', (done) => {
+        it('Expect to return empty array if no parameter provided', (done) => {
             request(app)
                 .get('/api/autocomplete')
                 .expect(200)
                 .set('Accept', 'application/json')
                 .then((response) => {
                     expect(response.body).to.be.an('array');
-                    expect(response.body.length)
-                        .to.be.equal(testProducts.length);
+                    expect(response.body.length).to.be.equal(0);
                     done();
                 }).catch((err) => {
                     done(err);
@@ -84,7 +83,8 @@ describe('/API tests', () => {
             request(app)
                 .get('/api/autocomplete')
                 .query({ name: 'invalid-prod' })
-                .expect(400, (err) => done(err));
+                .expect(200, (err) => done(err));
+                // res.status(200).json([])
         });
     });
 
