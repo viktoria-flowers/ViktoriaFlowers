@@ -6,6 +6,7 @@ $('.autocompleteInput').on('keyup', () => {
         url: "/api/autocomplete",
         data: { name: currentValue },
         success: ((data) => {
+            console.log(data);
             $('#autocomplete').typeahead({ source: data });
         }),
         error: ((error) => {

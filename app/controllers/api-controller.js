@@ -11,15 +11,16 @@ class ApiController {
 
         return this._data.products.getAll(query)
             .then((products) => {
-                // if (products.length === 0) {
-                //     // return res.sendStatus(400);
-                //     return res.status(200).json([]);
-                // }
+                if (products.length === 0) {
+                    // return res.sendStatus(400);
+                    return res.status(200).json([]);
+                }
 
                 const productNames = products.map((p) => {
                     return p.title;
                 });
 
+                console.log(productNames);
                 return res.status(200).json(productNames);
             })
             .catch((err) => {

@@ -1,16 +1,16 @@
 const { setLocals } = require('../middlewares');
 const { isAdmin } = require('../middlewares');
 
-const serverRoutes = (app, usersController) => {
+const serverRoutes = (app, controllers) => {
     app.use('/', setLocals);
 
     app.get('/', (req, res) => {
-        return usersController.getTopProductsForHomePage(req, res);
+        return controllers.usersController.getTopProductsForHomePage(req, res);
     });
     app.get('/home', (req, res) => {
-        return usersController.getTopProductsForHomePage(req, res);
+        return controllers.usersController.getTopProductsForHomePage(req, res);
     });
-    
+
     app.get('/baskets', (req, res) => res.render('baskets'));
     app.get('/pots', (req, res) => res.render('pots'));
     app.get('/cards', (req, res) => res.render('cards'));
@@ -24,7 +24,7 @@ const serverRoutes = (app, usersController) => {
     app.get('/contacts', (req, res) => res.render('contacts'));
     app.get('/checkout', (req, res) => res.render('checkout'));
     app.get('/userslist', isAdmin, (req, res) => {
-        return usersController.getAllUsers(req, res);
+        return controllers.usersController.getAllUsers(req, res);
     });
 };
 
