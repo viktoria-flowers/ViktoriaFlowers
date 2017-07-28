@@ -83,8 +83,15 @@ describe('/API tests', () => {
             request(app)
                 .get('/api/autocomplete')
                 .query({ name: 'invalid-prod' })
-                .expect(200, (err) => done(err));
-                // res.status(200).json([])
+                .expect(200)
+                .end((err, response) => {
+                    if (err) {
+                        done(err);
+                    }
+
+                    expect(response.body).to.be.deep.equal([]);
+                    return done();
+                });
         });
     });
 
@@ -101,7 +108,7 @@ describe('/API tests', () => {
                     }
 
                     expect(response.body).to.be.equal('email-exists');
-                    done();
+                    return done();
                 });
         });
 
@@ -151,7 +158,6 @@ describe('/API tests', () => {
                     if (err) {
                         return done(err);
                     }
-
 
                     // user is authenticated here (Admin)
                     return agent
@@ -320,7 +326,7 @@ describe('/API tests', () => {
         });
     });
 
-    afterEach(function() {
+    afterEach(function () {
         return db.dropDatabase();
     });
 });
