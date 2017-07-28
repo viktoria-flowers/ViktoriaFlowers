@@ -84,16 +84,6 @@ class BaseData {
         });
     }
 
-    update(param) {
-        return this.collection.update({ '_id': new ObjectID(id) },
-            {
-                $set:
-                {
-                    roles: ['admin'],
-                },
-            });
-    }
-
     updateParamsById(model, props) {
         return this.collection.updateOne(
             { _id: new ObjectID(model._id) },

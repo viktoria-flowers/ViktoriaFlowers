@@ -13,6 +13,32 @@ class UsersData extends BaseData {
         return this.collection.findOne({ _id: new ObjectID(id) });
     }
 
+    // override base
+    create(newUser) {
+        const modelState = this.validate(newUser);
+        if (!modelState.isValid) {
+            return Promise.reject(modelState.errors);
+        }
+
+        const newPassword = authHelper.makeHashFromPassword(newUser.password);
+        return this.findByUsername(newUser.username)
+            .then((user) => {
+                if (user) {
+                    return Promise.reject(['username-exist']);
+                }
+
+                // register the new user
+                newUser.roles = [];
+                newUser.orders = [];
+                newUser.password = newPassword;
+                return super.create(newUser);
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
+    }
+
     findByUsername(username) {
         return this.collection.findOne({
             username:
@@ -51,29 +77,23 @@ class UsersData extends BaseData {
         }
     }
 
-    // override base
-    create(newUser) {
-        const modelState = this.validate(newUser);
-        if (!modelState.isValid) {
-            return Promise.reject(modelState.errors);
-        }
+    update(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            {
+                $set:
+                {
+                    roles: ['admin'],
+                },
+            });
+    }
 
-        const newPassword = authHelper.makeHashFromPassword(newUser.password);
-        return this.findByUsername(newUser.username)
-            .then((user) => {
-                if (user) {
-                    return Promise.reject(['username-exist']);
-                }
-
-                // register the new user
-                newUser.roles = [];
-                newUser.orders = [];
-                newUser.password = newPassword;
-                return super.create(newUser);
-            })
-            .catch((err) => {
-                console.log(err);
-                throw err;
+    setAdmin(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            {
+                $set:
+                {
+                    roles: ['admin'],
+                },
             });
     }
 }

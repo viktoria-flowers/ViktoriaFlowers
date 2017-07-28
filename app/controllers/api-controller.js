@@ -6,19 +6,21 @@ class ApiController {
     }
 
     getAutoComplete(req, res) {
-        const regex = new RegExp(req.query.name);
+        const regex = new RegExp(req.query.name, 'i');
         const query = { 'title': regex };
 
         return this._data.products.getAll(query)
             .then((products) => {
                 if (products.length === 0) {
-                    return res.sendStatus(400);
+                    // return res.sendStatus(400);
+                    return res.status(200).json([]);
                 }
 
                 const productNames = products.map((p) => {
                     return p.title;
                 });
 
+                console.log(productNames);
                 return res.status(200).json(productNames);
             })
             .catch((err) => {
