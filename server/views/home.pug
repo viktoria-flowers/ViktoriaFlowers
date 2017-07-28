@@ -24,6 +24,7 @@ block content
             em
              | Нестандартни букети
     //MAIN slider end
+
     //PROMO and newest products start
     .top-brands
       .container
@@ -32,227 +33,80 @@ block content
           .bs-example.bs-example-tabs(role='tabpanel', data-example-id='togglable-tabs')
             ul#myTab.nav.nav-tabs(role='tablist')
               li.active(role='presentation')
-                a#expeditions-tab(href='#expeditions', role='tab', data-toggle='tab', aria-controls='expeditions', aria-expanded='true') Промо
+                a#expeditions-tab(href='#expeditions', role='tab', data-toggle='tab', aria-controls='expeditions', aria-expanded='true') Най-търсени предложения
               li(role='presentation')
                 a#tours-tab(href='#tours', role='tab', data-toggle='tab', aria-controls='tours') Най-нови предложения
+            
             #myTabContent.tab-content
+              
+              ///////////////// first
+                  
               #expeditions.tab-pane.fade.in.active(role='tabpanel', aria-labelledby='expeditions-tab')
                 .agile_top_brands_grids
+              
+                each prod, index in topViewed
                   .col-md-4.top_brand_left
                     .hover14.column
                       .agile_top_brand_left_grid
+                      if prod.wasPrice != ''
                         .agile_top_brand_left_grid_pos
                           img.img-responsive(src='static/images/offer.png', alt=' ')
                         .agile_top_brand_left_grid1
                           figure
                             .snipcart-item.block
                               .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/1.png')
-                                p Tata-salt
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $20.99 
-                                  span $35.00
+                                a(href='/products/details/' + prod._id)
+                                  img(title=' ', alt=' ', src=prod.url)
+                                p= prod.title
+                                h4= prod.price 
+                                  span= prod.price 
                               .snipcart-details.top_brand_home_details
                                 form(action='#', method='post')
                                   fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Fortune Sunflower Oil')
-                                    input(type='hidden', name='amount', value='20.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
+                                    input(type='hidden', name='id', value=prod._id)
+                                    input(type='hidden', name='title', value=prod.title)
+                                    input(type='hidden', name='price', value=prod.price)
+                                    input(type='hidden', name='wasPrice', value=prod.wasPrice)
+                                    input(type='hidden', name='type', value=prod.type)
+                                    input(type='hidden', name='description', value=prod.description)
+                                    input(type='hidden', name='url', value=prod.url)
+                                    input(type='hidden', name='dateCreated', value=prod.dateCreated)
+                                    input(type='hidden', name='viewsCount', value=prod.viewsCount)
                                     input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
+                        if (index + 1) % 3 == 0
+                          .clearfix
+                          .agile_top_brands_grids
+                      else
                         .agile_top_brand_left_grid1
                           figure
                             .snipcart-item.block
                               .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/2.png')
-                                p Fortune-sunflower
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $20.99 
-                                  span $35.00
+                                a(href='/products/details/' + prod._id)
+                                  img(title=' ', alt=' ', src=prod.url)
+                                p= prod.title
+                                h4= prod.price 
                               .snipcart-details.top_brand_home_details
                                 form(action='#', method='post')
                                   fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='basmati rise')
-                                    input(type='hidden', name='amount', value='20.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Добавете в количката')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img.img-responsive(src='static/images/3.png', alt=' ')
-                                p Aashirvaad-atta
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $40.99 
-                                  span $65.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Pepsi soft drink')
-                                    input(type='hidden', name='amount', value='40.00')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
+                                    input(type='hidden', name='id', value=prod._id)
+                                    input(type='hidden', name='title', value=prod.title)
+                                    input(type='hidden', name='price', value=prod.price)
+                                    input(type='hidden', name='wasPrice', value=prod.wasPrice)
+                                    input(type='hidden', name='type', value=prod.type)
+                                    input(type='hidden', name='description', value=prod.description)
+                                    input(type='hidden', name='url', value=prod.url)
+                                    input(type='hidden', name='dateCreated', value=prod.dateCreated)
+                                    input(type='hidden', name='viewsCount', value=prod.viewsCount)
                                     input.button(type='submit', name='submit', value='Add to cart')
-                  .clearfix  
-                .agile_top_brands_grids
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/4.png')
-                                p Sampann-toor-dal
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $35.99 
-                                  span $55.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Fortune Sunflower Oil')
-                                    input(type='hidden', name='amount', value='35.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/5.png')
-                                p Parryss-sugar
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $30.99 
-                                  span $45.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='basmati rise')
-                                    input(type='hidden', name='amount', value='30.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img.img-responsive(src='static/images/6.png', alt=' ')
-                                p Saffola-gold
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $80.99 
-                                  span $105.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Pepsi soft drink')
-                                    input(type='hidden', name='amount', value='80.00')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .clearfix  
+                        if (index + 1) % 3 == 0
+                          .clearfix
+                          .agile_top_brands_grids
+
+              // ////// second 
+            
               #tours.tab-pane.fade(role='tabpanel', aria-labelledby='tours-tab')
-                .agile-tp
-                  h5 This week
-                  p.w3l-ad
-                    | We've pulled together all our advertised offers into one place, so you won't miss out on a great deal.
                 .agile_top_brands_grids
+
                   .col-md-4.top_brand_left
                     .hover14.column
                       .agile_top_brand_left_grid
@@ -462,6 +316,7 @@ block content
                                     input(type='hidden', name='cancel_return', value=' ')
                                     input.button(type='submit', name='submit', value='Add to cart')
                   .clearfix  
+    
     //PROMO and newest products start
     //Carousel start
     #myCarousel.carousel.slide(data-ride='carousel')
@@ -486,17 +341,17 @@ block content
       .container
         .col-md-6.ban-bottom3
           .ban-top
-            img.img-responsive(src='static/images/p2.jpg', alt='')
+            img.img-responsive(src='static/images/extraordinary1.jpg', alt='')
           .ban-img
             .ban-bottom1
               .ban-top
-                img.img-responsive(src='static/images/p3.jpg', alt='')
+                img.img-responsive(src='static/images/baskets.jpg', alt='')
             .ban-bottom2
               .ban-top
-                img.img-responsive(src='static/images/p4.jpg', alt='')
+                img.img-responsive(src='static/images/circle.jpg', alt='')
             .clearfix
         .col-md-6.ban-bottom
           .ban-top
-            img.img-responsive(src='static/images/111.jpg', alt='')
+            img.img-responsive(src='static/images/wedding1.jpg', alt='')
         .clearfix
     //Fading pics end

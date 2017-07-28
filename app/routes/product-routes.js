@@ -12,8 +12,17 @@ const productRoutes = (app, productController) => {
         return productController.getDetailsProduct(req, res);
     });
 
+
+            return data.products.updateParamsById(product, { viewsCount: ++product.viewsCount })
+                .then(() => {
+                    return res.render(
+                        'products/details', { model: product });
+                });
+        });
+
     app.get('/products/delete', isAdmin, (req, res) => {
         return productController.getDeleteProducts(req, res);
+
     });
 
     app.post(
