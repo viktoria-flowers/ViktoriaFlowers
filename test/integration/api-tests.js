@@ -65,15 +65,14 @@ describe('/API tests', () => {
                 });
         });
 
-        it('Expect to return all if no parameter provided', (done) => {
+        it('Expect to return empty array if no parameter provided', (done) => {
             request(app)
                 .get('/api/autocomplete')
                 .expect(200)
                 .set('Accept', 'application/json')
                 .then((response) => {
                     expect(response.body).to.be.an('array');
-                    expect(response.body.length)
-                        .to.be.equal(testProducts.length);
+                    expect(response.body.length).to.be.equal(0);
                     done();
                 }).catch((err) => {
                     done(err);
@@ -84,7 +83,15 @@ describe('/API tests', () => {
             request(app)
                 .get('/api/autocomplete')
                 .query({ name: 'invalid-prod' })
-                .expect(400, (err) => done(err));
+                .expect(200)
+                .end((err, response) => {
+                    if (err) {
+                        done(err);
+                    }
+
+                    expect(response.body).to.be.deep.equal([]);
+                    return done();
+                });
         });
     });
 
@@ -101,7 +108,7 @@ describe('/API tests', () => {
                     }
 
                     expect(response.body).to.be.equal('email-exists');
-                    done();
+                    return done();
                 });
         });
 
@@ -151,7 +158,6 @@ describe('/API tests', () => {
                     if (err) {
                         return done(err);
                     }
-
 
                     // user is authenticated here (Admin)
                     return agent
@@ -320,7 +326,7 @@ describe('/API tests', () => {
         });
     });
 
-    afterEach(function() {
+    afterEach(function () {
         return db.dropDatabase();
     });
 });

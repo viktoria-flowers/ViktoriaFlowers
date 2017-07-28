@@ -8,11 +8,13 @@ class ApiController {
     getAutoComplete(req, res) {
         const regex = new RegExp(req.query.name, 'i');
         const query = { 'title': regex };
+        if(!req.query.name) {
+            return res.status(200).json([]);
+        }
 
         return this._data.products.getAll(query)
             .then((products) => {
-                if (products.length === 0) {
-                    // return res.sendStatus(400);
+                if (products.length === 0 ) {
                     return res.status(200).json([]);
                 }
 
@@ -20,7 +22,6 @@ class ApiController {
                     return p.title;
                 });
 
-                console.log(productNames);
                 return res.status(200).json(productNames);
             })
             .catch((err) => {
