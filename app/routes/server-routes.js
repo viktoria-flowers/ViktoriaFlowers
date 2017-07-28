@@ -4,21 +4,8 @@ const { isAdmin } = require('../middlewares');
 const serverRoutes = (app, usersController) => {
     app.use('/', setLocals);
 
-
     app.get('/', (req, res) => {
-        let sortViewsObj = { viewsCount: -1 };
-        let sortNewsesObj = { dateCreated: 1 };
-
-        Promise.resolve;
-        data.products.getAll({}, sortViewsObj, 1, 6)
-            .then((topViewed) => {
-                data.products.getAll({}, sortNewsesObj, 1, 6)
-                    .then((topNewest) => {
-                        var products = { topNewest: topNewest, topViewed: topViewed };
-
-                        return res.render('home', products);
-                    });
-            });
+        return usersController.getTopProductsForHomePage(req, res);
     });
 
     app.get('/home', (req, res) => res.render('home'));
