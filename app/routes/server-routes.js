@@ -7,9 +7,10 @@ const serverRoutes = (app, usersController) => {
     app.get('/', (req, res) => {
         return usersController.getTopProductsForHomePage(req, res);
     });
-
-    app.get('/home', (req, res) => res.render('home'));
-
+    app.get('/home', (req, res) => {
+        return usersController.getTopProductsForHomePage(req, res);
+    });
+    
     app.get('/baskets', (req, res) => res.render('baskets'));
     app.get('/pots', (req, res) => res.render('pots'));
     app.get('/cards', (req, res) => res.render('cards'));
