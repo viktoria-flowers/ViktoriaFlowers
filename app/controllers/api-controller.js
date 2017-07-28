@@ -57,7 +57,7 @@ class ApiController {
     postContactUs(req, res) {
         return this._data.contactUsUsers.create(req.body)
             .then((contactUsDataSend) => {
-                return res.status(200).json(
+                return res.status(201).json(
                     { message: 'OK' }
                 );
             })
@@ -76,7 +76,7 @@ class ApiController {
     getProducts(req, res) {
         const type = req.params.type;
         if (type && productTypes.indexOf(type) === -1) {
-            return res.json({ message: `Wrong type: ${type}` });
+            return res.status(400).json({ message: `Wrong type: ${type}` });
         }
 
         const page = +req.query.page || 1;

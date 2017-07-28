@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
 const { setLocals } = require('../../../../app/middlewares');
-const { getResponseMock, getRequestMock } = require('../../mocks-req-res');
+const { getResponseMock } = require('../../mocks-req-res');
 
 describe('Middleware setLocals() tests', () => {
-
     let isNextCalled = false;
     const next = () => {
         isNextCalled = true;
