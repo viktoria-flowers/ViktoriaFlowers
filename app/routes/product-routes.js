@@ -14,7 +14,6 @@ const productRoutes = (app, productController) => {
 
     app.get('/products/delete', isAdmin, (req, res) => {
         return productController.getDeleteProducts(req, res);
-
     });
 
     app.post(
