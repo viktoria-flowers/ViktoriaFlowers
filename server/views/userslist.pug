@@ -1,0 +1,28 @@
+extends /layouts/default.pug
+
+block content
+  .breadcrumbs
+    .container
+      ol.breadcrumb.breadcrumb1.animated.wow.slideInLeft(data-wow-delay='.5s')
+        li
+          a(href='/')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            | Начало
+        li.active Списък с потребители
+  .container.table-responsive
+    table.table.text-left
+      thead
+        tr
+          th Потребителско име
+          th E-mail
+          th
+      tbody
+        if (userlist && userlist.length)
+          - for(var i = 0; i < userlist.length; i += 1) 
+              tr.productsRow
+                td.userIdCell(value=userlist[i]._id)
+                  = userlist[i].username
+                td
+                  = userlist[i].email
+                td.text-right
+                  input.btn.btn-md.btn-danger.set-admin(type="button", value="Направи админ")

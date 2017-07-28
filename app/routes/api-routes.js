@@ -24,6 +24,10 @@ const ajaxRequests = (app, apiController) => {
     app.get('/api/products/:type*?', (req, res) => {
         return apiController.getProducts(req, res);
     });
+
+    app.post('/api/create-admin', isAdmin, (req, res) => {
+        return apiController.postSetUserAsAdmin(req, res);
+    });
 };
 
 module.exports = ajaxRequests;

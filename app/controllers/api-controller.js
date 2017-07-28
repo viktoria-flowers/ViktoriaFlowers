@@ -113,6 +113,19 @@ class ApiController {
             .catch((err) => res.status(400)
                 .res.json(err));
     }
+
+    postSetUserAsAdmin(req, res) {
+        const id = req.body.userId;
+        return this._data.users.setAdmin(id)
+            .then((selectedUser) => {
+                return res.status(200).json(
+                    { message: 'OK' }
+                );
+            })
+            .catch((err) => {
+                return res.status(400).json(err);
+            });
+    }
 }
 
 module.exports = ApiController;

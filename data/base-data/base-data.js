@@ -32,6 +32,15 @@ class BaseData {
             .limit(size)
             .toArray();
     }
+        
+    setAdmin(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
+    }
 
     findById(id) {
         if (!id || !ObjectID.isValid(id)) {
@@ -72,6 +81,15 @@ class BaseData {
         return this.collection.remove({
             _id: new ObjectID(obj._id),
         });
+    }
+
+    update(param) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
     }
 
     updateParamsById(model, props) {

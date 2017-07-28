@@ -174,6 +174,25 @@ $('#checkout-button').on('click', () => {
             sendInfo: sendInfo,
         },
         success: ((data) => {
+            toastr.success(data);                
+        }),
+        error: ((error) => {
+            toastr.error(JSON.stringify(error));                            
+        })
+    });
+});
+
+$('.set-admin').on('click', (e) => {
+
+    let userId = $(event.target).parent().parent().find('.userIdCell').attr('value');
+
+    $.ajax({
+        type: "POST",
+        url: "/api/create-admin",
+        data: {
+            userId: userId,
+        },
+        success: ((data) => {
             toastr.error(data);                
         }),
         error: ((error) => {
@@ -181,4 +200,6 @@ $('#checkout-button').on('click', () => {
         })
     });
 });
+
+
 
