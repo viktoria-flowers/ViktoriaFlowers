@@ -4,7 +4,6 @@ const BaseData = require('../../../data/base-data/base-data');
 const ModelState = require('../../../data/model-state');
 const { constants } = require('../../../app/utils');
 const sinon = require('sinon');
-const { ObjectID } = require('mongodb');
 
 describe('BaseData tests', () => {
     const db = {
@@ -14,18 +13,11 @@ describe('BaseData tests', () => {
     let items = [];
 
     let ModelClass = null;
-    const validator = null;
     let baseData = null;
-    const idNumber = '222222222222222222222222';
-    // let Id = new ObjectID(idNumber);
 
     const toArray = () => {
         return Promise.resolve(items);
     };
-
-    // const findOne = () => {
-    //     return Promise.resolve(existingUser);
-    // };
 
     const find = (obj) => {
         if (obj) {
