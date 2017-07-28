@@ -156,6 +156,7 @@ $('#checkout-button').on('click', () => {
 
     let ids = $('.productName').toArray();
     let quantities = $('.quantities').toArray();
+    let sendInfo = [];
     let sendIdsArray = [];
     let sendQuantitiesArray = [];
 
@@ -163,19 +164,21 @@ $('#checkout-button').on('click', () => {
         sendIdsArray.push({ "_id": ids[i].attributes.value.nodeValue });
         sendQuantitiesArray.push(quantities[i].innerHTML);
     }
-    console.log(sendIdsArray);
+
+    sendInfo[0] = sendIdsArray;
+    sendInfo[1] = sendQuantitiesArray;
+
     $.ajax({
         type: "POST",
         url: "/api/checkout",
         data: {
-            ids: sendIdsArray,
-            quantities: sendQuantitiesArray
+            sendInfo: sendInfo,
         },
         success: ((data) => {
             alert(data);
         }),
         error: ((error) => {
-            alert(error);
+            alert(JSON.stringify(error));
         })
     });
 });

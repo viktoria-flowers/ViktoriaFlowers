@@ -67,7 +67,7 @@ class ApiController {
     }
 
     postCheckout(req, res) {
-        return this._data.products.findAllRecordsByIds(req.body.ids)
+        return this._data.products.findAllRecordsByIds(req.body.sendInfo)
             .then((foundProduct) => {
                 return res.send(foundProduct);
             });

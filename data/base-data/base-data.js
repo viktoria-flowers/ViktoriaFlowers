@@ -48,20 +48,12 @@ class BaseData {
             });
     }
 
-    findAllRecordsByIds(ids) {
-        // console.log(ids);
-        // const searchedIds = ids.map(((obj) => {
-        //      return new ObjectID(obj._id);
-        // }));
-let searchedIds = ids.map(function (obj){ return new ObjectID(obj._id)});
+    findAllRecordsByIds(data) {
+        const searchedIds = data[0].map(((obj) => {
+             return new ObjectID(obj._id);
+        }));
 
-this.collection.find({ "_id": { "$in": searchedIds }});
-        // console.log(searchedIds);
-        // this.collection.find({
-        //     '_id': { '$in':
-        //         searchedIds,
-        //     },
-        // });
+        return this.collection.find({ '_id': { '$in': searchedIds } });
     }
 
     create(model) {
