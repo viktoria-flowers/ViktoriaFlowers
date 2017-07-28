@@ -8,47 +8,48 @@ block content
           a(href='/')
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
-        li.active Профил
-  .products
-    .container
-      .row.profile
-        .col-sm-4
-          .profile-sidebar
-            // SIDEBAR MENU
-            .profile-usermenu
-              ul.nav
-                li
-                  i.glyphicon.glyphicon-user
-                  | Потребителско име
-                  p.h3
-                    =user.username
-                li
-                  i.glyphicon.glyphicon-hand-right
-                  | Име и Фамилия
-                  p.h3
-                    =user.names
-                li
-                  i.glyphicon.glyphicon-hand-right
-                  | E-mail адрес
-                  p.h3
-                    =user.email
-                li
-                  i.glyphicon.glyphicon-earphone
-                  | Телефонен номер
-                  p.h3
-                    =user.phone                    
-                li
-                  i.glyphicon.glyphicon-home
-                  | Адрес
-                  p.h3
-                    =user.contactInfo
-              // END MENU
-              // SIDEBAR BUTTONS
-              .profile-userbuttons
-                span
-                  a.btn.btn-success.btn-sm(href="/profile-edit") Редактирай
-            // END SIDEBAR BUTTONS
-        .col-sm-8
+        li.active Профилна информация
+  br
+  .container
+    h1.page-header Профилна информация
+    .row
+      // left column
+      .col-md-4.col-sm-6.col-xs-12
+        .text-center
+          img.avatar.img-circle.img-thumbnail(src='https://cdn0.iconfinder.com/data/icons/superuser-web-kit/512/686909-user_people_man_human_head_person-512.png', alt='user')
+      // edit form column
+      .col-md-8.col-sm-6.col-xs-12.personal-info
+        .col-lg-4
+          label Потребителско име
+        .col-lg-8
+          p
+            =user.username
+        .col-lg-4
+          label Име и Фамилия
+        .col-lg-8
+          p
+            =user.names
+        .col-lg-4
+          label E-mail адрес
+        .col-lg-8
+          p
+            =user.email
+        .col-lg-4
+          label Телефонен номер
+        .col-lg-8
+          p
+            =user.phone
+        .col-lg-4
+          label Адрес
+        .col-lg-8
+          p
+            =user.contactInfo
+        .col-lg-12
+          br
+          a.btn.btn-success.btn-md(href="/profile-edit") Редактирай
+  .container
+    h1.page-header
+    .row
           .profile-content
             #tabs
               ul
@@ -84,5 +85,4 @@ block content
                       event: "mouseover"
                   });
                 });
-  .clearfix
-    
+    .clearfix

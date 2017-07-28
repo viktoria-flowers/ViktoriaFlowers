@@ -32,9 +32,18 @@ class BaseData {
             .limit(size)
             .toArray();
     }
+        
+    setAdmin(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
+    }
 
     findById(id) {
-        if (id || !ObjectID.isValid(id)) {
+        if (!id || !ObjectID.isValid(id)) {
             return Promise.reject(['invalid-id']);
         }
 
@@ -48,20 +57,12 @@ class BaseData {
             });
     }
 
-    findAllRecordsByIds(ids) {
-        // console.log(ids);
-        // const searchedIds = ids.map(((obj) => {
-        //      return new ObjectID(obj._id);
-        // }));
-let searchedIds = ids.map(function (obj){ return new ObjectID(obj._id)});
+    findAllRecordsByIds(data) {
+        const searchedIds = data[0].map(((obj) => {
+             return new ObjectID(obj._id);
+        }));
 
-this.collection.find({ "_id": { "$in": searchedIds }});
-        // console.log(searchedIds);
-        // this.collection.find({
-        //     '_id': { '$in':
-        //         searchedIds,
-        //     },
-        // });
+        return this.collection.find({ '_id': { '$in': searchedIds } });
     }
 
     create(model) {
@@ -76,16 +77,19 @@ this.collection.find({ "_id": { "$in": searchedIds }});
             });
     }
 
-    updateWholeObjectById(model) {
-        return this.collection.replaceOne({
-            _id: model._id,
-        }, model);
-    }
-
     removeObjectById(obj) {
         return this.collection.remove({
             _id: new ObjectID(obj._id),
         });
+    }
+
+    update(param) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
     }
 
     updateParamsById(model, props) {

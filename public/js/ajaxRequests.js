@@ -1,4 +1,4 @@
-/*globals $, alert, typeahead */
+/*globals $, typeahead */
 $('.autocompleteInput').on('keyup', () => {
     let currentValue = $(".autocompleteInput").val();
     $.ajax({
@@ -9,7 +9,7 @@ $('.autocompleteInput').on('keyup', () => {
             $('#autocomplete').typeahead({ source: data });
         }),
         error: ((error) => {
-            alert("error on search");
+            toastr.error("error on search");
         })
     });
 });
@@ -25,7 +25,7 @@ $('#sendSubscribeEmail').on('click', () => {
     function validate(email) {
         let pattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
         if (!email.match(pattern)) {
-            alert('Моля, въведете валиден e-mail адрес');
+            toastr.error("Моля, въведете валиден e-mail адрес");
             $('#subscriptionEmail').val('');
             hasError = true;
         }
@@ -42,12 +42,12 @@ $('#sendSubscribeEmail').on('click', () => {
         url: "/api/subscribe",
         data: { subscribeEmail: subscriberEmail },
         success: ((data) => {
-            alert('Успешно се регистрирахте за нашия бюлетин');
+            toastr.success("Успешно се регистрирахте за нашия бюлетин");
             $('#subscriptionEmail').val('');
         }),
         error: ((error) => {
             if (error.responseJSON === 'email-exists') {
-                alert(errorMessages.existingEmail);
+                toastr.error(errorMessages.existingEmail);
             }
         })
     });
@@ -60,38 +60,7 @@ $('#contactFormSend').on('click', (() => {
     let email = $('#cUserEmail').val();
     let text = $('#cUserText').val();
 
-    let hasError = false;
-
-    function validate(names, email, text) {
-        let namesPattern = /^[a-zA-Z]+$/;
-        let emailPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
-        let textPattern = /^[a-zA-Z0-9 ]+$/;
-
-        if (names === '' || email === '' || text === '') {
-            alert('Формата за връзка с нас е празна, моля попълнете всички полета');
-            return;
-        }
-
-        if (!names.match(namesPattern)) {
-            alert('Моля, въведете валидни имена');
-            $('#cUserNames').val('');
-            hasError = true;
-        }
-
-        if (!email.match(emailPattern)) {
-            alert('Моля, въведете валиден e-mail адрес');
-            $('#cUserEmail').val('');
-            hasError = true;
-        }
-
-        if (!text.match(textPattern)) {
-            alert('Текстовото поле съдържа непозволени символи');
-            $('#cUserText').val('');
-            hasError = true;
-        }
-    }
-
-    validate(names, email, text);
+    let hasError = validate(names, email, text);
 
     if (hasError) {
         return;
@@ -106,7 +75,7 @@ $('#contactFormSend').on('click', (() => {
             contactUserText: text,
         },
         success: ((data) => {
-            alert('Успешно се абонирахте за нашите предложения');
+            toastr.success('Успешно се абонирахте за нашите предложения');
             $('#cUserNames').val('');
             $('#cUserEmail').val('');
             $('#cUserText').val('');
@@ -116,11 +85,11 @@ $('#contactFormSend').on('click', (() => {
 
             for (let i = 0; i < len; i += 1) {
                 if (error.responseJSON[i] === 'names') {
-                    alert('Моля, въведете валидни имена');
+                    toastr.error('Моля, въведете валидни имена');
                 } else if (error.responseJSON[i] === 'email') {
-                    alert('Моля, въведете валиден e-mail');
+                    toastr.error('Моля, въведете валиден e-mail'); 
                 } else if (error.responseJSON[i] === 'text') {
-                    alert('Използвали сте невалидни символи в текстовото поле');
+                    toastr.error('Използвали сте невалидни символи в текстовото поле');                     
                 }
             }
         })
@@ -135,42 +104,102 @@ $('body').on('click', '.delete_product', () => {
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
-        data: { _id : productId },
+        data: { _id: productId },
         success: ((data) => {
-            alert('Продуктът беше изтрит от системата успешно');
+            toastr.success('Продуктът беше изтрит от системата успешно');
             $(location).attr('href', '/products/delete');
         }),
         error: ((error) => {
-            alert(JSON.stringify(error));
+            toastr.error(JSON.stringify(error));            
         })
     });
 });
+
+function validate(names, email, text) {
+    let namesPattern = /^[a-zA-Z]+/;
+    let emailPattern = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
+    let textPattern = /^[a-zA-Z0-9 ]+$/;
+    let hasError = false;
+
+    if (!names && !email && !text) {
+        toastr.error('Формата за връзка с нас е празна, моля попълнете всички полета');
+        hasError = true;
+        return hasError;
+    }
+    if (!names.match(namesPattern)) {
+        toastr.error('Моля, въведете валидни имена');
+        $('#cUserNames').val('');
+        hasError = true;
+        return hasError;
+        
+    }
+
+    if (!email.match(emailPattern)) {
+        toastr.error('Моля, въведете валиден e-mail адрес');        
+        $('#cUserEmail').val('');
+        hasError = true;
+        return hasError;
+    }
+
+    if (!text.match(textPattern)) {
+        toastr.error('Текстовото поле съдържа непозволени символи или е празно');                
+        $('#cUserText').val('');
+        hasError = true;
+        return hasError;
+    }
+        return hasError;
+    
+}
 
 $('#checkout-button').on('click', () => {
 
     let ids = $('.productName').toArray();
     let quantities = $('.quantities').toArray();
+    let sendInfo = [];
     let sendIdsArray = [];
     let sendQuantitiesArray = [];
 
-    for(let i = 0; i < ids.length; i += 1){
-        sendIdsArray.push({"_id": ids[i].attributes.value.nodeValue});
+    for (let i = 0; i < ids.length; i += 1) {
+        sendIdsArray.push({ "_id": ids[i].attributes.value.nodeValue });
         sendQuantitiesArray.push(quantities[i].innerHTML);
     }
-console.log(sendIdsArray);
+
+    sendInfo[0] = sendIdsArray;
+    sendInfo[1] = sendQuantitiesArray;
+
     $.ajax({
         type: "POST",
         url: "/api/checkout",
         data: {
-            ids: sendIdsArray,
-            quantities: sendQuantitiesArray
+            sendInfo: sendInfo,
         },
         success: ((data) => {
-            alert(data);
+            toastr.success(data);                
         }),
         error: ((error) => {
-            alert(error);
+            toastr.error(JSON.stringify(error));                            
         })
     });
 });
+
+$('.set-admin').on('click', (e) => {
+
+    let userId = $(event.target).parent().parent().find('.userIdCell').attr('value');
+
+    $.ajax({
+        type: "POST",
+        url: "/api/create-admin",
+        data: {
+            userId: userId,
+        },
+        success: ((data) => {
+            toastr.error(data);                
+        }),
+        error: ((error) => {
+            toastr.error(JSON.stringify(error));                            
+        })
+    });
+});
+
+
 

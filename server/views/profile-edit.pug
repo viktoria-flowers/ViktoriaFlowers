@@ -8,95 +8,45 @@ block content
           a(href='/')
             span.glyphicon.glyphicon-home(aria-hidden='true')
             | Начало
-        li.active Профил
-  .products
-    .container
-      .row.profile
-        .col-sm-4
-          .profile-sidebar
-            // SIDEBAR USERPIC
-            .profile-userpic
-              img.img-responsive(src='', alt='МОЛЯ СМЕНЕТЕ ПРОФИЛНАТА КАРТИНА С ПО-МАЛКА! от папката public')
-            // END SIDEBAR USERPIC
-            //- // SIDEBAR USER TITLE
-            //- .profile-usertitle
-            //-   .profile-usertitle-name
-            //-     | Тук седи името на user
-            //- // END SIDEBAR USER TITLE
-            // SIDEBAR MENU
-            .profile-usermenu
-              form(action='/profile-edit', method='POST')
-                ul.nav
-                  li
-                    i.glyphicon.glyphicon-user
-                    | Потребителско име
-                    input.input.input-sm.profileInputs(type='text', name='username', value=user.username)
-                  li
-                    i.glyphicon.glyphicon-hand-right
-                    | Нова парола
-                    input.input.input-sm.profileInputs(type='text', name='password')
-                    br
-                    br
-                    br
-                    br
-                  li
-                    i.glyphicon.glyphicon-hand-right
-                    | Име и Фамилия
-                    input.input.input-sm.profileInputs(type='text', name='names', value=user.names)
-                  li
-                    i.glyphicon.glyphicon-hand-right
-                    | E-mail адрес
-                    input.input.input-sm.profileInputs(type='text', name='email', , value=user.email)
-                  li
-                    i.glyphicon.glyphicon-earphone
-                    | Телефонен номер
-                    input.input.input-sm.profileInputs(type='text', name='phone', , value=user.phone)
-                  li
-                    i.glyphicon.glyphicon-home
-                    | Адрес
-                    input.input.input-sm.profileInputs(type='text', name='contactInfo', , value=user.contactInfo)
-                // END MENU
-                // SIDEBAR BUTTONS
-                .profile-userbuttons
-                  span
-                    input.btn.btn-success.btn-sm(type='submit', value='Запази промените')
-                    a.btn.btn-danger.btn-sm(href='/logout') Изтрии профил
-            // END SIDEBAR BUTTONS
-        .col-sm-8
-          .profile-content
-            #tabs
-              ul
-                li
-                  a(href='#tabs-1') История на поръчките
-                li
-                  a(href='#tabs-2') Любими
-              #tabs-1
-                ul.nav
-                  li                  
-                    i.glyphicon.glyphicon-hand-right.gly-size
-                      label.ordersText
-                        | Поръчка 1
-                  li                  
-                    i.glyphicon.glyphicon-hand-right.gly-size
-                      label.ordersText
-                        | Поръчка 2 ...   
-              #tabs-2
-                ul.nav
-                  li                  
-                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                      label.ordersText
-                      a(href="#")
-                        | Продукт 1
-                  li                  
-                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                      label.ordersText
-                      a(href="#")
-                        | Продукт 2..
-              script.
-                $( function() {
-                  $( "#tabs" ).tabs({
-                      event: "mouseover"
-                  });
-                });
+        li.active Редактиране на профил
+  .container
+    h1.page-header Редактиране на профила
+    .row
+      // left column
+      .col-md-3.col-sm-5.col-xs-12
+        .text-center
+          img.avatar.img-circle.img-thumbnail(src='https://cdn0.iconfinder.com/data/icons/superuser-web-kit/512/686909-user_people_man_human_head_person-512.png', alt='user')
+      // edit form column
+      .col-md-9.col-sm-7.col-xs-12.personal-info
+        form.form-horizontal(action='/profile-edit', method='POST', role='form')
+          .form-group
+            label.col-lg-3.control-label Потребителско име
+            .col-lg-8
+              input.form-control(type='text', name='username', value=user.username)
+          .form-group
+            label.col-lg-3.control-label Парола
+            .col-lg-8
+              input.form-control(type='password', name='password')
+          .form-group
+            label.col-lg-3.control-label Име и Фамилия
+            .col-lg-8
+              input.form-control(type='text', name='names', value=user.names)
+          .form-group
+            label.col-lg-3.control-label E-mail
+            .col-lg-8
+              input.form-control(type='text', name='email', value=user.email)
+          .form-group
+            label.col-md-3.control-label Телефонен номер
+            .col-md-8
+              input.form-control(type='text', name='phone', , value=user.phone)
+          .form-group
+            label.col-md-3.control-label Адрес
+            .col-md-8
+              input.form-control(type='text', name='contactInfo', , value=user.contactInfo)
+          .form-group
+            label.col-md-3.control-label
+            .col-md-8
+              input.btn.btn-success.btn-md(type='submit', value='Запази промените')
+  br
   .clearfix
     

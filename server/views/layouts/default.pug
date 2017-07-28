@@ -17,10 +17,11 @@ html
     link(href='https://fonts.googleapis.com/css?family=Philosopher', rel='stylesheet')
     link(href='/static/css/font-awesome.css', rel='stylesheet')
     link(href='/static/css/skdslider.css', rel='stylesheet')
+    link(href='/libs/typeahead/style.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/libs/toastr/build/toastr.min.css', rel="stylesheet")    
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css')    
     link(href='/static/css/style.css', rel='stylesheet', type='text/css', media='all')
     link(href='/static/css//site/loading.css', rel='stylesheet', type='text/css', media='all')
-    link(href='/libs/typeahead/style.css', rel='stylesheet', type='text/css', media='all')
 
     script(src='/static/js/jquery-1.11.1.min.js')
     script(src='https://code.jquery.com/ui/1.12.0/jquery-ui.min.js')
@@ -40,6 +41,8 @@ html
                   a(href='/products/create') Добави продукт
                 li.ul-li.pull-left-lg-nav
                   a(href='/products/delete') Изтрии продукт
+                li.ul-li.pull-left-lg-nav
+                  a(href='/userslist') Списък с потребители
               .col-sm-6
                 li.ul-li.pull-right-lg-nav
                   a(href='/logout') Изход
@@ -201,6 +204,7 @@ html
     script(src='/static/js/skdslider.min.js')
     script(src='/static/js/site/loading.js')
     script(src="/libs/jquery-zoom/jquery.zoom.min.js")
+    script(src="/libs/toastr/build/toastr.min.js")
     script(type='text/javascript', src='/static/js/template.js')
     script(type='text/javascript', src='/static/js/checkout.js')
     script(type='text/javascript', src='/static/js/ajaxRequests.js')      

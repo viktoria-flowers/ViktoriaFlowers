@@ -36,6 +36,9 @@ block content
           form(action='#', method='post')
             fieldset#fieldsetHiddenItems
               input(type='hidden', name='id', value=model._id)
+            - if(isAuthenticated)
               a
                 input.btn.btn-warning.btn-md(name='submit', value='Добави в количка', type='button').addToCart
+            - else
+              a(href="/login") Влезнете в профила си
   .clearfix  
