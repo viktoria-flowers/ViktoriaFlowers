@@ -3766,3 +3766,7 @@ ul.dropdown-cart li .item-right button{
 .histotyFav{
     width: 60px;
 }
+.typeahead.dropdown-menu{
+    max-height: 150px;
+    overflow-y: auto; 
+}
