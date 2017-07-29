@@ -20,7 +20,7 @@ block content
     .col-sm-12
       .col-sm-8.text-center
         .col-sm-4
-          label.sort-label(for='sort') Сортирай по
+          label.sort-label(for='sort') Сортирай
           select.form-control#sort.frm-field.required.sect(name="sortField")
             option(value='title') Име на продукт
             option(value='viewsCount') Брой преглеждания
@@ -35,58 +35,58 @@ block content
   br
   .container
     .col-sm-12
-    if (products && products.length)
-      - for (var p = 0; p < products.length; p += 1)
-        .col-sm-4.productBoxHeight
-          .panel.panel-default
-            - if (products[p].wasPrice.length)
-              .cnrflash
-                .cnrflash-inner
-                  span.cnrflash-label
-                    | Промо
-            .panel-heading.text-center.prodName
-              = products[p].title
-            .panel-body.text-center
-              table.table#tableBorderTop
-                tr
-                  td.crop
-                    a(href='/products/details/' + products[p]._id)
-                      img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=products[p].url, src=products[p].url)
-                tr
-                  td
-                    | Цена: 
-                    span.prodPrice
-                      = products[p].price
-                    |  лв.
-                - if (products[p].wasPrice.length)
+      if (products && products.length)
+        - for (var p = 0; p < products.length; p += 1)
+          .col-sm-4.productBoxHeight
+            .panel.panel-default
+              - if (products[p].wasPrice.length)
+                .cnrflash
+                  .cnrflash-inner
+                    span.cnrflash-label
+                      | Промо
+              .panel-heading.text-center.prodName
+                = products[p].title
+              .panel-body.text-center
+                table.table#tableBorderTop
                   tr
-                    td.scratchOverText.text-center
-                      = 'Предишна цена: ' + products[p].wasPrice + 'лв.'
-                - else
+                    td.crop
+                      a(href='/products/details/' + products[p]._id)
+                        img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=products[p].url, src=products[p].url)
                   tr
                     td
-                      br
-                tr
-                  td
-                    button.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
-                      span.glyphicon.glyphicon-heart
-                      |  Добави в любими
-                tr
-                  td
-                    form(action='#', method='post')
-                      fieldset
-                        input(type='hidden', name='id', value=products[p]._id)
-                        input(type='hidden', name='title', value=products[p].title)
-                        input(type='hidden', name='url', value=products[p].url)
-                        input(type='hidden', name='price', value=products[p].price)
-                        - if (isAuthenticated)
-                          input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
-                        - else
-                          a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + products[p]._id) Вижте детайли
-    else
-      h2.text-center Няма продукти по зададените критерии  
-  nav.numbering
-    +getPages(pages)
+                      | Цена: 
+                      span.prodPrice
+                        = products[p].price
+                      |  лв.
+                  - if (products[p].wasPrice.length)
+                    tr
+                      td.scratchOverText.text-center
+                        = 'Предишна цена: ' + products[p].wasPrice + 'лв.'
+                  - else
+                    tr
+                      td
+                        br
+                  tr
+                    td
+                      button.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
+                        span.glyphicon.glyphicon-heart
+                        |  Добави в любими
+                  tr
+                    td
+                      form(action='#', method='post')
+                        fieldset
+                          input(type='hidden', name='id', value=products[p]._id)
+                          input(type='hidden', name='title', value=products[p].title)
+                          input(type='hidden', name='url', value=products[p].url)
+                          input(type='hidden', name='price', value=products[p].price)
+                          - if (isAuthenticated)
+                            input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
+                          - else
+                            a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + products[p]._id) Вижте детайли
+      else
+        h2.text-center Няма продукти по зададените критерии  
+    nav.numbering
+      +getPages(pages)
   .clearfix
    
 block scripts

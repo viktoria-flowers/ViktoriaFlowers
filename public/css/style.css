@@ -3828,3 +3828,24 @@ table-layout:fixed;
     padding: 10px;
 }
 
+.home-tabs-font-size{
+    font-size: 20px !important;
+}
+
+#ourOffers{
+    color: #016773;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(1turn);
+  }
+}
+
+.ourOffers-effect {
+  animation: spin 10s ease;
+  animation-iteration-count: infinite;
+}
