@@ -4,22 +4,26 @@ const { authHelper } = require('./utils/index');
 const init = (data) => {
     const app = express();
 
-    data.users.getAll({ username: 'admin' })
+    data.users.getAll({ username: 'admin11' })
         .then((users) => {
             if (users.length === 0) {
+                console.log(users);
                 let initialAdmin = {
-                    username: 'admin',
+                    username: 'admin11',
                     password: authHelper.makeHashFromPassword('pe6oadmin4eto'),
                     names : 'admin',
                     phone: '0888888888',
                     email: 'abv@abv.bg',
                     contactInfo: 'admin contact info',
+                    roles: ['admin']
                 };
 
                 data.users.collection.insert(initialAdmin);
             }
+        })
+        .catch((err)=>{
+            console.log(err);
         });
-
 
     const controllers = require('./controllers/init').init(data);
 
