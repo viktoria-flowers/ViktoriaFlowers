@@ -1,48 +1,56 @@
 include ../mixins/productType.pug
 include ../mixins/resolvePaging.pug
 
-
-.col-md-12.products-right
+.col-sm-12
   if (products && products.length)
     each product in products
-      .col-md-4.top_brand_left
-        .hover14.column
-          .agile_top_brand_left_grid
-            .agile_top_brand_left_grid_pos
-            if product.wasPrice.length
-              img.img-responsive(src='/static/images/offer.png', alt=' ')
-            .agile_top_brand_left_grid1
-              figure
-                .snipcart-item.block
-                  .snipcart-thumb
-                    a(href='/products/details/'+product._id)
-                      img.img-responsive.imgRightDimensions#prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
-                    p#prodName
-                      =product.title
-                    h4
-                      | Цена:
-                      span#prodPrice
-                        = product.price
-                      |  лв.
+      .col-sm-4.productBoxHeight
+        .panel.panel-default
+          - if (product.wasPrice)
+            .cnrflash
+              .cnrflash-inner
+                span.cnrflash-label
+                  | Промо
+          .panel-heading.text-center.prodName
+            = product.title
+          .panel-body.text-center
+            table.table#tableBorderTop
+              tr
+                td.crop
+                  a(href='/products/details/' + product._id)
+                    img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
+              tr
+                td
+                  | Цена: 
+                  span.prodPrice
+                    = product.price
+                  |  лв.
+              - if (product.wasPrice)
+                tr
+                  td.scratchOverText.text-center
+                    = 'Предишна цена: ' + product.wasPrice + 'лв.'
+              - else
+                tr
+                  td
                     br
-                    if product.wasPrice.length
-                      h5.scratchOverText.text-center
-                        = 'Предишна цена: ' + product.wasPrice + 'лв.'
-                    else
-                      = product.wasPrice
-                  .snipcart-details.top_brand_home_details
-                    form(action='#', method='post')
-                      fieldset
-                        input(type='hidden', name='id', value=product._id)
-                        input(type='hidden', name='title', value=product.title)
-                        input(type='hidden', name='url', value=product.url)
-                        input(type='hidden', name='price', value=product.price)
-                      - if(isAuthenticated)
-                        a
-                          input.btn.btn-primary.btn-lg(name='submit', value='Добави в количка', type='button').addToCart
+              tr
+                td
+                  button.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
+                    span.glyphicon.glyphicon-heart
+                    |  Добави в любими
+              tr
+                td
+                  form(action='#', method='post')
+                    fieldset
+                      input(type='hidden', name='id', value=product._id)
+                      input(type='hidden', name='title', value=product.title)
+                      input(type='hidden', name='url', value=product.url)
+                      input(type='hidden', name='price', value=product.price)
+                      - if (isAuthenticated)
+                        input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                       - else
-                        a.btn.btn-primary.btn-lg(href='/login') Добавете в количката
+                        a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + product._id) Вижте детайли
   else
-    h2.text-center Няма продукти по зададените критерии  
+    h2.text-center Няма продукти по зададените критерии
 nav.numbering
   +getPages(pages)
