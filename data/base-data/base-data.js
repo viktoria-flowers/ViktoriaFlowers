@@ -33,6 +33,15 @@ class BaseData {
             .toArray();
     }
 
+    setAdmin(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
+    }
+
     findById(id) {
         if (!id || !ObjectID.isValid(id)) {
             return Promise.reject(['invalid-id']);

@@ -126,7 +126,7 @@ $(document).ready(function(){
 // Cart images
 $(document).ready(function(){
   $('td img')
-    .wrap('<div style="height:200px"></div>')
+    .wrap('<div style="height:300px"></div>')
     .css('display', 'block')
     .parent()
     .zoom({
