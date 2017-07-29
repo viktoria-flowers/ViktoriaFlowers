@@ -3831,3 +3831,7 @@ ul.dropdown-cart li .item-right button{
 #del-table{
     table-layout:fixed;
 }
+.typeahead .dropdown-menu{
+    max-height: 150px;
+    overflow-y: auto; 
+}

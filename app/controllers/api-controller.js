@@ -6,13 +6,16 @@ class ApiController {
     }
 
     getAutoComplete(req, res) {
-        const regex = new RegExp(req.query.name);
+        const regex = new RegExp(req.query.name, 'i');
         const query = { 'title': regex };
+        if(!req.query.name) {
+            return res.status(200).json([]);
+        }
 
         return this._data.products.getAll(query)
             .then((products) => {
-                if (products.length === 0) {
-                    return res.sendStatus(400);
+                if (products.length === 0 ) {
+                    return res.status(200).json([]);
                 }
 
                 const productNames = products.map((p) => {
@@ -57,7 +60,7 @@ class ApiController {
     postContactUs(req, res) {
         return this._data.contactUsUsers.create(req.body)
             .then((contactUsDataSend) => {
-                return res.status(200).json(
+                return res.status(201).json(
                     { message: 'OK' }
                 );
             })
@@ -76,7 +79,7 @@ class ApiController {
     getProducts(req, res) {
         const type = req.params.type;
         if (type && productTypes.indexOf(type) === -1) {
-            return res.json({ message: `Wrong type: ${type}` });
+            return res.status(400).json({ message: `Wrong type: ${type}` });
         }
 
         const page = +req.query.page || 1;

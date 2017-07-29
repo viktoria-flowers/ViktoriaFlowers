@@ -17,9 +17,9 @@ const ajaxRequests = (app, apiController) => {
         return apiController.postContactUs(req, res);
     });
 
-    app.post('/api/checkout', isLoggedIn, (req, res) => {
-        return apiController.postCheckout(req, res);
-    });
+    // app.post('/api/checkout', isLoggedIn, (req, res) => {
+    //     return apiController.postCheckout(req, res);
+    // });
 
     app.get('/api/products/:type*?', (req, res) => {
         return apiController.getProducts(req, res);

@@ -14,7 +14,7 @@ class BaseData {
         page = page || 1;
         size = size || constants.DEFAULT_PAGE_SIZE;
         sortObj = sortObj || {};
-        
+
         const skipVal = (page - 1) * size;
         if (filters) {
             return this.collection
@@ -32,6 +32,7 @@ class BaseData {
             .limit(size)
             .toArray();
     }
+<<<<<<< HEAD
 
     setAdmin(id) {
         return this.collection.update({ '_id': new ObjectID(id) },
@@ -41,6 +42,8 @@ class BaseData {
                 },
             });
     }
+=======
+>>>>>>> 04f4778684adecbc12dba312321bbc2e01a28d62
 
     findById(id) {
         if (!id || !ObjectID.isValid(id)) {
@@ -59,7 +62,7 @@ class BaseData {
 
     findAllRecordsByIds(data) {
         const searchedIds = data[0].map(((obj) => {
-             return new ObjectID(obj._id);
+            return new ObjectID(obj._id);
         }));
 
         return this.collection.find({ '_id': { '$in': searchedIds } });
@@ -81,15 +84,6 @@ class BaseData {
         return this.collection.remove({
             _id: new ObjectID(obj._id),
         });
-    }
-
-    update(param) {
-        return this.collection.update({ '_id': new ObjectID(id) },
-            { $set:
-                {
-                    roles: ['admin'],
-                },
-            });
     }
 
     updateParamsById(model, props) {

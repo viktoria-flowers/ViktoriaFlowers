@@ -1,6 +1,10 @@
 const {
-    ApiController, AuthController, ProfileController,
-    ProductController, ImagesController, UsersController,
+    ApiController,
+    AuthController,
+    ProfileController,
+    ProductController,
+    ImagesController,
+    UsersController,
 } = require('./');
 
 const init = (data) => {

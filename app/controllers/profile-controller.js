@@ -38,7 +38,8 @@ class ProfileController {
 
         req.body.password = authHelper
             .makeHashFromPassword(req.body.password);
-        return this._data.users.updateUserPropertiesById(req.body, req.body.password)
+        return this._data.users
+            .updateUserPropertiesById(req.body, req.body.password)
             .then((updatedUser, error) => {
                 res.redirect('/profile');
             }, (error) => {

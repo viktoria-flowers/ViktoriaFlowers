@@ -1,6 +1,11 @@
-/*globals $, typeahead */
+/*globals $, typeahead, toastr */
 $('.autocompleteInput').on('keyup', () => {
+    
     let currentValue = $(".autocompleteInput").val();
+    if (!currentValue) {
+        return;
+    }
+
     $.ajax({
         type: "GET",
         url: "/api/autocomplete",
@@ -87,9 +92,9 @@ $('#contactFormSend').on('click', (() => {
                 if (error.responseJSON[i] === 'names') {
                     toastr.error('Моля, въведете валидни имена');
                 } else if (error.responseJSON[i] === 'email') {
-                    toastr.error('Моля, въведете валиден e-mail'); 
+                    toastr.error('Моля, въведете валиден e-mail');
                 } else if (error.responseJSON[i] === 'text') {
-                    toastr.error('Използвали сте невалидни символи в текстовото поле');                     
+                    toastr.error('Използвали сте невалидни символи в текстовото поле');
                 }
             }
         })
@@ -111,7 +116,7 @@ $('body').on('click', '.delete_product', () => {
             $(location).attr('href', '/products/delete');
         }),
         error: ((error) => {
-            toastr.error(JSON.stringify(error));            
+            toastr.error(JSON.stringify(error));
         })
     });
 });
@@ -132,24 +137,24 @@ function validate(names, email, text) {
         $('#cUserNames').val('');
         hasError = true;
         return hasError;
-        
+
     }
 
     if (!email.match(emailPattern)) {
-        toastr.error('Моля, въведете валиден e-mail адрес');        
+        toastr.error('Моля, въведете валиден e-mail адрес');
         $('#cUserEmail').val('');
         hasError = true;
         return hasError;
     }
 
     if (!text.match(textPattern)) {
-        toastr.error('Текстовото поле съдържа непозволени символи или е празно');                
+        toastr.error('Текстовото поле съдържа непозволени символи или е празно');
         $('#cUserText').val('');
         hasError = true;
         return hasError;
     }
-        return hasError;
-    
+    return hasError;
+
 }
 
 $('#checkout-button').on('click', () => {
@@ -175,10 +180,10 @@ $('#checkout-button').on('click', () => {
             sendInfo: sendInfo,
         },
         success: ((data) => {
-            toastr.success(data);                
+            toastr.success(data);
         }),
         error: ((error) => {
-            toastr.error(JSON.stringify(error));                            
+            toastr.error(JSON.stringify(error));
         })
     });
 });
@@ -194,7 +199,7 @@ $('.set-admin').on('click', (e) => {
             userId: userId,
         },
         success: ((data) => {
-            toastr.error(data);                
+            toastr.error(data);
         }),
         error: ((error) => {
             toastr.error(error);                            
