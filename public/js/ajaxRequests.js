@@ -99,14 +99,15 @@ $('#contactFormSend').on('click', (() => {
 
 $('body').on('click', '.delete_product', () => {
 
-    let productId = $('.idCell').attr('value');
-
+    let productId = $(event.target).parent().parent().find('.idCell').attr('value');
+    
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
         data: { _id: productId },
         success: ((data) => {
-            toastr.success('Продуктът беше изтрит от системата успешно');
+            toastr.success(data);
+            console.log(data);
             $(location).attr('href', '/products/delete');
         }),
         error: ((error) => {
@@ -196,7 +197,7 @@ $('.set-admin').on('click', (e) => {
             toastr.error(data);                
         }),
         error: ((error) => {
-            toastr.error(JSON.stringify(error));                            
+            toastr.error(error);                            
         })
     });
 });

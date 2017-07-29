@@ -2,7 +2,7 @@ const {
     ApiController, AuthController, ProfileController,
     ProductController, ImagesController, UsersController,
 } = require('./');
-console.log(UsersController);
+
 const init = (data) => {
     return {
         apiController: new ApiController(data),

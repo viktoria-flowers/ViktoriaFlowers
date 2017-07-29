@@ -38,7 +38,7 @@ block content
               input(type='hidden', name='id', value=model._id)
             - if(isAuthenticated)
               a
-                input.btn.btn-warning.btn-md(name='submit', value='Добави в количка', type='button').addToCart
+                input.btn.btn-primary.btn-lg(name='submit', value='Добави в количка', type='button').addToCart
             - else
-              a(href="/login") Влезнете в профила си
+              a.btn.btn-primary.btn-lg(href='/login') Добавете в количката
   .clearfix  

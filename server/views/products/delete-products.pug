@@ -10,7 +10,7 @@ block content
             | Начало
         li.active Изтрии продукт
   .container.table-responsive
-    table.table.text-left
+    table#del-table.table.text-left
       thead
         tr
           th Уникален номер на продукта
@@ -22,13 +22,13 @@ block content
         if (productsList && productsList.length)
           - for(var i = 0; i < productsList.length; i += 1) 
               tr.productsRow
-                td.idCell(value=productsList[i]._id)
+                td.word-wrap.idCell(value=productsList[i]._id)
                   = productsList[i]._id
-                td
+                td.word-wrap
                   = productsList[i].title
-                td
+                td.word-wrap
                   = productsList[i].price + ' лв.'
-                td
+                td.word-wrap
                   = moment(productsList[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
-                td
+                td.word-wrap
                   input.btn.btn-md.btn-danger(type="button", value="Изтриите продукта", class="delete_product") 

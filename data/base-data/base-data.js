@@ -32,7 +32,7 @@ class BaseData {
             .limit(size)
             .toArray();
     }
-        
+
     setAdmin(id) {
         return this.collection.update({ '_id': new ObjectID(id) },
             { $set:
