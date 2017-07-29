@@ -37,10 +37,10 @@ block content
     //First tab content start
     .tab-content
       #topNew.tab-pane.fade.in.active
-        .col-sm-12
+        .col-md-12
         if (topNewest && topNewest.length)
           - for (let p = 0; p < topNewest.length; p += 1)
-            .col-sm-4.productBoxHeight
+            .col-md-4.productBoxHeight
               .panel.panel-default
                 - if (topNewest[p].wasPrice.length)
                   .cnrflash
@@ -86,14 +86,15 @@ block content
                               input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                             - else
                               a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topNewest[p]._id) Вижте детайли
+      .clearfix.visible-md-block.visible-sm-block
       //First tab content end
 
       //Second tab content start
       #topViewed.tab-pane.fade
-        .col-sm-12
+        .col-md-12
         if (topViewed && topViewed.length)
           - for (let p = 0; p < topViewed.length; p += 1)
-            .col-sm-4.productBoxHeight
+            .col-md-4.productBoxHeight
               .panel.panel-default
                 - if (topViewed[p].wasPrice.length)
                   .cnrflash
@@ -139,8 +140,8 @@ block content
                               input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                             - else
                               a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topViewed[p]._id) Вижте детайли
+      .clearfix.visible-md-block.visible-sm-block
       //Second tab content end
-  .clearfix  
     
   //Carousel start
   #myCarousel.carousel.slide(data-ride='carousel')
