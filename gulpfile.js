@@ -63,12 +63,14 @@ gulp.task('test-server:stop', () => {
 });
 
 gulp.task('tests:browser', ['test-server:start'], () => {
-    return gulp.src('./test/browser/bouquets/getAll.js')
+    return gulp.src(['./test/browser/**/*tests.js'])
         .pipe(mocha({
-            reporter: 'nyan',
+            reporter: 'spec',
             timeout: 10000,
         }))
         .once('end', () => {
             gulp.start('test-server:stop');
+            /* eslint-disable no-undef */
+            process.exit(0);
         });
 });

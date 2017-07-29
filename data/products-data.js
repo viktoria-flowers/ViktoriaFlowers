@@ -13,6 +13,8 @@ class ProductData extends BaseData {
             return Promise.reject(['model-missing']);
         }
 
+        productModel.price = +productModel.price;
+        productModel.wasPrice = +productModel.wasPrice;
         productModel.dateCreated = new Date();
         productModel.viewsCount = 0;
         return super.create(productModel);
