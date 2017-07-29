@@ -1,6 +1,8 @@
 /*globals hideLoading, showLoading */
 (function() {
 
+    var productsContainer = '.container.products-content';
+
     // on drop down change
     $('body').on('change', 'select.frm-field', function() {
         var data = getData();
@@ -10,10 +12,9 @@
     // on page click
     $('body').on('click', '.pagination.paging li a', function(e) {
         e.preventDefault();
-
         
         var $target = $(e.target);
-        // Sometime  the span elemet is clicked
+        // Sometime  the span element is clicked
         if (!$target.is('a')) {
             $target = $target.closest('a');
         }
@@ -34,34 +35,31 @@
     })
 
     function doAjax(dataQuery) {
-        showLoading('.products .container');
+        showLoading(productsContainer);
 
         $.ajax({
             method: 'GET',
-            url: '/api/products/' + dataQuery.prodyctType || '',
+            url: '/api/products/' + dataQuery.productType || '',
             data: dataQuery
         })
         .done(function(htmlResponse) {
-            $('.products .container .products-content').html(htmlResponse);
+            $(productsContainer).html(htmlResponse);
         })
         .fail(function(err) {
             alert('An error occurred! Check console [F12]!');
             console.log(err);
         })
         .always(function() {
-            hideLoading('.products .container');
+            hideLoading(productsContainer);
         });
     }
-
 
     function getData() {
         return {
             sortField: $('select[name=sortField]').val(),
             sortType: $('select[name=sortType]').val(),
             page: $('.pagination.paging li.active a').attr('data-page'),
-            prodyctType: $('#prodyctType').val(),
+            productType: $('#productType').val(),
         };
-
     };
-
 })()
