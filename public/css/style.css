@@ -3789,7 +3789,8 @@ ul.dropdown-cart li .item-right button{
 }
 
 .word-wrap{
-    word-wrap: break-word;
+display: inline-block;
+word-break: break-word;
 }
 
 @media (min-width: 640px){
@@ -3849,3 +3850,9 @@ table-layout:fixed;
   animation: spin 10s ease;
   animation-iteration-count: infinite;
 }
+.addToFavorites{
+    text-decoration: none;
+    color: black;
+    font-weight: initial;
+}
+

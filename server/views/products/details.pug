@@ -11,34 +11,50 @@ block content
         li.active Информация за продукт
   .products
     .container
-      .col-sm-12
-        .col-sm-6.text-center
+      .col-md-12
+        .col-md-6.text-center
           img.img-responsive.prodImg(src=model.url, alt=model.url)
         .col-md-6.text-center
-          h3.prodName
-           = model.title
-          br
-          small Добавен на: 
-            = model.dateCreated.toLocaleDateString()
-          h4 Преглеждания: 
-            = model.viewsCount
-          h4 Добави в любими 
-            a(href="/")
-              i.glyphicon.glyphicon-heart
-          h4 Описание: 
-            p
-              = model.description || 'Липсва'
-          h4 Цена: 
-            = model.price ? model.price + '.00 лв.' : 'Цената липсва'
-          h4.scratchOverText
-            = model.wasPrice ? 'Предишна цена: ' + model.wasPrice + '.00 лв.' : ''
-          br
-          form(action='#', method='post')
-            fieldset#fieldsetHiddenItems
-              input(type='hidden', name='id', value=model._id)
-            - if(isAuthenticated)
-              a
-                input.btn.btn-primary.btn-lg(name='submit', value='Добави в количка', type='button').addToCart
-            - else
-              a.btn.btn-primary.btn-lg(href='/login') Добавете в количката
-  .clearfix  
+          .panel.panel-default
+            .panel-heading
+              h3.prodName
+              = model.title
+            .panel-body
+              table.table#tableBorderTop
+                tr
+                  td 
+                    h3
+                      | Цена: 
+                      = model.price ? model.price + '.00 лв.' : 'Цената липсва'
+                tr
+                  td.scratchOverText
+                    = model.wasPrice ? 'Предишна цена: ' + model.wasPrice + '.00 лв.' : ''
+                //- tr
+                //-   td 
+                //-     h6
+                //-     | Добавен на: 
+                //-     = model.dateCreated.toLocaleDateString()
+                tr
+                  td Преглеждания: 
+                    = model.viewsCount
+                tr
+                  td 
+                    a.addToFavorites(href="/") Добави в любими 
+                      i.glyphicon.glyphicon-heart.gly-heart
+                tr
+                  td
+                    strong
+                      | Описание: 
+                    p.word-wrap
+                      = model.description || 'Липсва'
+                tr
+                  td
+                    form(action='#', method='post')
+                      fieldset#fieldsetHiddenItems
+                        input(type='hidden', name='id', value=model._id)
+                      - if(isAuthenticated)
+                        a
+                          input.btn.btn-warning.btn-lg(name='submit', value='Добавете в количка', type='button').addToCart
+                      - else
+                        a.btn.btn-warning.btn-lg(href='/login') Добавете в количката
+  .clearfix.visible-md-block.visible-sm-block

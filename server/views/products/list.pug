@@ -33,11 +33,11 @@ block content
             option(value='-1') Низходящ ред
   br
   br
-  .container.products-content
-    .col-sm-12
+  .container
+    .col-md-12
       if (products && products.length)
         - for (var p = 0; p < products.length; p += 1)
-          .col-sm-4.productBoxHeight
+          .col-md-4.productBoxHeight
             .panel.panel-default
               - if (products[p].wasPrice.length)
                 .cnrflash
@@ -83,6 +83,8 @@ block content
                             input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                           - else
                             a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + products[p]._id) Вижте детайли
+          - if ((p !== 0) && (p % 3 === 0))
+            .clearfix.visible-md-block.visible-sm-block
       else
         h2.text-center Няма продукти по зададените критерии  
     nav.numbering
