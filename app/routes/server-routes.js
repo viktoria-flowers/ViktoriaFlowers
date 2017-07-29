@@ -5,10 +5,10 @@ const serverRoutes = (app, controllers) => {
     app.use('/', setLocals);
 
     app.get('/', (req, res) => {
-        return controllers.usersController.getTopProductsForHomePage(req, res);
+        return controllers.productController.getTopProductsForHomePage(req, res);
     });
     app.get('/home', (req, res) => {
-        return controllers.usersController.getTopProductsForHomePage(req, res);
+        return controllers.productController.getTopProductsForHomePage(req, res);
     });
 
     app.get('/baskets', (req, res) => res.render('baskets'));
