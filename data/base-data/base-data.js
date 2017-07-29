@@ -14,7 +14,7 @@ class BaseData {
         page = page || 1;
         size = size || constants.DEFAULT_PAGE_SIZE;
         sortObj = sortObj || {};
-        
+
         const skipVal = (page - 1) * size;
         if (filters) {
             return this.collection
@@ -32,7 +32,16 @@ class BaseData {
             .limit(size)
             .toArray();
     }
-        
+
+    setAdmin(id) {
+        return this.collection.update({ '_id': new ObjectID(id) },
+            { $set:
+                {
+                    roles: ['admin'],
+                },
+            });
+    }
+
     findById(id) {
         if (!id || !ObjectID.isValid(id)) {
             return Promise.reject(['invalid-id']);
@@ -50,7 +59,7 @@ class BaseData {
 
     findAllRecordsByIds(data) {
         const searchedIds = data[0].map(((obj) => {
-             return new ObjectID(obj._id);
+            return new ObjectID(obj._id);
         }));
 
         return this.collection.find({ '_id': { '$in': searchedIds } });

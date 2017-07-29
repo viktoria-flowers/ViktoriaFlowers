@@ -1,4 +1,4 @@
-const { isLoggedIn, setLocals, isAdmin } = require('../middlewares');
+const { isLoggedIn } = require('../middlewares');
 
 const profileRoutes = (app, profileController) => {
     app.get('/profile', isLoggedIn, (req, res) => {

@@ -37,7 +37,11 @@ include ../mixins/resolvePaging.pug
                         input(type='hidden', name='title', value=product.title)
                         input(type='hidden', name='url', value=product.url)
                         input(type='hidden', name='price', value=product.price)
-                        input.button(type='button', name='submit', value='Добави в количката', href='#myModal', data-toggle='modal').addToCart
+                      - if(isAuthenticated)
+                        a
+                          input.btn.btn-primary.btn-lg(name='submit', value='Добави в количка', type='button').addToCart
+                      - else
+                        a.btn.btn-primary.btn-lg(href='/login') Добавете в количката
   else
     h2.text-center Няма продукти по зададените критерии  
 nav.numbering
