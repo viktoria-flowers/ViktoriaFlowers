@@ -14,58 +14,58 @@ block content
             | Начало
         li.active 
             +getProductType(type)
-  .products
-    .container
-      .products-right-grid
-        .products-right-grids
-          .sorting
-            label(for='sort') Сортирай по
-          .sorting-left
-            label(for='order') Подредба
-          .clearfix
-        .products-right-grids
-          .sorting
-            select#sort.frm-field.required.sect(name="sortField")
-              option(value='title') Име на продукт
-              option(value='viewsCount') Брой преглеждания
-              option(value='price') Цена на продукт
-              option(value='dateCreated') Дата на добавяне
-          .sorting-left
-            select#order.frm-field.required.sect(name="sortType")
-              option(value='1') Възходящ ред
-              option(value='-1') Низходящ ред
-          .clearfix
-        .agile_top_brands_grids
+  br
+  br
+  .container
+    .col-sm-12
+      .col-sm-8.text-center
+        .col-sm-4
+          label.sort-label(for='sort') Сортирай по
+          select.form-control#sort.frm-field.required.sect(name="sortField")
+            option(value='title') Име на продукт
+            option(value='viewsCount') Брой преглеждания
+            option(value='price') Цена на продукт
+            option(value='dateCreated') Дата на добавяне
+        .col-sm-4
+          label.sort-label(for='order') Подредба
+          select.form-control#order.frm-field.required.sect(name="sortType")
+            option(value='1') Възходящ ред
+            option(value='-1') Низходящ ред
+  br
+  br
   .container
     .col-sm-12
     if (products && products.length)
-      each product,index in products
-        .col-sm-4
+      - for (var p = 0; p < products.length; p += 1)
+        .col-sm-4.productBoxHeight
           .panel.panel-default
-          - if (product.wasPrice.length)
-            .cnrflash
-              .cnrflash-inner
-                span.cnrflash-label
-                  | Промо
+            - if (products[p].wasPrice.length)
+              .cnrflash
+                .cnrflash-inner
+                  span.cnrflash-label
+                    | Промо
             .panel-heading.text-center.prodName
-              = product.title
+              = products[p].title
             .panel-body.text-center
               table.table#tableBorderTop
                 tr
-                  td
-                    a(href='/products/details/' + product._id)
-                      img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
+                  td.crop
+                    a(href='/products/details/' + products[p]._id)
+                      img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=products[p].url, src=products[p].url)
                 tr
                   td
                     | Цена: 
                     span.prodPrice
-                      = product.price
+                      = products[p].price
                     |  лв.
-              - if (product.wasPrice.length)
-                tr
-                  td
-                    h5.scratchOverText.text-center
-                      = 'Предишна цена: ' + product.wasPrice + 'лв.'
+                - if (products[p].wasPrice.length)
+                  tr
+                    td.scratchOverText.text-center
+                      = 'Предишна цена: ' + products[p].wasPrice + 'лв.'
+                - else
+                  tr
+                    td
+                      br
                 tr
                   td
                     button.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
@@ -75,91 +75,19 @@ block content
                   td
                     form(action='#', method='post')
                       fieldset
-                        input(type='hidden', name='id', value=product._id)
-                        input(type='hidden', name='title', value=product.title)
-                        input(type='hidden', name='url', value=product.url)
-                        input(type='hidden', name='price', value=product.price)
-                      - if (isAuthenticated)
-                        a
-                          input.button.hundredPercentWidthhundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
-                      - else
-                        a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + product._id) Вижте детайли
-        if index % 3 === 0
-        .clearfix
-          h1 
-            = index % 3
-
-
-
-    //- .products
-    //-   .container
-    //-     .products-right-grid
-    //-       .products-right-grids
-    //-         .sorting
-    //-           label(for='sort') Сортирай по
-    //-         .sorting-left
-    //-           label(for='order') Подредба
-    //-         .clearfix
-    //-       .products-right-grids
-    //-         .sorting
-    //-           select#sort.frm-field.required.sect(name="sortField")
-    //-             option(value='title') Име на продукт
-    //-             option(value='viewsCount') Брой преглеждания
-    //-             option(value='price') Цена на продукт
-    //-             option(value='dateCreated') Дата на добавяне
-    //-         .sorting-left
-    //-           select#order.frm-field.required.sect(name="sortType")
-    //-             option(value='1') Възходящ ред
-    //-             option(value='-1') Низходящ ред
-    //-         .clearfix
-    //-       .agile_top_brands_grids
-    //-     .products-content
-    //-       .col-md-12.products-right
-    //-         if (products && products.length)
-    //-           each product in products
-    //-             .col-md-4.top_brand_left
-    //-               .hover14.column
-    //-                 .agile_top_brand_left_grid
-    //-                   .agile_top_brand_left_grid_pos
-    //-                   if product.wasPrice.length
-    //-                     img.img-responsive(src='/static/images/offer.png', alt=' ')
-    //-                   .agile_top_brand_left_grid1
-    //-                     figure
-    //-                       .snipcart-item.block
-    //-                         .snipcart-thumb
-    //-                           a(href='/products/details/'+product._id)
-    //-                             img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=product.url, src=product.url)
-    //-                           p.prodName
-    //-                             =product.title
-    //-                           h4
-    //-                             | Цена:
-    //-                             span.prodPrice
-    //-                               = product.price
-    //-                             |  лв.
-    //-                           br
-    //-                           if product.wasPrice.length
-    //-                             h5.scratchOverText.text-center
-    //-                               = 'Предишна цена: ' + product.wasPrice + 'лв.'
-    //-                           else
-    //-                             = product.wasPrice
-    //-                         .snipcart-details.top_brand_home_details
-    //-                           form(action='#', method='post')
-    //-                             fieldset
-    //-                               input(type='hidden', name='id', value=product._id)
-    //-                               input(type='hidden', name='title', value=product.title)
-    //-                               input(type='hidden', name='url', value=product.url)
-    //-                               input(type='hidden', name='price', value=product.price)
-    //-                             - if (isAuthenticated)
-    //-                               a
-    //-                                 input.button(type='button', name='submit', value='Добави в количката').addToCart
-    //-                             - else
-    //-                               a.btn.btn-primary.btn-lg(href='/products/details/' + product._id) Вижте детайли                                  
-    //-         else
-    //-           h2.text-center Няма продукти по зададените критерии  
-    //-       nav.numbering
-    //-         +getPages(pages)
-    //-   .clearfix
-
-      
+                        input(type='hidden', name='id', value=products[p]._id)
+                        input(type='hidden', name='title', value=products[p].title)
+                        input(type='hidden', name='url', value=products[p].url)
+                        input(type='hidden', name='price', value=products[p].price)
+                        - if (isAuthenticated)
+                          input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
+                        - else
+                          a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + products[p]._id) Вижте детайли
+    else
+      h2.text-center Няма продукти по зададените критерии  
+  nav.numbering
+    +getPages(pages)
+  .clearfix
+   
 block scripts
   script(src='/static/js/site/filter.js')

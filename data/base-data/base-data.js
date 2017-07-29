@@ -32,7 +32,6 @@ class BaseData {
             .limit(size)
             .toArray();
     }
-<<<<<<< HEAD
 
     setAdmin(id) {
         return this.collection.update({ '_id': new ObjectID(id) },
@@ -42,8 +41,6 @@ class BaseData {
                 },
             });
     }
-=======
->>>>>>> 04f4778684adecbc12dba312321bbc2e01a28d62
 
     findById(id) {
         if (!id || !ObjectID.isValid(id)) {
