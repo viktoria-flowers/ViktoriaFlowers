@@ -2,8 +2,6 @@ const express = require('express');
 const { authHelper } = require('./utils/index');
 
 const init = (data) => {
-    const app = express();
-
     data.users.getAll({ username: 'admin' })
         .then((users) => {
             if (users.length === 0) {
@@ -20,7 +18,7 @@ const init = (data) => {
             }
         });
 
-
+    const app = express();
     const controllers = require('./controllers/init').init(data);
 
     // folder app/config
