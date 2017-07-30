@@ -12,7 +12,7 @@ const serverRoutes = (app, controllers) => {
         return controllers.productController.getTopProductsForHomePage(req, res);
     });
 
-    app.get('/search/:title', (req, res) => {
+    app.get('/search/', (req, res) => {
         controllers.productController.getProductByTitle(req, res);
     });
 

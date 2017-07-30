@@ -124,15 +124,12 @@ class ProductController {
 
     getProductByTitle(req, res) {
         const filter = {};
-        const title = req.params.type;
+        const title = req.query.title;
 
-        console.log(4);
+        console.log(title);
 
         return this._data.products.getAll({ title: title })
             .then((productsByTitle) => {
-
-                console.log("==================");
-                console.log(productsByTitle);
 
                 if (productsByTitle.length === 0) {
                     return res.redirect('/NotFound');
@@ -141,7 +138,7 @@ class ProductController {
                 let currentProduct = productsByTitle[0];
                 return this._data.products.updateParamsById(currentProduct, { viewsCount: ++currentProduct.viewsCount })
                     .then(() => {
-                         return req.redirect('/products/details/', currentProduct._id);
+                         return res.status(301).redirect(`/products/details/${currentProduct._id}`);
                     });
 
             })
