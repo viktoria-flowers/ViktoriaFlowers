@@ -33,13 +33,13 @@ block content
             option(value='-1') Низходящ ред
   br
   br
-  .container
+  .container.products-content
     .col-md-12
       if (products && products.length)
         - for (var p = 0; p < products.length; p += 1)
           .col-md-4.productBoxHeight
             .panel.panel-default
-              - if (products[p].wasPrice.length)
+              - if (products[p].wasPrice)
                 .cnrflash
                   .cnrflash-inner
                     span.cnrflash-label
@@ -58,7 +58,7 @@ block content
                       span.prodPrice
                         = products[p].price
                       |  лв.
-                  - if (products[p].wasPrice.length)
+                  - if (products[p].wasPrice)
                     tr
                       td.scratchOverText.text-center
                         = 'Предишна цена: ' + products[p].wasPrice + 'лв.'
