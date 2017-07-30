@@ -13,6 +13,10 @@ class Product {
             return modelState;
         }
 
+        if (!productModel.type) {
+            modelState.addError('type');
+        }
+
         if (!productModel.title || productModel.title.length < minTitleLength) {
             modelState.addError('title');
         }

@@ -3,13 +3,20 @@ const passport = require('passport');
 
 const attach = (app, authController) => {
     const router = new Router();
-    router.post('/login',
-        passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/login',
-            // failureFlash: true,
-        })
-    );
+    router.post('/login', (req, res, next) => {
+        return passport.authenticate('local', (err, user, info) => {
+            const model = {};
+            model.username = req.body.username;
+            if (err) {
+                model.err = err.message;
+                return res.render('login', { model: model });
+            }
+
+            return req.login(user, () => {
+                return res.redirect('/');
+            });
+        })(req, res, next);
+    });
 
     router.post('/register', (req, res) => {
         return authController.postRegister(req, res);
