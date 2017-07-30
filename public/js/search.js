@@ -1,11 +1,22 @@
-/*globals $ */
+/*globals $, toastr*/
 $('#search-span').on('click', function (e) {
+	let form = $('#search-form');
+	$(form).submit();
+});
+
+$('#search-form').submit(function (e) {
+	if ($(e.target).attr('isValid')) {
+		return;
+	}
+	else {
+		e.preventDefault();
+	}
+
 	let form = $('#search-form');
 	let currentValue = $(".autocompleteInput").val();
 
 	if (!currentValue) {
-		toastr.error('Моля въведете име на продукт');
-		e.preventDefault();
+		toastr.warning('Моля въведете име на продукт');
 		return;
 	}
 
@@ -14,12 +25,11 @@ $('#search-span').on('click', function (e) {
 		url: "/api/autocomplete",
 		data: { name: currentValue },
 		success: ((data) => {
-			console.log(data);
-			console.log(currentValue);
 			if (data.indexOf(currentValue) === -1) {
-				toastr.error('Няма такъв продукт');
+				toastr.warning(`Няма продукт с име ${currentValue}`);
 			}
 			else {
+				form.attr('isValid', true);
 				$(form).submit();
 			}
 		}),
