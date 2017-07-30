@@ -3788,13 +3788,17 @@ ul.dropdown-cart li .item-right button{
 }
 
 .word-wrap{
-display: inline-block;
-word-break: break-word;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.word-wrap-only{
+    word-break: break-word;  
 }
 
 @media (min-width: 640px){
 	.fixed-table {
-table-layout:fixed;
+        table-layout:fixed;
 	}
 }
 

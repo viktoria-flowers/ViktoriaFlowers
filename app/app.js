@@ -8,10 +8,10 @@ const init = (data) => {
         .then((users) => {
             if (users.length === 0) {
                 console.log(users);
-                let initialAdmin = {
+                const initialAdmin = {
                     username: 'admin11',
                     password: authHelper.makeHashFromPassword('pe6oadmin4eto'),
-                    names : 'admin',
+                    names: 'admin',
                     phone: '0888888888',
                     email: 'abv@abv.bg',
                     contactInfo: 'admin contact info',
