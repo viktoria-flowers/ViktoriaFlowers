@@ -13,7 +13,6 @@ block content
     table.fixed-table.table.text-left
       thead
         tr
-          th Уникален номер на продукта
           th Име
           th Цена
           th Дата на добавяне
@@ -22,13 +21,11 @@ block content
         if (productsList && productsList.length)
           - for(var i = 0; i < productsList.length; i += 1) 
               tr.productsRow
-                td.word-wrap.idCell(value=productsList[i]._id)
-                  = productsList[i]._id
-                td.word-wrap
+                td.word-wrap-only
                   = productsList[i].title
-                td.word-wrap
+                td.word-wrap-only
                   = productsList[i].price + ' лв.'
-                td.word-wrap
+                td.word-wrap-only
                   = moment(productsList[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
-                td.word-wrap
-                  input.btn.btn-md.btn-danger(type="button", value="Изтриите продукта", class="delete_product") 
+                td.word-wrap-only.text-right
+                  input.btn.btn-md.btn-danger(type="button", value="Изтриите продукта", class="delete_product")

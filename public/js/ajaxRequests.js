@@ -106,7 +106,7 @@ $('#contactFormSend').on('click', (() => {
 $('body').on('click', '.delete_product', () => {
 
     let productId = $(event.target).parent().parent().find('.idCell').attr('value');
-    
+    console.log(1111111);
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
