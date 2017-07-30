@@ -103,17 +103,16 @@ $('#contactFormSend').on('click', (() => {
 
 }));
 
-$('body').on('click', '.delete_product', () => {
+$('body').on('click', '.delete_product', (e) => {
 
-    let productId = $(event.target).parent().parent().find('.idCell').attr('value');
+    let productId = $(e.target).parent().parent().find('.idCell').attr('value');
     
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
         data: { _id: productId },
         success: ((data) => {
-            toastr.success(data);
-            console.log(data);
+            toastr.success('Продуктът беше изтрит!');
             $(location).attr('href', '/products/delete');
         }),
         error: ((error) => {
@@ -191,7 +190,7 @@ $('#checkout-button').on('click', () => {
 
 $('.set-admin').on('click', (e) => {
 
-    let userId = $(event.target).parent().parent().find('.userIdCell').attr('value');
+    let userId = $(e.target).parent().parent().find('.userIdCell').attr('value');
 
     $.ajax({
         type: "POST",
@@ -200,7 +199,7 @@ $('.set-admin').on('click', (e) => {
             userId: userId,
         },
         success: ((data) => {
-            toastr.error(data);
+            toastr.success(data);
         }),
         error: ((error) => {
             toastr.error(error);                            
