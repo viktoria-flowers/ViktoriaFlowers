@@ -23,14 +23,6 @@ const productRoutes = (app, productController) => {
     app.get('/products/:type*?', (req, res) => {
         return productController.getProducts(req, res);
     });
-
-    app.get('/products/:title*?', (req, res) => {
-        if() {
-            
-        }
-
-        return productController.getDetailsProduct(req, res);
-    });
 };
 
 module.exports = productRoutes;

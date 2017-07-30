@@ -15,7 +15,8 @@ class ProductController {
             return res.redirect('/NotFound');
         }
 
-        return this._data.products.findById(req.params.id).then((product) => {
+        return this._data.products.findById(req.params.id)
+        .then((product) => {
             if (!product) {
                 res.status(404);
                 return res.redirect('/NotFound');
@@ -29,6 +30,7 @@ class ProductController {
                 });
         });
     }
+
     postCreateProduct(req, res) {
         const modelState = this._data.products.validate(req.body);
         // Need to validate the object first
@@ -117,6 +119,34 @@ class ProductController {
 
                         return res.render('home', products);
                     });
+            });
+    }
+
+    getProductByTitle(req, res) {
+        const filter = {};
+        const title = req.params.type;
+
+        console.log(4);
+
+        return this._data.products.getAll({ title: title })
+            .then((productsByTitle) => {
+
+                console.log("==================");
+                console.log(productsByTitle);
+
+                if (productsByTitle.length === 0) {
+                    return res.redirect('/NotFound');
+                }
+
+                let currentProduct = productsByTitle[0];
+                return this._data.products.updateParamsById(currentProduct, { viewsCount: ++currentProduct.viewsCount })
+                    .then(() => {
+                         return req.redirect('/products/details/', currentProduct._id);
+                    });
+
+            })
+            .catch((err) => {
+                console.log(err);
             });
     }
 }

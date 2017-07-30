@@ -1,13 +1,30 @@
 /*globals $ */
 $('#search-span').on('click', function (e) {
-	console.log(55555555555);
-
 	let form = $('#search-form');
-	console.log(form);
-	if (!$('#autocomplete').val()) {
+	let currentValue = $(".autocompleteInput").val();
+
+	if (!currentValue) {
+		toastr.error('Моля въведете име на продукт');
 		e.preventDefault();
 		return;
 	}
-	
-	$(form).submit();
+
+	$.ajax({
+		type: "GET",
+		url: "/api/autocomplete",
+		data: { name: currentValue },
+		success: ((data) => {
+			console.log(data);
+			console.log(currentValue);
+			if (data.indexOf(currentValue) === -1) {
+				toastr.error('Няма такъв продукт');
+			}
+			else {
+				$(form).submit();
+			}
+		}),
+		error: ((error) => {
+			toastr.error('Грешка при търсене');
+		})
+	});
 });
