@@ -1,6 +1,28 @@
 /*globals $, typeahead, toastr */
+$('.addToFavorites').on('click', () => {
+    console.log(555);
+
+    // let currentValue = $(".autocompleteInput").val();
+    // if (!currentValue) {
+    //     return;
+    // }
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/api/autocomplete",
+    //     data: { name: currentValue },
+    //     success: ((data) => {
+    //         $('#autocomplete').autocomplete({ source: data });
+    //                     // .typeahead({ source: data });
+    //     }),
+    //     error: ((error) => {
+    //         toastr.error("error on search");
+    //     })
+    // });
+});
+
 $('.autocompleteInput').on('keyup', () => {
-    
+
     let currentValue = $(".autocompleteInput").val();
     if (!currentValue) {
         return;
@@ -12,7 +34,7 @@ $('.autocompleteInput').on('keyup', () => {
         data: { name: currentValue },
         success: ((data) => {
             $('#autocomplete').autocomplete({ source: data });
-                        // .typeahead({ source: data });
+            // .typeahead({ source: data });
         }),
         error: ((error) => {
             toastr.error("error on search");
@@ -106,7 +128,7 @@ $('#contactFormSend').on('click', (() => {
 $('body').on('click', '.delete_product', (e) => {
 
     let productId = $(e.target).parent().parent().find('.idCell').attr('value');
-    
+
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
@@ -201,7 +223,7 @@ $('.set-admin').on('click', (e) => {
             $(location).attr('href', '/userslist');
         }),
         error: ((error) => {
-            toastr.error(error);                            
+            toastr.error(error);
         })
     });
 });
