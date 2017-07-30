@@ -1,12 +1,13 @@
 /*globals $ */
-$('body').on('click', '.input-group-addon', function (e) {
+$('#search-span').on('click', function (e) {
+	console.log(55555555555);
 
-	let form = $(e.target).closest($('form-group'));
-
+	let form = $('#search-form');
+	console.log(form);
 	if (!$('#autocomplete').val()) {
 		e.preventDefault();
 		return;
 	}
-	console.log(55555555555);
+	
 	$(form).submit();
 });

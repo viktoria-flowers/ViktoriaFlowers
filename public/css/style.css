@@ -3855,4 +3855,7 @@ table-layout:fixed;
     color: black;
     font-weight: initial;
 }
+#search-span{
+    cursor: pointer;
+}
 

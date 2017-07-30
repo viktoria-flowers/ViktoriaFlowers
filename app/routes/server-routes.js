@@ -16,6 +16,9 @@ const serverRoutes = (app, controllers) => {
     app.get('/cards', (req, res) => res.render('cards'));
     app.get('/cart', (req, res) => res.render('cart'));
 
+    app.get('/search/:title', (req, res) => {
+        
+    });
     app.get('/payment', (req, res) => res.render('payment'));
     app.get('/payOnDelivery', (req, res) => res.render('payOnDelivery'));
     app.get('/paypal-payment', (req, res) => res.render('paypal-payment'));

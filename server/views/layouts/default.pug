@@ -78,12 +78,12 @@ html
             h1
               a(href='/')#shopTitle Магазин за цветя "Виктория"
           .col-sm-4
-            form.form-group(action='/payment', method='GET')
+            form#search-form.form-group(action='/payment', method='GET')
               .col-sm-12.inputGroupContainer
                 .input-group
                   input#autocomplete.autocompleteInput.form-control(type='text', placeholder='Търси...', autocomplete='off')
                   span.input-group-addon#search-span
-                    a(href="/")
+                    span
                       i.glyphicon.glyphicon-search#search-glyph
         .clearfix
     .clearfix  

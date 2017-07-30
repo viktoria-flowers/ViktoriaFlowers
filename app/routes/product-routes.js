@@ -16,16 +16,20 @@ const productRoutes = (app, productController) => {
         return productController.getDeleteProducts(req, res);
     });
 
-    app.post(
-        '/products/create',
-        isAdmin,
-        upload.single('image'),
-        (req, res) => {
+    app.post('/products/create', isAdmin, upload.single('image'), (req, res) => {
             return productController.postCreateProduct(req, res);
         });
 
     app.get('/products/:type*?', (req, res) => {
         return productController.getProducts(req, res);
+    });
+
+    app.get('/products/:title*?', (req, res) => {
+        if() {
+            
+        }
+
+        return productController.getDetailsProduct(req, res);
     });
 };
 
