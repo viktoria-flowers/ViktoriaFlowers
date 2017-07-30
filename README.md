@@ -1,5 +1,8 @@
 # ViktoriaFlowers
 
+[![Build Status](https://travis-ci.org/viktoria-flowers/ViktoriaFlowers.svg?branch=master)](https://travis-ci.org/viktoria-flowers/ViktoriaFlowers)
+
+
 ### To deploy new version of ViktoriaFlowers app to AWS. 
 * 1. Log in https://aws.amazon.com/ choose instances and select Node instance. Then choose connect and copy ssh.
 * 2. In GitBash paste ssh in directory where is your "ViktoriaFlowers.pem" file. 
