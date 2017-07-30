@@ -13,6 +13,7 @@ class AuthController {
             }
 
             return req.login(user, () => {
+                res.cookie('username', user.username);
                 return res.redirect('/');
             });
         })(req, res, next);
@@ -39,6 +40,7 @@ class AuthController {
 
     logOut(req, res) {
         req.logout();
+        res.clearCookie('username');
         return res.redirect('/home');
     }
 

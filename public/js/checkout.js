@@ -1,44 +1,43 @@
 $('.addToCart').on('click', () => {
 
-    var test = localStorage.getItem("test");
-    var obj = [];
+    var username = getUserName();
+    var storageKey = 'cart-' + username;
+    var products = localStorage.getItem(storageKey);
+    var productsArr = [];
     var productName = $('#prodName').html();
     var productId = $('input[name=id]').attr('value');
     var exist = false;
 
-    if (test) {
-        obj = JSON.parse(test);
+    if (products) {
+        productsArr = JSON.parse(products);
     }
 
-    for (let i = 0; i < obj.length; i += 1) {
-        if (obj[i].id == productId) {
+    for (let i = 0; i < productsArr.length; i += 1) {
+        if (productsArr[i].id == productId) {
             exist = true;
         }
     }
 
     if (!exist) {
-        obj.push({ "id": $('input[name=id]').attr('value'), "name": $('.prodName').html(), "price": $('.prodPrice').html(), "imgUrl": $('.prodImg').attr('src') });
+        productsArr.push({ "id": $('input[name=id]').attr('value'), "name": $('.prodName').html(), "price": $('.prodPrice').html(), "imgUrl": $('.prodImg').attr('src') });
         toastr.info('Продуктът беше добавен в количката')
     } else {
         toastr.options.closeButton = true;
         toastr.error('Вече сте добавили този продукт в количката')
     }
 
-    if (localStorage.getItem("cart")) {
-        localStorage.setItem("cart", JSON.stringify(obj));
-    }
-    localStorage.setItem("test", JSON.stringify(obj));
+    // if (localStorage.getItem("cart")) {
+    //     localStorage.setItem("cart", JSON.stringify(productsArr));
+    // }
+    localStorage.setItem(storageKey, JSON.stringify(productsArr));
 });
 
-if (localStorage.length > 0 && localStorage.test !== 'undefined') {
+var username = getUserName();
+var localStorageKey = 'cart-' + username;
 
-    let savedData;
+if (localStorage.length > 0 && localStorage[localStorageKey]) {
 
-    if (localStorage.test) {
-        savedData = JSON.parse(localStorage.test);
-    } else {
-        savedData = JSON.parse(localStorage.cart);
-    }
+    let savedData = JSON.parse(localStorage[localStorageKey]);
 
     let savedDataLen = savedData.length;
 
@@ -69,8 +68,8 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
         let entryValue = $('<div />').addClass('entry value');
         let spanNumber = $('<span />').html(1).addClass('quantities');
-            spanNumber.appendTo(entryValue);
-            entryValue.appendTo(quantitySelectDiv);
+        spanNumber.appendTo(entryValue);
+        entryValue.appendTo(quantitySelectDiv);
 
         let valuePlusDiv = $('<div />').addClass('entry value-plus active');
         valuePlusDiv.appendTo(quantitySelectDiv);
@@ -79,13 +78,13 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 
         let fourthCell = $('<td />').addClass('invert');
         let fourthCellLabel = $('<label />').html(savedData[i].price + ' лв.');
-            fourthCellLabel.appendTo(fourthCell);
-            fourthCell.appendTo(mainRow);
+        fourthCellLabel.appendTo(fourthCell);
+        fourthCell.appendTo(mainRow);
 
         let fifthCell = $('<td />').addClass('invert');
         let fifthCellLabel = $('<label />').html(savedData[i].price).attr('class', 'dynamicPrice').attr('value', savedData[i].price);
-            let currencySpan = $('<span />').html(' лв.');
-            currencySpan.appendTo(fifthCellLabel);
+        let currencySpan = $('<span />').html(' лв.');
+        currencySpan.appendTo(fifthCellLabel);
 
         fifthCellLabel.appendTo(fifthCell);
         fifthCell.appendTo(mainRow);
@@ -113,33 +112,33 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
 }
 
 // All images in site
-$(document).ready(function(){
-  $('.prodImg')
-    .wrap('<span style="display:inline-block"></span>')
-    .css('display', 'inline-block')
-    .parent()
-    .zoom({
-        touch: true
-    });
+$(document).ready(function() {
+    $('.prodImg')
+        .wrap('<span style="display:inline-block"></span>')
+        .css('display', 'inline-block')
+        .parent()
+        .zoom({
+            touch: true
+        });
 });
 
 // Cart images
-$(document).ready(function(){
-  $('td img')
-    .wrap('<div style="height:300px"></div>')
-    .css('display', 'block')
-    .parent()
-    .zoom({
-        touch: true
-    });
+$(document).ready(function() {
+    $('td img')
+        .wrap('<div style="height:300px"></div>')
+        .css('display', 'block')
+        .parent()
+        .zoom({
+            touch: true
+        });
 });
 
-var sum = $('.rem1').find('.dynamicPrice').map(function () {
+var sum = $('.rem1').find('.dynamicPrice').map(function() {
     return $(this).html();
 }).get();
 
 
-var totalSum = sum.reduce(function (a, b) {
+var totalSum = sum.reduce(function(a, b) {
     return parseInt(a) + parseInt(b);
 }, 0);
 
@@ -150,28 +149,31 @@ let totalSumHolder = $('.checkout-left-basket');
 totalSumLabel.prependTo(totalSumHolder);
 
 //This script is for deleting product from cart
-$('body').on('click', '.rem1 .close1', function (c) {
-    $(this).closest('tr').fadeOut('slow', function (c) {
+$('body').on('click', '.rem1 .close1', function(c) {
+    var username = getUserName();
+    var storageKey = 'cart-' + username;
+
+    $(this).closest('tr').fadeOut('slow', function(c) {
         $(this).closest('tr').remove();
         let sumToBeRemoved = parseInt($(this).closest('tr').find('.dynamicPrice').html());
         totalSumLabel.html('Обща сума: ' + (totalSum -= sumToBeRemoved) + 'лв.');
 
         var idToRemove = $(this).closest('tr').find('.productName').attr('value');
-        var arrItems = JSON.parse(localStorage.getItem('test'));
+        var arrItems = JSON.parse(localStorage.getItem(storageKey));
         var indexOfItem = arrItems.findIndex(obj => obj.id === idToRemove);
 
         if (indexOfItem !== -1) {
             arrItems.splice(indexOfItem, 1);
         }
 
-        localStorage.setItem('test', JSON.stringify(arrItems));
+        localStorage.setItem(storageKey, JSON.stringify(arrItems));
     });
 });
 
 totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 
 //This script is for quantity increasing
-$('body').on('click', '.value-plus', function () {
+$('body').on('click', '.value-plus', function() {
     let valueField = $(this).parent().find('.value'),
         newValue = parseInt(valueField.text(), 10) + 1;
     valueField.text(newValue).addClass('quantities');
@@ -183,14 +185,14 @@ $('body').on('click', '.value-plus', function () {
 });
 
 //This script is for quantity decreasing
-$('body').on('click', '.value-minus', function () {
+$('body').on('click', '.value-minus', function() {
     let valueField = $(this).parent().find('.value'),
         newValue = parseInt(valueField.text(), 10) - 1;
     if (newValue >= 1) {
         valueField.text(newValue).addClass('quantities');
         let dynamicPriceField = $(this).parent().parent().parent().parent().find('.dynamicPrice');
         let initialValue = $(this).parent().parent().parent().parent().find('.dynamicPrice').attr('value');
-            dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue) + ' лв.');
+        dynamicPriceField.text(parseInt(dynamicPriceField.text()) - parseInt(initialValue) + ' лв.');
         totalSum -= (parseInt(dynamicPriceField.attr('value')));
         totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
     }
@@ -198,16 +200,10 @@ $('body').on('click', '.value-minus', function () {
 
 
 // Sliding cart
-if (localStorage.length > 0 && localStorage.test !== 'undefined') {
+if (localStorage.length > 0 && localStorage[localStorageKey]) {
 
-    let savedData;
-
-    if (localStorage.test) {
-        savedData = JSON.parse(localStorage.test);
-    } else {
-        savedData = JSON.parse(localStorage.cart);
-    }
-
+    let savedData =JSON.parse(localStorage[localStorageKey]);
+    
     let savedDataLen = savedData.length;
     let slidingCartName = $('#slidingCartTitle');
     let slidingCartPrice = $('#slidingCartPrice');
@@ -218,5 +214,16 @@ if (localStorage.length > 0 && localStorage.test !== 'undefined') {
         slidingCartPrice.html(savedData[i].price + ' лв.');
         slidingCartImgSrc.attr('src', savedData[i].imgUrl).css('width', '100%');
     }
+}
+
+function getUserName() {
+    // get only the username from cookie using RegEx
+    var reg = /username=(\w+)\;?/g
+    var matches = reg.exec(document.cookie);
+    if (matches && matches.length) {
+        return matches[1];
+    }
+
+    return '';
 }
 

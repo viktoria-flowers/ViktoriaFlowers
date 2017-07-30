@@ -62,6 +62,7 @@
 	font-weight:600;
     letter-spacing: 2px;
 	text-transform:uppercase;
+	
 }
 
 .skdslider .slide-desc > p {
@@ -365,5 +366,9 @@ text-decoration:underline;
     font-size: 14px;
     width: 100%;
 	 line-height: 26px;
+	}
 }
+
+.elegantshd {
+  text-shadow: black 0.1em 0.1em 0.2em;
 }

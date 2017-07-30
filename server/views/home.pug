@@ -6,19 +6,19 @@ block content
     li
       img(src='static/images/11.jpg', alt='')
       .slide-desc
-        h3
+        h3.elegantshd
           em
             | Цветя за всеки повод
     li
       img(src='static/images/22.jpg', alt='')
       .slide-desc
-        h3
+        h3.elegantshd
           em
             | Посетете ни
     li
       img(src='static/images/44.jpg', alt='')
       .slide-desc
-        h3
+        h3.elegantshd
           em
             | Нестандартни букети
   br
@@ -147,42 +147,26 @@ block content
                 .clearfix.visible-md-block.visible-sm-block
       //Second tab content end
     
-  //Carousel start
-  #myCarousel.carousel.slide(data-ride='carousel')
-    // Indicators
-    ol.carousel-indicators
-      li.active(data-target='#myCarousel', data-slide-to='0')
-      li(data-target='#myCarousel', data-slide-to='1')
-      li(data-target='#myCarousel', data-slide-to='2')
-    .carousel-inner(role='listbox')
-      .item.active
-        a(href='beverages.html')
-          img.first-slide(src='static/images/b1.jpg', alt='First slide')
-      .item
-        a(href='personalcare.html')
-          img.second-slide(src='static/images/b3.jpg', alt='Second slide')
-      .item
-        a(href='household.html')
-          img.third-slide(src='static/images/b1.jpg', alt='Third slide')
-  .clearfix
-  //Carousel end
-
   //Fading pics start
   .ban-bottom-w3l
     .container
       .col-md-6.ban-bottom3
         .ban-top
-          img.img-responsive(src='static/images/extraordinary1.jpg', alt='')
+          a(href='/products/extraordinary')
+            img.img-responsive(src='static/images/extraordinary1.jpg', alt='')
         .ban-img
           .ban-bottom1
             .ban-top
-              img.img-responsive(src='static/images/baskets.jpg', alt='')
+              a(href='/products/baskets')
+                img.img-responsive(src='static/images/baskets.jpg', alt='')
           .ban-bottom2
             .ban-top
-              img.img-responsive(src='static/images/circle.jpg', alt='')
+              a(href='/products/circle')
+                img.img-responsive(src='static/images/circle.jpg', alt='')
           .clearfix
       .col-md-6.ban-bottom
         .ban-top
-          img.img-responsive(src='static/images/wedding1.jpg', alt='')
+          a(href='/products/wedding')
+            img.img-responsive(src='static/images/wedding1.jpg', alt='')
       .clearfix
   //Fading pics end
