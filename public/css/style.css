@@ -97,7 +97,6 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
     font-size: 20px;
     text-align: center;
     color: #fe9126;
-    animation: blinker 3s linear infinite;
 }
 @keyframes blinker {  
   50% { 
