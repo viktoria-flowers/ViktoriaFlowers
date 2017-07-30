@@ -22,7 +22,7 @@
 * Run browser tests with selenium
   * `npm install -g chromedriver`
   *  Open `cmd` in ViktioriaFlowers repo and run 
-     * `java -jar selenium-server-standalone-3.4.0.jar`
+     * `java -jar selenuim\selenium-server-standalone-3.4.0.jar`
   * In other terminal run `gulp tests:browser` 
   * Your browser should open itself
   * **Note** The tests run on chrome only!
