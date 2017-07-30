@@ -11,7 +11,8 @@ $('.autocompleteInput').on('keyup', () => {
         url: "/api/autocomplete",
         data: { name: currentValue },
         success: ((data) => {
-            $('#autocomplete').typeahead({ source: data });
+            $('#autocomplete').autocomplete({ source: data });
+                        // .typeahead({ source: data });
         }),
         error: ((error) => {
             toastr.error("error on search");
