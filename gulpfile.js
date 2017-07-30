@@ -44,6 +44,7 @@ const config = {
 gulp.task('test-server:start', () => {
     return Promise.resolve()
         .then(() => require('./db').init(config.connectionString))
+        .then((db) => require('./test/utils/seed-data').seed(db))
         .then((db) => require('./data').init(db))
         .then((data) => require('./app').init(data))
         .then((app) => {
@@ -62,7 +63,7 @@ gulp.task('test-server:stop', () => {
         });
 });
 
-gulp.task('tests:browser', ['test-server:start'], () => {
+gulp.task('tests:browser', ['test-server:stop', 'test-server:start'], () => {
     return gulp.src(['./test/browser/**/*tests.js'])
         .pipe(mocha({
             reporter: 'spec',

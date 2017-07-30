@@ -14,7 +14,7 @@ describe('Public routes test', () => {
     const baseUrl = 'http://localhost:3002';
     let driver = null;
     //new Builder().usingServer('http://localhost:4444/wd/hub').forBrowser('chrome').build();
-    test.beforeEach(() => {
+    test.before(() => {
         driver = new Builder()
             .usingServer('http://localhost:4444/wd/hub')
             .forBrowser('chrome')
@@ -28,11 +28,13 @@ describe('Public routes test', () => {
                 return ekl.getText();
             })
             .then((text) => {
-                expect(text).to.include('Магазин за цветя "Виктория"');
+                expect(text, 'Message is wrong')
+                    .to.include('Магазин за цветя "Виктория"');
             });
-        driver.findElements(By.className('top-brands'))
-            .then((brandContainers) => {
-                expect(brandContainers.length).to.be.equal(1);
+        driver.findElements(By.css('#topNew .productBoxHeight'))
+            .then((topProducts) => {
+                expect(topProducts.length, 'top products container')
+                    .to.be.equal(6);
             });
         driver.findElements(By.css('#myCarousel .item'))
             .then((carouselItems) => {
@@ -41,7 +43,7 @@ describe('Public routes test', () => {
     });
 
     test.it('Expect page to show not products found message', () => {
-        driver.get(baseUrl + '/products/wedding');
+        driver.get(baseUrl + '/products/cards');
         driver.findElement(By.css('.products-content h2.text-center'))
             .then((el) => {
                 expect(el).to.not.be.undefined;
@@ -53,7 +55,7 @@ describe('Public routes test', () => {
             });
     });
 
-    test.afterEach(() => {
+    test.after(() => {
         driver.quit();
     });
 });
