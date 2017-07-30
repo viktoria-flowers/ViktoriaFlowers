@@ -33,11 +33,12 @@ include ../mixins/resolvePaging.pug
                 tr
                   td
                     br
-              tr
-                td
-                  button.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
-                    span.glyphicon.glyphicon-heart
-                    |  Добави в любими
+              - if (isAuthenticated)      
+                tr
+                  td
+                    button#addToFavorites.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
+                      span.glyphicon.glyphicon-heart
+                      |  Добави в любими
               tr
                 td
                   form(action='#', method='post')
