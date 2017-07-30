@@ -3836,23 +3836,25 @@ table-layout:fixed;
 #ourOffers{
     color: #016773;
 }
+.textDots p{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
 
-@keyframes spin {
-  from {
-    transform: rotateY(0);
-  }
-  to {
-    transform: rotateY(1turn);
-  }
+ @keyframes spin {
+  from {transform: rotateY(0);}
+  to {transform: rotateY(1turn);}
 }
 
 .ourOffers-effect {
   animation: spin 10s ease;
   animation-iteration-count: infinite;
-}
+} 
 .addToFavorites{
     text-decoration: none;
     color: black;
     font-weight: initial;
 }
+
 

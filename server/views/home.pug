@@ -47,8 +47,9 @@ block content
                     .cnrflash-inner
                       span.cnrflash-label
                         | Промо
-                .panel-heading.text-center.prodName
-                  = topNewest[p].title
+                .panel-heading.text-center.prodName.textDots
+                  p
+                    = topNewest[p].title
                 .panel-body.text-center
                   table.table#tableBorderTop
                     tr
@@ -64,7 +65,7 @@ block content
                     - if (topNewest[p].wasPrice.length)
                       tr
                         td.scratchOverText.text-center
-                          = 'Предишна цена: ' + topNewest[p].wasPrice + 'лв.'
+                          = 'Стара цена: ' + topNewest[p].wasPrice + 'лв.'
                     - else
                       tr
                         td
@@ -86,7 +87,8 @@ block content
                               input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                             - else
                               a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topNewest[p]._id) Вижте детайли
-      .clearfix.visible-md-block.visible-sm-block
+            - if ((p !== 0) && ((p % 2 === 0) && (p % 5 === 0)))
+              .clearfix.visible-md-block.visible-sm-block
       //First tab content end
 
       //Second tab content start
@@ -101,8 +103,9 @@ block content
                     .cnrflash-inner
                       span.cnrflash-label
                         | Промо
-                .panel-heading.text-center.prodName
-                  = topViewed[p].title
+                .panel-heading.text-center.prodName.textDots
+                  p
+                    = topViewed[p].title
                 .panel-body.text-center
                   table.table#tableBorderTop
                     tr
@@ -118,7 +121,7 @@ block content
                     - if (topViewed[p].wasPrice.length)
                       tr
                         td.scratchOverText.text-center
-                          = 'Предишна цена: ' + topViewed[p].wasPrice + 'лв.'
+                          = 'Стара цена: ' + topViewed[p].wasPrice + 'лв.'
                     - else
                       tr
                         td
@@ -140,7 +143,8 @@ block content
                               input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
                             - else
                               a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topViewed[p]._id) Вижте детайли
-      .clearfix.visible-md-block.visible-sm-block
+            - if ((p !== 0) && ((p % 2 === 0) && (p % 5 === 0)))
+                .clearfix.visible-md-block.visible-sm-block
       //Second tab content end
     
   //Carousel start
