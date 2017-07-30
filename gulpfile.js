@@ -70,8 +70,10 @@ gulp.task('tests:browser', ['test-server:stop', 'test-server:start'], () => {
             timeout: 10000,
         }))
         .once('end', () => {
-            gulp.start('test-server:stop');
-            /* eslint-disable no-undef */
-            process.exit(0);
+            gulp.start('test-server:stop', () => {
+                    console.log('Test database cleared!');
+                    /* eslint-disable no-undef */
+                    process.exit(0);
+            });
         });
 });

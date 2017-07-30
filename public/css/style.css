@@ -97,7 +97,6 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
     font-size: 20px;
     text-align: center;
     color: #fe9126;
-    animation: blinker 3s linear infinite;
 }
 @keyframes blinker {  
   50% { 
@@ -3836,20 +3835,21 @@ table-layout:fixed;
 #ourOffers{
     color: #016773;
 }
+.textDots p{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
 
-@keyframes spin {
-  from {
-    transform: rotateY(0);
-  }
-  to {
-    transform: rotateY(1turn);
-  }
+ @keyframes spin {
+  from {transform: rotateY(0);}
+  to {transform: rotateY(1turn);}
 }
 
 .ourOffers-effect {
   animation: spin 10s ease;
   animation-iteration-count: infinite;
-}
+} 
 .addToFavorites{
     text-decoration: none;
     color: black;

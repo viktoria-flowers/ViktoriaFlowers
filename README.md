@@ -2,7 +2,7 @@
 
 ### To deploy new version of ViktoriaFlowers app to AWS. 
 * 1. Log in https://aws.amazon.com/ choose instances and select Node instance. Then choose connect and copy ssh.
-* 2. In GitBash paste ssh in directory when is your "ViktoriaFlowers.pem" file. 
+* 2. In GitBash paste ssh in directory where is your "ViktoriaFlowers.pem" file. 
 * 3. Now you are in ubuntu environment. Path to app repository is => `var/app//ViktoriaFlowers`
     * command to stop pm2 => `sudo pm2 stop start.sh`  
     * command to start pm2 => `sudo pm2 start start.sh`  
@@ -13,23 +13,19 @@
 * Follow steps one and two, but choose to connect to MongoDB instance.  
 * When you are connect to ubuntu execute => `sudo systemctl status mongod`  
 
- `Tests`
-* Run unit tests and integration tests
-* `gulp tests:unit`
-* (gulp should by installed globally)
-
-* Run browser tests with selenium
-* `gulp tests:browser` 
-* (selenium should by installed - view presentation)
 
 ### Starts `Tests`
 * Run unit tests and integration tests
-* `gulp tests:unit`
-* (gulp should by installed globally)
+  * `gulp tests:unit`
+  * (gulp should be installed globally)
 
 * Run browser tests with selenium
-* `gulp tests:browser` 
-* (selenium should by installed - view presentation)
+  * `npm install -g chromedriver`
+  *  Open `cmd` in ViktioriaFlowers repo and run 
+     * `java -jar selenuim\selenium-server-standalone-3.4.0.jar`
+  * In other terminal run `gulp tests:browser` 
+  * Your browser should open itself
+  * **Note** The tests run on chrome only!
 
 ### Set admin in Mongo db
 
