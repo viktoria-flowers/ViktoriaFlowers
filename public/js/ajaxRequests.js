@@ -159,34 +159,50 @@ function validate(names, email, text) {
 
 $('#checkout-button').on('click', () => {
 
-    let ids = $('.productName').toArray();
-    let quantities = $('.quantities').toArray();
-    let sendInfo = [];
-    let sendIdsArray = [];
-    let sendQuantitiesArray = [];
+    let productRows = $('#checkoutBody tr');
+    
 
-    for (let i = 0; i < ids.length; i += 1) {
-        sendIdsArray.push({ "_id": ids[i].attributes.value.nodeValue });
-        sendQuantitiesArray.push(quantities[i].innerHTML);
-    }
-
-    sendInfo[0] = sendIdsArray;
-    sendInfo[1] = sendQuantitiesArray;
-
+    let prodInfo = [];
+    productRows.each(function(index, rowElement)  {
+        let count = $(rowElement).find('.quantities').html();
+        let id = $(rowElement).find('.invert.productName').attr('value');
+        prodInfo.push({
+            _id: id,
+            count: count
+        });
+    });
     $.ajax({
         type: "POST",
         url: "/api/checkout",
         data: {
-            sendInfo: sendInfo,
-        },
-        success: ((data) => {
-            toastr.success(data);
-        }),
-        error: ((error) => {
-            toastr.error(JSON.stringify(error));
+            sendInfo: prodInfo,
+        }})
+        .done(function(data) {
+            toastr.success('Успешно изпратена поръчка!');
+            toastr.success('Очаквайте доставка скоро! :)');
+
+            // getUserName is a globalFunction that comes form checkout.js
+            var username = getUserName();
+            var storageKey = 'cart-' + username;
+            localStorage.removeItem(storageKey);
+            document.location.reload(true);
         })
+        .fail(function(err) {
+            console.log(err);
+            toastr.error('Възникна грешка по време на вашата заявка!');
+        });
     });
-});
+
+$('body').on('click', '.checkout-btn', function(e) {
+     let tableCheckout = $('#checkoutBody');
+     let rows = tableCheckout.find('tr');
+    if (tableCheckout.html().indexOf('Вашата количка е празна') !== -1 ||
+        rows.length === 0) {
+        toastr.warning('Моля добавете продукти в количката');
+        e.preventDefault();
+        e.stopPropagation();
+    }
+})
 
 $('.set-admin').on('click', (e) => {
 

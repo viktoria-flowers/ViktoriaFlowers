@@ -86,3 +86,7 @@ block content
                   });
                 });
     .clearfix
+  .container
+    | Поръчки :
+    pre
+      = JSON.stringify(user.orders, null, 4)

@@ -1,25 +1,29 @@
-$('.addToCart').on('click', () => {
+$('.addToCart').on('click', (е) => {
 
     var username = getUserName();
     var storageKey = 'cart-' + username;
     var products = localStorage.getItem(storageKey);
-    var productsArr = [];
-    var productName = $('#prodName').html();
-    var productId = $('input[name=id]').attr('value');
-    var exist = false;
-
-    if (products) {
-        productsArr = JSON.parse(products);
+    var productsArr = JSON.parse(products);
+    if (!productsArr) {
+        productsArr = [];
     }
 
+    var exist = false;
+    var form = $(е.target).closest('form');
+    var prod = {};
+    prod.id = form.find('input[name=id]').val();
+    prod.name = form.find('input[name=title]').val();
+    prod.price = form.find('input[name=price]').val();
+    prod.imgUrl = form.find('input[name=url]').val();
+
     for (let i = 0; i < productsArr.length; i += 1) {
-        if (productsArr[i].id == productId) {
+        if (productsArr[i].id === prod.id) {
             exist = true;
         }
     }
 
     if (!exist) {
-        productsArr.push({ "id": $('input[name=id]').attr('value'), "name": $('.prodName').html(), "price": $('.prodPrice').html(), "imgUrl": $('.prodImg').attr('src') });
+        productsArr.push(prod);
         toastr.info('Продуктът беше добавен в количката')
     } else {
         toastr.options.closeButton = true;
@@ -34,8 +38,9 @@ $('.addToCart').on('click', () => {
 
 var username = getUserName();
 var localStorageKey = 'cart-' + username;
+var arr = JSON.parse(localStorage.getItem(localStorageKey))
 
-if (localStorage.length > 0 && localStorage[localStorageKey]) {
+if (arr && arr.length) {
 
     let savedData = JSON.parse(localStorage[localStorageKey]);
 
@@ -46,7 +51,7 @@ if (localStorage.length > 0 && localStorage[localStorageKey]) {
         // Dynamically create the products in cart => get them from localStorage
         let mainRow = $('<tr />').addClass('rem1');
         let firstCell = $('<td />').addClass('invert-image');
-        let firstCellAnchor = $('<a />').attr('href', '/');
+        let firstCellAnchor = $('<a />').attr('href', '/products/details/' + savedData[i].id);
         let firstCellImg = $('<img />').addClass('img-responsive').attr('src', savedData[i].imgUrl);
 
         firstCellImg.appendTo(firstCellAnchor);
@@ -202,7 +207,7 @@ $('body').on('click', '.value-minus', function() {
 // Sliding cart
 if (localStorage.length > 0 && localStorage[localStorageKey]) {
 
-    let savedData =JSON.parse(localStorage[localStorageKey]);
+    let savedData = JSON.parse(localStorage[localStorageKey]);
     
     let savedDataLen = savedData.length;
     let slidingCartName = $('#slidingCartTitle');
@@ -227,3 +232,11 @@ function getUserName() {
     return '';
 }
 
+
+$('body').on('click', '#agree', function(e) {
+    if (e.target.checked) {
+        $('#checkout-button').removeClass('disabled');
+    } else {
+        $('#checkout-button').addClass('disabled');
+    }
+});

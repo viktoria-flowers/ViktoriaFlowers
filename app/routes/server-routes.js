@@ -1,5 +1,4 @@
-const { setLocals } = require('../middlewares');
-const { isAdmin } = require('../middlewares');
+const { setLocals, isAdmin, isLoggedIn } = require('../middlewares');
 
 const serverRoutes = (app, controllers) => {
     app.use('/', setLocals);
@@ -31,7 +30,7 @@ const serverRoutes = (app, controllers) => {
     app.get('/card-payment', (req, res) => res.render('card-payment'));
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
-    app.get('/checkout', (req, res) => res.render('checkout'));
+    app.get('/checkout', isLoggedIn, (req, res) => res.render('checkout'));
 };
 
 module.exports = serverRoutes;
