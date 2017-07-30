@@ -18,11 +18,19 @@ block content
           th
       tbody
         if (userlist && userlist.length)
-          - for(var i = 0; i < userlist.length; i += 1) 
+          - for(var i = 0; i < userlist.length; i += 1)      
               tr.productsRow
+              - if (userlist[i].roles.indexOf("admin") === -1)              
                 td.userIdCell(value=userlist[i]._id)
                   = userlist[i].username
                 td
                   = userlist[i].email
-                td.text-right
-                  input.btn.btn-md.btn-danger.set-admin(type="button", value="Направи админ")
+                td.text-center
+                  input.btn.btn-lg.btn-danger.set-admin(type="button", value="Направи админ")
+              - else
+                td.userIdCell(value=userlist[i]._id)
+                  = userlist[i].username
+                td
+                  = userlist[i].email
+                td.text-center.text-warning
+                  | Потребителят има администраторски права
