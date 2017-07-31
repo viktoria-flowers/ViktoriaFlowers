@@ -27,6 +27,7 @@ class AuthController {
                         res.redirect('/login');
                     }
 
+                    res.cookie('username', user.username);
                     res.redirect('/profile');
                 });
             })

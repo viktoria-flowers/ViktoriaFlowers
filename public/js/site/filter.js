@@ -44,6 +44,22 @@
         })
         .done(function(htmlResponse) {
             $(productsContainer).html(htmlResponse);
+             $('.prodImg')
+                .wrap('<span style="display:inline-block"></span>')
+                .css('display', 'inline-block')
+                .parent()
+                .zoom({
+                    touch: true
+                });
+
+             $('td img')
+                .wrap('<div style="height:300px"></div>')
+                .css('display', 'block')
+                .parent()
+                .zoom({
+                    touch: true
+            });
+                
         })
         .fail(function(err) {
             toastr.error('An error occurred! Check console [F12]!');
