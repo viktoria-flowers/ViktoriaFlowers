@@ -52,9 +52,12 @@ block content
                     form(action='#', method='post')
                       fieldset#fieldsetHiddenItems
                         input(type='hidden', name='id', value=model._id)
+                        input(type='hidden', name='title', value=model.title)
+                        input(type='hidden', name='url', value=model.url)
+                        input(type='hidden', name='price', value=model.price)
                       - if(isAuthenticated)
                         a
-                          input.btn.btn-warning.btn-lg(name='submit', value='Добавете в количка', type='button').addToCart
+                          input.btn.btn-warning.btn-lg(name='submit', value='Добави в количката', type='button').addToCart
                       - else
-                        a.btn.btn-warning.btn-lg(href='/login') Добавете в количката
+                        a.btn.btn-warning.btn-lg(href='/login') Добави в количката
   .clearfix.visible-md-block.visible-sm-block
