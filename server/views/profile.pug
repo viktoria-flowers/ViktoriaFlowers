@@ -58,32 +58,38 @@ block content
             li
               a(href='#tabs-2') Любими
           #tabs-1
-            .table-responsive
-              table.fixed-table.table.text-left
-                thead
-                  tr
-                    th Име на продукта
-                    th Снимка
-                    th Единична цена
-                    th Количество
-                    th Обща цена
-                    th Дата на поръчката
-                tbody
-                  - if (user.orders && user.orders.length)
-                    - for(var i = 0; i < user.orders.length; i += 1) 
+            - if (user.orders && user.orders.length)
+              - for(let i = 0; i < user.orders.length; i += 1)
+                hr
+                h2.text-center Поръчка: 
+                  = i + 1 
+                h3 Статус: 
+                  = user.orders[i].status
+                .table-responsive
+                  table.fixed-table.table.text-left
+                    thead
+                      tr
+                        th Име на продукта
+                        th Снимка
+                        th Единична цена
+                        th Количество
+                        th Обща цена
+                        th Дата на поръчката
+                    tbody
+                      - for(let j = 0; j < user.orders[i].products.length; j += 1) 
                         tr.productsRow
                           td.word-wrap-only
-                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                            a.bootstrap-link(href='products/details/' + user.orders[i].products[j]._id)
                               = user.orders[i].products[0].title
                           td.word-wrap-only
-                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                            a.bootstrap-link(href='products/details/' + user.orders[i].products[j]._id)
                               img.order-pic(src=user.orders[i].products[0].url)
                           td.word-wrap-only
-                            = user.orders[i].products[0].price + ' лв.'
+                            = user.orders[i].products[j].price + ' лв.'
                           td.word-wrap-only
-                            = user.orders[i].products[0].count
+                            = user.orders[i].products[j].count
                           td.word-wrap-only
-                            = user.orders[i].products[0].price * user.orders[i].products[0].count + ' лв.'
+                            = user.orders[i].products[j].price * user.orders[i].products[0].count + ' лв.'
                           td.word-wrap-only
                             = moment(user.orders[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
           #tabs-2
@@ -94,7 +100,7 @@ block content
                     th Име на продукта
                     th Снимка
                     th Единична цена
-                    th Тип на продукта
+                    th Описание
                 tbody
                   - if (user.favorites && user.favorites.length)
                     - for(var i = 0; i < user.favorites.length; i += 1) 
@@ -108,7 +114,7 @@ block content
                           td.word-wrap-only
                             = user.favorites[i].price + ' лв.'
                           td.word-wrap-only
-                            = user.favorites[i].type
+                            = user.favorites[i].description
           script.
             $( function() {
               $( "#tabs" ).tabs({
