@@ -1,6 +1,5 @@
 const BaseData = require('./base-data');
 const ProductModel = require('./models/product-model');
-const ModelState = require('./model-state');
 
 class ProductData extends BaseData {
     constructor(db) {

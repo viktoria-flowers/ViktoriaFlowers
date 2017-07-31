@@ -61,21 +61,21 @@ class UsersData extends BaseData {
                     },
                 }
             );
-        } else {
-            return this.collection.update(
-                { _id: model._id },
-                {
-                    $set: {
-                        names: model.names,
-                        phone: model.phone,
-                        email: model.email,
-                        contactInfo: model.contactInfo,
-                        username: model.username,
-                        password: pass,
-                    },
-                }
-            );
         }
+
+        return this.collection.update(
+            { _id: model._id },
+            {
+                $set: {
+                    names: model.names,
+                    phone: model.phone,
+                    email: model.email,
+                    contactInfo: model.contactInfo,
+                    username: model.username,
+                    password: pass,
+                },
+            }
+        );
     }
 
     update(id) {

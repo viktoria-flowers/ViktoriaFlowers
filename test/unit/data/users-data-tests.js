@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-expressions */
-/*globals it, describe, afterEach, beforeEach */
+/* eslint-disable no-unused-expressions  */
+/* globals it, describe, afterEach, beforeEach */
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { ObjectID } = require('mongodb');
@@ -13,15 +13,14 @@ describe('UsersData tests', () => {
         collection: () => { },
     };
 
-    let items = [];
     let ModelClass = null;
     const validator = null;
     let userData = null;
 
     describe('method "findById()"', () => {
-        let idNumber = '222222222222222222222222';
-        let Id = new ObjectID(idNumber);
-        let existingUser = { _id: Id };
+        const idNumber = '222222222222222222222222';
+        const Id = new ObjectID(idNumber);
+        const existingUser = { _id: Id };
 
         // const toArray = () => {
         //     return Promise.resolve(existingUser);
@@ -33,7 +32,6 @@ describe('UsersData tests', () => {
 
         describe('when there are user with such ID in db', () => {
             beforeEach(() => {
-                items = [existingUser];
                 sinon.stub(db, 'collection')
                     .callsFake(() => {
                         return { findOne };
@@ -60,15 +58,14 @@ describe('UsersData tests', () => {
 
     describe('method "findByUsername()"', () => {
         describe('when there are user with such username in db', () => {
-            let username = 'Pesho';
-            let existingUser = { username: username };
+            const username = 'Pesho';
+            const existingUser = { username: username };
 
             const findOne = () => {
                 return Promise.resolve(existingUser);
             };
 
             beforeEach(() => {
-                items = [existingUser];
                 sinon.stub(db, 'collection')
                     .callsFake(() => {
                         return { findOne };
@@ -94,8 +91,9 @@ describe('UsersData tests', () => {
     });
 
     describe('method "create()"', () => {
+        /* eslint-disable max-len  */
         describe('when there are provided user with invalid parameters should by returned model state with error', () => {
-            let newUserInvalidUsername = {
+            const newUserInvalidUsername = {
                 username: 'p',
                 password: 'pesho123456',
                 names: 'Pesho',
@@ -104,12 +102,12 @@ describe('UsersData tests', () => {
                 contactInfo: 'Bulgaria, Sofia...',
             };
 
-            let modelState = new ModelState();
+            const modelState = new ModelState();
             modelState.errors = ['username'];
 
             ModelClass = {
                 validate: () => {
-                }
+                },
             };
 
             const validate = () => {
@@ -135,7 +133,7 @@ describe('UsersData tests', () => {
         });
 
         describe('when there are provided user and hi exist in data base should be return error', () => {
-            let newUserValid = {
+            const newUserValid = {
                 username: 'Pesho',
                 password: 'pesho123456',
                 names: 'Pesho',
@@ -144,7 +142,7 @@ describe('UsersData tests', () => {
                 contactInfo: 'Bulgaria, Sofia...',
             };
 
-            let expectedUser = {
+            const expectedUser = {
                 username: 'Pesho',
                 password: 'pesho123456',
                 names: 'Pesho',
@@ -156,11 +154,11 @@ describe('UsersData tests', () => {
             ModelClass = class {
             };
 
-            let modelState = new ModelState();
+            const modelState = new ModelState();
 
             ModelClass = {
                 validate: () => {
-                }
+                },
             };
 
             expectedUser.roles = [];
@@ -204,7 +202,7 @@ describe('UsersData tests', () => {
 
 
         describe('when there are provided user with valid parameters should by created and saved in database', () => {
-            let newUserValid = {
+            const newUserValid = {
                 username: 'Pesho',
                 password: 'pesho123456',
                 names: 'Pesho',
@@ -213,7 +211,7 @@ describe('UsersData tests', () => {
                 contactInfo: 'Bulgaria, Sofia...',
             };
 
-            let expectedUser = {
+            const expectedUser = {
                 username: 'Pesho',
                 password: 'pesho123456',
                 names: 'Pesho',
@@ -225,11 +223,11 @@ describe('UsersData tests', () => {
             ModelClass = class {
             };
 
-            let modelState = new ModelState();
+            const modelState = new ModelState();
 
             ModelClass = {
                 validate: () => {
-                }
+                },
             };
 
             expectedUser.roles = [];
@@ -242,7 +240,7 @@ describe('UsersData tests', () => {
             };
 
             const insert = (user) => {
-                return Promise.resolve({ops: [user]});
+                return Promise.resolve({ ops: [user] });
             };
 
             const findOne = (name) => {

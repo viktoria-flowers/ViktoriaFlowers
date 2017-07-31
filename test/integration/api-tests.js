@@ -221,7 +221,7 @@ describe('/API tests', () => {
         });
     });
 
-    // TODO It seems the method is not ready for testing
+    // It seems the method is not ready for testing
     describe.skip('Checkout tests', () => {
         it('Expect to return all products', (done) => {
             const agent = request.agent(app);

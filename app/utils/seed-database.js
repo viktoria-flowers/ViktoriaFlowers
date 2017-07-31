@@ -1,4 +1,4 @@
-const { authHelper } = require('./utils/index');
+const { authHelper } = require('./auth-helper');
 
 const seedDatabase = (data) => {
     data.users.getAll({ username: 'admin11' })
@@ -24,4 +24,4 @@ const seedDatabase = (data) => {
         });
 };
 
-module.exports({ seedDatabase });
+module.exports = { seedDatabase };

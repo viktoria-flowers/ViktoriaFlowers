@@ -1,16 +1,11 @@
 /* eslint-disable no-unused-expressions */
 /* globals describe, beforeEach, afterEach, it */
-const { expect } = require('chai');
-const { setupDriver } = require('../utils/setup-driver');
-// const ui = require('../utils/ui');
-// const itemsUtils = require('../utils/bouquets-utils');
 
-const async = require('../../utils/async');
-const { Builder, By, until, WebDriver } = require('selenium-webdriver');
+const { expect } = require('chai');
+const { Builder, By, until } = require('selenium-webdriver');
 const test = require('selenium-webdriver/testing');
 
 describe('Public routes test', () => {
-
     const ensurePageContent = (source) => {
         // verify the correct page content is visible
         const index = source.indexOf('.error-template', '');
