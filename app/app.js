@@ -8,9 +8,6 @@ const init = (data) => {
 
     initialAdmin.seedDatabase(data);
 
-    const app = express();
-    const controllers = require('./controllers/init').init(data);
-
     // folder app/config
     require('./config/app-config')(app);
     require('./config/auth-config')(app, data.users);
