@@ -6,10 +6,10 @@ class ApiController {
     }
 
     postFavorites(req, res) {
-        let currentUser = req.user;
-        let prodID = req.body.prodID;
-        let responseMessage = {
-            message: 'error'
+        const currentUser = req.user;
+        const prodID = req.body.prodID;
+        const responseMessage = {
+            message: 'error',
         };
 
         if (!currentUser) {
@@ -19,17 +19,19 @@ class ApiController {
 
         return this._data.products.findById(prodID)
             .then((product) => {
-                let isAlreadyAdded = currentUser.favorites
-                    .filter(e => e._id.toString() === product._id.toString()).length > 0;
+                const isAlreadyAdded = currentUser.favorites
+                    .filter((e) => e._id.toString() ===
+                        product._id.toString()).length > 0;
                 if (!isAlreadyAdded) {
                     responseMessage.message = 'success';
                     currentUser.favorites.push(product);
-                    return this._data.users.updateParamsById(currentUser, { favorites: currentUser.favorites });
+                    return this._data.users
+                        .updateParamsById(currentUser,
+                            { favorites: currentUser.favorites });
                 }
-                else {
-                    responseMessage.message = 'already added';
-                    return Promise.resolve();
-                }
+
+                responseMessage.message = 'already added';
+                return Promise.resolve();
             })
             .then(() => {
                 return res.status(200).json(responseMessage);
