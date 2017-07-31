@@ -177,14 +177,15 @@ $('#checkout-button').on('click', () => {
             sendInfo: prodInfo,
         }})
         .done(function(data) {
-            toastr.success('Успешно изпратена поръчка!');
-            toastr.success('Очаквайте доставка скоро! :)');
+            toastr.success('Успешно изпратена поръчка, можете да видите вашите поръчки в профила си!');
 
             // getUserName is a globalFunction that comes form checkout.js
             var username = getUserName();
             var storageKey = 'cart-' + username;
             localStorage.removeItem(storageKey);
-            document.location.reload(true);
+            setTimeout(() => {
+                 document.location.reload(true); 
+            }, 2000);
         })
         .fail(function(err) {
             console.log(err);
