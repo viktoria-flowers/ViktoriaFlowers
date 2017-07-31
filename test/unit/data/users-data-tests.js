@@ -234,6 +234,7 @@ describe('UsersData tests', () => {
 
             expectedUser.roles = [];
             expectedUser.orders = [];
+            expectedUser.favorites = [];
             expectedUser.password = authHelper.makeHashFromPassword(newUserValid.password);
 
             const validate = () => {
