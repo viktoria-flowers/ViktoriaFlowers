@@ -28,6 +28,10 @@ const ajaxRequests = (app, apiController) => {
     app.post('/api/create-admin', isAdmin, (req, res) => {
         return apiController.postSetUserAsAdmin(req, res);
     });
+
+    app.post('/api/favorites', isAdmin, (req, res) => {
+        return apiController.postFavorites(req, res);
+    });
 };
 
 module.exports = ajaxRequests;

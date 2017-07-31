@@ -5,6 +5,11 @@ class ApiController {
         this._data = data;
     }
 
+    postFavorites(req, res){
+        
+    }
+
+
     getAutoComplete(req, res) {
         const regex = new RegExp(req.query.name, 'i');
         const query = { 'title': regex };
