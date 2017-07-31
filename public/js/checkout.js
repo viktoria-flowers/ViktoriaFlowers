@@ -115,6 +115,17 @@ if (arr && arr.length) {
 
     container.appendTo(tableBody);
 }
+//Order images
+
+$(document).ready(function() {
+    $('.order-pic')
+        .wrap('<div style="height: 100px"></div>')
+        .css('display', 'block')
+        .parent()
+        .zoom({
+            touch: true
+        });
+});
 
 // All images in site
 $(document).ready(function() {

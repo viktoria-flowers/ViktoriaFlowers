@@ -3791,7 +3791,9 @@ ul.dropdown-cart li .item-right button{
         table-layout:fixed;
 	}
 }
-
+.fixed-table{
+    font-size: 15px;
+}
 .typeahead .dropdown-menu{
     max-height: 150px;
     overflow-y: auto; 
@@ -3882,4 +3884,7 @@ ul.dropdown-cart li .item-right button{
 .delivery-text li p{
     font-size: 17px;
     text-align: justify;
+}
+.order-pic{
+    width: 70%;
 }
