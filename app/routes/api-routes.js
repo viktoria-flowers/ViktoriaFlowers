@@ -30,7 +30,6 @@ const ajaxRequests = (app, apiController) => {
     });
 
     app.post('/api/favorites', isLoggedIn, (req, res) => {
-        console.log('-----begin-------');
         return apiController.postFavorites(req, res);
     });
 };

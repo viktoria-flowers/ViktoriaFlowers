@@ -8,28 +8,44 @@ class ApiController {
     postFavorites(req, res) {
         let currentUser = req.user;
         let prodID = req.body.prodID;
+        let responseMessage = {
+            message: 'error'
+        };
 
         if (!currentUser) {
-            return res.status(400).json({ message: 'no user' });
+            responseMessage.message = 'no logged user';
+            return res.status(400).json(responseMessage);
         }
 
         return this._data.products.findById(prodID)
             .then((product) => {
-                console.log(currentUser.favorites);
-                currentUser.favorites.push(product);
+                console.log('-------- product----------');
+                console.log(product);
 
-                return this._data.users.updateParamsById(currentUser, { favorites: currentUser.favorites });
+                console.log('----user favorites----------');
+                console.log(currentUser.favorites);
+
+                let isAlreadyAdded = currentUser.favorites.filter(e => e._id.toString() === product._id.toString() && e.title === product.title).length > 0;
+                console.log(isAlreadyAdded);
+
+                if (!isAlreadyAdded) {
+                    responseMessage.message = 'success';
+                    currentUser.favorites.push(product);
+                    return this._data.users.updateParamsById(currentUser, { favorites: currentUser.favorites });
+                }
+                else {
+                    responseMessage.message = 'already added';
+                    return Promise.resolve();
+                }
             })
             .then(() => {
-                console.log('==== server OK====');
-                return res.json({ message: 'OK' });
+                return res.status(200).json(responseMessage);
             })
             .catch((err) => {
-                console.log('=====err============');
+                console.log(err);
                 return res.status(400).json(err);
             });
     }
-
 
     getAutoComplete(req, res) {
         const regex = new RegExp(req.query.name, 'i');

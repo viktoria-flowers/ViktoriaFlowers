@@ -1,10 +1,18 @@
 /*globals $, typeahead, toastr */
 $('.addToFavorites').on('click', (e) => {
     let target = $(e.target);
+    console.log(target);
+
+    if (target.prop('nodeName') === 'SPAN') {
+        target = target.parent();
+    }
+
     let prodID = target.attr('prodID');
 
+    console.log(target);
     if (!prodID) {
-        toastr.error("error on search");
+        toastr.error('Неуспешно добавяне, моля опитайте отново ');
+        return;
     }
 
     $.ajax({
@@ -12,22 +20,22 @@ $('.addToFavorites').on('click', (e) => {
         url: "/api/favorites",
         data: { prodID: prodID },
         success: ((data) => {
-            console.log('---data---');
-            console.log(data);
-            toastr.success('Успешно добавихте продукта в любими');
-            
+            if (data.message === 'already added') {
+                toastr.error('Вече сте добавили този продукт в любими в любими');
+            }
+            else {
+                toastr.success('Успешно добавихте продукта в любими');
+            }
         }),
         error: ((error) => {
-            console.log('---error---');
-            console.log(error);
-            toastr.success(error);
+            toastr.error('Неуспешно добавяне, моля опитайте отново');
         })
     });
 });
 
 $('.autocompleteInput').on('keyup', () => {
     let currentValue = $(".autocompleteInput").val();
-    
+
     if (!currentValue) {
         return;
     }
