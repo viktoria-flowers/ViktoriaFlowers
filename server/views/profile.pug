@@ -65,7 +65,6 @@ block content
                     th Име на продукта
                     th Снимка
                     th Единична цена
-                    th 
                     th Количество
                     th Обща цена
                     th Дата на поръчката
@@ -74,13 +73,13 @@ block content
                     - for(var i = 0; i < user.orders.length; i += 1) 
                         tr.productsRow
                           td.word-wrap-only
-                            = user.orders[i].products[0].title
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                              = user.orders[i].products[0].title
                           td.word-wrap-only
-                            img.order-pic(src=user.orders[i].products[0].url)
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                              img.order-pic(src=user.orders[i].products[0].url)
                           td.word-wrap-only
                             = user.orders[i].products[0].price + ' лв.'
-                          td.word-wrap-only
-                            | x
                           td.word-wrap-only
                             = user.orders[i].products[0].count
                           td.word-wrap-only
@@ -88,17 +87,28 @@ block content
                           td.word-wrap-only
                             = moment(user.orders[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
           #tabs-2
-            ul.nav
-              li                  
-                i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                  label.ordersText
-                  a(href="#")
-                    | Продукт 1
-              li                  
-                i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                  label.ordersText
-                  a(href="#")
-                    | Продукт 2..
+            .table-responsive
+              table.fixed-table.table.text-left
+                thead
+                  tr
+                    th Име на продукта
+                    th Снимка
+                    th Единична цена
+                    th Тип на продукта
+                tbody
+                  - if (user.favorites && user.favorites.length)
+                    - for(var i = 0; i < user.favorites.length; i += 1) 
+                        tr.productsRow
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id) 
+                              = user.favorites[i].title
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                              img.order-pic(src=user.favorites[i].url)
+                          td.word-wrap-only
+                            = user.favorites[i].price + ' лв.'
+                          td.word-wrap-only
+                            = user.favorites[i].type
           script.
             $( function() {
               $( "#tabs" ).tabs({
