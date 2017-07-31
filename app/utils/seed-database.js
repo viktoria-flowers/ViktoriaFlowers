@@ -1,4 +1,4 @@
-const { authHelper } = require('./auth-helper');
+const authHelper = require('./auth-helper');
 
 const seedDatabase = (data) => {
     data.users.getAll({ username: 'admin11' })
