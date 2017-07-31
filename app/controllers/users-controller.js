@@ -11,6 +11,8 @@ class UsersController {
                 return res.render(pugView, { userlist: userlist });
             });
     }
+    
+    
 }
 
 module.exports = UsersController;
