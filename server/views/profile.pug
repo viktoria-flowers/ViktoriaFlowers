@@ -48,41 +48,92 @@ block content
           br
           a.btn.btn-success.btn-md(href="/profile-edit") Редактирай
   .container
-    h1.page-header
+    h3.page-header
     .row
-          .profile-content
-            #tabs
-              ul
-                li
-                  a(href='#tabs-1') История на поръчките
-                li
-                  a(href='#tabs-2') Любими
-              #tabs-1
-                ul.nav
-                  li                  
-                    i.glyphicon.glyphicon-hand-right.gly-size
-                      label.ordersText
-                        | Поръчка 1
-                  li                  
-                    i.glyphicon.glyphicon-hand-right.gly-size
-                      label.ordersText
-                        | Поръчка 2 ...   
-              #tabs-2
-                ul.nav
-                  li                  
-                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                      label.ordersText
-                      a(href="#")
-                        | Продукт 1
-                  li                  
-                    i.glyphicon.glyphicon-heart.gly-size.gly-heart
-                      label.ordersText
-                      a(href="#")
-                        | Продукт 2..
-              script.
-                $( function() {
-                  $( "#tabs" ).tabs({
-                      event: "mouseover"
-                  });
-                });
+      .profile-content
+        #tabs
+          ul
+            li
+              a(href='#tabs-1') История на поръчките
+            li
+              a(href='#tabs-2') Любими
+          #tabs-1
+            - if (user.orders && user.orders.length)
+              - for(let i = 0; i < user.orders.length; i += 1)
+                hr
+                h2.text-center Поръчка: 
+                  = i + 1 
+                h3 Статус: 
+                  - if (user.orders[i].status === 'pending')
+                    = 'чака одобрение'
+                  - else
+                    = 'доставена'
+                .table-responsive
+                  table.fixed-table.table.text-left
+                    thead
+                      tr
+                        th Име на продукта
+                        th Снимка
+                        th Единична цена
+                        th Количество
+                        th Обща цена
+                        th Дата на поръчката
+                    tbody
+                      - for(let j = 0; j < user.orders[i].products.length; j += 1) 
+                        tr.productsRow
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.orders[i].products[j]._id)
+                              = user.orders[i].products[0].title
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.orders[i].products[j]._id)
+                              img.order-pic(src=user.orders[i].products[0].url)
+                          td.word-wrap-only
+                            = user.orders[i].products[j].price + ' лв.'
+                          td.word-wrap-only
+                            = user.orders[i].products[j].count
+                          td.word-wrap-only
+                            = user.orders[i].products[j].price * user.orders[i].products[0].count + ' лв.'
+                          td.word-wrap-only
+                            = moment(user.orders[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
+            - else 
+              p
+              | Все още нямате поръчки 
+          #tabs-2
+            .table-responsive
+              table.fixed-table.table.text-left
+                thead
+                  tr
+                    th Име на продукта
+                    th Снимка
+                    th Единична цена
+                    th Описание
+                tbody
+                  - if (user.favorites && user.favorites.length)
+                    - for(var i = 0; i < user.favorites.length; i += 1) 
+                        tr.productsRow
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id) 
+                              = user.favorites[i].title
+                          td.word-wrap-only
+                            a.bootstrap-link(href='products/details/' + user.favorites[i]._id)
+                              img.order-pic(src=user.favorites[i].url)
+                          td.word-wrap-only
+                            = user.favorites[i].price + ' лв.'
+                          td.word-wrap-only
+                            = user.favorites[i].description
+                  - else
+                        tr
+                          td.text-center(colspan=4)
+                            | Нямате любими продукти
+          script.
+            $( function() {
+              $( "#tabs" ).tabs({
+                  event: "mouseover"
+              });
+            });
     .clearfix
+  //- .container
+  //-   | Поръчки :
+  //-   pre
+  //-     = JSON.stringify(user.orders, null, 4)
+  

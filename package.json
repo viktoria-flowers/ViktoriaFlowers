@@ -8,7 +8,7 @@
     "nodemon": "nodemon server.js",
     "test-unit": "gulp tests:unit",
     "lint": "./node_modules/.bin/eslint .",
-    "test": "./node_modules/.bin/mocha test/**/*js",
+    "test": "./node_modules/.bin/mocha test/unit/**/*js",
     "mocha": "./node_modules/.bin/mocha test/**/*js",
     "istanbul": "./node_modules/.bin/istanbul"
   },

@@ -1,357 +1,174 @@
 extends /layouts/default.pug
 
-//- script(src='static/js/home.js')
-
 block content
-    //MAIN slider start
-    ul#demo1
-      li
-        img(src='static/images/11.jpg', alt='')
-        .slide-desc
-          h3
-            em
-             | Цветя за всеки повод
-      li
-        img(src='static/images/22.jpg', alt='')
-        .slide-desc
-          h3
-            em
-             | Посетете ни
-      li
-        img(src='static/images/44.jpg', alt='')
-        .slide-desc
-          h3
-            em
-             | Нестандартни букети
-    //MAIN slider end
+  //MAIN slider start
+  ul#demo1
+    li
+      img(src='static/images/11.jpg', alt='')
+      .slide-desc
+        h3.elegantshd
+          em
+            | Цветя за всеки повод
+    li
+      img(src='static/images/22.jpg', alt='')
+      .slide-desc
+        h3.elegantshd
+          em
+            | Посетете ни
+    li
+      img(src='static/images/44.jpg', alt='')
+      .slide-desc
+        h3.elegantshd
+          em
+            | Нестандартни букети
+  br
+  //MAIN slider end
 
-    //PROMO and newest products start
-    .top-brands
-      .container
-        h2 Нашите предложения
-        .grid_3.grid_5
-          .bs-example.bs-example-tabs(role='tabpanel', data-example-id='togglable-tabs')
-            ul#myTab.nav.nav-tabs(role='tablist')
-              li.active(role='presentation')
-                a#expeditions-tab(href='#expeditions', role='tab', data-toggle='tab', aria-controls='expeditions', aria-expanded='true') Най-търсени предложения
-              li(role='presentation')
-                a#tours-tab(href='#tours', role='tab', data-toggle='tab', aria-controls='tours') Най-нови предложения
-            
-            #myTabContent.tab-content
-              
-              ///////////////// first
-                  
-              #expeditions.tab-pane.fade.in.active(role='tabpanel', aria-labelledby='expeditions-tab')
-                .agile_top_brands_grids
-              
-                each prod, index in topViewed
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                      if prod.wasPrice != ''
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='/products/details/' + prod._id)
-                                  img(title=' ', alt=' ', src=prod.url)
-                                p= prod.title
-                                h4= prod.price 
-                                  span= prod.price 
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='id', value=prod._id)
-                                    input(type='hidden', name='title', value=prod.title)
-                                    input(type='hidden', name='price', value=prod.price)
-                                    input(type='hidden', name='wasPrice', value=prod.wasPrice)
-                                    input(type='hidden', name='type', value=prod.type)
-                                    input(type='hidden', name='description', value=prod.description)
-                                    input(type='hidden', name='url', value=prod.url)
-                                    input(type='hidden', name='dateCreated', value=prod.dateCreated)
-                                    input(type='hidden', name='viewsCount', value=prod.viewsCount)
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                        if (index + 1) % 3 == 0
-                          .clearfix
-                          .agile_top_brands_grids
-                      else
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='/products/details/' + prod._id)
-                                  img(title=' ', alt=' ', src=prod.url)
-                                p= prod.title
-                                h4= prod.price 
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='id', value=prod._id)
-                                    input(type='hidden', name='title', value=prod.title)
-                                    input(type='hidden', name='price', value=prod.price)
-                                    input(type='hidden', name='wasPrice', value=prod.wasPrice)
-                                    input(type='hidden', name='type', value=prod.type)
-                                    input(type='hidden', name='description', value=prod.description)
-                                    input(type='hidden', name='url', value=prod.url)
-                                    input(type='hidden', name='dateCreated', value=prod.dateCreated)
-                                    input(type='hidden', name='viewsCount', value=prod.viewsCount)
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                        if (index + 1) % 3 == 0
-                          .clearfix
-                          .agile_top_brands_grids
+  .container
+    h1#ourOffers.ourOffers-effect.text-center Нашите предложения
+    hr
+    br
+    ul.nav.nav-tabs
+      li.active
+        a.home-tabs-font-size(data-toggle='tab', href='#topNew') Най-нови
+      li
+        a.home-tabs-font-size(data-toggle='tab', href='#topViewed') Най-преглеждани
+    br
+    //First tab content start
+    .tab-content
+      #topNew.tab-pane.fade.in.active
+        .col-md-12
+        if (topNewest && topNewest.length)
+          - for (let p = 0; p < topNewest.length; p += 1)
+            .col-md-4.productBoxHeight
+              .panel.panel-default
+                - if (topNewest[p].wasPrice.length)
+                  .cnrflash
+                    .cnrflash-inner
+                      span.cnrflash-label
+                        | Промо
+                .panel-heading.text-center.prodName.textDots
+                  p
+                    = topNewest[p].title
+                .panel-body.text-center
+                  table.table#tableBorderTop
+                    tr
+                      td.crop
+                        a(href='/products/details/' + topNewest[p]._id)
+                          img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=topNewest[p].url, src=topNewest[p].url)
+                    tr
+                      td
+                        | Цена: 
+                        span.prodPrice
+                          = topNewest[p].price
+                        |  лв.
+                    - if (topNewest[p].wasPrice.length)
+                      tr
+                        td.scratchOverText.text-center
+                          = 'Стара цена: ' + topNewest[p].wasPrice + 'лв.'
+                    - else
+                      tr
+                        td
+                          br
+                    - if (isAuthenticated)      
+                      tr
+                        td
+                          button.addToFavorites.btn.btn-default.btn-lg.hundredPercentWidth(type='button', prodID=topNewest[p]._id)
+                            span.glyphicon.glyphicon-heart
+                            |  Добави в любими
+                    tr
+                      td
+                        form(action='#', method='post')
+                          fieldset
+                            input(type='hidden', name='id', value=topNewest[p]._id)
+                            input(type='hidden', name='title', value=topNewest[p].title)
+                            input(type='hidden', name='url', value=topNewest[p].url)
+                            input(type='hidden', name='price', value=topNewest[p].price)
+                            - if (isAuthenticated)
+                              input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
+                            - else
+                              a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topNewest[p]._id) Вижте детайли
+            - if ((p !== 0) && ((p % 2 === 0) && (p % 5 === 0)))
+              .clearfix.visible-md-block.visible-sm-block
+      //First tab content end
 
-              // ////// second 
-            
-              #tours.tab-pane.fade(role='tabpanel', aria-labelledby='tours-tab')
-                .agile_top_brands_grids
-
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/7.png')
-                                p Sona-masoori-rice
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $35.99 
-                                  span $55.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Fortune Sunflower Oil')
-                                    input(type='hidden', name='amount', value='35.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/8.png')
-                                p Milky-mist-paneer
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $30.99 
-                                  span $45.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='basmati rise')
-                                    input(type='hidden', name='amount', value='30.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img.img-responsive(src='static/images/9.png', alt=' ')
-                                p Basmati-Rice
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $80.99 
-                                  span $105.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Pepsi soft drink')
-                                    input(type='hidden', name='amount', value='80.00')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .clearfix  
-                .agile_top_brands_grids
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/10.png')
-                                p Fortune-sunflower
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $20.99 
-                                  span $35.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Fortune Sunflower Oil')
-                                    input(type='hidden', name='amount', value='20.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img(title=' ', alt=' ', src='static/images/12.png')
-                                p Nestle-a-slim
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $20.99 
-                                  span $35.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='basmati rise')
-                                    input(type='hidden', name='amount', value='20.99')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .col-md-4.top_brand_left
-                    .hover14.column
-                      .agile_top_brand_left_grid
-                        .agile_top_brand_left_grid_pos
-                          img.img-responsive(src='static/images/offer.png', alt=' ')
-                        .agile_top_brand_left_grid1
-                          figure
-                            .snipcart-item.block
-                              .snipcart-thumb
-                                a(href='products.html')
-                                  img.img-responsive(src='static/images/13.png', alt=' ')
-                                p Bread-sandwich
-                                .stars
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.blue-star(aria-hidden='true')
-                                  i.fa.fa-star.gray-star(aria-hidden='true')
-                                h4
-                                  | $40.99 
-                                  span $65.00
-                              .snipcart-details.top_brand_home_details
-                                form(action='#', method='post')
-                                  fieldset
-                                    input(type='hidden', name='cmd', value='_cart')
-                                    input(type='hidden', name='add', value='1')
-                                    input(type='hidden', name='business', value=' ')
-                                    input(type='hidden', name='item_name', value='Pepsi soft drink')
-                                    input(type='hidden', name='amount', value='40.00')
-                                    input(type='hidden', name='discount_amount', value='1.00')
-                                    input(type='hidden', name='currency_code', value='USD')
-                                    input(type='hidden', name='return', value=' ')
-                                    input(type='hidden', name='cancel_return', value=' ')
-                                    input.button(type='submit', name='submit', value='Add to cart')
-                  .clearfix  
+      //Second tab content start
+      #topViewed.tab-pane.fade
+        .col-md-12
+        if (topViewed && topViewed.length)
+          - for (let p = 0; p < topViewed.length; p += 1)
+            .col-md-4.productBoxHeight
+              .panel.panel-default
+                - if (topViewed[p].wasPrice.length)
+                  .cnrflash
+                    .cnrflash-inner
+                      span.cnrflash-label
+                        | Промо
+                .panel-heading.text-center.prodName.textDots
+                  p
+                    = topViewed[p].title
+                .panel-body.text-center
+                  table.table#tableBorderTop
+                    tr
+                      td.crop
+                        a(href='/products/details/' + topViewed[p]._id)
+                          img.img-responsive.imgRightDimensions.prodImg(title='Снимка на продукт', alt=topViewed[p].url, src=topViewed[p].url)
+                    tr
+                      td
+                        | Цена: 
+                        span.prodPrice
+                          = topViewed[p].price
+                        |  лв.
+                    - if (topViewed[p].wasPrice.length)
+                      tr
+                        td.scratchOverText.text-center
+                          = 'Стара цена: ' + topViewed[p].wasPrice + 'лв.'
+                    - else
+                      tr
+                        td
+                          br
+                    - if (isAuthenticated)
+                      tr
+                        td
+                          button.addToFavorites.btn.btn-default.btn-lg.hundredPercentWidth(type='button' prodID=topViewed[p]._id)
+                            span.glyphicon.glyphicon-heart
+                            | Добави в любими
+                    tr
+                      td
+                        form(action='#', method='post')
+                          fieldset
+                            input(type='hidden', name='id', value=topViewed[p]._id)
+                            input(type='hidden', name='title', value=topViewed[p].title)
+                            input(type='hidden', name='url', value=topViewed[p].url)
+                            input(type='hidden', name='price', value=topViewed[p].price)
+                            - if (isAuthenticated)
+                              input.button.btn.btn-warning.btn-lg.hundredPercentWidth(type='button', name='submit', value='Добави в количката').addToCart
+                            - else
+                              a.btn.btn-success.btn-lg.hundredPercentWidth(href="/products/details/" + topViewed[p]._id) Вижте детайли
+            - if ((p !== 0) && ((p % 2 === 0) && (p % 5 === 0)))
+                .clearfix.visible-md-block.visible-sm-block
+      //Second tab content end
     
-    //PROMO and newest products start
-    //Carousel start
-    #myCarousel.carousel.slide(data-ride='carousel')
-      // Indicators
-      ol.carousel-indicators
-        li.active(data-target='#myCarousel', data-slide-to='0')
-        li(data-target='#myCarousel', data-slide-to='1')
-        li(data-target='#myCarousel', data-slide-to='2')
-      .carousel-inner(role='listbox')
-        .item.active
-          a(href='beverages.html')
-            img.first-slide(src='static/images/b1.jpg', alt='First slide')
-        .item
-          a(href='personalcare.html')
-            img.second-slide(src='static/images/b3.jpg', alt='Second slide')
-        .item
-          a(href='household.html')
-            img.third-slide(src='static/images/b1.jpg', alt='Third slide')
-    //Carousel end
-    //Fading pics start
-    .ban-bottom-w3l
-      .container
-        .col-md-6.ban-bottom3
-          .ban-top
+  //Fading pics start
+  .ban-bottom-w3l
+    .container
+      .col-md-6.ban-bottom3
+        .ban-top
+          a(href='/products/extraordinary')
             img.img-responsive(src='static/images/extraordinary1.jpg', alt='')
-          .ban-img
-            .ban-bottom1
-              .ban-top
+        .ban-img
+          .ban-bottom1
+            .ban-top
+              a(href='/products/baskets')
                 img.img-responsive(src='static/images/baskets.jpg', alt='')
-            .ban-bottom2
-              .ban-top
+          .ban-bottom2
+            .ban-top
+              a(href='/products/circle')
                 img.img-responsive(src='static/images/circle.jpg', alt='')
-            .clearfix
-        .col-md-6.ban-bottom
-          .ban-top
+          .clearfix
+      .col-md-6.ban-bottom
+        .ban-top
+          a(href='/products/wedding')
             img.img-responsive(src='static/images/wedding1.jpg', alt='')
-        .clearfix
-    //Fading pics end
+      .clearfix
+  //Fading pics end

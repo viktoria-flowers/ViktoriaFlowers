@@ -221,7 +221,7 @@ describe('/API tests', () => {
         });
     });
 
-    // TODO It seems the method is not ready for testing
+    // It seems the method is not ready for testing
     describe.skip('Checkout tests', () => {
         it('Expect to return all products', (done) => {
             const agent = request.agent(app);
@@ -269,10 +269,10 @@ describe('/API tests', () => {
                         return done(err);
                     }
 
-                    const pattern = RegExp('col-md-4 top_brand_left', 'ig');
+                    const pattern = RegExp('col-sm-4 productBoxHeight', 'ig');
                     const matches = response.text.match(pattern);
                     if (!matches) {
-                        return done('Cannot find product selector');
+                        return done(new Error('Cannot find product selector'));
                     }
 
                     expect(matches.length).to.be.equal(12);
@@ -294,10 +294,10 @@ describe('/API tests', () => {
                         return done(err);
                     }
 
-                    const pattern = RegExp('col-md-4 top_brand_left', 'ig');
+                    const pattern = RegExp('col-sm-4 productBoxHeight', 'ig');
                     const matches = response.text.match(pattern);
                     if (!matches) {
-                        return done('Cannot find product selector');
+                        return done(new Error('Cannot find product selector'));
                     }
 
                     expect(matches.length).to.be.equal(pots.length);
@@ -326,7 +326,7 @@ describe('/API tests', () => {
         });
     });
 
-    afterEach(function () {
+    afterEach(() => {
         return db.dropDatabase();
     });
 });

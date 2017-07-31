@@ -13,8 +13,12 @@ block content
     .container
       h2 Вход
       .login-form-grids.animated.wow.slideInUp(data-wow-delay='.5s')
+        if (model && model.err)
+          p.error-message
+            span.text-danger
+              | Невалидно потребителско име или парола
         form(action='/login', method="POST")
-          input(type='text', placeholder='Потребителско име', required='required', name='username')
+          input(type='text', placeholder='Потребителско име', required='required', name='username', value=model?model.username:'')
           input(type='password', placeholder='Парола', required='required', name='password')
           input(type='submit', value='Влез в своя профил')
       h4 Нямате регистрация?

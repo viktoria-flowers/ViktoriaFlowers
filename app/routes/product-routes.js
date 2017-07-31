@@ -16,9 +16,7 @@ const productRoutes = (app, productController) => {
         return productController.getDeleteProducts(req, res);
     });
 
-    app.post(
-        '/products/create',
-        isAdmin,
+    app.post('/products/create', isAdmin,
         upload.single('image'),
         (req, res) => {
             return productController.postCreateProduct(req, res);

@@ -1,22 +1,12 @@
 const express = require('express');
-const { authHelper } = require('./utils/index');
+
+const initialAdmin = require('./utils/seed-database');
 
 const init = (data) => {
-    data.users.getAll({ username: 'admin' })
-        .then((users) => {
-            if (users.length === 0) {
-                let initialAdmin = {
-                    username: 'admin',
-                    password: authHelper.makeHashFromPassword('pe6oadmin4eto'),
-                    names : 'admin',
-                    phone: '0888888888',
-                    email: 'abv@abv.bg',
-                    contactInfo: 'admin contact info',
-                };
+    const app = express();
+    const controllers = require('./controllers/init').init(data);
 
-                data.users.collection.insert(initialAdmin);
-            }
-        });
+    initialAdmin.seedDatabase(data);
 
     const app = express();
     const controllers = require('./controllers/init').init(data);

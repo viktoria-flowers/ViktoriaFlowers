@@ -15,20 +15,23 @@ class ProductController {
             return res.redirect('/NotFound');
         }
 
-        return this._data.products.findById(req.params.id).then((product) => {
-            if (!product) {
-                res.status(404);
-                return res.redirect('/NotFound');
-            }
+        return this._data.products.findById(req.params.id)
+            .then((product) => {
+                if (!product) {
+                    res.status(404);
+                    return res.redirect('/NotFound');
+                }
 
-            return this._data.products
-                .updateParamsById(product, { viewsCount: ++product.viewsCount })
-                .then(() => {
-                    return res.render(
-                        'products/details', { model: product });
-                });
-        });
+                /* eslint-disable max-len */
+                return this._data.products
+                    .updateParamsById(product, { viewsCount: ++product.viewsCount })
+                    .then(() => {
+                        return res.render(
+                            'products/details', { model: product });
+                    });
+            });
     }
+
     postCreateProduct(req, res) {
         const modelState = this._data.products.validate(req.body);
         // Need to validate the object first
@@ -106,17 +109,45 @@ class ProductController {
     }
 
     getTopProductsForHomePage(req, res) {
-        let sortViewsObj = { viewsCount: -1 };
-        let sortNewsesObj = { dateCreated: 1 };
+        const sortViewsObj = { viewsCount: -1 };
+        const sortNewsesObj = { dateCreated: 1 };
 
         return this._data.products.getAll({}, sortViewsObj, 1, 6)
             .then((topViewed) => {
                 this._data.products.getAll({}, sortNewsesObj, 1, 6)
                     .then((topNewest) => {
-                        var products = { topNewest: topNewest, topViewed: topViewed };
+                        const products = {
+                            topNewest: topNewest,
+                            topViewed: topViewed,
+                        };
 
                         return res.render('home', products);
                     });
+            });
+    }
+
+    getProductByTitle(req, res) {
+        const title = req.query.title;
+
+        return this._data.products.getAll({ title: title })
+            .then((productsByTitle) => {
+                if (productsByTitle.length === 0) {
+                    return res.redirect('/NotFound');
+                }
+
+                // !!!!
+                const currentProduct = productsByTitle[0];
+                return this._data.products.updateParamsById(currentProduct,
+                    {
+                        viewsCount: ++currentProduct.viewsCount,
+                    })
+                    .then(() => {
+                        /* eslint-disable max-len */
+                        return res.status(301).redirect(`/products/details/${currentProduct._id}`);
+                    });
+            })
+            .catch((err) => {
+                console.log(err);
             });
     }
 }

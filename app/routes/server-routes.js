@@ -1,14 +1,26 @@
-const { setLocals } = require('../middlewares');
-const { isAdmin } = require('../middlewares');
+const { setLocals, isAdmin, isLoggedIn } = require('../middlewares');
 
 const serverRoutes = (app, controllers) => {
     app.use('/', setLocals);
 
     app.get('/', (req, res) => {
-        return controllers.productController.getTopProductsForHomePage(req, res);
+        return controllers.productController
+            .getTopProductsForHomePage(req, res);
     });
+
     app.get('/home', (req, res) => {
-        return controllers.productController.getTopProductsForHomePage(req, res);
+        return controllers.productController
+            .getTopProductsForHomePage(req, res);
+    });
+
+    app.get('/search/', (req, res) => {
+        controllers.productController
+            .getProductByTitle(req, res);
+    });
+
+    app.get('/userslist', isAdmin, (req, res) => {
+        return controllers.usersController
+            .getAllUsers(req, res);
     });
 
     app.get('/baskets', (req, res) => res.render('baskets'));
@@ -22,10 +34,7 @@ const serverRoutes = (app, controllers) => {
     app.get('/card-payment', (req, res) => res.render('card-payment'));
     app.get('/delivery', (req, res) => res.render('delivery'));
     app.get('/contacts', (req, res) => res.render('contacts'));
-    app.get('/checkout', (req, res) => res.render('checkout'));
-    app.get('/userslist', isAdmin, (req, res) => {
-        return controllers.usersController.getAllUsers(req, res);
-    });
+    app.get('/checkout', isLoggedIn, (req, res) => res.render('checkout'));
 };
 
 module.exports = serverRoutes;

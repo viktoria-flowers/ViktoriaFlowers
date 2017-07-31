@@ -1,12 +1,40 @@
-/*globals $ */
-$('body').on('click', '.input-group-addon', function (e) {
+/*globals $, toastr*/
+$('#search-span').on('click', function (e) {
+	let form = $('#search-form');
+	$(form).submit();
+});
 
-	let form = $(e.target).closest($('form-group'));
-	
-	if(!$('#autocomplete').val()) {
-		e.preventDefault();
+$('#search-form').submit(function (e) {
+	if ($(e.target).attr('isValid')) {
 		return;
 	}
-console.log(55555555555);
-	$(form).submit();
+	else {
+		e.preventDefault();
+	}
+
+	let form = $('#search-form');
+	let currentValue = $(".autocompleteInput").val();
+
+	if (!currentValue) {
+		toastr.warning('Моля въведете име на продукт');
+		return;
+	}
+
+	$.ajax({
+		type: "GET",
+		url: "/api/autocomplete",
+		data: { name: currentValue },
+		success: ((data) => {
+			if (data.indexOf(currentValue) === -1) {
+				toastr.warning(`Няма продукт с име ${currentValue}`);
+			}
+			else {
+				form.attr('isValid', true);
+				$(form).submit();
+			}
+		}),
+		error: ((error) => {
+			toastr.error('Грешка при търсене');
+		})
+	});
 });

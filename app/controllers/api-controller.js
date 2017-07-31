@@ -5,16 +5,53 @@ class ApiController {
         this._data = data;
     }
 
+    postFavorites(req, res) {
+        const currentUser = req.user;
+        const prodID = req.body.prodID;
+        const responseMessage = {
+            message: 'error',
+        };
+
+        if (!currentUser) {
+            responseMessage.message = 'no logged user';
+            return res.status(400).json(responseMessage);
+        }
+
+        return this._data.products.findById(prodID)
+            .then((product) => {
+                const isAlreadyAdded = currentUser.favorites
+                    .filter((e) => e._id.toString() ===
+                        product._id.toString()).length > 0;
+                if (!isAlreadyAdded) {
+                    responseMessage.message = 'success';
+                    currentUser.favorites.push(product);
+                    return this._data.users
+                        .updateParamsById(currentUser,
+                            { favorites: currentUser.favorites });
+                }
+
+                responseMessage.message = 'already added';
+                return Promise.resolve();
+            })
+            .then(() => {
+                return res.status(200).json(responseMessage);
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(400).json(err);
+            });
+    }
+
     getAutoComplete(req, res) {
         const regex = new RegExp(req.query.name, 'i');
         const query = { 'title': regex };
-        if(!req.query.name) {
+        if (!req.query.name) {
             return res.status(200).json([]);
         }
 
         return this._data.products.getAll(query)
             .then((products) => {
-                if (products.length === 0 ) {
+                if (products.length === 0) {
                     return res.status(200).json([]);
                 }
 
@@ -70,9 +107,32 @@ class ApiController {
     }
 
     postCheckout(req, res) {
-        return this._data.products.findAllRecordsByIds(req.body.sendInfo)
-            .then((foundProduct) => {
-                return res.send(foundProduct);
+        const mapIdCount = {};
+        const prodIds = req.body.sendInfo.map((obj) => {
+            mapIdCount[obj._id] = obj.count;
+            return obj._id;
+        });
+
+        return this._data.products.findAllRecordsByIds(prodIds)
+            .then((products) => {
+                const order = {};
+                order.dateCreated = new Date();
+                order.status = 'pending';
+                order.products = [];
+                products.forEach((prod) => {
+                    prod.count = +mapIdCount[prod._id.toString()];
+                    order.products.push(prod);
+                });
+
+                req.user.orders.push(order);
+                /* eslint-disable max-len */
+                return this._data.users.updateParamsById(req.user, { orders: req.user.orders });
+            })
+            .then(() => {
+                return res.json({ message: 'OK' });
+            })
+            .catch((err) => {
+                return res.status(400).json(err);
             });
     }
 

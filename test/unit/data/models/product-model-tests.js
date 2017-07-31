@@ -28,10 +28,11 @@ describe('ProductModel tests', () => {
             const modelState = ProductModel.isValid({});
 
             expect(modelState.isValid).to.be.false;
-            expect(modelState.errors.length).to.be.equal(3);
+            expect(modelState.errors.length).to.be.equal(4);
             expect(modelState.errors).to.include('title');
             expect(modelState.errors).to.include('description');
             expect(modelState.errors).to.include('price');
+            expect(modelState.errors).to.include('type');
         });
 
         it('Expect invalid state when title is short', () => {
@@ -39,6 +40,7 @@ describe('ProductModel tests', () => {
                 title: 'a',
                 description: 'valid',
                 price: 100,
+                type: 'tall',
             };
 
             const modelState = ProductModel.isValid(testProduct);
@@ -52,6 +54,7 @@ describe('ProductModel tests', () => {
             const testProduct = {
                 description: 'valid',
                 price: 100,
+                type: 'tall',
             };
 
             const modelState = ProductModel.isValid(testProduct);
@@ -65,6 +68,7 @@ describe('ProductModel tests', () => {
             const testProduct = {
                 title: 'Product #11',
                 price: 100,
+                type: 'tall',
             };
 
             const modelState = ProductModel.isValid(testProduct);
@@ -77,6 +81,7 @@ describe('ProductModel tests', () => {
         it('Expect invalid state when price is missing', () => {
             const testProduct = {
                 title: 'Product #11',
+                type: 'tall',
                 description: 'Most wanted',
             };
 
@@ -92,6 +97,7 @@ describe('ProductModel tests', () => {
                 title: 'Product #11',
                 description: 'Most wanted',
                 price: 0,
+                type: 'tall',
             };
 
             const modelState = ProductModel.isValid(testProduct);
@@ -106,6 +112,7 @@ describe('ProductModel tests', () => {
                 title: 'Product #11',
                 description: 'Most wanted',
                 price: 32,
+                type: 'tall',
             };
 
             const modelState = ProductModel.isValid(testProduct);

@@ -97,13 +97,12 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
     font-size: 20px;
     text-align: center;
     color: #fe9126;
-    animation: blinker 3s linear infinite;
 }
-@keyframes blinker {  
+/* @keyframes blinker {  
   50% { 
       opacity: 0;
   }
-}
+} */
 
 .w3l_search input[type="search"] {
     width: 83%;
@@ -1523,15 +1522,7 @@ h3.w3_agile_header:after,h2.w3_agile_header:after{
     padding: 0;
     overflow: hidden;
 }
-.about .grid-top p {
-    font-size: 1em;
-    color: #999;
-    line-height: 1.8em;
-    margin: 1em 0 2.5em;
-}
-.about .grid-top p.top {
-    margin: 1em 0;
-}
+
 .offic-time {
     text-align: center;
 }
@@ -2573,9 +2564,9 @@ ul.phone_email li {
 .footer-copy p {
     margin: 1.5em 0 0;
 }
-.ban-bottom3 {
+/* .ban-bottom3 {
     margin: 2em 0;
-}
+} */
 .products-left {
     padding: 0;
     margin-bottom: 24px;
@@ -2988,9 +2979,7 @@ h3.w3_agile_header, h2.w3_agile_header {
     font-size: 1.1em;
     line-height: 24px;
 }
-.about .grid-top p {
-    font-size: 0.875em;
-}
+
 .about-team-grids {
     width: 80%;
 }
@@ -3789,15 +3778,22 @@ ul.dropdown-cart li .item-right button{
 }
 
 .word-wrap{
-    word-wrap: break-word;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.word-wrap-only{
+    word-break: break-word;  
 }
 
 @media (min-width: 640px){
 	.fixed-table {
-table-layout:fixed;
+        table-layout:fixed;
 	}
 }
-
+.fixed-table{
+    font-size: 15px;
+}
 .typeahead .dropdown-menu{
     max-height: 150px;
     overflow-y: auto; 
@@ -3828,3 +3824,67 @@ table-layout:fixed;
     padding: 10px;
 }
 
+.home-tabs-font-size{
+    font-size: 20px !important;
+}
+
+#ourOffers{
+    color: #016773;
+}
+.textDots p{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+ @keyframes spin {
+  from {transform: rotateY(0);}
+  to {transform: rotateY(1turn);}
+}
+
+.ourOffers-effect {
+  animation: spin 10s ease;
+  animation-iteration-count: infinite;
+} 
+.addToFavorites{
+    text-decoration: none;
+    color: black;
+    font-weight: initial;
+}
+#search-span{
+    cursor: pointer;
+}
+.ui-menu .ui-menu-item a{
+    color: #96f226;
+    border-radius: 0px;
+    border: 1px solid #454545;
+}
+
+.delivery-text li{
+    text-decoration: none;
+    list-style-type: none;
+    padding: 7px;
+}
+
+.glyphicon-hand-right{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.glyphicon-hand-right:hover{
+    color: #F56505;
+}
+
+@media (min-width:300px){
+    .delivery-text li p{
+        text-align: justify;
+    }
+}
+
+.delivery-text li p{
+    font-size: 17px;
+    text-align: justify;
+}
+.order-pic{
+    width: 70%;
+}

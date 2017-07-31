@@ -35,7 +35,8 @@ class BaseData {
 
     setAdmin(id) {
         return this.collection.update({ '_id': new ObjectID(id) },
-            { $set:
+            {
+                $set:
                 {
                     roles: ['admin'],
                 },
@@ -57,12 +58,12 @@ class BaseData {
             });
     }
 
-    findAllRecordsByIds(data) {
-        const searchedIds = data[0].map(((obj) => {
-            return new ObjectID(obj._id);
+    findAllRecordsByIds(dataIds) {
+        const searchedIds = dataIds.map(((id) => {
+            return new ObjectID(id);
         }));
 
-        return this.collection.find({ '_id': { '$in': searchedIds } });
+        return this.collection.find({ _id: { $in: searchedIds } }).toArray();
     }
 
     create(model) {

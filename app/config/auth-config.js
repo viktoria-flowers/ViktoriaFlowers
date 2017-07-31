@@ -11,7 +11,7 @@ const configAuth = (app, users) => {
             return users.findByUsername(username)
                 .then((user) => {
                     const passHash = authHelper.makeHashFromPassword(password);
-                    if (user && user.password !== passHash) {
+                    if (!user || user.password !== passHash) {
                         return done(new Error('Invalid credentials'));
                     }
 
@@ -33,13 +33,11 @@ const configAuth = (app, users) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    // return/generate cookie to the user
     passport.serializeUser((user, done) => {
         const serializedUser = UserModel.toViewModel(user);
         done(null, serializedUser.id);
     });
 
-    // find the user from cookie
     passport.deserializeUser((id, done) => {
         return users.findById(id)
             .then((user) => {

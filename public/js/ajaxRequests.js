@@ -1,7 +1,41 @@
-/*globals $, typeahead, toastr */
+/*globals $, typeahead, toastr, getUserName */
+$('.addToFavorites').on('click', (e) => {
+    let target = $(e.target);
+    console.log(target);
+
+    if (target.prop('nodeName') === 'SPAN') {
+        target = target.parent();
+    }
+
+    let prodID = target.attr('prodID');
+
+    console.log(target);
+    if (!prodID) {
+        toastr.error('Неуспешно добавяне, моля опитайте отново');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/api/favorites",
+        data: { prodID: prodID },
+        success: ((data) => {
+            if (data.message === 'already added') {
+                toastr.info('Вече сте добавили този продукт в любими');
+            }
+            else {
+                toastr.success('Успешно добавихте продукта в любими');
+            }
+        }),
+        error: ((error) => {
+            toastr.error('Неуспешно добавяне, моля опитайте отново');
+        })
+    });
+});
+
 $('.autocompleteInput').on('keyup', () => {
-    
     let currentValue = $(".autocompleteInput").val();
+
     if (!currentValue) {
         return;
     }
@@ -11,16 +45,16 @@ $('.autocompleteInput').on('keyup', () => {
         url: "/api/autocomplete",
         data: { name: currentValue },
         success: ((data) => {
-            $('#autocomplete').typeahead({ source: data });
+            $('#autocomplete').autocomplete({ source: data });
+            // .typeahead({ source: data });
         }),
         error: ((error) => {
-            toastr.error("error on search");
+            toastr.warning('Моля опитайте отново');
         })
     });
 });
 
 $('#sendSubscribeEmail').on('click', () => {
-
     let subscriberEmail = $("#subscriptionEmail").val(),
         errorMessages = {
             existingEmail: 'E-mail адресът, който сте въвели вече съществува! Моля, опитайте отново',
@@ -80,7 +114,7 @@ $('#contactFormSend').on('click', (() => {
             contactUserText: text,
         },
         success: ((data) => {
-            toastr.success('Успешно се абонирахте за нашите предложения');
+            toastr.success('Очаквайте отговор на посочения имейл адрес');
             $('#cUserNames').val('');
             $('#cUserEmail').val('');
             $('#cUserText').val('');
@@ -102,17 +136,14 @@ $('#contactFormSend').on('click', (() => {
 
 }));
 
-$('body').on('click', '.delete_product', () => {
+$('body').on('click', '.delete_product', (e) => {
+    let productId = $(e.target).parent().parent().find('.idCell').attr('value');
 
-    let productId = $(event.target).parent().parent().find('.idCell').attr('value');
-    
     $.ajax({
         type: "POST",
         url: "/api/delete-product",
         data: { _id: productId },
         success: ((data) => {
-            toastr.success(data);
-            console.log(data);
             $(location).attr('href', '/products/delete');
         }),
         error: ((error) => {
@@ -158,39 +189,56 @@ function validate(names, email, text) {
 }
 
 $('#checkout-button').on('click', () => {
+    let prodInfo = [];
+    let productRows = $('#checkoutBody tr');
 
-    let ids = $('.productName').toArray();
-    let quantities = $('.quantities').toArray();
-    let sendInfo = [];
-    let sendIdsArray = [];
-    let sendQuantitiesArray = [];
-
-    for (let i = 0; i < ids.length; i += 1) {
-        sendIdsArray.push({ "_id": ids[i].attributes.value.nodeValue });
-        sendQuantitiesArray.push(quantities[i].innerHTML);
-    }
-
-    sendInfo[0] = sendIdsArray;
-    sendInfo[1] = sendQuantitiesArray;
+    productRows.each(function (index, rowElement) {
+        let count = $(rowElement).find('.quantities').html();
+        let id = $(rowElement).find('.invert.productName').attr('value');
+        prodInfo.push({
+            _id: id,
+            count: count
+        });
+    });
 
     $.ajax({
         type: "POST",
         url: "/api/checkout",
         data: {
-            sendInfo: sendInfo,
-        },
-        success: ((data) => {
-            toastr.success(data);
-        }),
-        error: ((error) => {
-            toastr.error(JSON.stringify(error));
+            sendInfo: prodInfo,
+        }
+    })
+        .done(function (data) {
+            toastr.success('Успешно изпратена поръчка, можете да видите вашите поръчки в профила си!');
+
+            // getUserName is a globalFunction that comes form checkout.js
+            var username = getUserName();
+            var storageKey = 'cart-' + username;
+            localStorage.removeItem(storageKey);
+            setTimeout(() => {
+                 document.location.reload(true); 
+            }, 2000);
         })
-    });
+        .fail(function (err) {
+            console.log(err);
+            toastr.error('Възникна грешка по време на вашата заявка!');
+        });
 });
+
+$('body').on('click', '.checkout-btn', function (e) {
+    let tableCheckout = $('#checkoutBody');
+    let rows = tableCheckout.find('tr');
+    if (tableCheckout.html().indexOf('Вашата количка е празна') !== -1 ||
+        rows.length === 0) {
+        toastr.warning('Моля добавете продукти в количката');
+        e.preventDefault();
+        e.stopPropagation();
+    }
+})
 
 $('.set-admin').on('click', (e) => {
 
-    let userId = $(event.target).parent().parent().find('.userIdCell').attr('value');
+    let userId = $(e.target).parent().parent().find('.userIdCell').attr('value');
 
     $.ajax({
         type: "POST",
@@ -199,10 +247,10 @@ $('.set-admin').on('click', (e) => {
             userId: userId,
         },
         success: ((data) => {
-            toastr.error(data);
+            $(location).attr('href', '/userslist');
         }),
         error: ((error) => {
-            toastr.error(error);                            
+            toastr.error(error);
         })
     });
 });

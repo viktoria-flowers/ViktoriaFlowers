@@ -43,7 +43,7 @@ block content
       .form-group
         label.col-md-4.control-label Тип*
         .col-md-4.inputGroupContainer
-          select#create-ad-manufacturer.form-control(name='type', value='wedding')
+          select#create-ad-manufacturer.form-control(name='type', value='wedding', required='required')
             option(value='')
             option(value='baskets', selected= model&&model.type==='baskets') Кошници
             option(value='pots', selected= model&&model.type==='pots') Сакции

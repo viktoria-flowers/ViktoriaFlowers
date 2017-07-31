@@ -29,10 +29,7 @@ block content
       .checkout-left
         .checkout-left-basket
             //Dinamically add total price
-            script
-               toastr.info('Are you the 6 fingered man?')
-            div(rel='tooltip', title='In development', style='display: inline-block;')
-                a.btn.btn-lg.btn-success.disabled(href='#myModal', data-toggle='modal') Завършване на поръчката
+            a.btn.btn-lg.btn-success.checkout-btn(href='#myModal', data-toggle='modal') Завършване на поръчката
             // Modal HTML
             #myModal.modal.fade
               .modal-dialog
@@ -42,9 +39,11 @@ block content
                     h4.modal-title Потвърдете поръчката
                   .modal-body
                     p Сигурни ли сте, че искате да направите поръчката?
+                    div
+                      label(for='agree')
+                        input(type='checkbox', id='agree')
+                        | Прочетох и съм съгласен с Условията за ползване
                   .modal-footer
                     button.btn.btn-danger(type='button', data-dismiss='modal') Отказ
-                    input(type='button', value='Направи поръчка', id="checkout-button").btn.btn-success
-        script.
-               $(document).ready(function() {$('body').tooltip({ selector: '[rel=tooltip]' })} ); 
+                    input(type='button', value='Направи поръчка', id="checkout-button").btn.btn-success.disabled
     .clearfix

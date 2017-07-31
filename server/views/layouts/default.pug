@@ -78,12 +78,12 @@ html
             h1
               a(href='/')#shopTitle Магазин за цветя "Виктория"
           .col-sm-4
-            form.form-group(action='/payment', method='GET')
+            form#search-form.form-group(action='/search/', method='GET')
               .col-sm-12.inputGroupContainer
                 .input-group
-                  input#autocomplete.autocompleteInput.form-control(type='text', placeholder='Търси...', autocomplete='off')
+                  input#autocomplete.autocompleteInput.form-control(type='text', name='title' placeholder='Търси...', autocomplete='off')
                   span.input-group-addon#search-span
-                    a(href="/")
+                    span
                       i.glyphicon.glyphicon-search#search-glyph
         .clearfix
     .clearfix  
@@ -206,9 +206,9 @@ html
     script(src='/static/js/search.js')
     script(src="/libs/jquery-zoom/jquery.zoom.min.js")
     script(src="/libs/toastr/build/toastr.min.js")
+    script(src='/static/js/toastr-config.js')
     script(type='text/javascript', src='/static/js/template.js')
     script(type='text/javascript', src='/static/js/checkout.js')
-    script(type='text/javascript', src='/static/js/ajaxRequests.js')      
-    script(src="https://rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js")
+    script(type='text/javascript', src='/static/js/ajaxRequests.js')
     
     block scripts

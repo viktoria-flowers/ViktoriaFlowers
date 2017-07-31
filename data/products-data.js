@@ -1,6 +1,5 @@
 const BaseData = require('./base-data');
 const ProductModel = require('./models/product-model');
-const ModelState = require('./model-state');
 
 class ProductData extends BaseData {
     constructor(db) {
@@ -13,6 +12,8 @@ class ProductData extends BaseData {
             return Promise.reject(['model-missing']);
         }
 
+        productModel.price = +productModel.price;
+        productModel.wasPrice = +productModel.wasPrice;
         productModel.dateCreated = new Date();
         productModel.viewsCount = 0;
         return super.create(productModel);

@@ -94,7 +94,6 @@ describe('ModelState tests', () => {
                 .with.property('length')
                 .that.is.equal(1);
 
-
             expect(modelState.errors[0]).to.be.equal('new-error');
         });
     });
