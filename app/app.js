@@ -3,10 +3,9 @@ const initialAdmin = require('./utils/seed-database');
 
 const init = (data) => {
     const app = express();
+    const controllers = require('./controllers/init').init(data);
 
     initialAdmin.seedDatabase(data);
-    
-    const controllers = require('./controllers/init').init(data);
 
     // folder app/config
     require('./config/app-config')(app);

@@ -14,9 +14,11 @@ const attach = (app, authController) => {
     router.get('/register', (req, res) => {
         return authController.getRegister(req, res);
     });
+
     router.get('/login', (req, res) => {
         return authController.getLogin(req, res);
     });
+
     router.get('/logout', (req, res) => {
         return authController.logOut(req, res);
     });

@@ -4,19 +4,23 @@ const serverRoutes = (app, controllers) => {
     app.use('/', setLocals);
 
     app.get('/', (req, res) => {
-        return controllers.productController.getTopProductsForHomePage(req, res);
+        return controllers.productController
+            .getTopProductsForHomePage(req, res);
     });
 
     app.get('/home', (req, res) => {
-        return controllers.productController.getTopProductsForHomePage(req, res);
+        return controllers.productController
+            .getTopProductsForHomePage(req, res);
     });
 
     app.get('/search/', (req, res) => {
-        controllers.productController.getProductByTitle(req, res);
+        controllers.productController
+            .getProductByTitle(req, res);
     });
 
     app.get('/userslist', isAdmin, (req, res) => {
-        return controllers.usersController.getAllUsers(req, res);
+        return controllers.usersController
+            .getAllUsers(req, res);
     });
 
     app.get('/baskets', (req, res) => res.render('baskets'));
