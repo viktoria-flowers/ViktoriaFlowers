@@ -1,3 +1,4 @@
+/* globals $, toastr*/
 $('.addToCart').on('click', (е) => {
 
     var username = getUserName();
@@ -158,7 +159,6 @@ var totalSum = sum.reduce(function(a, b) {
     return parseInt(a) + parseInt(b);
 }, 0);
 
-
 let totalSumLabel = $('<p />');
 totalSumLabel.html('Обща сума: ' + totalSum + ' лв.');
 let totalSumHolder = $('.checkout-left-basket');
@@ -214,7 +214,6 @@ $('body').on('click', '.value-minus', function() {
     }
 });
 
-
 // Sliding cart
 if (localStorage.length > 0 && localStorage[localStorageKey]) {
 
@@ -242,7 +241,6 @@ function getUserName() {
 
     return '';
 }
-
 
 $('body').on('click', '#agree', function(e) {
     if (e.target.checked) {

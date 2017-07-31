@@ -1,4 +1,4 @@
-/*globals hideLoading, showLoading */
+/*globals $, hideLoading, showLoading, toastr */
 (function() {
 
     var productsContainer = '.container.products-content';
@@ -14,7 +14,7 @@
         e.preventDefault();
         
         var $target = $(e.target);
-        // Sometime  the span element is clicked
+        // Sometime the span element is clicked
         if (!$target.is('a')) {
             $target = $target.closest('a');
         }
@@ -32,7 +32,7 @@
 
         data.page = currentPage;
         doAjax(data);
-    })
+    });
 
     function doAjax(dataQuery) {
         showLoading(productsContainer);
@@ -46,7 +46,7 @@
             $(productsContainer).html(htmlResponse);
         })
         .fail(function(err) {
-            alert('An error occurred! Check console [F12]!');
+            toastr.error('An error occurred! Check console [F12]!');
             console.log(err);
         })
         .always(function() {
@@ -61,5 +61,5 @@
             page: $('.pagination.paging li.active a').attr('data-page'),
             productType: $('#productType').val(),
         };
-    };
-})()
+    }
+})();

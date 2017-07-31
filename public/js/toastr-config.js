@@ -1,3 +1,4 @@
+/*globals toastr */
 (function () {
 	toastr.options = {
 		'closeButton': false,

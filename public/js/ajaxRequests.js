@@ -1,4 +1,4 @@
-/*globals $, typeahead, toastr */
+/*globals $, typeahead, toastr, getUserName */
 $('.addToFavorites').on('click', (e) => {
     let target = $(e.target);
     console.log(target);
@@ -21,7 +21,7 @@ $('.addToFavorites').on('click', (e) => {
         data: { prodID: prodID },
         success: ((data) => {
             if (data.message === 'already added') {
-                toastr.error('Вече сте добавили този продукт в любими в любими');
+                toastr.info('Вече сте добавили този продукт в любими');
             }
             else {
                 toastr.success('Успешно добавихте продукта в любими');
@@ -49,7 +49,7 @@ $('.autocompleteInput').on('keyup', () => {
             // .typeahead({ source: data });
         }),
         error: ((error) => {
-            toastr.warning("Try again please");
+            toastr.warning('Моля опитайте отново');
         })
     });
 });
@@ -137,7 +137,6 @@ $('#contactFormSend').on('click', (() => {
 }));
 
 $('body').on('click', '.delete_product', (e) => {
-
     let productId = $(e.target).parent().parent().find('.idCell').attr('value');
 
     $.ajax({
@@ -190,11 +189,9 @@ function validate(names, email, text) {
 }
 
 $('#checkout-button').on('click', () => {
-
+    let prodInfo = [];
     let productRows = $('#checkoutBody tr');
 
-
-    let prodInfo = [];
     productRows.each(function (index, rowElement) {
         let count = $(rowElement).find('.quantities').html();
         let id = $(rowElement).find('.invert.productName').attr('value');
@@ -203,6 +200,7 @@ $('#checkout-button').on('click', () => {
             count: count
         });
     });
+
     $.ajax({
         type: "POST",
         url: "/api/checkout",
