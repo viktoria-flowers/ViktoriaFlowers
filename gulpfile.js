@@ -28,6 +28,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
     ])
         .pipe(mocha({
             reporter: 'spec',
+            timeout: 10000,
         }))
         .pipe(istanbul.writeReports())
         .on('end', () => {

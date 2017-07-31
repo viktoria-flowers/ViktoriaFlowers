@@ -1,4 +1,4 @@
-# Project Title
+# Project
 
 E-commerce Node.js application for selling flowers.
 
@@ -47,17 +47,7 @@ This application is based on the following technologies:
 
 Before using the app you have to run the following command in the folder of the application:
 
-npm install
-
-Other useful commands are:
-
-npm run start - turns on the server
-npm run nodemon - turns on the server (watches for changes everytime we save something in our code)
-npm run test-unit - turns on gulp unit tests
-npm run lint - turns on the eslint sintax checker
-<!-- npm run test - turns on the mocha tests
-    "mocha": "./node_modules/.bin/mocha test/**/*js",
-    "istanbul": "./node_modules/.bin/istanbul" -->
+`npm install`
 
 ### Main functionalities
 
@@ -66,7 +56,7 @@ The user can:
 - login
 - register
 - search for products
-- arrage/sort product lists
+- arrange/sort product lists
 - edit his own profile
 - add products to cart
 - finish his order
@@ -83,10 +73,50 @@ The admin can:
 
 *Only logged in users can add to cart and finish their orders
 
+### Routes
+
+`Public`
+
+* /login
+* /register
+* /products/cards
+* /products/pots
+* /products/baskets
+* /products/circle
+* /products/tall
+* /products/wedding
+* /products/extraordinary
+* /delivery
+* /payment
+* /payOnDelivery
+* /card-payment
+* /paypal-payment
+
+`Private`
+
+* /profile
+* /profile-edit
+* /products/create
+* /products/delete
+* /userslist
+* /checkout
+
+## Images
+
+<p float="left">
+  <img src="./public/images/app-screenshots/autocomplete.png" width="400" />
+  <img src="./public/images/app-screenshots/offers.png" width="400" /> 
+  <img src="./public/images/app-screenshots/product-details.png" width="400" />
+  <img src="./public/images/app-screenshots/profile.png" width="400" />
+  <img src="./public/images/app-screenshots/mobile-front.png" width="400" />
+  <img src="./public/images/app-screenshots/mobile-contacts.png" width="400" />  
+</p>
+
 ## Deployment
 
-The application is uploaded on AWS cloud and his Mongo DB.
-It can be found ....
+The application is uploaded on AWS cloud with his Mongo DB.
+It can be found in: 
+<p>`http://ec2-13-59-39-204.us-east-2.compute.amazonaws.com`</p>
 
 ## Authors
 

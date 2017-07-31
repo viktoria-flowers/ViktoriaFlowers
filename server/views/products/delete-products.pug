@@ -21,7 +21,7 @@ block content
         if (productsList && productsList.length)
           - for(var i = 0; i < productsList.length; i += 1) 
               tr.productsRow
-                td.word-wrap-only
+                td.word-wrap-only.idCell(value=productsList[i]._id)
                   = productsList[i].title
                 td.word-wrap-only
                   = productsList[i].price + ' лв.'
