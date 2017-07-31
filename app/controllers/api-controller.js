@@ -19,15 +19,8 @@ class ApiController {
 
         return this._data.products.findById(prodID)
             .then((product) => {
-                console.log('-------- product----------');
-                console.log(product);
-
-                console.log('----user favorites----------');
-                console.log(currentUser.favorites);
-
-                let isAlreadyAdded = currentUser.favorites.filter(e => e._id.toString() === product._id.toString() && e.title === product.title).length > 0;
-                console.log(isAlreadyAdded);
-
+                let isAlreadyAdded = currentUser.favorites
+                    .filter(e => e._id.toString() === product._id.toString()).length > 0;
                 if (!isAlreadyAdded) {
                     responseMessage.message = 'success';
                     currentUser.favorites.push(product);

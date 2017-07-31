@@ -11,7 +11,7 @@ $('.addToFavorites').on('click', (e) => {
 
     console.log(target);
     if (!prodID) {
-        toastr.error('Неуспешно добавяне, моля опитайте отново ');
+        toastr.error('Неуспешно добавяне, моля опитайте отново');
         return;
     }
 
