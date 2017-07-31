@@ -127,12 +127,12 @@ block content
                       tr
                         td
                           br
-                  - if (isAuthenticated)
-                    tr
-                      td
-                        button.addToFavorites.btn.btn-default.btn-lg.hundredPercentWidth(type='button')
-                          span.glyphicon.glyphicon-heart
-                          |  Добави в любими
+                    - if (isAuthenticated)
+                      tr
+                        td
+                          button.addToFavorites.btn.btn-default.btn-lg.hundredPercentWidth(type='button' prodID=topNewest[p]._id)
+                            span.glyphicon.glyphicon-heart
+                            | Добави в любими
                     tr
                       td
                         form(action='#', method='post')
