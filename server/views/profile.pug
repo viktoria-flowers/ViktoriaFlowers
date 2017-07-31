@@ -95,6 +95,9 @@ block content
                             = user.orders[i].products[j].price * user.orders[i].products[0].count + ' лв.'
                           td.word-wrap-only
                             = moment(user.orders[i].dateCreated).format('MMMM Do YYYY, h:mm:ss a')
+            - else 
+              p
+              | Все още нямате поръчки 
           #tabs-2
             .table-responsive
               table.fixed-table.table.text-left
@@ -118,6 +121,10 @@ block content
                             = user.favorites[i].price + ' лв.'
                           td.word-wrap-only
                             = user.favorites[i].description
+                  - else
+                        tr
+                          td.text-center(colspan=4)
+                            | Нямате любими продукти
           script.
             $( function() {
               $( "#tabs" ).tabs({
