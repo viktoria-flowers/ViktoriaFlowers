@@ -5,8 +5,29 @@ class ApiController {
         this._data = data;
     }
 
-    postFavorites(req, res){
-        
+    postFavorites(req, res) {
+        let currentUser = req.user;
+        let prodID = req.body.prodID;
+
+        if (!currentUser) {
+            return res.status(400).json({ message: 'no user' });
+        }
+
+        return this._data.products.findById(prodID)
+            .then((product) => {
+                console.log(currentUser.favorites);
+                currentUser.favorites.push(product);
+
+                return this._data.users.updateParamsById(currentUser, { favorites: currentUser.favorites });
+            })
+            .then(() => {
+                console.log('==== server OK====');
+                return res.json({ message: 'OK' });
+            })
+            .catch((err) => {
+                console.log('=====err============');
+                return res.status(400).json(err);
+            });
     }
 
 
@@ -93,7 +114,6 @@ class ApiController {
                 });
 
                 req.user.orders.push(order);
-
                 /* eslint-disable max-len */
                 return this._data.users.updateParamsById(req.user, { orders: req.user.orders });
             })

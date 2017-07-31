@@ -29,7 +29,8 @@ const ajaxRequests = (app, apiController) => {
         return apiController.postSetUserAsAdmin(req, res);
     });
 
-    app.post('/api/favorites', isAdmin, (req, res) => {
+    app.post('/api/favorites', isLoggedIn, (req, res) => {
+        console.log('-----begin-------');
         return apiController.postFavorites(req, res);
     });
 };

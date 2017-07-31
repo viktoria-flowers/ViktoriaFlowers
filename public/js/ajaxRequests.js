@@ -7,17 +7,20 @@ $('.addToFavorites').on('click', (e) => {
         toastr.error("error on search");
     }
 
-
     $.ajax({
         type: "POST",
         url: "/api/favorites",
         data: { prodID: prodID },
         success: ((data) => {
-            $('#autocomplete').autocomplete({ source: data });
-                        // .typeahead({ source: data });
+            console.log('---data---');
+            console.log(data);
+            toastr.success('Успешно добавихте продукта в любими');
+            
         }),
         error: ((error) => {
-            toastr.error("error on search");
+            console.log('---error---');
+            console.log(error);
+            toastr.success(error);
         })
     });
 });
@@ -103,7 +106,7 @@ $('#contactFormSend').on('click', (() => {
             contactUserText: text,
         },
         success: ((data) => {
-            toastr.success('Успешно се абонирахте за нашите предложения');
+            toastr.success('Очаквайте отговор на посочения имейл адрес');
             $('#cUserNames').val('');
             $('#cUserEmail').val('');
             $('#cUserText').val('');
