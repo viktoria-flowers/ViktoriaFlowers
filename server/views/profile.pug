@@ -64,7 +64,10 @@ block content
                 h2.text-center Поръчка: 
                   = i + 1 
                 h3 Статус: 
-                  = user.orders[i].status
+                  - if (user.orders[i].status === 'pending')
+                    = 'чака одобрение'
+                  - else
+                    = 'доставена'
                 .table-responsive
                   table.fixed-table.table.text-left
                     thead
